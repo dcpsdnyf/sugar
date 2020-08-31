@@ -1,0 +1,48 @@
+server:
+  port: 18085
+  servlet:
+    context-path: /sugar
+  tomcat:
+    uri-encoding:  UTF-8
+    session:
+      timeout:  7200
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 100
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+spring:
+  profiles:
+    active: test
+  mvc:
+    static-path-pattern: /**
+
+  # thymeleaf ģ������
+  thymeleaf:
+    enabled: true
+    cache: false
+    check-template-location: true
+    suffix: .html
+    prefix: classpath:/thymeleaf/
+    encoding: UTF-8
+    mode: HTML5
+    template-resolver-order: 0
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/gt?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+mybatis:
+  type-aliases-package: com.sugar
+  mapper-locations: classpath:sqlMapper/common/*.xml
