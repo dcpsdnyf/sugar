@@ -323,6 +323,79 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+  <update id="updateSugarProject" parameterType="com.sugar.manage.dao.model.TSugarProject">
+    update t_sugar_project
+    <set>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null">
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="demandReview != null">
+        demand_review = #{demandReview,jdbcType=VARCHAR},
+      </if>
+      <if test="demandConfirm != null">
+        demand_confirm = #{demandConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="demandCheck != null">
+        demand_check = #{demandCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="environmentDeployment != null">
+        environment_deployment = #{environmentDeployment,jdbcType=VARCHAR},
+      </if>
+      <if test="developProgress10 != null">
+        develop_progress_10 = #{developProgress10,jdbcType=VARCHAR},
+      </if>
+      <if test="developProgress25 != null">
+        develop_progress_25 = #{developProgress25,jdbcType=VARCHAR},
+      </if>
+      <if test="developProgress50 != null">
+        develop_progress_50 = #{developProgress50,jdbcType=VARCHAR},
+      </if>
+      <if test="developProgress75 != null">
+        develop_progress_75 = #{developProgress75,jdbcType=VARCHAR},
+      </if>
+      <if test="developProgress100 != null">
+        develop_progress_100 = #{developProgress100,jdbcType=VARCHAR},
+      </if>
+      <if test="implementDeliver != null">
+        implement_deliver = #{implementDeliver,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStaff != null">
+        CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedStaff != null">
+        UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technologySelection != null">
+        technology_selection = #{technologySelection,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="frameworkDesign != null">
+        framework_design = #{frameworkDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="insideTest != null">
+        inside_test = #{insideTest,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customerTest != null">
+        customer_test = #{customerTest,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="checkDeliver != null">
+        check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
   <update id="updateByExampleSelective" parameterType="map">
     update t_sugar_project
     <set>

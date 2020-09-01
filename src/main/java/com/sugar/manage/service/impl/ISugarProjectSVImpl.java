@@ -101,4 +101,15 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         }
 
     }
+
+    @Override
+    public int updateSugarProject(TSugarProjectWithBLOBs project){
+        int a=sugarProjectMapper.updateSugarProject(project);
+        return a;
+    }
+    @Override
+    public int deleteByPrimaryKey(Integer id){
+        int a=sugarProjectMapper.deleteByPrimaryKey(id);
+        return a;
+    }
 }

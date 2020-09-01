@@ -7,6 +7,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -243,5 +245,13 @@ public class JsonUtil {
         }
         return sb.toString();
 
+    }
+
+    public static void write(HttpServletResponse response, Object o) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out=response.getWriter();
+        out.println(o.toString());
+        out.flush();
+        out.close();
     }
 }
