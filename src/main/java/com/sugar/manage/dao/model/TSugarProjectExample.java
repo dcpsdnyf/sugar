@@ -305,703 +305,73 @@ public class TSugarProjectExample {
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewIsNull() {
-            addCriterion("demand_review is null");
+        public Criteria andPlatformIdIsNull() {
+            addCriterion("platform_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewIsNotNull() {
-            addCriterion("demand_review is not null");
+        public Criteria andPlatformIdIsNotNull() {
+            addCriterion("platform_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewEqualTo(String value) {
-            addCriterion("demand_review =", value, "demandReview");
+        public Criteria andPlatformIdEqualTo(String value) {
+            addCriterion("platform_id =", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewNotEqualTo(String value) {
-            addCriterion("demand_review <>", value, "demandReview");
+        public Criteria andPlatformIdNotEqualTo(String value) {
+            addCriterion("platform_id <>", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewGreaterThan(String value) {
-            addCriterion("demand_review >", value, "demandReview");
+        public Criteria andPlatformIdGreaterThan(String value) {
+            addCriterion("platform_id >", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewGreaterThanOrEqualTo(String value) {
-            addCriterion("demand_review >=", value, "demandReview");
+        public Criteria andPlatformIdGreaterThanOrEqualTo(String value) {
+            addCriterion("platform_id >=", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewLessThan(String value) {
-            addCriterion("demand_review <", value, "demandReview");
+        public Criteria andPlatformIdLessThan(String value) {
+            addCriterion("platform_id <", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewLessThanOrEqualTo(String value) {
-            addCriterion("demand_review <=", value, "demandReview");
+        public Criteria andPlatformIdLessThanOrEqualTo(String value) {
+            addCriterion("platform_id <=", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewLike(String value) {
-            addCriterion("demand_review like", value, "demandReview");
+        public Criteria andPlatformIdLike(String value) {
+            addCriterion("platform_id like", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewNotLike(String value) {
-            addCriterion("demand_review not like", value, "demandReview");
+        public Criteria andPlatformIdNotLike(String value) {
+            addCriterion("platform_id not like", value, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewIn(List<String> values) {
-            addCriterion("demand_review in", values, "demandReview");
+        public Criteria andPlatformIdIn(List<String> values) {
+            addCriterion("platform_id in", values, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewNotIn(List<String> values) {
-            addCriterion("demand_review not in", values, "demandReview");
+        public Criteria andPlatformIdNotIn(List<String> values) {
+            addCriterion("platform_id not in", values, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewBetween(String value1, String value2) {
-            addCriterion("demand_review between", value1, value2, "demandReview");
+        public Criteria andPlatformIdBetween(String value1, String value2) {
+            addCriterion("platform_id between", value1, value2, "platformId");
             return (Criteria) this;
         }
 
-        public Criteria andDemandReviewNotBetween(String value1, String value2) {
-            addCriterion("demand_review not between", value1, value2, "demandReview");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmIsNull() {
-            addCriterion("demand_confirm is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmIsNotNull() {
-            addCriterion("demand_confirm is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmEqualTo(String value) {
-            addCriterion("demand_confirm =", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmNotEqualTo(String value) {
-            addCriterion("demand_confirm <>", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmGreaterThan(String value) {
-            addCriterion("demand_confirm >", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmGreaterThanOrEqualTo(String value) {
-            addCriterion("demand_confirm >=", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmLessThan(String value) {
-            addCriterion("demand_confirm <", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmLessThanOrEqualTo(String value) {
-            addCriterion("demand_confirm <=", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmLike(String value) {
-            addCriterion("demand_confirm like", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmNotLike(String value) {
-            addCriterion("demand_confirm not like", value, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmIn(List<String> values) {
-            addCriterion("demand_confirm in", values, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmNotIn(List<String> values) {
-            addCriterion("demand_confirm not in", values, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmBetween(String value1, String value2) {
-            addCriterion("demand_confirm between", value1, value2, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandConfirmNotBetween(String value1, String value2) {
-            addCriterion("demand_confirm not between", value1, value2, "demandConfirm");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckIsNull() {
-            addCriterion("demand_check is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckIsNotNull() {
-            addCriterion("demand_check is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckEqualTo(String value) {
-            addCriterion("demand_check =", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckNotEqualTo(String value) {
-            addCriterion("demand_check <>", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckGreaterThan(String value) {
-            addCriterion("demand_check >", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckGreaterThanOrEqualTo(String value) {
-            addCriterion("demand_check >=", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckLessThan(String value) {
-            addCriterion("demand_check <", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckLessThanOrEqualTo(String value) {
-            addCriterion("demand_check <=", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckLike(String value) {
-            addCriterion("demand_check like", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckNotLike(String value) {
-            addCriterion("demand_check not like", value, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckIn(List<String> values) {
-            addCriterion("demand_check in", values, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckNotIn(List<String> values) {
-            addCriterion("demand_check not in", values, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckBetween(String value1, String value2) {
-            addCriterion("demand_check between", value1, value2, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andDemandCheckNotBetween(String value1, String value2) {
-            addCriterion("demand_check not between", value1, value2, "demandCheck");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentIsNull() {
-            addCriterion("environment_deployment is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentIsNotNull() {
-            addCriterion("environment_deployment is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentEqualTo(String value) {
-            addCriterion("environment_deployment =", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentNotEqualTo(String value) {
-            addCriterion("environment_deployment <>", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentGreaterThan(String value) {
-            addCriterion("environment_deployment >", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentGreaterThanOrEqualTo(String value) {
-            addCriterion("environment_deployment >=", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentLessThan(String value) {
-            addCriterion("environment_deployment <", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentLessThanOrEqualTo(String value) {
-            addCriterion("environment_deployment <=", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentLike(String value) {
-            addCriterion("environment_deployment like", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentNotLike(String value) {
-            addCriterion("environment_deployment not like", value, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentIn(List<String> values) {
-            addCriterion("environment_deployment in", values, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentNotIn(List<String> values) {
-            addCriterion("environment_deployment not in", values, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentBetween(String value1, String value2) {
-            addCriterion("environment_deployment between", value1, value2, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andEnvironmentDeploymentNotBetween(String value1, String value2) {
-            addCriterion("environment_deployment not between", value1, value2, "environmentDeployment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10IsNull() {
-            addCriterion("develop_progress_10 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10IsNotNull() {
-            addCriterion("develop_progress_10 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10EqualTo(String value) {
-            addCriterion("develop_progress_10 =", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10NotEqualTo(String value) {
-            addCriterion("develop_progress_10 <>", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10GreaterThan(String value) {
-            addCriterion("develop_progress_10 >", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10GreaterThanOrEqualTo(String value) {
-            addCriterion("develop_progress_10 >=", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10LessThan(String value) {
-            addCriterion("develop_progress_10 <", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10LessThanOrEqualTo(String value) {
-            addCriterion("develop_progress_10 <=", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10Like(String value) {
-            addCriterion("develop_progress_10 like", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10NotLike(String value) {
-            addCriterion("develop_progress_10 not like", value, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10In(List<String> values) {
-            addCriterion("develop_progress_10 in", values, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10NotIn(List<String> values) {
-            addCriterion("develop_progress_10 not in", values, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10Between(String value1, String value2) {
-            addCriterion("develop_progress_10 between", value1, value2, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress10NotBetween(String value1, String value2) {
-            addCriterion("develop_progress_10 not between", value1, value2, "developProgress10");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25IsNull() {
-            addCriterion("develop_progress_25 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25IsNotNull() {
-            addCriterion("develop_progress_25 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25EqualTo(String value) {
-            addCriterion("develop_progress_25 =", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25NotEqualTo(String value) {
-            addCriterion("develop_progress_25 <>", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25GreaterThan(String value) {
-            addCriterion("develop_progress_25 >", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25GreaterThanOrEqualTo(String value) {
-            addCriterion("develop_progress_25 >=", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25LessThan(String value) {
-            addCriterion("develop_progress_25 <", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25LessThanOrEqualTo(String value) {
-            addCriterion("develop_progress_25 <=", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25Like(String value) {
-            addCriterion("develop_progress_25 like", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25NotLike(String value) {
-            addCriterion("develop_progress_25 not like", value, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25In(List<String> values) {
-            addCriterion("develop_progress_25 in", values, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25NotIn(List<String> values) {
-            addCriterion("develop_progress_25 not in", values, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25Between(String value1, String value2) {
-            addCriterion("develop_progress_25 between", value1, value2, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress25NotBetween(String value1, String value2) {
-            addCriterion("develop_progress_25 not between", value1, value2, "developProgress25");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50IsNull() {
-            addCriterion("develop_progress_50 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50IsNotNull() {
-            addCriterion("develop_progress_50 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50EqualTo(String value) {
-            addCriterion("develop_progress_50 =", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50NotEqualTo(String value) {
-            addCriterion("develop_progress_50 <>", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50GreaterThan(String value) {
-            addCriterion("develop_progress_50 >", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50GreaterThanOrEqualTo(String value) {
-            addCriterion("develop_progress_50 >=", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50LessThan(String value) {
-            addCriterion("develop_progress_50 <", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50LessThanOrEqualTo(String value) {
-            addCriterion("develop_progress_50 <=", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50Like(String value) {
-            addCriterion("develop_progress_50 like", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50NotLike(String value) {
-            addCriterion("develop_progress_50 not like", value, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50In(List<String> values) {
-            addCriterion("develop_progress_50 in", values, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50NotIn(List<String> values) {
-            addCriterion("develop_progress_50 not in", values, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50Between(String value1, String value2) {
-            addCriterion("develop_progress_50 between", value1, value2, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress50NotBetween(String value1, String value2) {
-            addCriterion("develop_progress_50 not between", value1, value2, "developProgress50");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75IsNull() {
-            addCriterion("develop_progress_75 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75IsNotNull() {
-            addCriterion("develop_progress_75 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75EqualTo(String value) {
-            addCriterion("develop_progress_75 =", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75NotEqualTo(String value) {
-            addCriterion("develop_progress_75 <>", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75GreaterThan(String value) {
-            addCriterion("develop_progress_75 >", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75GreaterThanOrEqualTo(String value) {
-            addCriterion("develop_progress_75 >=", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75LessThan(String value) {
-            addCriterion("develop_progress_75 <", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75LessThanOrEqualTo(String value) {
-            addCriterion("develop_progress_75 <=", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75Like(String value) {
-            addCriterion("develop_progress_75 like", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75NotLike(String value) {
-            addCriterion("develop_progress_75 not like", value, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75In(List<String> values) {
-            addCriterion("develop_progress_75 in", values, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75NotIn(List<String> values) {
-            addCriterion("develop_progress_75 not in", values, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75Between(String value1, String value2) {
-            addCriterion("develop_progress_75 between", value1, value2, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress75NotBetween(String value1, String value2) {
-            addCriterion("develop_progress_75 not between", value1, value2, "developProgress75");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100IsNull() {
-            addCriterion("develop_progress_100 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100IsNotNull() {
-            addCriterion("develop_progress_100 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100EqualTo(String value) {
-            addCriterion("develop_progress_100 =", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100NotEqualTo(String value) {
-            addCriterion("develop_progress_100 <>", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100GreaterThan(String value) {
-            addCriterion("develop_progress_100 >", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100GreaterThanOrEqualTo(String value) {
-            addCriterion("develop_progress_100 >=", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100LessThan(String value) {
-            addCriterion("develop_progress_100 <", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100LessThanOrEqualTo(String value) {
-            addCriterion("develop_progress_100 <=", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100Like(String value) {
-            addCriterion("develop_progress_100 like", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100NotLike(String value) {
-            addCriterion("develop_progress_100 not like", value, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100In(List<String> values) {
-            addCriterion("develop_progress_100 in", values, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100NotIn(List<String> values) {
-            addCriterion("develop_progress_100 not in", values, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100Between(String value1, String value2) {
-            addCriterion("develop_progress_100 between", value1, value2, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevelopProgress100NotBetween(String value1, String value2) {
-            addCriterion("develop_progress_100 not between", value1, value2, "developProgress100");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverIsNull() {
-            addCriterion("implement_deliver is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverIsNotNull() {
-            addCriterion("implement_deliver is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverEqualTo(String value) {
-            addCriterion("implement_deliver =", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverNotEqualTo(String value) {
-            addCriterion("implement_deliver <>", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverGreaterThan(String value) {
-            addCriterion("implement_deliver >", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverGreaterThanOrEqualTo(String value) {
-            addCriterion("implement_deliver >=", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverLessThan(String value) {
-            addCriterion("implement_deliver <", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverLessThanOrEqualTo(String value) {
-            addCriterion("implement_deliver <=", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverLike(String value) {
-            addCriterion("implement_deliver like", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverNotLike(String value) {
-            addCriterion("implement_deliver not like", value, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverIn(List<String> values) {
-            addCriterion("implement_deliver in", values, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverNotIn(List<String> values) {
-            addCriterion("implement_deliver not in", values, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverBetween(String value1, String value2) {
-            addCriterion("implement_deliver between", value1, value2, "implementDeliver");
-            return (Criteria) this;
-        }
-
-        public Criteria andImplementDeliverNotBetween(String value1, String value2) {
-            addCriterion("implement_deliver not between", value1, value2, "implementDeliver");
+        public Criteria andPlatformIdNotBetween(String value1, String value2) {
+            addCriterion("platform_id not between", value1, value2, "platformId");
             return (Criteria) this;
         }
 

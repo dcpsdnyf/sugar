@@ -1,21 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sugar.manage.dao.mapper.TSugarProjectMapper">
   <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TSugarProject">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="product_type" jdbcType="VARCHAR" property="productType" />
     <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
-    <result column="demand_review" jdbcType="VARCHAR" property="demandReview" />
-    <result column="demand_confirm" jdbcType="VARCHAR" property="demandConfirm" />
-    <result column="demand_check" jdbcType="VARCHAR" property="demandCheck" />
-    <result column="environment_deployment" jdbcType="VARCHAR" property="environmentDeployment" />
-    <result column="develop_progress_10" jdbcType="VARCHAR" property="developProgress10" />
-    <result column="develop_progress_25" jdbcType="VARCHAR" property="developProgress25" />
-    <result column="develop_progress_50" jdbcType="VARCHAR" property="developProgress50" />
-    <result column="develop_progress_75" jdbcType="VARCHAR" property="developProgress75" />
-    <result column="develop_progress_100" jdbcType="VARCHAR" property="developProgress100" />
-    <result column="implement_deliver" jdbcType="VARCHAR" property="implementDeliver" />
+    <result column="platform_id" jdbcType="VARCHAR" property="platformId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
     <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
@@ -23,13 +13,55 @@
     <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
+    <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
+    <result column="business_clue_0" jdbcType="LONGVARCHAR" property="businessClue0" />
+    <result column="business_discover_10" jdbcType="LONGVARCHAR" property="businessDiscover10" />
+    <result column="business_establish_25" jdbcType="LONGVARCHAR" property="businessEstablish25" />
+    <result column="business_establish_50" jdbcType="LONGVARCHAR" property="businessEstablish50" />
+    <result column="business_establish_75" jdbcType="LONGVARCHAR" property="businessEstablish75" />
+    <result column="business_win_100" jdbcType="LONGVARCHAR" property="businessWin100" />
+    <result column="customer_maintain_back_money" jdbcType="LONGVARCHAR" property="customerMaintainBackMoney" />
+    <result column="business_close" jdbcType="LONGVARCHAR" property="businessClose" />
+    <result column="initial_intention_plan" jdbcType="LONGVARCHAR" property="initialIntentionPlan" />
+    <result column="write_project_proposal" jdbcType="LONGVARCHAR" property="writeProjectProposal" />
+    <result column="working_hours_assess" jdbcType="LONGVARCHAR" property="workingHoursAssess" />
+    <result column="business_negotiation" jdbcType="LONGVARCHAR" property="businessNegotiation" />
+    <result column="request_draft" jdbcType="LONGVARCHAR" property="requestDraft" />
+    <result column="attend_meeting" jdbcType="LONGVARCHAR" property="attendMeeting" />
+    <result column="bidding" jdbcType="LONGVARCHAR" property="bidding" />
+    <result column="request_oa_approval" jdbcType="LONGVARCHAR" property="requestOaApproval" />
+    <result column="contract_draft" jdbcType="LONGVARCHAR" property="contractDraft" />
+    <result column="lawyer_review" jdbcType="LONGVARCHAR" property="lawyerReview" />
+    <result column="contract_oa_approval" jdbcType="LONGVARCHAR" property="contractOaApproval" />
+    <result column="usage_seal" jdbcType="LONGVARCHAR" property="usageSeal" />
+    <result column="other_seal" jdbcType="LONGVARCHAR" property="otherSeal" />
+    <result column="scan" jdbcType="LONGVARCHAR" property="scan" />
+    <result column="general_department_file" jdbcType="LONGVARCHAR" property="generalDepartmentFile" />
+    <result column="first_payment" jdbcType="LONGVARCHAR" property="firstPayment" />
+    <result column="progress_payment" jdbcType="LONGVARCHAR" property="progressPayment" />
+    <result column="final_payment" jdbcType="LONGVARCHAR" property="finalPayment" />
+    <result column="design_brief" jdbcType="LONGVARCHAR" property="designBrief" />
+    <result column="detailed_design" jdbcType="LONGVARCHAR" property="detailedDesign" />
+    <result column="ui_design" jdbcType="LONGVARCHAR" property="uiDesign" />
+    <result column="requirement_design" jdbcType="LONGVARCHAR" property="requirementDesign" />
+    <result column="requirements_review" jdbcType="LONGVARCHAR" property="requirementsReview" />
+    <result column="demand_order_confirm" jdbcType="LONGVARCHAR" property="demandOrderConfirm" />
+    <result column="pro_check_deliver" jdbcType="LONGVARCHAR" property="proCheckDeliver" />
     <result column="technology_selection" jdbcType="LONGVARCHAR" property="technologySelection" />
+    <result column="environment_deployment" jdbcType="LONGVARCHAR" property="environmentDeployment" />
     <result column="framework_design" jdbcType="LONGVARCHAR" property="frameworkDesign" />
+    <result column="develop_progress_10" jdbcType="LONGVARCHAR" property="developProgress10" />
+    <result column="develop_progress_25" jdbcType="LONGVARCHAR" property="developProgress25" />
+    <result column="develop_progress_50" jdbcType="LONGVARCHAR" property="developProgress50" />
+    <result column="develop_progress_75" jdbcType="LONGVARCHAR" property="developProgress75" />
+    <result column="develop_progress_100" jdbcType="LONGVARCHAR" property="developProgress100" />
     <result column="inside_test" jdbcType="LONGVARCHAR" property="insideTest" />
     <result column="customer_test" jdbcType="LONGVARCHAR" property="customerTest" />
+    <result column="implement_deliver" jdbcType="LONGVARCHAR" property="implementDeliver" />
     <result column="check_deliver" jdbcType="LONGVARCHAR" property="checkDeliver" />
+    <result column="operation_phase" jdbcType="LONGVARCHAR" property="operationPhase" />
+    <result column="maintain_phase" jdbcType="LONGVARCHAR" property="maintainPhase" />
   </resultMap>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -89,13 +121,21 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, product_type, platform_name, demand_review, demand_confirm, demand_check, environment_deployment,
-    develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75,
-    develop_progress_100, implement_deliver, status, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF,
-    UPDATED_TIME
+    ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME, 
+    UPDATED_STAFF, UPDATED_TIME
   </sql>
   <sql id="Blob_Column_List">
-    technology_selection, framework_design, inside_test, customer_test, check_deliver
+    business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
+    business_establish_50, business_establish_75, business_win_100, customer_maintain_back_money, 
+    business_close, initial_intention_plan, write_project_proposal, working_hours_assess, 
+    business_negotiation, request_draft, attend_meeting, bidding, request_oa_approval, 
+    contract_draft, lawyer_review, contract_oa_approval, usage_seal, other_seal, scan, 
+    general_department_file, first_payment, progress_payment, final_payment, design_brief, 
+    detailed_design, ui_design, requirement_design, requirements_review, demand_order_confirm, 
+    pro_check_deliver, technology_selection, environment_deployment, framework_design, 
+    develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75, 
+    develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver, 
+    operation_phase, maintain_phase
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.sugar.manage.dao.model.TSugarProjectExample" resultMap="ResultMapWithBLOBs">
     select
@@ -113,7 +153,6 @@
       order by ${orderByClause}
     </if>
   </select>
-
   <select id="selectByExample" parameterType="com.sugar.manage.dao.model.TSugarProjectExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -129,7 +168,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select
+    select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -146,32 +185,57 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
-  <insert id="insertType" parameterType="com.sugar.manage.dao.model.TSugarProject">
-    insert into t_sugar_project (ID, product_type, platform_name)
-    values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}
-     )
-  </insert>
-
   <insert id="insert" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
-    insert into t_sugar_project (ID, product_type, platform_name,
-      demand_review, demand_confirm, demand_check,
-      environment_deployment, develop_progress_10,
-      develop_progress_25, develop_progress_50, develop_progress_75,
-      develop_progress_100, implement_deliver, status,
-      CREATED_STAFF, CREATED_TIME, UPDATED_STAFF,
-      UPDATED_TIME, technology_selection,
-      framework_design, inside_test, customer_test,
-      check_deliver)
-    values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR},
-      #{demandReview,jdbcType=VARCHAR}, #{demandConfirm,jdbcType=VARCHAR}, #{demandCheck,jdbcType=VARCHAR},
-      #{environmentDeployment,jdbcType=VARCHAR}, #{developProgress10,jdbcType=VARCHAR},
-      #{developProgress25,jdbcType=VARCHAR}, #{developProgress50,jdbcType=VARCHAR}, #{developProgress75,jdbcType=VARCHAR},
-      #{developProgress100,jdbcType=VARCHAR}, #{implementDeliver,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
-      #{createdStaff,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR},
-      #{updatedTime,jdbcType=TIMESTAMP}, #{technologySelection,jdbcType=LONGVARCHAR},
-      #{frameworkDesign,jdbcType=LONGVARCHAR}, #{insideTest,jdbcType=LONGVARCHAR}, #{customerTest,jdbcType=LONGVARCHAR},
-      #{checkDeliver,jdbcType=LONGVARCHAR})
+    insert into t_sugar_project (ID, product_type, platform_name, 
+      platform_id, status, CREATED_STAFF, 
+      CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, 
+      business_clue_open, business_clue_0, 
+      business_discover_10, business_establish_25, 
+      business_establish_50, business_establish_75, 
+      business_win_100, customer_maintain_back_money, 
+      business_close, initial_intention_plan, 
+      write_project_proposal, working_hours_assess, 
+      business_negotiation, request_draft, 
+      attend_meeting, bidding, request_oa_approval, 
+      contract_draft, lawyer_review, contract_oa_approval, 
+      usage_seal, other_seal, scan, 
+      general_department_file, first_payment, 
+      progress_payment, final_payment, 
+      design_brief, detailed_design, ui_design, 
+      requirement_design, requirements_review, 
+      demand_order_confirm, pro_check_deliver, 
+      technology_selection, environment_deployment, 
+      framework_design, develop_progress_10, 
+      develop_progress_25, develop_progress_50, 
+      develop_progress_75, develop_progress_100, 
+      inside_test, customer_test, implement_deliver, 
+      check_deliver, operation_phase, maintain_phase
+      )
+    values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
+      #{platformId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
+      #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR}, 
+      #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, 
+      #{businessClose,jdbcType=LONGVARCHAR}, #{initialIntentionPlan,jdbcType=LONGVARCHAR}, 
+      #{writeProjectProposal,jdbcType=LONGVARCHAR}, #{workingHoursAssess,jdbcType=LONGVARCHAR}, 
+      #{businessNegotiation,jdbcType=LONGVARCHAR}, #{requestDraft,jdbcType=LONGVARCHAR}, 
+      #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, #{requestOaApproval,jdbcType=LONGVARCHAR}, 
+      #{contractDraft,jdbcType=LONGVARCHAR}, #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
+      #{usageSeal,jdbcType=LONGVARCHAR}, #{otherSeal,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR}, 
+      #{generalDepartmentFile,jdbcType=LONGVARCHAR}, #{firstPayment,jdbcType=LONGVARCHAR}, 
+      #{progressPayment,jdbcType=LONGVARCHAR}, #{finalPayment,jdbcType=LONGVARCHAR}, 
+      #{designBrief,jdbcType=LONGVARCHAR}, #{detailedDesign,jdbcType=LONGVARCHAR}, #{uiDesign,jdbcType=LONGVARCHAR}, 
+      #{requirementDesign,jdbcType=LONGVARCHAR}, #{requirementsReview,jdbcType=LONGVARCHAR}, 
+      #{demandOrderConfirm,jdbcType=LONGVARCHAR}, #{proCheckDeliver,jdbcType=LONGVARCHAR}, 
+      #{technologySelection,jdbcType=LONGVARCHAR}, #{environmentDeployment,jdbcType=LONGVARCHAR}, 
+      #{frameworkDesign,jdbcType=LONGVARCHAR}, #{developProgress10,jdbcType=LONGVARCHAR}, 
+      #{developProgress25,jdbcType=LONGVARCHAR}, #{developProgress50,jdbcType=LONGVARCHAR}, 
+      #{developProgress75,jdbcType=LONGVARCHAR}, #{developProgress100,jdbcType=LONGVARCHAR}, 
+      #{insideTest,jdbcType=LONGVARCHAR}, #{customerTest,jdbcType=LONGVARCHAR}, #{implementDeliver,jdbcType=LONGVARCHAR}, 
+      #{checkDeliver,jdbcType=LONGVARCHAR}, #{operationPhase,jdbcType=LONGVARCHAR}, #{maintainPhase,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     insert into t_sugar_project
@@ -185,35 +249,8 @@
       <if test="platformName != null">
         platform_name,
       </if>
-      <if test="demandReview != null">
-        demand_review,
-      </if>
-      <if test="demandConfirm != null">
-        demand_confirm,
-      </if>
-      <if test="demandCheck != null">
-        demand_check,
-      </if>
-      <if test="environmentDeployment != null">
-        environment_deployment,
-      </if>
-      <if test="developProgress10 != null">
-        develop_progress_10,
-      </if>
-      <if test="developProgress25 != null">
-        develop_progress_25,
-      </if>
-      <if test="developProgress50 != null">
-        develop_progress_50,
-      </if>
-      <if test="developProgress75 != null">
-        develop_progress_75,
-      </if>
-      <if test="developProgress100 != null">
-        develop_progress_100,
-      </if>
-      <if test="implementDeliver != null">
-        implement_deliver,
+      <if test="platformId != null">
+        platform_id,
       </if>
       <if test="status != null">
         status,
@@ -230,11 +267,131 @@
       <if test="updatedTime != null">
         UPDATED_TIME,
       </if>
+      <if test="businessClueOpen != null">
+        business_clue_open,
+      </if>
+      <if test="businessClue0 != null">
+        business_clue_0,
+      </if>
+      <if test="businessDiscover10 != null">
+        business_discover_10,
+      </if>
+      <if test="businessEstablish25 != null">
+        business_establish_25,
+      </if>
+      <if test="businessEstablish50 != null">
+        business_establish_50,
+      </if>
+      <if test="businessEstablish75 != null">
+        business_establish_75,
+      </if>
+      <if test="businessWin100 != null">
+        business_win_100,
+      </if>
+      <if test="customerMaintainBackMoney != null">
+        customer_maintain_back_money,
+      </if>
+      <if test="businessClose != null">
+        business_close,
+      </if>
+      <if test="initialIntentionPlan != null">
+        initial_intention_plan,
+      </if>
+      <if test="writeProjectProposal != null">
+        write_project_proposal,
+      </if>
+      <if test="workingHoursAssess != null">
+        working_hours_assess,
+      </if>
+      <if test="businessNegotiation != null">
+        business_negotiation,
+      </if>
+      <if test="requestDraft != null">
+        request_draft,
+      </if>
+      <if test="attendMeeting != null">
+        attend_meeting,
+      </if>
+      <if test="bidding != null">
+        bidding,
+      </if>
+      <if test="requestOaApproval != null">
+        request_oa_approval,
+      </if>
+      <if test="contractDraft != null">
+        contract_draft,
+      </if>
+      <if test="lawyerReview != null">
+        lawyer_review,
+      </if>
+      <if test="contractOaApproval != null">
+        contract_oa_approval,
+      </if>
+      <if test="usageSeal != null">
+        usage_seal,
+      </if>
+      <if test="otherSeal != null">
+        other_seal,
+      </if>
+      <if test="scan != null">
+        scan,
+      </if>
+      <if test="generalDepartmentFile != null">
+        general_department_file,
+      </if>
+      <if test="firstPayment != null">
+        first_payment,
+      </if>
+      <if test="progressPayment != null">
+        progress_payment,
+      </if>
+      <if test="finalPayment != null">
+        final_payment,
+      </if>
+      <if test="designBrief != null">
+        design_brief,
+      </if>
+      <if test="detailedDesign != null">
+        detailed_design,
+      </if>
+      <if test="uiDesign != null">
+        ui_design,
+      </if>
+      <if test="requirementDesign != null">
+        requirement_design,
+      </if>
+      <if test="requirementsReview != null">
+        requirements_review,
+      </if>
+      <if test="demandOrderConfirm != null">
+        demand_order_confirm,
+      </if>
+      <if test="proCheckDeliver != null">
+        pro_check_deliver,
+      </if>
       <if test="technologySelection != null">
         technology_selection,
       </if>
+      <if test="environmentDeployment != null">
+        environment_deployment,
+      </if>
       <if test="frameworkDesign != null">
         framework_design,
+      </if>
+      <if test="developProgress10 != null">
+        develop_progress_10,
+      </if>
+      <if test="developProgress25 != null">
+        develop_progress_25,
+      </if>
+      <if test="developProgress50 != null">
+        develop_progress_50,
+      </if>
+      <if test="developProgress75 != null">
+        develop_progress_75,
+      </if>
+      <if test="developProgress100 != null">
+        develop_progress_100,
       </if>
       <if test="insideTest != null">
         inside_test,
@@ -242,8 +399,17 @@
       <if test="customerTest != null">
         customer_test,
       </if>
+      <if test="implementDeliver != null">
+        implement_deliver,
+      </if>
       <if test="checkDeliver != null">
         check_deliver,
+      </if>
+      <if test="operationPhase != null">
+        operation_phase,
+      </if>
+      <if test="maintainPhase != null">
+        maintain_phase,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -256,35 +422,8 @@
       <if test="platformName != null">
         #{platformName,jdbcType=VARCHAR},
       </if>
-      <if test="demandReview != null">
-        #{demandReview,jdbcType=VARCHAR},
-      </if>
-      <if test="demandConfirm != null">
-        #{demandConfirm,jdbcType=VARCHAR},
-      </if>
-      <if test="demandCheck != null">
-        #{demandCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="environmentDeployment != null">
-        #{environmentDeployment,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress10 != null">
-        #{developProgress10,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress25 != null">
-        #{developProgress25,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress50 != null">
-        #{developProgress50,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress75 != null">
-        #{developProgress75,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress100 != null">
-        #{developProgress100,jdbcType=VARCHAR},
-      </if>
-      <if test="implementDeliver != null">
-        #{implementDeliver,jdbcType=VARCHAR},
+      <if test="platformId != null">
+        #{platformId,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -301,11 +440,131 @@
       <if test="updatedTime != null">
         #{updatedTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="businessClueOpen != null">
+        #{businessClueOpen,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessClue0 != null">
+        #{businessClue0,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessDiscover10 != null">
+        #{businessDiscover10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish25 != null">
+        #{businessEstablish25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish50 != null">
+        #{businessEstablish50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish75 != null">
+        #{businessEstablish75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessWin100 != null">
+        #{businessWin100,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customerMaintainBackMoney != null">
+        #{customerMaintainBackMoney,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessClose != null">
+        #{businessClose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="initialIntentionPlan != null">
+        #{initialIntentionPlan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="writeProjectProposal != null">
+        #{writeProjectProposal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workingHoursAssess != null">
+        #{workingHoursAssess,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessNegotiation != null">
+        #{businessNegotiation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestDraft != null">
+        #{requestDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attendMeeting != null">
+        #{attendMeeting,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bidding != null">
+        #{bidding,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestOaApproval != null">
+        #{requestOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contractDraft != null">
+        #{contractDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lawyerReview != null">
+        #{lawyerReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contractOaApproval != null">
+        #{contractOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usageSeal != null">
+        #{usageSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherSeal != null">
+        #{otherSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scan != null">
+        #{scan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="generalDepartmentFile != null">
+        #{generalDepartmentFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="firstPayment != null">
+        #{firstPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="progressPayment != null">
+        #{progressPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finalPayment != null">
+        #{finalPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="designBrief != null">
+        #{designBrief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detailedDesign != null">
+        #{detailedDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="uiDesign != null">
+        #{uiDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirementDesign != null">
+        #{requirementDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirementsReview != null">
+        #{requirementsReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="demandOrderConfirm != null">
+        #{demandOrderConfirm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="proCheckDeliver != null">
+        #{proCheckDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="technologySelection != null">
         #{technologySelection,jdbcType=LONGVARCHAR},
       </if>
+      <if test="environmentDeployment != null">
+        #{environmentDeployment,jdbcType=LONGVARCHAR},
+      </if>
       <if test="frameworkDesign != null">
         #{frameworkDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress10 != null">
+        #{developProgress10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress25 != null">
+        #{developProgress25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress50 != null">
+        #{developProgress50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress75 != null">
+        #{developProgress75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress100 != null">
+        #{developProgress100,jdbcType=LONGVARCHAR},
       </if>
       <if test="insideTest != null">
         #{insideTest,jdbcType=LONGVARCHAR},
@@ -313,8 +572,17 @@
       <if test="customerTest != null">
         #{customerTest,jdbcType=LONGVARCHAR},
       </if>
+      <if test="implementDeliver != null">
+        #{implementDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="checkDeliver != null">
         #{checkDeliver,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="operationPhase != null">
+        #{operationPhase,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="maintainPhase != null">
+        #{maintainPhase,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -324,79 +592,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-
-  <update id="updateSugarProject" parameterType="com.sugar.manage.dao.model.TSugarProject">
-    update t_sugar_project
-    <set>
-      <if test="productType != null">
-        product_type = #{productType,jdbcType=VARCHAR},
-      </if>
-      <if test="platformName != null">
-        platform_name = #{platformName,jdbcType=VARCHAR},
-      </if>
-      <if test="demandReview != null">
-        demand_review = #{demandReview,jdbcType=VARCHAR},
-      </if>
-      <if test="demandConfirm != null">
-        demand_confirm = #{demandConfirm,jdbcType=VARCHAR},
-      </if>
-      <if test="demandCheck != null">
-        demand_check = #{demandCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="environmentDeployment != null">
-        environment_deployment = #{environmentDeployment,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress10 != null">
-        develop_progress_10 = #{developProgress10,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress25 != null">
-        develop_progress_25 = #{developProgress25,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress50 != null">
-        develop_progress_50 = #{developProgress50,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress75 != null">
-        develop_progress_75 = #{developProgress75,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress100 != null">
-        develop_progress_100 = #{developProgress100,jdbcType=VARCHAR},
-      </if>
-      <if test="implementDeliver != null">
-        implement_deliver = #{implementDeliver,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="createdStaff != null">
-        CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
-      </if>
-      <if test="createdTime != null">
-        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedStaff != null">
-        UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
-      </if>
-      <if test="updatedTime != null">
-        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="technologySelection != null">
-        technology_selection = #{technologySelection,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="frameworkDesign != null">
-        framework_design = #{frameworkDesign,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="insideTest != null">
-        inside_test = #{insideTest,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="customerTest != null">
-        customer_test = #{customerTest,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="checkDeliver != null">
-        check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByExampleSelective" parameterType="map">
     update t_sugar_project
     <set>
@@ -409,35 +604,8 @@
       <if test="record.platformName != null">
         platform_name = #{record.platformName,jdbcType=VARCHAR},
       </if>
-      <if test="record.demandReview != null">
-        demand_review = #{record.demandReview,jdbcType=VARCHAR},
-      </if>
-      <if test="record.demandConfirm != null">
-        demand_confirm = #{record.demandConfirm,jdbcType=VARCHAR},
-      </if>
-      <if test="record.demandCheck != null">
-        demand_check = #{record.demandCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="record.environmentDeployment != null">
-        environment_deployment = #{record.environmentDeployment,jdbcType=VARCHAR},
-      </if>
-      <if test="record.developProgress10 != null">
-        develop_progress_10 = #{record.developProgress10,jdbcType=VARCHAR},
-      </if>
-      <if test="record.developProgress25 != null">
-        develop_progress_25 = #{record.developProgress25,jdbcType=VARCHAR},
-      </if>
-      <if test="record.developProgress50 != null">
-        develop_progress_50 = #{record.developProgress50,jdbcType=VARCHAR},
-      </if>
-      <if test="record.developProgress75 != null">
-        develop_progress_75 = #{record.developProgress75,jdbcType=VARCHAR},
-      </if>
-      <if test="record.developProgress100 != null">
-        develop_progress_100 = #{record.developProgress100,jdbcType=VARCHAR},
-      </if>
-      <if test="record.implementDeliver != null">
-        implement_deliver = #{record.implementDeliver,jdbcType=VARCHAR},
+      <if test="record.platformId != null">
+        platform_id = #{record.platformId,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
@@ -454,11 +622,131 @@
       <if test="record.updatedTime != null">
         UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.businessClueOpen != null">
+        business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessClue0 != null">
+        business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessDiscover10 != null">
+        business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessEstablish25 != null">
+        business_establish_25 = #{record.businessEstablish25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessEstablish50 != null">
+        business_establish_50 = #{record.businessEstablish50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessEstablish75 != null">
+        business_establish_75 = #{record.businessEstablish75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessWin100 != null">
+        business_win_100 = #{record.businessWin100,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.customerMaintainBackMoney != null">
+        customer_maintain_back_money = #{record.customerMaintainBackMoney,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessClose != null">
+        business_close = #{record.businessClose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.initialIntentionPlan != null">
+        initial_intention_plan = #{record.initialIntentionPlan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.writeProjectProposal != null">
+        write_project_proposal = #{record.writeProjectProposal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.workingHoursAssess != null">
+        working_hours_assess = #{record.workingHoursAssess,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.businessNegotiation != null">
+        business_negotiation = #{record.businessNegotiation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requestDraft != null">
+        request_draft = #{record.requestDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.attendMeeting != null">
+        attend_meeting = #{record.attendMeeting,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bidding != null">
+        bidding = #{record.bidding,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requestOaApproval != null">
+        request_oa_approval = #{record.requestOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.contractDraft != null">
+        contract_draft = #{record.contractDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.lawyerReview != null">
+        lawyer_review = #{record.lawyerReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.contractOaApproval != null">
+        contract_oa_approval = #{record.contractOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.usageSeal != null">
+        usage_seal = #{record.usageSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.otherSeal != null">
+        other_seal = #{record.otherSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.scan != null">
+        scan = #{record.scan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.generalDepartmentFile != null">
+        general_department_file = #{record.generalDepartmentFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.firstPayment != null">
+        first_payment = #{record.firstPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.progressPayment != null">
+        progress_payment = #{record.progressPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.finalPayment != null">
+        final_payment = #{record.finalPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.designBrief != null">
+        design_brief = #{record.designBrief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.detailedDesign != null">
+        detailed_design = #{record.detailedDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.uiDesign != null">
+        ui_design = #{record.uiDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requirementDesign != null">
+        requirement_design = #{record.requirementDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requirementsReview != null">
+        requirements_review = #{record.requirementsReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.demandOrderConfirm != null">
+        demand_order_confirm = #{record.demandOrderConfirm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.proCheckDeliver != null">
+        pro_check_deliver = #{record.proCheckDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="record.technologySelection != null">
         technology_selection = #{record.technologySelection,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.environmentDeployment != null">
+        environment_deployment = #{record.environmentDeployment,jdbcType=LONGVARCHAR},
+      </if>
       <if test="record.frameworkDesign != null">
         framework_design = #{record.frameworkDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.developProgress10 != null">
+        develop_progress_10 = #{record.developProgress10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.developProgress25 != null">
+        develop_progress_25 = #{record.developProgress25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.developProgress50 != null">
+        develop_progress_50 = #{record.developProgress50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.developProgress75 != null">
+        develop_progress_75 = #{record.developProgress75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.developProgress100 != null">
+        develop_progress_100 = #{record.developProgress100,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.insideTest != null">
         inside_test = #{record.insideTest,jdbcType=LONGVARCHAR},
@@ -466,8 +754,17 @@
       <if test="record.customerTest != null">
         customer_test = #{record.customerTest,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.implementDeliver != null">
+        implement_deliver = #{record.implementDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="record.checkDeliver != null">
         check_deliver = #{record.checkDeliver,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.operationPhase != null">
+        operation_phase = #{record.operationPhase,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.maintainPhase != null">
+        maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -477,28 +774,62 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update t_sugar_project
     set ID = #{record.id,jdbcType=INTEGER},
-    product_type = #{record.productType,jdbcType=VARCHAR},
-    platform_name = #{record.platformName,jdbcType=VARCHAR},
-    demand_review = #{record.demandReview,jdbcType=VARCHAR},
-    demand_confirm = #{record.demandConfirm,jdbcType=VARCHAR},
-    demand_check = #{record.demandCheck,jdbcType=VARCHAR},
-    environment_deployment = #{record.environmentDeployment,jdbcType=VARCHAR},
-    develop_progress_10 = #{record.developProgress10,jdbcType=VARCHAR},
-    develop_progress_25 = #{record.developProgress25,jdbcType=VARCHAR},
-    develop_progress_50 = #{record.developProgress50,jdbcType=VARCHAR},
-    develop_progress_75 = #{record.developProgress75,jdbcType=VARCHAR},
-    develop_progress_100 = #{record.developProgress100,jdbcType=VARCHAR},
-    implement_deliver = #{record.implementDeliver,jdbcType=VARCHAR},
-    status = #{record.status,jdbcType=VARCHAR},
-    CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
-    CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
-    UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
-    UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
-    technology_selection = #{record.technologySelection,jdbcType=LONGVARCHAR},
-    framework_design = #{record.frameworkDesign,jdbcType=LONGVARCHAR},
-    inside_test = #{record.insideTest,jdbcType=LONGVARCHAR},
-    customer_test = #{record.customerTest,jdbcType=LONGVARCHAR},
-    check_deliver = #{record.checkDeliver,jdbcType=LONGVARCHAR}
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      platform_name = #{record.platformName,jdbcType=VARCHAR},
+      platform_id = #{record.platformId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
+      business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
+      business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
+      business_establish_25 = #{record.businessEstablish25,jdbcType=LONGVARCHAR},
+      business_establish_50 = #{record.businessEstablish50,jdbcType=LONGVARCHAR},
+      business_establish_75 = #{record.businessEstablish75,jdbcType=LONGVARCHAR},
+      business_win_100 = #{record.businessWin100,jdbcType=LONGVARCHAR},
+      customer_maintain_back_money = #{record.customerMaintainBackMoney,jdbcType=LONGVARCHAR},
+      business_close = #{record.businessClose,jdbcType=LONGVARCHAR},
+      initial_intention_plan = #{record.initialIntentionPlan,jdbcType=LONGVARCHAR},
+      write_project_proposal = #{record.writeProjectProposal,jdbcType=LONGVARCHAR},
+      working_hours_assess = #{record.workingHoursAssess,jdbcType=LONGVARCHAR},
+      business_negotiation = #{record.businessNegotiation,jdbcType=LONGVARCHAR},
+      request_draft = #{record.requestDraft,jdbcType=LONGVARCHAR},
+      attend_meeting = #{record.attendMeeting,jdbcType=LONGVARCHAR},
+      bidding = #{record.bidding,jdbcType=LONGVARCHAR},
+      request_oa_approval = #{record.requestOaApproval,jdbcType=LONGVARCHAR},
+      contract_draft = #{record.contractDraft,jdbcType=LONGVARCHAR},
+      lawyer_review = #{record.lawyerReview,jdbcType=LONGVARCHAR},
+      contract_oa_approval = #{record.contractOaApproval,jdbcType=LONGVARCHAR},
+      usage_seal = #{record.usageSeal,jdbcType=LONGVARCHAR},
+      other_seal = #{record.otherSeal,jdbcType=LONGVARCHAR},
+      scan = #{record.scan,jdbcType=LONGVARCHAR},
+      general_department_file = #{record.generalDepartmentFile,jdbcType=LONGVARCHAR},
+      first_payment = #{record.firstPayment,jdbcType=LONGVARCHAR},
+      progress_payment = #{record.progressPayment,jdbcType=LONGVARCHAR},
+      final_payment = #{record.finalPayment,jdbcType=LONGVARCHAR},
+      design_brief = #{record.designBrief,jdbcType=LONGVARCHAR},
+      detailed_design = #{record.detailedDesign,jdbcType=LONGVARCHAR},
+      ui_design = #{record.uiDesign,jdbcType=LONGVARCHAR},
+      requirement_design = #{record.requirementDesign,jdbcType=LONGVARCHAR},
+      requirements_review = #{record.requirementsReview,jdbcType=LONGVARCHAR},
+      demand_order_confirm = #{record.demandOrderConfirm,jdbcType=LONGVARCHAR},
+      pro_check_deliver = #{record.proCheckDeliver,jdbcType=LONGVARCHAR},
+      technology_selection = #{record.technologySelection,jdbcType=LONGVARCHAR},
+      environment_deployment = #{record.environmentDeployment,jdbcType=LONGVARCHAR},
+      framework_design = #{record.frameworkDesign,jdbcType=LONGVARCHAR},
+      develop_progress_10 = #{record.developProgress10,jdbcType=LONGVARCHAR},
+      develop_progress_25 = #{record.developProgress25,jdbcType=LONGVARCHAR},
+      develop_progress_50 = #{record.developProgress50,jdbcType=LONGVARCHAR},
+      develop_progress_75 = #{record.developProgress75,jdbcType=LONGVARCHAR},
+      develop_progress_100 = #{record.developProgress100,jdbcType=LONGVARCHAR},
+      inside_test = #{record.insideTest,jdbcType=LONGVARCHAR},
+      customer_test = #{record.customerTest,jdbcType=LONGVARCHAR},
+      implement_deliver = #{record.implementDeliver,jdbcType=LONGVARCHAR},
+      check_deliver = #{record.checkDeliver,jdbcType=LONGVARCHAR},
+      operation_phase = #{record.operationPhase,jdbcType=LONGVARCHAR},
+      maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -506,23 +837,14 @@
   <update id="updateByExample" parameterType="map">
     update t_sugar_project
     set ID = #{record.id,jdbcType=INTEGER},
-    product_type = #{record.productType,jdbcType=VARCHAR},
-    platform_name = #{record.platformName,jdbcType=VARCHAR},
-    demand_review = #{record.demandReview,jdbcType=VARCHAR},
-    demand_confirm = #{record.demandConfirm,jdbcType=VARCHAR},
-    demand_check = #{record.demandCheck,jdbcType=VARCHAR},
-    environment_deployment = #{record.environmentDeployment,jdbcType=VARCHAR},
-    develop_progress_10 = #{record.developProgress10,jdbcType=VARCHAR},
-    develop_progress_25 = #{record.developProgress25,jdbcType=VARCHAR},
-    develop_progress_50 = #{record.developProgress50,jdbcType=VARCHAR},
-    develop_progress_75 = #{record.developProgress75,jdbcType=VARCHAR},
-    develop_progress_100 = #{record.developProgress100,jdbcType=VARCHAR},
-    implement_deliver = #{record.implementDeliver,jdbcType=VARCHAR},
-    status = #{record.status,jdbcType=VARCHAR},
-    CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
-    CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
-    UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
-    UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      platform_name = #{record.platformName,jdbcType=VARCHAR},
+      platform_id = #{record.platformId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -536,35 +858,8 @@
       <if test="platformName != null">
         platform_name = #{platformName,jdbcType=VARCHAR},
       </if>
-      <if test="demandReview != null">
-        demand_review = #{demandReview,jdbcType=VARCHAR},
-      </if>
-      <if test="demandConfirm != null">
-        demand_confirm = #{demandConfirm,jdbcType=VARCHAR},
-      </if>
-      <if test="demandCheck != null">
-        demand_check = #{demandCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="environmentDeployment != null">
-        environment_deployment = #{environmentDeployment,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress10 != null">
-        develop_progress_10 = #{developProgress10,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress25 != null">
-        develop_progress_25 = #{developProgress25,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress50 != null">
-        develop_progress_50 = #{developProgress50,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress75 != null">
-        develop_progress_75 = #{developProgress75,jdbcType=VARCHAR},
-      </if>
-      <if test="developProgress100 != null">
-        develop_progress_100 = #{developProgress100,jdbcType=VARCHAR},
-      </if>
-      <if test="implementDeliver != null">
-        implement_deliver = #{implementDeliver,jdbcType=VARCHAR},
+      <if test="platformId != null">
+        platform_id = #{platformId,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -581,11 +876,131 @@
       <if test="updatedTime != null">
         UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="businessClueOpen != null">
+        business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessClue0 != null">
+        business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessDiscover10 != null">
+        business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish25 != null">
+        business_establish_25 = #{businessEstablish25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish50 != null">
+        business_establish_50 = #{businessEstablish50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessEstablish75 != null">
+        business_establish_75 = #{businessEstablish75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessWin100 != null">
+        business_win_100 = #{businessWin100,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customerMaintainBackMoney != null">
+        customer_maintain_back_money = #{customerMaintainBackMoney,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessClose != null">
+        business_close = #{businessClose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="initialIntentionPlan != null">
+        initial_intention_plan = #{initialIntentionPlan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="writeProjectProposal != null">
+        write_project_proposal = #{writeProjectProposal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workingHoursAssess != null">
+        working_hours_assess = #{workingHoursAssess,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="businessNegotiation != null">
+        business_negotiation = #{businessNegotiation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestDraft != null">
+        request_draft = #{requestDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attendMeeting != null">
+        attend_meeting = #{attendMeeting,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bidding != null">
+        bidding = #{bidding,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestOaApproval != null">
+        request_oa_approval = #{requestOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contractDraft != null">
+        contract_draft = #{contractDraft,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lawyerReview != null">
+        lawyer_review = #{lawyerReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contractOaApproval != null">
+        contract_oa_approval = #{contractOaApproval,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usageSeal != null">
+        usage_seal = #{usageSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherSeal != null">
+        other_seal = #{otherSeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scan != null">
+        scan = #{scan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="generalDepartmentFile != null">
+        general_department_file = #{generalDepartmentFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="firstPayment != null">
+        first_payment = #{firstPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="progressPayment != null">
+        progress_payment = #{progressPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finalPayment != null">
+        final_payment = #{finalPayment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="designBrief != null">
+        design_brief = #{designBrief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detailedDesign != null">
+        detailed_design = #{detailedDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="uiDesign != null">
+        ui_design = #{uiDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirementDesign != null">
+        requirement_design = #{requirementDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirementsReview != null">
+        requirements_review = #{requirementsReview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="demandOrderConfirm != null">
+        demand_order_confirm = #{demandOrderConfirm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="proCheckDeliver != null">
+        pro_check_deliver = #{proCheckDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="technologySelection != null">
         technology_selection = #{technologySelection,jdbcType=LONGVARCHAR},
       </if>
+      <if test="environmentDeployment != null">
+        environment_deployment = #{environmentDeployment,jdbcType=LONGVARCHAR},
+      </if>
       <if test="frameworkDesign != null">
         framework_design = #{frameworkDesign,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress10 != null">
+        develop_progress_10 = #{developProgress10,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress25 != null">
+        develop_progress_25 = #{developProgress25,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress50 != null">
+        develop_progress_50 = #{developProgress50,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress75 != null">
+        develop_progress_75 = #{developProgress75,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="developProgress100 != null">
+        develop_progress_100 = #{developProgress100,jdbcType=LONGVARCHAR},
       </if>
       <if test="insideTest != null">
         inside_test = #{insideTest,jdbcType=LONGVARCHAR},
@@ -593,8 +1008,17 @@
       <if test="customerTest != null">
         customer_test = #{customerTest,jdbcType=LONGVARCHAR},
       </if>
+      <if test="implementDeliver != null">
+        implement_deliver = #{implementDeliver,jdbcType=LONGVARCHAR},
+      </if>
       <if test="checkDeliver != null">
         check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="operationPhase != null">
+        operation_phase = #{operationPhase,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="maintainPhase != null">
+        maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -603,42 +1027,67 @@
     update t_sugar_project
     set product_type = #{productType,jdbcType=VARCHAR},
       platform_name = #{platformName,jdbcType=VARCHAR},
-      demand_review = #{demandReview,jdbcType=VARCHAR},
-      demand_confirm = #{demandConfirm,jdbcType=VARCHAR},
-      demand_check = #{demandCheck,jdbcType=VARCHAR},
-      environment_deployment = #{environmentDeployment,jdbcType=VARCHAR},
-      develop_progress_10 = #{developProgress10,jdbcType=VARCHAR},
-      develop_progress_25 = #{developProgress25,jdbcType=VARCHAR},
-      develop_progress_50 = #{developProgress50,jdbcType=VARCHAR},
-      develop_progress_75 = #{developProgress75,jdbcType=VARCHAR},
-      develop_progress_100 = #{developProgress100,jdbcType=VARCHAR},
-      implement_deliver = #{implementDeliver,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
+      business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
+      business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
+      business_establish_25 = #{businessEstablish25,jdbcType=LONGVARCHAR},
+      business_establish_50 = #{businessEstablish50,jdbcType=LONGVARCHAR},
+      business_establish_75 = #{businessEstablish75,jdbcType=LONGVARCHAR},
+      business_win_100 = #{businessWin100,jdbcType=LONGVARCHAR},
+      customer_maintain_back_money = #{customerMaintainBackMoney,jdbcType=LONGVARCHAR},
+      business_close = #{businessClose,jdbcType=LONGVARCHAR},
+      initial_intention_plan = #{initialIntentionPlan,jdbcType=LONGVARCHAR},
+      write_project_proposal = #{writeProjectProposal,jdbcType=LONGVARCHAR},
+      working_hours_assess = #{workingHoursAssess,jdbcType=LONGVARCHAR},
+      business_negotiation = #{businessNegotiation,jdbcType=LONGVARCHAR},
+      request_draft = #{requestDraft,jdbcType=LONGVARCHAR},
+      attend_meeting = #{attendMeeting,jdbcType=LONGVARCHAR},
+      bidding = #{bidding,jdbcType=LONGVARCHAR},
+      request_oa_approval = #{requestOaApproval,jdbcType=LONGVARCHAR},
+      contract_draft = #{contractDraft,jdbcType=LONGVARCHAR},
+      lawyer_review = #{lawyerReview,jdbcType=LONGVARCHAR},
+      contract_oa_approval = #{contractOaApproval,jdbcType=LONGVARCHAR},
+      usage_seal = #{usageSeal,jdbcType=LONGVARCHAR},
+      other_seal = #{otherSeal,jdbcType=LONGVARCHAR},
+      scan = #{scan,jdbcType=LONGVARCHAR},
+      general_department_file = #{generalDepartmentFile,jdbcType=LONGVARCHAR},
+      first_payment = #{firstPayment,jdbcType=LONGVARCHAR},
+      progress_payment = #{progressPayment,jdbcType=LONGVARCHAR},
+      final_payment = #{finalPayment,jdbcType=LONGVARCHAR},
+      design_brief = #{designBrief,jdbcType=LONGVARCHAR},
+      detailed_design = #{detailedDesign,jdbcType=LONGVARCHAR},
+      ui_design = #{uiDesign,jdbcType=LONGVARCHAR},
+      requirement_design = #{requirementDesign,jdbcType=LONGVARCHAR},
+      requirements_review = #{requirementsReview,jdbcType=LONGVARCHAR},
+      demand_order_confirm = #{demandOrderConfirm,jdbcType=LONGVARCHAR},
+      pro_check_deliver = #{proCheckDeliver,jdbcType=LONGVARCHAR},
       technology_selection = #{technologySelection,jdbcType=LONGVARCHAR},
+      environment_deployment = #{environmentDeployment,jdbcType=LONGVARCHAR},
       framework_design = #{frameworkDesign,jdbcType=LONGVARCHAR},
+      develop_progress_10 = #{developProgress10,jdbcType=LONGVARCHAR},
+      develop_progress_25 = #{developProgress25,jdbcType=LONGVARCHAR},
+      develop_progress_50 = #{developProgress50,jdbcType=LONGVARCHAR},
+      develop_progress_75 = #{developProgress75,jdbcType=LONGVARCHAR},
+      develop_progress_100 = #{developProgress100,jdbcType=LONGVARCHAR},
       inside_test = #{insideTest,jdbcType=LONGVARCHAR},
       customer_test = #{customerTest,jdbcType=LONGVARCHAR},
-      check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR}
+      implement_deliver = #{implementDeliver,jdbcType=LONGVARCHAR},
+      check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
+      operation_phase = #{operationPhase,jdbcType=LONGVARCHAR},
+      maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TSugarProject">
     update t_sugar_project
     set product_type = #{productType,jdbcType=VARCHAR},
       platform_name = #{platformName,jdbcType=VARCHAR},
-      demand_review = #{demandReview,jdbcType=VARCHAR},
-      demand_confirm = #{demandConfirm,jdbcType=VARCHAR},
-      demand_check = #{demandCheck,jdbcType=VARCHAR},
-      environment_deployment = #{environmentDeployment,jdbcType=VARCHAR},
-      develop_progress_10 = #{developProgress10,jdbcType=VARCHAR},
-      develop_progress_25 = #{developProgress25,jdbcType=VARCHAR},
-      develop_progress_50 = #{developProgress50,jdbcType=VARCHAR},
-      develop_progress_75 = #{developProgress75,jdbcType=VARCHAR},
-      develop_progress_100 = #{developProgress100,jdbcType=VARCHAR},
-      implement_deliver = #{implementDeliver,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},

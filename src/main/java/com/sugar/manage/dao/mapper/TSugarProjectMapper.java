@@ -3,11 +3,11 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Mapper
 @Service
@@ -19,10 +19,6 @@ public interface TSugarProjectMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(TSugarProjectWithBLOBs record);
-
-    int insertType(TSugarProject record);
-
-    int updateSugarProject(TSugarProjectWithBLOBs record);
 
     int insertSelective(TSugarProjectWithBLOBs record);
 
@@ -43,5 +39,4 @@ public interface TSugarProjectMapper {
     int updateByPrimaryKeyWithBLOBs(TSugarProjectWithBLOBs record);
 
     int updateByPrimaryKey(TSugarProject record);
-
 }

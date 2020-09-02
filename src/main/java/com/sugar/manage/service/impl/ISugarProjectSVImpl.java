@@ -59,9 +59,9 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
                 t.setId(s.getId());
                 t.setProductType(s.getProductType());
                 t.setPlatformName(s.getPlatformName());
-                t.setDemandReview(s.getDemandReview());
+                /*t.setDemandReview(s.getDemandReview());
                 t.setDemandConfirm(s.getDemandConfirm());
-                t.setDemandCheck(s.getDemandCheck());
+                t.setDemandCheck(s.getDemandCheck());*/
                 t.setTechnologySelection(s.getTechnologySelection());
                 t.setEnvironmentDeployment(s.getEnvironmentDeployment());
                 t.setFrameworkDesign(s.getFrameworkDesign());
@@ -95,17 +95,18 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
      */
     @Override
     public void saveSugarProject(TSugarProject project) {
-        int a=sugarProjectMapper.insertType(project);
+        /*int a=sugarProjectMapper.insertType(project);
         if (a>0){
             System.out.println(a);
-        }
+        }*/
 
     }
 
     @Override
     public int updateSugarProject(TSugarProjectWithBLOBs project){
-        int a=sugarProjectMapper.updateSugarProject(project);
-        return a;
+        /*int a=sugarProjectMapper.updateSugarProject(project);
+        return a;*/
+        return 0;
     }
     @Override
     public int deleteByPrimaryKey(Integer id){
