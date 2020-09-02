@@ -77,8 +77,9 @@ public class SugarManageController {
        return null;
     }
     @RequestMapping("/delete")
-    public String deleteByPrimaryKey(Integer id, HttpServletResponse response) throws Exception {
-        int a=sugarProjectSV.deleteByPrimaryKey(id);
+    public String deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {
+        tSugarProject.setStatus("99");
+        int a=sugarProjectSV.deleteByPrimaryKey(tSugarProject);
         if (a>0){
             JSONObject result=new JSONObject();
             result.put("success",Boolean.TRUE);

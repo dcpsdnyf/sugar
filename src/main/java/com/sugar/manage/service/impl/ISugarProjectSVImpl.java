@@ -48,6 +48,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
     public List<TSugarProjectVO> getSugarProjectList(TSugarProjectVO projectVO) {
         TSugarProjectExample example = new TSugarProjectExample();
         TSugarProjectExample.Criteria sql = example.createCriteria();
+        sql.andStatusEqualTo("01");
 
         this.initParam(sql,projectVO);
 
@@ -88,9 +89,9 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         return 1;
     }
     @Override
-    public int deleteByPrimaryKey(Integer id){
-        int a=sugarProjectMapper.deleteByPrimaryKey(id);
-        return a;
+    public int deleteByPrimaryKey(TSugarProjectWithBLOBs project){
+        sugarProjectMapper.updateByPrimaryKeySelective(project);
+        return 1;
     }
 
 }
