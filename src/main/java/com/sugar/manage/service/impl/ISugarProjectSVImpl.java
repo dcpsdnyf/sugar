@@ -1,5 +1,6 @@
 package com.sugar.manage.service.impl;
 
+import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
@@ -55,31 +56,8 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             ArrayList<TSugarProjectVO> result = new ArrayList<>();
 
             for (TSugarProjectWithBLOBs s:sugarProject){
-                TSugarProjectVO t = new TSugarProjectVO();
-                t.setId(s.getId());
-                t.setProductType(s.getProductType());
-                t.setPlatformName(s.getPlatformName());
-                /*t.setDemandReview(s.getDemandReview());
-                t.setDemandConfirm(s.getDemandConfirm());
-                t.setDemandCheck(s.getDemandCheck());*/
-                t.setTechnologySelection(s.getTechnologySelection());
-                t.setEnvironmentDeployment(s.getEnvironmentDeployment());
-                t.setFrameworkDesign(s.getFrameworkDesign());
-                t.setDevelopProgress10(s.getDevelopProgress10());
-                t.setDevelopProgress25(s.getDevelopProgress25());
-                t.setDevelopProgress50(s.getDevelopProgress50());
-                t.setDevelopProgress75(s.getDevelopProgress75());
-                t.setDevelopProgress100(s.getDevelopProgress100());
-                t.setInsideTest(s.getInsideTest());
-                t.setCustomerTest(s.getCustomerTest());
-                t.setImplementDeliver(s.getImplementDeliver());
-                t.setCheckDeliver(s.getCheckDeliver());
-                t.setStatus(s.getStatus());
-                t.setCreatedStaff(s.getCreatedStaff());
-                t.setCreatedTime(s.getCreatedTime());
-                t.setUpdatedStaff(s.getUpdatedStaff());
-                t.setUpdatedTime(s.getUpdatedTime());
-                result.add(t);
+                TSugarProjectVO copy = ModelCopyUtil.copy(s, TSugarProjectVO.class);
+                result.add(copy);
             }
 
             return result;
@@ -91,22 +69,23 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
     /**
      * 保存及更新项目信息
      *
-     * @param project 参数对象
+     * @param record 参数对象
      */
     @Override
-    public void saveSugarProject(TSugarProject project) {
+    public void saveSugarProject(TSugarProjectWithBLOBs record) {
         /*int a=sugarProjectMapper.insertType(project);
         if (a>0){
             System.out.println(a);
         }*/
-
+        sugarProjectMapper.insert(record);
     }
 
     @Override
     public int updateSugarProject(TSugarProjectWithBLOBs project){
         /*int a=sugarProjectMapper.updateSugarProject(project);
         return a;*/
-        return 0;
+        sugarProjectMapper.updateByPrimaryKeySelective(project);
+        return 1;
     }
     @Override
     public int deleteByPrimaryKey(Integer id){

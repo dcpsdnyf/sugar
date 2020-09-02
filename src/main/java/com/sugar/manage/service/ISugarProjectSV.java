@@ -18,9 +18,9 @@ public interface ISugarProjectSV {
 
     /**
      * 保存及更新项目信息
-     * @param project 参数对象
+     * @param record 参数对象
      */
-    public void saveSugarProject(TSugarProject project);
+    public void saveSugarProject(TSugarProjectWithBLOBs record);
 
     public int updateSugarProject(TSugarProjectWithBLOBs project);
 
