@@ -43,4 +43,5 @@ public interface TSugarProjectMapper {
     int updateByPrimaryKeyWithBLOBs(TSugarProjectWithBLOBs record);
 
     int updateByPrimaryKey(TSugarProject record);
+
 }

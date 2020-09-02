@@ -25,4 +25,5 @@ public interface ISugarProjectSV {
     public int updateSugarProject(TSugarProjectWithBLOBs project);
 
     public int deleteByPrimaryKey(Integer id);
+
 }

@@ -112,4 +112,5 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         int a=sugarProjectMapper.deleteByPrimaryKey(id);
         return a;
     }
+
 }

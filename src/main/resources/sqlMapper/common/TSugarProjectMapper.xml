@@ -29,6 +29,7 @@
     <result column="customer_test" jdbcType="LONGVARCHAR" property="customerTest" />
     <result column="check_deliver" jdbcType="LONGVARCHAR" property="checkDeliver" />
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

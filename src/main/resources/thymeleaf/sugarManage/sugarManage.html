@@ -117,6 +117,7 @@
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
+
 		    selectItemName: 'parentItem',
                     //注册加载子表的事件。注意下这里的三个参数！
                     onExpandRow: function (index, row, $detail) {
@@ -127,6 +128,7 @@
                         field: 'id',
                         //checkbox: true
                     }, {
+
                         field: 'productType',
                         title: '产品类型',
                         editable: {
@@ -134,6 +136,9 @@
                             title: '产品类型',
                             validate: function (v) {
                                 if (!v) return '用户名不能为空';
+                                if (true){
+                                    return style:
+                                }
 
                             }
                         }
@@ -333,6 +338,7 @@
                            dataType: 'JSON',
                            success: function (status) {
                                    alert('提交数据成功');
+                                   location.reload();
                            },
                            error: function () {
                                alert('编辑失败');
