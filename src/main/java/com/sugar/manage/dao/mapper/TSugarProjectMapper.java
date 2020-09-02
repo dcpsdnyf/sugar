@@ -4,8 +4,13 @@ import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
+@Mapper
+@Service
 public interface TSugarProjectMapper {
     long countByExample(TSugarProjectExample example);
 
