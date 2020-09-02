@@ -11,6 +11,7 @@
     <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
     <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
@@ -122,7 +123,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME, 
-    UPDATED_STAFF, UPDATED_TIME
+    UPDATED_STAFF, UPDATED_TIME, sort
   </sql>
   <sql id="Blob_Column_List">
     business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
@@ -189,7 +190,7 @@
     insert into t_sugar_project (ID, product_type, platform_name, 
       platform_id, status, CREATED_STAFF, 
       CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, 
-      business_clue_open, business_clue_0, 
+      sort, business_clue_open, business_clue_0, 
       business_discover_10, business_establish_25, 
       business_establish_50, business_establish_75, 
       business_win_100, customer_maintain_back_money, 
@@ -214,7 +215,7 @@
     values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
       #{platformId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
-      #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
       #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR}, 
       #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR}, 
       #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, 
@@ -266,6 +267,9 @@
       </if>
       <if test="updatedTime != null">
         UPDATED_TIME,
+      </if>
+      <if test="sort != null">
+        sort,
       </if>
       <if test="businessClueOpen != null">
         business_clue_open,
@@ -439,6 +443,9 @@
       </if>
       <if test="updatedTime != null">
         #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
       </if>
       <if test="businessClueOpen != null">
         #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -622,6 +629,9 @@
       <if test="record.updatedTime != null">
         UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
       <if test="record.businessClueOpen != null">
         business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       </if>
@@ -782,6 +792,7 @@
       CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
       business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
@@ -844,7 +855,8 @@
       CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
-      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -875,6 +887,9 @@
       </if>
       <if test="updatedTime != null">
         UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="businessClueOpen != null">
         business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -1033,6 +1048,7 @@
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
       business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
@@ -1092,7 +1108,8 @@
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
-      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

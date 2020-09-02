@@ -506,6 +506,7 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
             && (this.getUpdatedStaff() == null ? other.getUpdatedStaff() == null : this.getUpdatedStaff().equals(other.getUpdatedStaff()))
             && (this.getUpdatedTime() == null ? other.getUpdatedTime() == null : this.getUpdatedTime().equals(other.getUpdatedTime()))
+            && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()))
             && (this.getBusinessClueOpen() == null ? other.getBusinessClueOpen() == null : this.getBusinessClueOpen().equals(other.getBusinessClueOpen()))
             && (this.getBusinessClue0() == null ? other.getBusinessClue0() == null : this.getBusinessClue0().equals(other.getBusinessClue0()))
             && (this.getBusinessDiscover10() == null ? other.getBusinessDiscover10() == null : this.getBusinessDiscover10().equals(other.getBusinessDiscover10()))
@@ -569,6 +570,7 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
         result = prime * result + ((getUpdatedStaff() == null) ? 0 : getUpdatedStaff().hashCode());
         result = prime * result + ((getUpdatedTime() == null) ? 0 : getUpdatedTime().hashCode());
+        result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
         result = prime * result + ((getBusinessClueOpen() == null) ? 0 : getBusinessClueOpen().hashCode());
         result = prime * result + ((getBusinessClue0() == null) ? 0 : getBusinessClue0().hashCode());
         result = prime * result + ((getBusinessDiscover10() == null) ? 0 : getBusinessDiscover10().hashCode());

@@ -22,6 +22,8 @@ public class TSugarProject implements Serializable {
 
     private Date updatedTime;
 
+    private Integer sort;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -96,6 +98,14 @@ public class TSugarProject implements Serializable {
         this.updatedTime = updatedTime;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -116,7 +126,8 @@ public class TSugarProject implements Serializable {
             && (this.getCreatedStaff() == null ? other.getCreatedStaff() == null : this.getCreatedStaff().equals(other.getCreatedStaff()))
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
             && (this.getUpdatedStaff() == null ? other.getUpdatedStaff() == null : this.getUpdatedStaff().equals(other.getUpdatedStaff()))
-            && (this.getUpdatedTime() == null ? other.getUpdatedTime() == null : this.getUpdatedTime().equals(other.getUpdatedTime()));
+            && (this.getUpdatedTime() == null ? other.getUpdatedTime() == null : this.getUpdatedTime().equals(other.getUpdatedTime()))
+            && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()));
     }
 
     @Override
@@ -132,6 +143,7 @@ public class TSugarProject implements Serializable {
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
         result = prime * result + ((getUpdatedStaff() == null) ? 0 : getUpdatedStaff().hashCode());
         result = prime * result + ((getUpdatedTime() == null) ? 0 : getUpdatedTime().hashCode());
+        result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
         return result;
     }
 
@@ -150,6 +162,7 @@ public class TSugarProject implements Serializable {
         sb.append(", createdTime=").append(createdTime);
         sb.append(", updatedStaff=").append(updatedStaff);
         sb.append(", updatedTime=").append(updatedTime);
+        sb.append(", sort=").append(sort);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
