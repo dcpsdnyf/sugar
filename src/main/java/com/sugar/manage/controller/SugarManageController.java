@@ -47,6 +47,7 @@ public class SugarManageController {
     @ResponseBody
     public String getSugarProjectList(){
         TSugarProjectVO projectVO = new TSugarProjectVO();
+
         List<TSugarProjectVO> sugarProjectList = sugarProjectSV.getSugarProjectList(projectVO);
         JSONArray array= JSONArray.parseArray(JSON.toJSONString(sugarProjectList));
         return array.toString();
