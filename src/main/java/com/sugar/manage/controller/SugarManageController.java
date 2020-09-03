@@ -57,7 +57,7 @@ public class SugarManageController {
      */
     @RequestMapping("/newlyAdded")
     public String newlyAdded(TSugarProjectWithBLOBs record){
-
+        record.setStatus("01");
         sugarProjectSV.saveSugarProject(record);
         return "redirect:/sugarManage/init";
     }
