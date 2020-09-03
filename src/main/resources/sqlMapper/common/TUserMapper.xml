@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TUser">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="english_name" jdbcType="VARCHAR" property="englishName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, user_name, status, remark, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME
+    ID, user_name, english_name, status, remark, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, 
+    UPDATED_TIME
   </sql>
   <select id="selectByExample" parameterType="com.sugar.manage.dao.model.TUserExample" resultMap="BaseResultMap">
     select
@@ -103,12 +105,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sugar.manage.dao.model.TUser">
-    insert into t_sys_user (ID, user_name, status, 
-      remark, CREATED_STAFF, CREATED_TIME, 
-      UPDATED_STAFF, UPDATED_TIME)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP})
+    insert into t_sys_user (ID, user_name, english_name, 
+      status, remark, CREATED_STAFF, 
+      CREATED_TIME, UPDATED_STAFF, UPDATED_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TUser">
     insert into t_sys_user
@@ -118,6 +122,9 @@
       </if>
       <if test="userName != null">
         user_name,
+      </if>
+      <if test="englishName != null">
+        english_name,
       </if>
       <if test="status != null">
         status,
@@ -144,6 +151,9 @@
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null">
+        #{englishName,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -180,6 +190,9 @@
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
+      <if test="record.englishName != null">
+        english_name = #{record.englishName,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
       </if>
@@ -207,6 +220,7 @@
     update t_sys_user
     set ID = #{record.id,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
+      english_name = #{record.englishName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
@@ -222,6 +236,9 @@
     <set>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null">
+        english_name = #{englishName,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -247,6 +264,7 @@
   <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TUser">
     update t_sys_user
     set user_name = #{userName,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},

@@ -1,0 +1,1 @@
+ALTER  TABLE  t_sys_user  ADD   english_name  VARCHAR(128)    COMMENT  '英文名称' ;

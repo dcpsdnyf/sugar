@@ -8,6 +8,8 @@ public class TUser implements Serializable {
 
     private String userName;
 
+    private String englishName;
+
     private String status;
 
     private String remark;
@@ -36,6 +38,14 @@ public class TUser implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName == null ? null : englishName.trim();
     }
 
     public String getStatus() {
@@ -100,6 +110,7 @@ public class TUser implements Serializable {
         TUser other = (TUser) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getEnglishName() == null ? other.getEnglishName() == null : this.getEnglishName().equals(other.getEnglishName()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getCreatedStaff() == null ? other.getCreatedStaff() == null : this.getCreatedStaff().equals(other.getCreatedStaff()))
@@ -114,6 +125,7 @@ public class TUser implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getEnglishName() == null) ? 0 : getEnglishName().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getCreatedStaff() == null) ? 0 : getCreatedStaff().hashCode());
@@ -131,6 +143,7 @@ public class TUser implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userName=").append(userName);
+        sb.append(", englishName=").append(englishName);
         sb.append(", status=").append(status);
         sb.append(", remark=").append(remark);
         sb.append(", createdStaff=").append(createdStaff);
