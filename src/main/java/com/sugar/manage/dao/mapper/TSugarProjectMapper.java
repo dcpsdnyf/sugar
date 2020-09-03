@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Mapper
 @Service
 public interface TSugarProjectMapper {
+
     long countByExample(TSugarProjectExample example);
 
     int deleteByExample(TSugarProjectExample example);

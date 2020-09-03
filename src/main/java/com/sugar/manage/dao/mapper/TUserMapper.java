@@ -3,8 +3,12 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.model.TUserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
+@Mapper
 public interface TUserMapper {
     long countByExample(TUserExample example);
 

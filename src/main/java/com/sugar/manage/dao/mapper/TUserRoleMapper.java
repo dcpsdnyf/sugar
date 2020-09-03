@@ -3,8 +3,11 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.model.TUserRole;
 import com.sugar.manage.dao.model.TUserRoleExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TUserRoleMapper {
     long countByExample(TUserRoleExample example);
 

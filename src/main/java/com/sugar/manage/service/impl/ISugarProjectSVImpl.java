@@ -2,7 +2,6 @@ package com.sugar.manage.service.impl;
 
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
-import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.service.ISugarProjectSV;
@@ -58,6 +57,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
             for (TSugarProjectWithBLOBs s:sugarProject){
                 TSugarProjectVO copy = ModelCopyUtil.copy(s, TSugarProjectVO.class);
+                copy.setRoleType(projectVO.getRoleType());
                 result.add(copy);
             }
 

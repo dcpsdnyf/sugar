@@ -126,7 +126,9 @@
                     columns: [{
                         title: '序号',
                         field: 'id',
-                        //checkbox: true
+                        formatter: function(value, row, index){
+                            return index + 1;
+                        }
                     }, {
                         field: 'productType',
                         title: '产品类型',
@@ -579,6 +581,11 @@
                             validate: function (v) {
                                 if (!v) return '用户名不能为空';
 
+                               /* if (v){
+
+                                    alert('你没资格修改');
+                                    document.getElementById("developProgress10").readOnly=true;
+                                }*/
                             }
                         }
                     }, {

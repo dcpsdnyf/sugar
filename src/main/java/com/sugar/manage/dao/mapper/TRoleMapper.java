@@ -3,8 +3,11 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.model.TRole;
 import com.sugar.manage.dao.model.TRoleExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TRoleMapper {
     long countByExample(TRoleExample example);
 
