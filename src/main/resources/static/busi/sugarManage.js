@@ -47,27 +47,27 @@ $(function () {
             }
         }, {
             field: 'productType',
-            title: '产品类型',
-            editable: {
+            title: '产品类型'
+            /*editable: {
                 type: 'text',
                 title: '产品类型',
                 button:true,
                 validate: function (v) {
                     if (!v) return '不能为空';
                 },
-            },
+            },*/
 
         }, {
             field: 'platformName',
-            title: '平台名称',
-            editable: {
+            title: '平台名称'
+           /* editable: {
                 type: 'text',
                 title: '平台名称',
                 validate: function (v) {
                     if (!v) return '不能为空';
                 },
 
-            }
+            }*/
         }, {
             field: 'businessClueOpen',
             title: '商机线索开启',
