@@ -1,0 +1,1 @@
+ALTER  TABLE  t_user_role  ADD   project_id  BIGINT  NOT NULL   COMMENT  '项目ID' ;

@@ -4,6 +4,7 @@ import com.sugar.manage.dao.mapper.TRoleMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.*;
 import com.sugar.manage.service.IUserRoleSV;
+import com.sugar.manage.vo.RoleProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -37,7 +38,8 @@ public class IUserRoleSVImpl implements IUserRoleSV {
      * @return
      */
     @Override
-    public String getUserRoleList(TUser user) {
+    public RoleProjectVO getUserRoleList(TUser user) {
+        RoleProjectVO roleProjectVO = new RoleProjectVO();
 
         TUserRoleExample example = new TUserRoleExample();
         TUserRoleExample.Criteria sql = example.createCriteria();
@@ -49,9 +51,12 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             List<Long> longList = new ArrayList<>();
 
+            String projectIds = "";
             for (TUserRole userRole : userRoleList){
+                projectIds += userRole.getProjectId()+",";
                 longList.add(userRole.getRoleId());
             }
+            roleProjectVO.setProjectIds(projectIds);
 
             TRoleExample exampleRole = new TRoleExample();
             TRoleExample.Criteria sqlRole = exampleRole.createCriteria();
@@ -63,10 +68,10 @@ public class IUserRoleSVImpl implements IUserRoleSV {
                 for (TRole role : roleList){
                     roleType += role.getRoleType() + ",";
                 }
-                return roleType;
+                roleProjectVO.setRoleTypes(roleType);
             }
 
         }
-        return null;
+        return roleProjectVO;
     }
 }

@@ -13,6 +13,7 @@ import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
+import com.sugar.manage.vo.RoleProjectVO;
 import com.sugar.manage.vo.TSugarProjectVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -76,10 +77,13 @@ public class SugarManageController extends AppBaseController {
         TUser user = new TUser();
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         user.setId(Integer.parseInt(userId));
-        String userRole = userRoleSV.getUserRoleList(user);
+        RoleProjectVO roleProjectVO = userRoleSV.getUserRoleList(user);
 
-        if(!StringUtils.isBlank(userRole)){
-            projectVO.setRoleType(userRole);
+        String roleTypes = null;
+        String projectIds = null;
+        if(roleProjectVO!=null){
+            roleTypes = roleProjectVO.getRoleTypes();
+            projectIds = roleProjectVO.getProjectIds();
         }
 
         PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
@@ -88,7 +92,8 @@ public class SugarManageController extends AppBaseController {
         if(!CollectionUtils.isEmpty(list)){
             for (TSugarProjectWithBLOBs t : list){
                 TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
-                tSugarProjectVO.setRoleType(userRole);
+                tSugarProjectVO.setRoleType(roleTypes);
+                tSugarProjectVO.setProjectIds(projectIds);
                 tSugarProjectVOSList.add(tSugarProjectVO);
             }
         }

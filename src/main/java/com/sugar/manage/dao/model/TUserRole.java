@@ -9,6 +9,8 @@ public class TUserRole implements Serializable {
 
     private Long userId;
 
+    private Long projectId;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class TUserRole implements Serializable {
         this.userId = userId;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -49,7 +59,8 @@ public class TUserRole implements Serializable {
         TUserRole other = (TUserRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getProjectId() == null ? other.getProjectId() == null : this.getProjectId().equals(other.getProjectId()));
     }
 
     @Override
@@ -59,6 +70,7 @@ public class TUserRole implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getProjectId() == null) ? 0 : getProjectId().hashCode());
         return result;
     }
 
@@ -71,6 +83,7 @@ public class TUserRole implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
         sb.append(", userId=").append(userId);
+        sb.append(", projectId=").append(projectId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
