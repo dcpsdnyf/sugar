@@ -16,8 +16,6 @@ $(function () {
                 limit : params.limit,       // 每页显示数量
                 offset : params.offset,     // SQL语句起始索引
                 page : (params.offset / params.limit) + 1, //当前页码
-                /*Name : $('#search_name').val(),
-                Tel : $('#search_tel').val()*/
             };
             return temp;
         },                                  //传递参数（*）
@@ -33,7 +31,7 @@ $(function () {
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
         uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
-        showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+        showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                   //是否显示父子表
         fixedColumns:true,//是否固定列
@@ -57,16 +55,6 @@ $(function () {
                 validate: function (v) {
                     if (!v) return '不能为空';
                 },
-                /* toggleDisabled: function (v,row,index) {
-                     var q=row.roleaType;
-                     var  w=q.split(",");
-                     for (var i=0;i<w.length;i++){
-                         if(w[i]==3) {
-                             return 1;
-                         }
-                     }return 1;
-                    return true;
-                 },*/
             },
 
         }, {
@@ -84,19 +72,13 @@ $(function () {
             field: 'businessClueOpen',
             title: '商机线索开启',
             editable: {
-
                 type: 'text',
                 title: '商机线索开启',
-
                 validate: function (v) {
                     if (!v) return '不能为空';
 
                 }
-
-
-
             }
-
         },{
             field: 'businessClue0',
             title: '1、商机线索0%：我方分析客户存在潜在需求',
@@ -1162,7 +1144,7 @@ $(function () {
 
             }
         }
-    });
+});
 
     //新增事件
     $("#btn_add").on('click', function () {
