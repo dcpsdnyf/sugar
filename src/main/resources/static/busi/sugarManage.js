@@ -40,10 +40,7 @@ $(function () {
         fixedNumber:3,//固定多少列，总左边开始数
 
         selectItemName: 'parentItem',
-        //注册加载子表的事件。注意下这里的三个参数！
-        onExpandRow: function (index, row, $detail) {
-            InitSubTable(index, row, $detail);
-        },
+
         columns: [{
             title: '序号',
             field: 'id',
