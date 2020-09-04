@@ -803,6 +803,14 @@
                             var firstPayment= rows[k].firstPayment;
                             var progressPayment= rows[k].progressPayment;
                             var finalPayment= rows[k].finalPayment;
+                            var designBrief= rows[k].designBrief;
+                            var detailedDesign= rows[k].detailedDesign;
+                            var uiDesign= rows[k].uiDesign;
+                            var requirementDesign= rows[k].requirementDesign;
+                            var requirementsReview= rows[k].requirementsReview;
+                            var demandOrderConfirm= rows[k].demandOrderConfirm;
+                            var proCheckDeliver= rows[k].proCheckDeliver;
+
 
 
                             if(roleTypes.indexOf('1')==-1){ //项目名称
@@ -916,6 +924,35 @@
                                 $(obj18).empty();
                                 $(obj18).text(finalPayment);
 
+                            }
+                            if(roleTypes.indexOf('4')==-1){
+                                var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="designBrief"]').parent();
+                                $(obj1).empty();
+                                $(obj1).text(designBrief);
+
+                                var obj2 = $('#tb_user tr[data-index='+k+'] a[data-name="detailedDesign"]').parent();
+                                $(obj2).empty();
+                                $(obj2).text(detailedDesign);
+
+                                var obj3 = $('#tb_user tr[data-index='+k+'] a[data-name="uiDesign"]').parent();
+                                $(obj3).empty();
+                                $(obj3).text(uiDesign);
+
+                                var obj4 = $('#tb_user tr[data-index='+k+'] a[data-name="requirementDesign"]').parent();
+                                $(obj4).empty();
+                                $(obj4).text(requirementDesign);
+
+                                var obj5 = $('#tb_user tr[data-index='+k+'] a[data-name="requirementsReview"]').parent();
+                                $(obj5).empty();
+                                $(obj5).text(requirementsReview);
+
+                                var obj6 = $('#tb_user tr[data-index='+k+'] a[data-name="demandOrderConfirm"]').parent();
+                                $(obj6).empty();
+                                $(obj6).text(demandOrderConfirm);
+
+                                var obj7 = $('#tb_user tr[data-index='+k+'] a[data-name="proCheckDeliver"]').parent();
+                                $(obj7).empty();
+                                $(obj7).text(proCheckDeliver);
                             }
                         }
                     }
