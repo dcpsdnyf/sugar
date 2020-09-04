@@ -771,6 +771,36 @@
                            }
 
                         });
+                    },
+                    onLoadSuccess: function (data) {
+                        //var data = $('#tb_user').bootstrapTable('getData', true);
+                        debugger
+                        var rows = data.rows;
+                        var roleTypes=rows[0].roleType;
+                        for(var k=0;k<rows.length;k++){
+                            var businessClueOpen = rows[k].businessClueOpen; //商机线索
+                            var businessClose = rows[k].businessClose;  //商机关闭
+                            var businessClue0 = rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
+                            var businessDiscover10= rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
+                            if(roleTypes.indexOf('1')==-1){ //项目名称
+                                var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="businessClueOpen"]').parent();
+                                $(obj1).empty();
+                                $(obj1).text(businessClueOpen);
+
+                                var obj2 = $('#tb_user tr[data-index='+k+'] a[data-name="businessClose"]').parent();
+                                $(obj2).empty();
+                                $(obj2).text(businessClose);
+                            }
+                            if(roleTypes.indexOf('2')==-1){
+                                var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="businessClue0"]').parent();
+                                $(obj1).empty();
+                                $(obj1).text(businessClue0);
+
+                                var obj2 = $('#tb_user tr[data-index='+k+'] a[data-name="businessDiscover10"]').parent();
+                                $(obj2).empty();
+                                $(obj2).text(businessDiscover10);
+                            }
+                        }
                     }
                 });
 
