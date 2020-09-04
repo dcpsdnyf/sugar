@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -132,6 +133,7 @@ public class SugarManageController extends AppBaseController {
      * @return
      */
     @RequestMapping("/Edit")
+    @ResponseBody
     public String updateSugarProject(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {
         int a=sugarProjectSV.updateSugarProject(tSugarProject);
             if (a>0){

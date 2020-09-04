@@ -59,6 +59,38 @@
         </div>
     </div>
     </form>
+    <form th:action="@{/sugarManage/Edit}">
+        <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="editMyModalLabel">操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="">
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">产品类型</label>
+                            <div class="col-xs-10">
+                                <input type="text" name="productType" class="form-control" placeholder="产品类型">
+                            </div>
+                        </div>
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">平台名称</label>
+                            <div class="col-xs-10">
+                                <input type="text" name="platformName" class="form-control" placeholder="平台名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
         <!--必须的js文件-->
         <script th:src="@{/Content/jquery-1.9.1.min.js}"></script>
         <script th:src="@{/Content/bootstrap/js/bootstrap.min.js}"></script>
@@ -1162,13 +1194,14 @@
                 //根据当前行的id获取当前的行数据
                 var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
                 //弹出模态框
-                $("#myModal").modal();
+                $("#editMyModal").modal();
                 //给弹出框里面的各个文本框赋值
-                $("#myModal input[name='Name']").val(row.Name);
+                /*$("#myModal input[name='Name']").val(row.Name);
                 $("#myModal input[name='Age']").val(row.Age);
                 $("#myModal input[name='School']").val(row.School);
                 $("#myModal input[name='Address']").val(row.Address);
-                $("#myModal textarea[name='Remark']").val(row.Remark);
+                $("#myModal textarea[name='Remark']").val(row.Remark);*/
+                $("#editMyModal input[name='id']").val(id);
             }
 
             //删除事件
