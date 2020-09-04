@@ -1,7 +1,5 @@
 package com.sugar.manage.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.AppBaseController;
@@ -57,10 +55,7 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/init")
     public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUser tUser){
-        String cookie = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-        if(!StringUtils.isBlank(cookie)){
-
-        }else {
+        if(!StringUtils.isBlank(tUser.getUserName())){
             tUser = userSV.getUserList(tUser);
             if(tUser != null){
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + tUser.getId());
