@@ -771,58 +771,60 @@
                     },
                     onLoadSuccess: function (data) {
                         //var data = $('#tb_user').bootstrapTable('getData', true);
-                        debugger
                         var rows = data.rows;
                         var roleTypes=rows[0].roleType;
                         for(var k=0;k<rows.length;k++){
+                            //======================商机推进阶段======================
                             var businessClueOpen = rows[k].businessClueOpen; //商机线索
                             var businessClose = rows[k].businessClose;  //商机关闭
                             var businessClue0 = rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
                             var businessDiscover10= rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
-                            var businessEstablish25= rows[k].businessEstablish25;
-                            var businessEstablish50= rows[k].businessEstablish50;
-                            var businessEstablish75= rows[k].businessEstablish75;
-                            var businessWin100= rows[k].businessWin100;
-                            var customerMaintainBackMoney= rows[k].customerMaintainBackMoney;
-                            var initialIntentionPlan= rows[k].initialIntentionPlan;
-                            var writeProjectProposal= rows[k].writeProjectProposal;
-                            var workingHoursAssess= rows[k].workingHoursAssess;
-                            var businessNegotiation= rows[k].businessNegotiation;
-                            var requestDraft= rows[k].requestDraft;
-                            var attendMeeting= rows[k].attendMeeting;
-                            var bidding= rows[k].bidding;
-                            var requestOaApproval= rows[k].requestOaApproval;
-                            var contractDraft= rows[k].contractDraft;
-                            var lawyerReview= rows[k].lawyerReview;
-                            var contractOaApproval= rows[k].contractOaApproval;
-                            var usageSeal= rows[k].usageSeal;
-                            var otherSeal= rows[k].otherSeal;
-                            var scan= rows[k].scan;
-                            var generalDepartmentFile= rows[k].generalDepartmentFile;
-                            var firstPayment= rows[k].firstPayment;
-                            var progressPayment= rows[k].progressPayment;
-                            var finalPayment= rows[k].finalPayment;
-                            var designBrief= rows[k].designBrief;
-                            var detailedDesign= rows[k].detailedDesign;
-                            var uiDesign= rows[k].uiDesign;
-                            var requirementDesign= rows[k].requirementDesign;
-                            var requirementsReview= rows[k].requirementsReview;
-                            var demandOrderConfirm= rows[k].demandOrderConfirm;
-                            var proCheckDeliver= rows[k].proCheckDeliver;
+                            var businessEstablish25= rows[k].businessEstablish25;//3、商机确立25%：客户明确购买意愿/立项/预算
+                            var businessEstablish50= rows[k].businessEstablish50;//4、商机确立50%：客户启动招标/采购流程、我方入围
+                            var businessEstablish75= rows[k].businessEstablish75;//5、商机确认75%：客户招标/采购，我方交流需求细则
+                            var businessWin100= rows[k].businessWin100;          // 6、商机赢取100%：合同签订
+                            var customerMaintainBackMoney= rows[k].customerMaintainBackMoney;// 7、客户维护/回款阶段
+                            //======================采购阶段======================
+                            var initialIntentionPlan= rows[k].initialIntentionPlan;     //1、初步意向方案（采购阶段）
+                            var writeProjectProposal= rows[k].writeProjectProposal;     // 2、写立项方案
+                            var workingHoursAssess= rows[k].workingHoursAssess;         // 3、工时评估
+                            var businessNegotiation= rows[k].businessNegotiation;       // 4、商务谈判
+                            var requestDraft= rows[k].requestDraft;                     // 5、请示拟写
+                            var attendMeeting= rows[k].attendMeeting;                   // 6、上会
+                            var bidding= rows[k].bidding;                               // 7、招投标
+                            var requestOaApproval= rows[k].requestOaApproval;           // 8、请示OA审批
+                            var contractDraft= rows[k].contractDraft;                   // 9、合同拟写
+                            var lawyerReview= rows[k].lawyerReview;                     // 10、律师审核
+                            var contractOaApproval= rows[k].contractOaApproval;         // 11、合同OA审批
+                            var usageSeal= rows[k].usageSeal;                           // 12、用章
+                            var otherSeal= rows[k].otherSeal;                           // 13、对方盖章
+                            var scan= rows[k].scan;                                     // 14、扫描
+                            var generalDepartmentFile= rows[k].generalDepartmentFile;   // 15、综合部归档
+                            var firstPayment= rows[k].firstPayment;                     // 16、首付款
+                            var progressPayment= rows[k].progressPayment;               // 17、进度款
+                            var finalPayment= rows[k].finalPayment;                     // 18、尾款
+                            //======================产品阶段======================
+                            var designBrief= rows[k].designBrief;                       // 1、设计概要
+                            var detailedDesign= rows[k].detailedDesign;                 // 2、详细设计
+                            var uiDesign= rows[k].uiDesign;                             // 3、UI设计
+                            var requirementDesign= rows[k].requirementDesign;           // 4、需求设计
+                            var requirementsReview= rows[k].requirementsReview;         // 5、需求评审
+                            var demandOrderConfirm= rows[k].demandOrderConfirm;         // 6、需求单确认
+                            var proCheckDeliver= rows[k].proCheckDeliver;               // 7、验收
 
                             //======================研发阶段======================
-                            var technologySelection = rows[k].technologySelection;  //1、技术选型
+                            var technologySelection = rows[k].technologySelection;      //1、技术选型
                             var environmentDeployment = rows[k].environmentDeployment;  //2、环境部署
-                            var frameworkDesign = rows[k].frameworkDesign;  //  3、框架设计
-                            var developProgress10 = rows[k].developProgress10;  //4、开发进度10%
-                            var developProgress25 = rows[k].developProgress25   //5、开发进度25%
-                            var developProgress50 = rows[k].developProgress50;  //6、开发进度50%
-                            var developProgress75 = rows[k].developProgress75;  //7、开发进度75%
-                            var developProgress100 = rows[k].developProgress100;//8、开发进度100%
-                            var insideTest = rows[k].insideTest;                //9、内部测试优化
-                            var customerTest = rows[k].customerTest;            //10、客户测试优化
-                            var implementDeliver = rows[k].implementDeliver;    //11、实施交付
-                            var checkDeliver = rows[k].checkDeliver;            //12、验收
+                            var frameworkDesign = rows[k].frameworkDesign;              //  3、框架设计
+                            var developProgress10 = rows[k].developProgress10;          //4、开发进度10%
+                            var developProgress25 = rows[k].developProgress25;          //5、开发进度25%
+                            var developProgress50 = rows[k].developProgress50;          //6、开发进度50%
+                            var developProgress75 = rows[k].developProgress75;          //7、开发进度75%
+                            var developProgress100 = rows[k].developProgress100;        //8、开发进度100%
+                            var insideTest = rows[k].insideTest;                        //9、内部测试优化
+                            var customerTest = rows[k].customerTest;                    //10、客户测试优化
+                            var implementDeliver = rows[k].implementDeliver;            //11、实施交付
+                            var checkDeliver = rows[k].checkDeliver;                    //12、验收
 
                             //======================运营阶段======================
                             var operationPhase = rows[k].operationPhase;
