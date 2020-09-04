@@ -61,7 +61,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             return pageInfo;
         }
 
-        return null;
+        return new PageInfo<>();
     }
 
     /**
