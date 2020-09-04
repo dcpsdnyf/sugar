@@ -43,6 +43,9 @@ spring:
     url: jdbc:mysql://10.17.116.6:3306/sugar_manage?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: gt
     password: gt@123
+    #url: jdbc:mysql://10.22.0.230:13306/sugaroffice?useUnicode=true&characterEncoding=utf-8
+    #username: sugaroffice
+    #password: sugoff_KIEhkkd)OOn
 mybatis:
   type-aliases-package: com.sugar
   mapper-locations: classpath:sqlMapper/common/*.xml

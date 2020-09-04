@@ -9,7 +9,7 @@ $(function () {
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
-        sortable: false,                     //是否启用排序
+        sortable: true,                     //是否启用排序
         sortOrder: "asc",                   //排序方式
         queryParams: function (params) {
             var temp = {                    //如果是在服务器端实现分页，limit、offset这两个参数是必须的
@@ -36,6 +36,7 @@ $(function () {
         detailView: false,                   //是否显示父子表
         fixedColumns:true,//是否固定列
         fixedNumber:3,//固定多少列，总左边开始数
+
 
         selectItemName: 'parentItem',
 
@@ -70,27 +71,7 @@ $(function () {
                 "align":"center",
                 "colspan": 12
             },
-            /*{
-                "title": "运营阶段",
-                "halign":"center",
-                "align":"center",
-                "colspan": 1,
-                rowspan: 2
-            },
             {
-                "title": "运维阶段",
-                "halign":"center",
-                "align":"center",
-                "colspan": 1,
-                rowspan: 2
-            },
-            {
-                "title": "操作",
-                "halign":"center",
-                "align":"center",
-                "colspan": 1,
-                rowspan: 2
-            },*/{
                 field: 'operationPhase',
                 title: '运营阶段',
                 "colspan": 1,
@@ -690,42 +671,7 @@ $(function () {
 
                 }
             }
-        }/*,{
-            field: 'operationPhase',
-            title: '运营阶段',
-            editable: {
-                type: 'text',
-                title: '运营阶段',
-                validate: function (v) {
-                    if (!v) return '不能为空';
-
-                }
-            }
-        },{
-            field: 'maintainPhase',
-            title: '运维阶段',
-            editable: {
-                type: 'text',
-                title: '运维阶段',
-                validate: function (v) {
-                    if (!v) return '不能为空';
-
-                }
-            }
-        }, {
-            halign:"center",
-            title: '操作',
-            formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-                if(row.projectIds==null || row.projectIds.indexOf(row.id)==-1){
-                    return '';
-                }
-
-                var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-                    '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
-                html += "</div>";
-                return html;
-            }
-        }*/]],
+        }]],
         onEditableSave: function (field, row, oldValue, $el) {
             // alert("更新保存事件，原始值为" + oldValue);
             $.ajax({
@@ -734,11 +680,14 @@ $(function () {
                 data: row,
                 dataType: 'JSON',
                 success: function (status) {
-                    alert('提交数据成功');
-                    location.reload();
+                    confirmModal("提示", "保存成功！", function () {
+                        window.location.reload();
+                    }, {}, function () {
+                        window.location.reload();
+                    });
                 },
                 error: function () {
-                    alert('编辑失败');
+                    msgInfoModal('提示', "编辑失败");
                 },
                 complete: function () {
 
@@ -1249,36 +1198,34 @@ var editModel = function (id) {
     //弹出模态框
     $("#editMyModal").modal();
     //给弹出框里面的各个文本框赋值
-    /*$("#myModal input[name='Name']").val(row.Name);
-    $("#myModal input[name='Age']").val(row.Age);
-    $("#myModal input[name='School']").val(row.School);
-    $("#myModal input[name='Address']").val(row.Address);
-    $("#myModal textarea[name='Remark']").val(row.Remark);*/
     $("#editMyModal input[name='id']").val(id);
     $("#editMyModal input[name='productType']").val(row.productType);
     $("#editMyModal input[name='platformName']").val(row.platformName);
 }
 
 //删除事件
-
 var deleteModel = function (id) {
-    alert("删除id为" + id + "的项目");
-    $.ajax({
-        type: "post",
-        url: WEB_ROOT + "/sugarManage/delete",
-        data: "id="+id,
-        dataType: 'JSON',
-        success: function (status) {
-            alert('删除成功');
-            location.reload();
-        },
-        error: function () {
-            alert('删除失败');
-        }
-
+    confirmModal("提示", "是否确定要删除该项目信息？", function () {
+        $.ajax({
+            type: "post",
+            url: WEB_ROOT + "/sugarManage/delete",
+            data: "id="+id,
+            dataType: 'JSON',
+            success: function (status) {
+                confirmModal("提示", "删除成功！", function () {
+                    window.location.reload();
+                }, {}, function () {
+                    window.location.reload();
+                });
+            },
+            error: function () {
+                msgInfoModal('提示', "删除失败");
+            }
+        });
+    }, {}, function () {
+        //window.location.reload();
     });
-
-}
+};
 function exportSugar() {
     var url = WEB_ROOT + "/sugarManage/exportSugarExcle";
     window.open(url);
@@ -1290,12 +1237,16 @@ function saveProjectInfo() {
         data: $("#editForm").serialize(),
         dataType: 'JSON',
         success: function (status) {
-            location.reload();
+            //location.reload();
+            confirmModal("提示", "更新成功！", function () {
+                window.location.reload();
+            }, {}, function () {
+                window.location.reload();
+            });
         },
         error: function () {
-            alert('更新失败');
+            msgInfoModal('提示', "更新失败");
         }
-
     });
 }
 
@@ -1306,12 +1257,14 @@ function addProject() {
         data: $("#addForm").serialize(),
         dataType: 'JSON',
         success: function (result) {
-            alert(result.msg)
-            location.reload();
+            confirmModal("提示", "新增成功！", function () {
+                window.location.reload();
+            }, {}, function () {
+                window.location.reload();
+            });
         },
         error: function () {
-            alert('新增失败');
+            msgInfoModal('提示', "更新失败");
         }
-
     });
 }
