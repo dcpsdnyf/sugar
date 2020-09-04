@@ -280,10 +280,19 @@ public class ExcelUtils {
         //设置为居中加粗
         XSSFCellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
+	    Font headerFont = workbook.createFont();
+	    headerFont.setFontName("Arial");
+	    headerFont.setFontHeightInPoints((short) 10);
+	    headerFont.setBold(true);
+	    //设置字体颜色
+	    headerFont.setColor(IndexedColors.WHITE.getIndex());
+	    style.setFont(headerFont);
         font.setBold(true);
-        style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
-        
+        //表头背景颜色优化
+	    style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
+	    style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
         for (int i = 0; i < titleList.size(); i++) {
         	String title=titleList.get(i);
         	XSSFCell cell = row.createCell(i);
