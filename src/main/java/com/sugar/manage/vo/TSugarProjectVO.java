@@ -20,7 +20,8 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
     private String productType ;
     /** 平台名称 */
     private String platformName ;
-    /** 5、需求评审 */private String businessClueOpen;
+
+    private String businessClueOpen;
 
     private String businessClue0;
 
@@ -118,4 +119,95 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     private String roleType;
 
+    public void setFrameworkDesign(String frameworkDesign) {
+        this.frameworkDesign = frameworkDesign;
+    }
+
+    public String getDevelopProgress10() {
+        return developProgress10;
+    }
+
+    public void setDevelopProgress10(String developProgress10) {
+        this.developProgress10 = developProgress10;
+    }
+
+    public String getDevelopProgress25() {
+        return developProgress25;
+    }
+
+    public void setDevelopProgress25(String developProgress25) {
+        this.developProgress25 = developProgress25;
+    }
+
+    public String getDevelopProgress50() {
+        return developProgress50;
+    }
+
+    public void setDevelopProgress50(String developProgress50) {
+        this.developProgress50 = developProgress50;
+    }
+
+    public String getDevelopProgress75() {
+        return developProgress75;
+    }
+
+    public void setDevelopProgress75(String developProgress75) {
+        this.developProgress75 = developProgress75;
+    }
+
+    public String getDevelopProgress100() {
+        return developProgress100;
+    }
+
+    public void setDevelopProgress100(String developProgress100) {
+        this.developProgress100 = developProgress100;
+    }
+
+    public String getInsideTest() {
+        return insideTest;
+    }
+
+    public void setInsideTest(String insideTest) {
+        this.insideTest = insideTest;
+    }
+
+    public String getCustomerTest() {
+        return customerTest;
+    }
+
+    public void setCustomerTest(String customerTest) {
+        this.customerTest = customerTest;
+    }
+
+    public String getImplementDeliver() {
+        return implementDeliver;
+    }
+
+    public void setImplementDeliver(String implementDeliver) {
+        this.implementDeliver = implementDeliver;
+    }
+
+    public String getCheckDeliver() {
+        return checkDeliver;
+    }
+
+    public void setCheckDeliver(String checkDeliver) {
+        this.checkDeliver = checkDeliver;
+    }
+
+    public String getOperationPhase() {
+        return operationPhase;
+    }
+
+    public void setOperationPhase(String operationPhase) {
+        this.operationPhase = operationPhase;
+    }
+
+    public String getMaintainPhase() {
+        return maintainPhase;
+    }
+
+    public void setMaintainPhase(String maintainPhase) {
+        this.maintainPhase = maintainPhase;
+    }
 }

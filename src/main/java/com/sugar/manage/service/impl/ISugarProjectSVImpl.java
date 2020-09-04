@@ -71,17 +71,11 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
      */
     @Override
     public void saveSugarProject(TSugarProjectWithBLOBs record) {
-        /*int a=sugarProjectMapper.insertType(project);
-        if (a>0){
-            System.out.println(a);
-        }*/
         sugarProjectMapper.insert(record);
     }
 
     @Override
     public int updateSugarProject(TSugarProjectWithBLOBs project){
-        /*int a=sugarProjectMapper.updateSugarProject(project);
-        return a;*/
         sugarProjectMapper.updateByPrimaryKeySelective(project);
         return 1;
     }
