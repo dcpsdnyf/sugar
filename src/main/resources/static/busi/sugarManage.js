@@ -39,35 +39,117 @@ $(function () {
 
         selectItemName: 'parentItem',
 
-        columns: [{
+        columns: [[
+            {
+                "title": "项目信息",
+                "halign":"center",
+                "align":"center",
+                "colspan": 3
+            },
+            {
+                "title": "商机推进阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 9
+            },
+            {
+                "title": "采购阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 18
+            },
+            {
+                "title": "产品阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 7
+            },
+            {
+                "title": "研发阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 12
+            },
+            /*{
+                "title": "运营阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 1,
+                rowspan: 2
+            },
+            {
+                "title": "运维阶段",
+                "halign":"center",
+                "align":"center",
+                "colspan": 1,
+                rowspan: 2
+            },
+            {
+                "title": "操作",
+                "halign":"center",
+                "align":"center",
+                "colspan": 1,
+                rowspan: 2
+            },*/{
+                field: 'operationPhase',
+                title: '运营阶段',
+                "colspan": 1,
+                rowspan: 2,
+                editable: {
+                    type: 'text',
+                    title: '运营阶段',
+                    validate: function (v) {
+                        if (!v) return '不能为空';
+
+                    }
+                }
+            },{
+                field: 'maintainPhase',
+                title: '运维阶段',
+                "colspan": 1,
+                rowspan: 2,
+                editable: {
+                    type: 'text',
+                    title: '运维阶段',
+                    validate: function (v) {
+                        if (!v) return '不能为空';
+
+                    }
+                }
+            }, {
+                halign:"center",
+                title: '操作',
+                "colspan": 1,
+                rowspan: 2,
+                formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+                    if(row.projectIds==null || row.projectIds.indexOf(row.id)==-1){
+                        return '';
+                    }
+
+                    var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+                        '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+                    html += "</div>";
+                    return html;
+                }
+            }
+        ],[{
+            align:"center",
+            halign:"center",
             title: '序号',
+            height:'50px',
             field: 'id',
             formatter: function(value, row, index){
-                return index + 1;
+                var html = "<div style='height:30px'>"+( index + 1) + "</div>";
+                return html;
             }
         }, {
+            align:"center",
+            halign:"center",
             field: 'productType',
             title: '产品类型'
-            /*editable: {
-                type: 'text',
-                title: '产品类型',
-                button:true,
-                validate: function (v) {
-                    if (!v) return '不能为空';
-                },
-            },*/
-
         }, {
             field: 'platformName',
             title: '平台名称'
-           /* editable: {
-                type: 'text',
-                title: '平台名称',
-                validate: function (v) {
-                    if (!v) return '不能为空';
-                },
-
-            }*/
         }, {
             field: 'businessClueOpen',
             title: '商机线索开启',
@@ -608,7 +690,7 @@ $(function () {
 
                 }
             }
-        },{
+        }/*,{
             field: 'operationPhase',
             title: '运营阶段',
             editable: {
@@ -622,7 +704,6 @@ $(function () {
         },{
             field: 'maintainPhase',
             title: '运维阶段',
-
             editable: {
                 type: 'text',
                 title: '运维阶段',
@@ -632,18 +713,19 @@ $(function () {
                 }
             }
         }, {
-            width:'220',
+            halign:"center",
             title: '操作',
             formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
                 if(row.projectIds==null || row.projectIds.indexOf(row.id)==-1){
                     return '';
                 }
-                var html = '<button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-                    '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
 
+                var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+                    '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+                html += "</div>";
                 return html;
             }
-        }],
+        }*/]],
         onEditableSave: function (field, row, oldValue, $el) {
             // alert("更新保存事件，原始值为" + oldValue);
             $.ajax({

@@ -14,9 +14,26 @@
     <link th:href="@{/Content/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet" />
     <link th:href="@{/Content/bootstrap-table/bootstrap-table.min.css}"  rel="stylesheet" />
     <link th:href="@{/Content/bootstrap-table-fixed-columns-master/bootstrap-table-fixed-columns.css}"  rel="stylesheet" />
+    <style type="text/css">
+
+        .W120 .th-inner {
+            width:120px !important;
+        }
+        .W80 .th-inner {
+            width:80px !important;
+        }
+        .W60 .th-inner {
+            width:60px !important;
+        }
+
+        .W150 .th-inner {
+            width:150px !important;
+        }
+    </style>
 </head>
 <body>
-    <div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel-body" style="margin:0px 25px;padding-bottom:0px;">
+        <h1 style="text-align:center;">项目管理</h1>
         <div id="toolbar" class="btn-group">
             <button id="btn_add" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
