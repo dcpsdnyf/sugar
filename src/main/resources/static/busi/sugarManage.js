@@ -37,7 +37,7 @@ $(function () {
         cardView: false,                    //是否显示详细视图
         detailView: false,                   //是否显示父子表
         fixedColumns:true,//是否固定列
-        fixedNumber:5,//固定多少列，总左边开始数
+        fixedNumber:3,//固定多少列，总左边开始数
 
         selectItemName: 'parentItem',
         //注册加载子表的事件。注意下这里的三个参数！
@@ -1179,110 +1179,6 @@ $(function () {
 
 });
 
-//加载子表
-var InitSubTable = function (index, row, $detail) {
-    var parentid = row.MENU_ID;
-    var cur_table = $detail.html('<table></table>').find('table');
-    //子表的初始化和父表完全相同
-    $(cur_table).bootstrapTable({
-        //url: '/api/MenuApi/GetChildrenMenu',
-        data: childData,
-        method: 'get',
-        queryParams: { strParentID: parentid },
-        ajaxOptions: { strParentID: parentid },
-        clickToSelect: true,
-        uniqueId: "MENU_ID",
-        pageSize: 10,
-        pageList: [10, 25],
-        selectItemName: 'childItem'+index,
-        checkboxHeader:false,
-        columns: [{
-            checkbox: true
-        }, {
-            field: 'SourceField',
-            title: '源端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }, {
-            field: 'BackField',
-            title: '备端字段'
-        }],
-        //无线循环取子表，直到子表里面没有记录
-        onExpandRow: function (index, row, $Subdetail) {
-            //oInit.InitSubTable(index, row, $Subdetail);
-        }
-    });
-};
 
 //编辑事件
 var editModel = function (id) {
