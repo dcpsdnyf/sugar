@@ -810,7 +810,25 @@
                             var demandOrderConfirm= rows[k].demandOrderConfirm;
                             var proCheckDeliver= rows[k].proCheckDeliver;
 
+                            //======================研发阶段======================
+                            var technologySelection = rows[k].technologySelection;  //1、技术选型
+                            var environmentDeployment = rows[k].environmentDeployment;  //2、环境部署
+                            var frameworkDesign = rows[k].frameworkDesign;  //  3、框架设计
+                            var developProgress10 = rows[k].developProgress10;  //4、开发进度10%
+                            var developProgress25 = rows[k].developProgress25   //5、开发进度25%
+                            var developProgress50 = rows[k].developProgress50;  //6、开发进度50%
+                            var developProgress75 = rows[k].developProgress75;  //7、开发进度75%
+                            var developProgress100 = rows[k].developProgress100;//8、开发进度100%
+                            var insideTest = rows[k].insideTest;                //9、内部测试优化
+                            var customerTest = rows[k].customerTest;            //10、客户测试优化
+                            var implementDeliver = rows[k].implementDeliver;    //11、实施交付
+                            var checkDeliver = rows[k].checkDeliver;            //12、验收
 
+                            //======================运营阶段======================
+                            var operationPhase = rows[k].operationPhase;
+
+                            //======================运营阶段======================
+                            var maintainPhase = rows[k].maintainPhase;
 
                             if(roleTypes.indexOf('1')==-1){ //项目名称
                                 var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="businessClueOpen"]').parent();
@@ -953,6 +971,69 @@
                                 $(obj7).empty();
                                 $(obj7).text(proCheckDeliver);
                             }
+
+                            if(roleTypes.indexOf('5')==-1){
+                                var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="technologySelection"]').parent();
+                                $(obj1).empty();
+                                $(obj1).text(technologySelection);
+
+                                var obj2 = $('#tb_user tr[data-index='+k+'] a[data-name="environmentDeployment"]').parent();
+                                $(obj12).empty();
+                                $(obj2).text(environmentDeployment);
+
+                                var obj3 = $('#tb_user tr[data-index='+k+'] a[data-name="frameworkDesign"]').parent();
+                                $(obj3).empty();
+                                $(obj3).text(frameworkDesign);
+
+                                var obj4 = $('#tb_user tr[data-index='+k+'] a[data-name="developProgress10"]').parent();
+                                $(obj4).empty();
+                                $(obj4).text(developProgress10);
+
+                                var obj5 = $('#tb_user tr[data-index='+k+'] a[data-name="developProgress25"]').parent();
+                                $(obj5).empty();
+                                $(obj5).text(developProgress25);
+
+                                var obj6 = $('#tb_user tr[data-index='+k+'] a[data-name="developProgress50"]').parent();
+                                $(obj6).empty();
+                                $(obj6).text(developProgress50);
+
+                                var obj7 = $('#tb_user tr[data-index='+k+'] a[data-name="developProgress75"]').parent();
+                                $(obj7).empty();
+                                $(obj7).text(developProgress75);
+
+                                var obj8 = $('#tb_user tr[data-index='+k+'] a[data-name="developProgress100"]').parent();
+                                $(obj8).empty();
+                                $(obj8).text(developProgress100);
+
+                                var obj9 = $('#tb_user tr[data-index='+k+'] a[data-name="insideTest"]').parent();
+                                $(obj9).empty();
+                                $(obj9).text(insideTest);
+
+                                var obj10 = $('#tb_user tr[data-index='+k+'] a[data-name="customerTest"]').parent();
+                                $(obj10).empty();
+                                $(obj10).text(customerTest);
+
+                                var obj11 = $('#tb_user tr[data-index='+k+'] a[data-name="implementDeliver"]').parent();
+                                $(obj11).empty();
+                                $(obj11).text(implementDeliver);
+
+                                var obj12 = $('#tb_user tr[data-index='+k+'] a[data-name="checkDeliver"]').parent();
+                                $(obj12).empty();
+                                $(obj12).text(checkDeliver);
+
+                            }
+                            if(roleTypes.indexOf('6')==-1){
+                                var obj = $('#tb_user tr[data-index='+k+'] a[data-name="operationPhase"]').parent();
+                                $(obj).empty();
+                                $(obj).text(operationPhase);
+                            }
+
+                            if(roleTypes.indexOf('7')==-1){
+                                var obj = $('#tb_user tr[data-index='+k+'] a[data-name="maintainPhase"]').parent();
+                                $(obj).empty();
+                                $(obj).text(maintainPhase);
+                            }
+
                         }
                     }
                 });
