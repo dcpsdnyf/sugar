@@ -94,4 +94,14 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         return 1;
     }
 
+    @Override
+    public List<TSugarProjectWithBLOBs> selectSugarList(TSugarProjectWithBLOBs sugarList) {
+        TSugarProjectExample example =new TSugarProjectExample();
+        TSugarProjectExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo("01");
+        List<TSugarProjectWithBLOBs> sugarLists = sugarProjectMapper.selectByExampleWithBLOBs(example);
+
+        return sugarLists;
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.sugar.manage.service;
 
-import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.vo.TSugarProjectVO;
 
@@ -25,5 +24,13 @@ public interface ISugarProjectSV {
     public int updateSugarProject(TSugarProjectWithBLOBs project);
 
     public int deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject);
+
+    /**
+     * 查询sugar管理列表
+     *
+     * @param sugarList sugar管理
+     * @return sugar管理集合
+     */
+    public List<TSugarProjectWithBLOBs> selectSugarList(TSugarProjectWithBLOBs sugarList);
 
 }

@@ -11,6 +11,7 @@ import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.TSugarProjectVO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/sugarManage")
-public class SugarManageController {
+@Slf4j
+public class SugarManageController extends AppBaseController {
 
     @Autowired
     private ISugarProjectSV sugarProjectSV;
@@ -82,7 +84,6 @@ public class SugarManageController {
         }
         return array.toString();
     }
-
     /**
      * 新增项目列表信息记录
      * @return
@@ -95,6 +96,21 @@ public class SugarManageController {
         record.setStatus("01");
         sugarProjectSV.saveSugarProject(record);
         return "redirect:/sugarManage/init";
+    }
+
+    @RequestMapping(value = "/exportSugarExcle")
+    public void exportSupplierOrderReport(HttpServletRequest request, HttpServletResponse response, TSugarProjectWithBLOBs sugarList) {
+        try{
+            String fileName="管理列表.xls";
+            List<String> titleLists = exportExcelHead();
+            List<List<String>> rowLists = exportExcelData(sugarList);
+            if(!CollectionUtils.isEmpty(titleLists) && !CollectionUtils.isEmpty(rowLists)) {
+                XSSFWorkbook workbook = ExcelUtils.buildWorkBookForExport(titleLists, rowLists);
+                writeExcelToResponse(response, workbook, fileName);
+            }
+        }catch (Exception e){
+           log.error("导出列表异常", e);
+        }
     }
 
     /**
