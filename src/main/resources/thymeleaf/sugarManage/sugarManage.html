@@ -18,8 +18,8 @@
     <div class="panel-body" style="padding-bottom:0px;">
         <div id="toolbar" class="btn-group">
             <button id="btn_add" type="button" class="btn btn-success">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-        </button>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
             <button id="btn_export" type="button" class="btn btn-warning" onclick="exportSugar()" style="margin-left: 10px">
                 <i class="glyphicon glyphicon-export"></i>导出
             </button>
@@ -146,18 +146,18 @@
                             title: '产品类型',
                             button:true,
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
                             },
-                            toggleDisabled: function (v,row,index) {
-                               /* var q=row.roleaType;
+                           /* toggleDisabled: function (v,row,index) {
+                                var q=row.roleaType;
                                 var  w=q.split(",");
                                 for (var i=0;i<w.length;i++){
                                     if(w[i]==3) {
                                         return 1;
                                     }
-                                }return 1;*/
+                                }return 1;
                                return true;
-                            },
+                            },*/
                         },
 
                     }, {
@@ -167,7 +167,7 @@
                             type: 'text',
                             title: '平台名称',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
                             },
 
                         }
@@ -180,7 +180,7 @@
                             title: '商机线索开启',
 
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
 
@@ -195,7 +195,7 @@
                             type: 'text',
                             title: '1、商机线索0%：我方分析客户存在潜在需求',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             },
 
@@ -208,7 +208,7 @@
                             type: 'text',
                             title: '2、商机发现10%：深入交流明确需求',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -220,7 +220,7 @@
                             type: 'text',
                             title: '3、商机确立25%：客户明确购买意愿/立项/预算',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -232,7 +232,7 @@
                             type: 'text',
                             title: '4、商机确立50%：客户启动招标/采购流程、我方入围',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -244,7 +244,7 @@
                             type: 'text',
                             title: '5、商机确认75%：客户招标/采购，我方交流需求细则',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -256,7 +256,7 @@
                             type: 'text',
                             title: '6、商机赢取100%：合同签订',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -268,7 +268,7 @@
                             type: 'text',
                             title: '7、客户维护/回款阶段',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -280,7 +280,7 @@
                             type: 'text',
                             title: '商机关闭',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -292,7 +292,7 @@
                             type: 'text',
                             title: '1、初步意向方案',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -304,7 +304,7 @@
                             type: 'text',
                             title: '2、写立项方案',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -316,7 +316,7 @@
                             type: 'text',
                             title: '3、工时评估',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -328,7 +328,7 @@
                             type: 'text',
                             title: '4、商务谈判',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -340,7 +340,7 @@
                             type: 'text',
                             title: '5、请示拟写',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -352,7 +352,7 @@
                             type: 'text',
                             title: '6、上会',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -364,7 +364,7 @@
                             type: 'text',
                             title: '7、招投标',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -376,7 +376,7 @@
                             type: 'text',
                             title: '8、请示OA审批',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -388,7 +388,7 @@
                             type: 'text',
                             title: '9、合同拟写',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -400,7 +400,7 @@
                             type: 'text',
                             title: '10、律师审核',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -412,7 +412,7 @@
                             type: 'text',
                             title: '11、合同OA审批',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -424,7 +424,7 @@
                             type: 'text',
                             title: '12、用章',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -436,7 +436,7 @@
                             type: 'text',
                             title: '13、对方盖章',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -448,7 +448,7 @@
                             type: 'text',
                             title: '14、扫描',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -460,7 +460,7 @@
                             type: 'text',
                             title: '15、综合部归档',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -472,7 +472,7 @@
                             type: 'text',
                             title: '16、首付款',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -484,7 +484,7 @@
                             type: 'text',
                             title: '17、进度款',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -496,7 +496,7 @@
                             type: 'text',
                             title: '18、尾款',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -508,7 +508,7 @@
                             type: 'text',
                             title: '1、设计概要',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -520,7 +520,7 @@
                             type: 'text',
                             title: '2、详细设计',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -532,7 +532,7 @@
                             type: 'text',
                             title: '3、UI设计',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -544,7 +544,7 @@
                             type: 'text',
                             title: '4、需求设计',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -556,7 +556,7 @@
                             type: 'text',
                             title: '5、需求评审',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -580,7 +580,7 @@
                             type: 'text',
                             title: '7、验收',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -592,7 +592,7 @@
                             type: 'text',
                             title: '1、技术选型',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
                             }
                         }
                     }, {
@@ -602,7 +602,7 @@
                             type: 'text',
                             title: '2、环境部署',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -613,7 +613,7 @@
                             type: 'text',
                             title: '3、框架设计',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -625,7 +625,7 @@
                             title: '4、开发进度10%',
                             validate: function (v) {
                                 if (!v) {
-                                    return '用户名不能为空';
+                                    return '不能为空';
                                 }
                             }
                         }
@@ -636,7 +636,7 @@
                             type: 'text',
                             title: '5、开发进度25%',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -647,7 +647,7 @@
                             type: 'text',
                             title: '6、开发进度50%',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -658,7 +658,7 @@
                             type: 'text',
                             title: '7、开发进度75%',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -669,7 +669,7 @@
                             type: 'text',
                             title: '8、开发进度100%',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -680,7 +680,7 @@
                             type: 'text',
                             title: '9、内部测试优化',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -691,7 +691,7 @@
                             type: 'text',
                             title: '10、客户测试优化',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -702,7 +702,7 @@
                             type: 'text',
                             title: '11、实施交付',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -713,7 +713,7 @@
                             type: 'text',
                             title: '12、验收',
                             validate: function (v) {
-                                if (!v) return '用户名不能为空';
+                                if (!v) return '不能为空';
 
                             }
                         }
@@ -724,7 +724,7 @@
                                 type: 'text',
                                 title: '运营阶段',
                                 validate: function (v) {
-                                    if (!v) return '用户名不能为空';
+                                    if (!v) return '不能为空';
 
                                 }
                             }
@@ -736,7 +736,7 @@
                                 type: 'text',
                                 title: '运维阶段',
                                 validate: function (v) {
-                                    if (!v) return '用户名不能为空';
+                                    if (!v) return '不能为空';
 
                                 }
                             }
@@ -775,62 +775,62 @@
                         var roleTypes=rows[0].roleType;
                         for(var k=0;k<rows.length;k++){
                             //======================商机推进阶段======================
-                            var businessClueOpen = rows[k].businessClueOpen; //商机线索
-                            var businessClose = rows[k].businessClose;  //商机关闭
-                            var businessClue0 = rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
-                            var businessDiscover10= rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
-                            var businessEstablish25= rows[k].businessEstablish25;//3、商机确立25%：客户明确购买意愿/立项/预算
-                            var businessEstablish50= rows[k].businessEstablish50;//4、商机确立50%：客户启动招标/采购流程、我方入围
-                            var businessEstablish75= rows[k].businessEstablish75;//5、商机确认75%：客户招标/采购，我方交流需求细则
-                            var businessWin100= rows[k].businessWin100;          // 6、商机赢取100%：合同签订
-                            var customerMaintainBackMoney= rows[k].customerMaintainBackMoney;// 7、客户维护/回款阶段
+                            var businessClueOpen = rows[k].businessClueOpen==null?'':rows[k].businessClueOpen; //商机线索
+                            var businessClose = rows[k].businessClose==null?'':rows[k].businessClose;  //商机关闭
+                            var businessClue0 = rows[k].businessClue0==null?'':rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
+                            var businessDiscover10= rows[k].businessDiscover10==null?'':rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
+                            var businessEstablish25= rows[k].businessEstablish25==null?'':rows[k].businessEstablish25;//3、商机确立25%：客户明确购买意愿/立项/预算
+                            var businessEstablish50= rows[k].businessEstablish50==null?'':rows[k].businessEstablish50;//4、商机确立50%：客户启动招标/采购流程、我方入围
+                            var businessEstablish75= rows[k].businessEstablish75==null?'':rows[k].businessEstablish75;//5、商机确认75%：客户招标/采购，我方交流需求细则
+                            var businessWin100= rows[k].businessWin100==null?'':rows[k].businessWin100;          // 6、商机赢取100%：合同签订
+                            var customerMaintainBackMoney= rows[k].customerMaintainBackMoney==null?'':rows[k].customerMaintainBackMoney;// 7、客户维护/回款阶段
                             //======================采购阶段======================
-                            var initialIntentionPlan= rows[k].initialIntentionPlan;     //1、初步意向方案（采购阶段）
-                            var writeProjectProposal= rows[k].writeProjectProposal;     // 2、写立项方案
-                            var workingHoursAssess= rows[k].workingHoursAssess;         // 3、工时评估
-                            var businessNegotiation= rows[k].businessNegotiation;       // 4、商务谈判
-                            var requestDraft= rows[k].requestDraft;                     // 5、请示拟写
-                            var attendMeeting= rows[k].attendMeeting;                   // 6、上会
-                            var bidding= rows[k].bidding;                               // 7、招投标
-                            var requestOaApproval= rows[k].requestOaApproval;           // 8、请示OA审批
-                            var contractDraft= rows[k].contractDraft;                   // 9、合同拟写
-                            var lawyerReview= rows[k].lawyerReview;                     // 10、律师审核
-                            var contractOaApproval= rows[k].contractOaApproval;         // 11、合同OA审批
-                            var usageSeal= rows[k].usageSeal;                           // 12、用章
-                            var otherSeal= rows[k].otherSeal;                           // 13、对方盖章
-                            var scan= rows[k].scan;                                     // 14、扫描
-                            var generalDepartmentFile= rows[k].generalDepartmentFile;   // 15、综合部归档
-                            var firstPayment= rows[k].firstPayment;                     // 16、首付款
-                            var progressPayment= rows[k].progressPayment;               // 17、进度款
-                            var finalPayment= rows[k].finalPayment;                     // 18、尾款
+                            var initialIntentionPlan= rows[k].initialIntentionPlan==null?'':rows[k].initialIntentionPlan;     //1、初步意向方案（采购阶段）
+                            var writeProjectProposal= rows[k].writeProjectProposal==null?'':rows[k].writeProjectProposal;     // 2、写立项方案
+                            var workingHoursAssess= rows[k].workingHoursAssess==null?'':rows[k].workingHoursAssess;         // 3、工时评估
+                            var businessNegotiation= rows[k].businessNegotiation==null?'':rows[k].businessNegotiation;       // 4、商务谈判
+                            var requestDraft= rows[k].requestDraft==null?'':rows[k].requestDraft;                     // 5、请示拟写
+                            var attendMeeting= rows[k].attendMeeting==null?'':rows[k].attendMeeting;                   // 6、上会
+                            var bidding= rows[k].bidding==null?'':rows[k].bidding;                               // 7、招投标
+                            var requestOaApproval= rows[k].requestOaApproval==null?'':rows[k].requestOaApproval;           // 8、请示OA审批
+                            var contractDraft= rows[k].contractDraft==null?'':rows[k].contractDraft;                   // 9、合同拟写
+                            var lawyerReview= rows[k].lawyerReview==null?'':rows[k].lawyerReview;                     // 10、律师审核
+                            var contractOaApproval= rows[k].contractOaApproval==null?'':rows[k].contractOaApproval;         // 11、合同OA审批
+                            var usageSeal= rows[k].usageSeal==null?'':rows[k].usageSeal;                           // 12、用章
+                            var otherSeal= rows[k].otherSeal==null?'':rows[k].otherSeal;                           // 13、对方盖章
+                            var scan= rows[k].scan==null?'':rows[k].scan;                                     // 14、扫描
+                            var generalDepartmentFile= rows[k].generalDepartmentFile==null?'':rows[k].generalDepartmentFile;   // 15、综合部归档
+                            var firstPayment= rows[k].firstPayment==null?'':rows[k].firstPayment;                     // 16、首付款
+                            var progressPayment= rows[k].progressPayment==null?'':rows[k].progressPayment;               // 17、进度款
+                            var finalPayment= rows[k].finalPayment==null?'':rows[k].finalPayment;                     // 18、尾款
                             //======================产品阶段======================
-                            var designBrief= rows[k].designBrief;                       // 1、设计概要
-                            var detailedDesign= rows[k].detailedDesign;                 // 2、详细设计
-                            var uiDesign= rows[k].uiDesign;                             // 3、UI设计
-                            var requirementDesign= rows[k].requirementDesign;           // 4、需求设计
-                            var requirementsReview= rows[k].requirementsReview;         // 5、需求评审
-                            var demandOrderConfirm= rows[k].demandOrderConfirm;         // 6、需求单确认
-                            var proCheckDeliver= rows[k].proCheckDeliver;               // 7、验收
+                            var designBrief= rows[k].designBrief==null?'':rows[k].designBrief;                       // 1、设计概要
+                            var detailedDesign= rows[k].detailedDesign==null?'':rows[k].detailedDesign;                 // 2、详细设计
+                            var uiDesign= rows[k].uiDesign==null?'':rows[k].uiDesign;                             // 3、UI设计
+                            var requirementDesign= rows[k].requirementDesign==null?'':rows[k].requirementDesign;           // 4、需求设计
+                            var requirementsReview= rows[k].requirementsReview==null?'':rows[k].requirementsReview;         // 5、需求评审
+                            var demandOrderConfirm= rows[k].demandOrderConfirm==null?'':rows[k].demandOrderConfirm;         // 6、需求单确认
+                            var proCheckDeliver= rows[k].proCheckDeliver==null?'':rows[k].proCheckDeliver;               // 7、验收
 
                             //======================研发阶段======================
-                            var technologySelection = rows[k].technologySelection;      //1、技术选型
-                            var environmentDeployment = rows[k].environmentDeployment;  //2、环境部署
-                            var frameworkDesign = rows[k].frameworkDesign;              //  3、框架设计
-                            var developProgress10 = rows[k].developProgress10;          //4、开发进度10%
-                            var developProgress25 = rows[k].developProgress25;          //5、开发进度25%
-                            var developProgress50 = rows[k].developProgress50;          //6、开发进度50%
-                            var developProgress75 = rows[k].developProgress75;          //7、开发进度75%
-                            var developProgress100 = rows[k].developProgress100;        //8、开发进度100%
-                            var insideTest = rows[k].insideTest;                        //9、内部测试优化
-                            var customerTest = rows[k].customerTest;                    //10、客户测试优化
-                            var implementDeliver = rows[k].implementDeliver;            //11、实施交付
-                            var checkDeliver = rows[k].checkDeliver;                    //12、验收
+                            var technologySelection = rows[k].technologySelection==null?'':rows[k].technologySelection;      //1、技术选型
+                            var environmentDeployment = rows[k].environmentDeployment==null?'':rows[k].environmentDeployment;  //2、环境部署
+                            var frameworkDesign = rows[k].frameworkDesign==null?'':rows[k].frameworkDesign;              //  3、框架设计
+                            var developProgress10 = rows[k].developProgress10==null?'':rows[k].developProgress10;          //4、开发进度10%
+                            var developProgress25 = rows[k].developProgress25==null?'':rows[k].developProgress25;          //5、开发进度25%
+                            var developProgress50 = rows[k].developProgress50==null?'':rows[k].developProgress50;          //6、开发进度50%
+                            var developProgress75 = rows[k].developProgress75==null?'':rows[k].developProgress75;          //7、开发进度75%
+                            var developProgress100 = rows[k].developProgress100==null?'':rows[k].developProgress100;        //8、开发进度100%
+                            var insideTest = rows[k].insideTest==null?'':rows[k].insideTest;                        //9、内部测试优化
+                            var customerTest = rows[k].customerTest==null?'':rows[k].customerTest;                    //10、客户测试优化
+                            var implementDeliver = rows[k].implementDeliver==null?'':rows[k].implementDeliver;            //11、实施交付
+                            var checkDeliver = rows[k].checkDeliver==null?'':rows[k].checkDeliver;                    //12、验收
 
                             //======================运营阶段======================
-                            var operationPhase = rows[k].operationPhase;
+                            var operationPhase = rows[k].operationPhase==null?'':rows[k].operationPhase;
 
                             //======================运营阶段======================
-                            var maintainPhase = rows[k].maintainPhase;
+                            var maintainPhase = rows[k].maintainPhase==null?'':rows[k].maintainPhase;
 
                             if(roleTypes.indexOf('1')==-1){ //项目名称
                                 var obj1 = $('#tb_user tr[data-index='+k+'] a[data-name="businessClueOpen"]').parent();

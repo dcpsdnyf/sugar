@@ -1,1 +1,0 @@
-ALTER  TABLE  t_sugar_project  ADD   sort  INT    COMMENT  '排序字段' ;

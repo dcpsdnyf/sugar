@@ -56,5 +56,6 @@ CREATE TABLE t_sugar_project(
     CREATED_TIME DATETIME    COMMENT '创建时间' ,
     UPDATED_STAFF VARCHAR(32)    COMMENT '更新人' ,
     UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    sort  INT    COMMENT  '排序字段',
     PRIMARY KEY (ID)
 ) COMMENT = '项目信息';
