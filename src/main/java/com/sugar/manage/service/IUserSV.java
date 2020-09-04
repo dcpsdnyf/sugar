@@ -12,4 +12,11 @@ public interface IUserSV {
      * @return 返回信息
      */
     public TUser getUserList(TUserVO tUser);
+
+    /**
+     * 查询用户是否具有新增权限
+     * @param user
+     * @return
+     */
+    public boolean getAddAuthority(TUser user);
 }

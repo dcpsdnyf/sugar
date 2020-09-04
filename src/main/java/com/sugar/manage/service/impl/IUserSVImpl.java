@@ -1,8 +1,9 @@
 package com.sugar.manage.service.impl;
 
+import com.sugar.manage.dao.mapper.TRoleMapper;
 import com.sugar.manage.dao.mapper.TUserMapper;
-import com.sugar.manage.dao.model.TUser;
-import com.sugar.manage.dao.model.TUserExample;
+import com.sugar.manage.dao.mapper.TUserRoleMapper;
+import com.sugar.manage.dao.model.*;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.TUserVO;
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +19,12 @@ public class IUserSVImpl implements IUserSV {
 
     @Autowired
     private TUserMapper userMapper;
+
+    @Autowired
+    private TUserRoleMapper userRoleMapper;
+
+    @Autowired
+    private TRoleMapper roleMapper;
 
     /**
      * 初始化参数信息
@@ -54,6 +62,38 @@ public class IUserSVImpl implements IUserSV {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean getAddAuthority(TUser user) {
+        TUserRoleExample tUserRoleExample = new TUserRoleExample();
+        TUserRoleExample.Criteria sql = tUserRoleExample.createCriteria();
+        if(user.getId()!=null){
+            sql.andUserIdEqualTo(Long.parseLong(user.getId().toString()));
+        }
+        List<TUserRole> tUserRoleList = userRoleMapper.selectByExample(tUserRoleExample);
+        List<Long> roleIdList = new ArrayList<>();
+        if(!CollectionUtils.isEmpty(tUserRoleList)){
+            for(TUserRole userRole:tUserRoleList){
+                roleIdList.add(userRole.getRoleId());
+            }
+
+            TRoleExample roleExample = new TRoleExample();
+            TRoleExample.Criteria criteria = roleExample.createCriteria();
+            criteria.andIdIn(roleIdList);
+
+            List<TRole> tRolesList = roleMapper.selectByExample(roleExample);
+            if(!CollectionUtils.isEmpty(tRolesList)){
+                for(TRole role:tRolesList){
+                    if("add".equals(role.getRoleType())){
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        return false;
     }
 
 }

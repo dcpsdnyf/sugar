@@ -1216,3 +1216,20 @@ function saveProjectInfo() {
 
     });
 }
+
+function addProject() {
+    $.ajax({
+        type: "post",
+        url: WEB_ROOT + "/sugarManage/newlyAdded",
+        data: $("#addForm").serialize(),
+        dataType: 'JSON',
+        success: function (result) {
+            alert(result.msg)
+            location.reload();
+        },
+        error: function () {
+            alert('新增失败');
+        }
+
+    });
+}

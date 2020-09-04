@@ -14,6 +14,7 @@ import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.RoleProjectVO;
+import com.sugar.manage.vo.SysResult;
 import com.sugar.manage.vo.TSugarProjectVO;
 import com.sugar.manage.vo.TUserVO;
 import lombok.extern.slf4j.Slf4j;
@@ -118,13 +119,30 @@ public class SugarManageController extends AppBaseController {
      * @return
      */
     @RequestMapping("/newlyAdded")
-    public String newlyAdded(HttpServletRequest request, TSugarProjectWithBLOBs record){
-        // String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-        // TUser user = new TUser();
-        // user.setId(Integer.parseInt(userId));
-        record.setStatus("01");
-        sugarProjectSV.saveSugarProject(record);
-        return "redirect:/sugarManage/init";
+    @ResponseBody
+    public SysResult newlyAdded(HttpServletRequest request, TSugarProjectWithBLOBs record){
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        try {
+            if(StringUtils.isNotBlank(userId)){
+                TUser user = new TUser();
+                user.setId(Integer.parseInt(userId));
+
+                boolean addAuthority = userSV.getAddAuthority(user);
+                if(addAuthority){
+                    record.setStatus("01");
+                    sugarProjectSV.saveSugarProject(record);
+
+                    return SysResult.success("新增成功",null);
+
+                    //return "redirect:/sugarManage/init";
+                }
+
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        return SysResult.fail("新增失败,无新增权限");
     }
 
     @RequestMapping(value = "/exportSugarExcle")
