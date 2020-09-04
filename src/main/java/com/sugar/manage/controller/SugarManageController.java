@@ -63,7 +63,7 @@ public class SugarManageController extends AppBaseController {
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + tUser.getId());
             }
         }
-        return "/sugarManage/sugarManage";
+        return "sugarManage/sugarManage";
     }
 
     /**
