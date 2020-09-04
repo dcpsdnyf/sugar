@@ -1,6 +1,7 @@
 package com.sugar.manage.service;
 
 import com.sugar.manage.dao.model.TUser;
+import com.sugar.manage.vo.TUserVO;
 
 
 public interface IUserSV {
@@ -10,5 +11,5 @@ public interface IUserSV {
      * @param tUser 参数对象
      * @return 返回信息
      */
-    public TUser getUserList(TUser tUser);
+    public TUser getUserList(TUserVO tUser);
 }

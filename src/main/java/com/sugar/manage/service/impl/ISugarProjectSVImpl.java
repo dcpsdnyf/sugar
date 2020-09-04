@@ -76,6 +76,12 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
     @Override
     public int updateSugarProject(TSugarProjectWithBLOBs project){
+        if(StringUtils.isBlank(project.getProductType())){
+            project.setProductType(null);
+        }
+        if(StringUtils.isBlank(project.getPlatformName())){
+            project.setPlatformName(null);
+        }
         sugarProjectMapper.updateByPrimaryKeySelective(project);
         return 1;
     }

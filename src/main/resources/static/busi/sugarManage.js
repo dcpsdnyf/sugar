@@ -30,7 +30,7 @@ $(function () {
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
-        uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
+        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
         showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                   //是否显示父子表
@@ -635,7 +635,7 @@ $(function () {
             width:'220',
             title: '操作',
             formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-                if(row.projectIds.indexOf(row.id)==-1){
+                if(row.projectIds==null || row.projectIds.indexOf(row.id)==-1){
                     return '';
                 }
                 var html = '<button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
@@ -730,7 +730,7 @@ $(function () {
 
                 //======================运营阶段======================
                 var maintainPhase = rows[k].maintainPhase == null ? '' : rows[k].maintainPhase;
-                if (projectIds.indexOf(id) == -1) {
+                if (projectIds==null || projectIds.indexOf(id) == -1) {
                     var productTypeObj = $('#tb_user tr[data-index=' + k + '] a[data-name="productType"]').parent();
                     $(productTypeObj).empty();
                     $(productTypeObj).text(productType);
@@ -937,7 +937,7 @@ $(function () {
                     $(obj48).text(maintainPhase);
 
                 } else {
-                    if (roleTypes.indexOf('1') == -1) { //项目名称
+                    if (roleTypes==null || roleTypes.indexOf('1') == -1) { //项目名称
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClueOpen"]').parent();
                         $(obj1).empty();
                         $(obj1).text(businessClueOpen);
@@ -946,7 +946,7 @@ $(function () {
                         $(obj2).empty();
                         $(obj2).text(businessClose);
                     }
-                    if (roleTypes.indexOf('2') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('2') == -1) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
                         $(obj1).empty();
                         $(obj1).text(businessClue0);
@@ -975,7 +975,7 @@ $(function () {
                         $(obj7).empty();
                         $(obj7).text(customerMaintainBackMoney);
                     }
-                    if (roleTypes.indexOf('3') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('3') == -1) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
                         $(obj1).empty();
                         $(obj1).text(initialIntentionPlan);
@@ -1049,7 +1049,7 @@ $(function () {
                         $(obj18).text(finalPayment);
 
                     }
-                    if (roleTypes.indexOf('4') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('4') == -1) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
                         $(obj1).empty();
                         $(obj1).text(designBrief);
@@ -1079,7 +1079,7 @@ $(function () {
                         $(obj7).text(proCheckDeliver);
                     }
 
-                    if (roleTypes.indexOf('5') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('5') == -1) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
                         $(obj1).empty();
                         $(obj1).text(technologySelection);
@@ -1129,13 +1129,13 @@ $(function () {
                         $(obj12).text(checkDeliver);
 
                     }
-                    if (roleTypes.indexOf('6') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('6') == -1) {
                         var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
                         $(obj).empty();
                         $(obj).text(operationPhase);
                     }
 
-                    if (roleTypes.indexOf('7') == -1) {
+                    if (roleTypes==null || roleTypes.indexOf('7') == -1) {
                         var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
                         $(obj).empty();
                         $(obj).text(maintainPhase);
@@ -1161,6 +1161,7 @@ $(function () {
 
 //编辑事件
 var editModel = function (id) {
+    debugger
     //根据当前行的id获取当前的行数据
     var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
     //弹出模态框
@@ -1172,12 +1173,14 @@ var editModel = function (id) {
     $("#myModal input[name='Address']").val(row.Address);
     $("#myModal textarea[name='Remark']").val(row.Remark);*/
     $("#editMyModal input[name='id']").val(id);
+    $("#editMyModal input[name='productType']").val(row.productType);
+    $("#editMyModal input[name='platformName']").val(row.platformName);
 }
 
 //删除事件
 
 var deleteModel = function (id) {
-    alert("删除id为" + id + "的用户");
+    alert("删除id为" + id + "的项目");
     $.ajax({
         type: "post",
         url: WEB_ROOT + "/sugarManage/delete",

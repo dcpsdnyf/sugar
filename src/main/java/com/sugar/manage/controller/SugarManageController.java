@@ -15,6 +15,7 @@ import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.RoleProjectVO;
 import com.sugar.manage.vo.TSugarProjectVO;
+import com.sugar.manage.vo.TUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -56,11 +57,11 @@ public class SugarManageController extends AppBaseController {
      * @return
      */
     @RequestMapping("/init")
-    public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUser tUser){
+    public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUserVO tUser){
         if(!StringUtils.isBlank(tUser.getUserName()) || StringUtils.isNotBlank(tUser.getEnglishName())){
-            tUser = userSV.getUserList(tUser);
+            TUser user = userSV.getUserList(tUser);
             if(tUser != null){
-                CookieUtils.setCookie(response, "SUGAR_USER_ID","" + tUser.getId());
+                CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
             }
         }
         return "sugarManage/sugarManage";
@@ -73,34 +74,42 @@ public class SugarManageController extends AppBaseController {
     @RequestMapping("/getSugarProjectList")
     @ResponseBody
     public TableDataInfo getSugarProjectList(HttpServletRequest request, TSugarProjectVO projectVO){
-
-        TUser user = new TUser();
-        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-        user.setId(Integer.parseInt(userId));
-        RoleProjectVO roleProjectVO = userRoleSV.getUserRoleList(user);
-
-        String roleTypes = null;
-        String projectIds = null;
-        if(roleProjectVO!=null){
-            roleTypes = roleProjectVO.getRoleTypes();
-            projectIds = roleProjectVO.getProjectIds();
-        }
-
-        PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
-        List<TSugarProjectWithBLOBs> list = page.getList();
-        List<TSugarProjectVO> tSugarProjectVOSList = new ArrayList<>() ;
-        if(!CollectionUtils.isEmpty(list)){
-            for (TSugarProjectWithBLOBs t : list){
-                TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
-                tSugarProjectVO.setRoleType(roleTypes);
-                tSugarProjectVO.setProjectIds(projectIds);
-                tSugarProjectVOSList.add(tSugarProjectVO);
-            }
-        }
         TableDataInfo tableDataInfo = new TableDataInfo();
-        tableDataInfo.setRows(tSugarProjectVOSList);
-        tableDataInfo.setTotal(page.getTotal());
-        tableDataInfo.setCode(200);
+        try {
+            TUser user = new TUser();
+            String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+            RoleProjectVO roleProjectVO = null;
+            if(StringUtils.isNotBlank(userId)){
+                user.setId(Integer.parseInt(userId));
+                roleProjectVO = userRoleSV.getUserRoleList(user);
+            }
+
+            String roleTypes = null;
+            String projectIds = null;
+            if(roleProjectVO!=null){
+                roleTypes = roleProjectVO.getRoleTypes();
+                projectIds = roleProjectVO.getProjectIds();
+            }
+
+            PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
+            List<TSugarProjectWithBLOBs> list = page.getList();
+            List<TSugarProjectVO> tSugarProjectVOSList = new ArrayList<>() ;
+            if(!CollectionUtils.isEmpty(list)){
+                for (TSugarProjectWithBLOBs t : list){
+                    TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
+                    tSugarProjectVO.setRoleType(roleTypes);
+                    tSugarProjectVO.setProjectIds(projectIds);
+                    tSugarProjectVOSList.add(tSugarProjectVO);
+                }
+            }
+
+            tableDataInfo.setRows(tSugarProjectVOSList);
+            tableDataInfo.setTotal(page.getTotal());
+            tableDataInfo.setCode(200);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
 
         return tableDataInfo;
     }

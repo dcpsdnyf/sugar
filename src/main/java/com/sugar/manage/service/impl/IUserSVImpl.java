@@ -4,6 +4,8 @@ import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.model.TUserExample;
 import com.sugar.manage.service.IUserSV;
+import com.sugar.manage.vo.TUserVO;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -31,20 +33,20 @@ public class IUserSVImpl implements IUserSV {
      * @param user
      */
     @Override
-    public TUser getUserList(TUser user) {
+    public TUser getUserList(TUserVO user) {
 
         TUserExample example = new TUserExample();
         TUserExample.Criteria sql = example.createCriteria();
         if(user.getId() != null){
             sql.andIdEqualTo(user.getId());
         }
-        if(user.getUserName() != null){
+        if(StringUtils.isNotBlank(user.getUserName())){
             sql.andUserNameEqualTo(user.getUserName());
         }
-        if(user.getEnglishName() != null){
-            sql.andEnglishNameEqualTo(user.getEnglishName());
+        if(StringUtils.isNotBlank(user.getUserAccount())){
+            sql.andEnglishNameEqualTo(user.getUserAccount());
         }
-        this.initParam(sql, user);
+
 
         List<TUser> tUserList =  userMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(tUserList)){
