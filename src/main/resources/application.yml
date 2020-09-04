@@ -1,5 +1,5 @@
 server:
-  port: 18085
+  port: 18088
   servlet:
     context-path: /sugar
   tomcat:
@@ -40,9 +40,9 @@ spring:
     template-resolver-order: 0
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/gt?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: root
+    url: jdbc:mysql://10.17.116.6:3306/sugar_manage?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: gt
+    password: gt@123
 mybatis:
   type-aliases-package: com.sugar
   mapper-locations: classpath:sqlMapper/common/*.xml

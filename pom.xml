@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.sugar.manage</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>sugarManage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SugarManage</name>
     <description>项目进度管理</description>
