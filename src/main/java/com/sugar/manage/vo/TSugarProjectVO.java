@@ -1,6 +1,7 @@
 package com.sugar.manage.vo;
 
 
+import com.sugar.manage.dao.vo.BaseModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * @create: 2020-08-30 13:41
  */
 @Data
-public class TSugarProjectVO implements Serializable,Cloneable{
+public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable{
     /** 索引值 */
     private Integer id ;
     /** 产品类型 */

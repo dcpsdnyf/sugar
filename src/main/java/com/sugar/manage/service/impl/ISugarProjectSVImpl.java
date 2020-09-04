@@ -1,5 +1,7 @@
 package com.sugar.manage.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.model.TSugarProjectExample;
@@ -44,24 +46,19 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
      * @return 返回信息
      */
     @Override
-    public List<TSugarProjectVO> getSugarProjectList(TSugarProjectVO projectVO) {
+    public PageInfo<TSugarProjectWithBLOBs> getSugarProjectList(TSugarProjectVO projectVO) {
         TSugarProjectExample example = new TSugarProjectExample();
         TSugarProjectExample.Criteria sql = example.createCriteria();
         sql.andStatusEqualTo("01");
 
-        this.initParam(sql,projectVO);
+        this.initParam(sql, projectVO);
+
+        PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
 
         List<TSugarProjectWithBLOBs> sugarProject =  sugarProjectMapper.selectByExampleWithBLOBs(example);
         if(!CollectionUtils.isEmpty(sugarProject)){
-            ArrayList<TSugarProjectVO> result = new ArrayList<>();
-
-            for (TSugarProjectWithBLOBs s:sugarProject){
-                TSugarProjectVO copy = ModelCopyUtil.copy(s, TSugarProjectVO.class);
-                copy.setRoleType(projectVO.getRoleType());
-                result.add(copy);
-            }
-
-            return result;
+            PageInfo<TSugarProjectWithBLOBs> pageInfo = new PageInfo<>(sugarProject);
+            return pageInfo;
         }
 
         return null;

@@ -3,12 +3,15 @@ package com.sugar.manage.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.sugar.common.AppBaseController;
 import com.sugar.common.utils.CookieUtils;
 import com.sugar.common.utils.ExcelUtils;
 import com.sugar.common.utils.JsonUtil;
+import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.model.TUser;
+import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
@@ -72,8 +75,9 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/getSugarProjectList")
     @ResponseBody
-    public String getSugarProjectList(HttpServletRequest request, TSugarProjectVO projectVO, TUser user){
+    public TableDataInfo getSugarProjectList(HttpServletRequest request, TSugarProjectVO projectVO){
 
+        TUser user = new TUser();
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         user.setId(Integer.parseInt(userId));
         String userRole = userRoleSV.getUserRoleList(user);
@@ -82,12 +86,22 @@ public class SugarManageController extends AppBaseController {
             projectVO.setRoleType(userRole);
         }
 
-        List<TSugarProjectVO> sugarProjectList = sugarProjectSV.getSugarProjectList(projectVO);
-        JSONArray array= JSONArray.parseArray(JSON.toJSONString(sugarProjectList));
-        if(array == null){
-            return null;
+        PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
+        List<TSugarProjectWithBLOBs> list = page.getList();
+        List<TSugarProjectVO> tSugarProjectVOSList = new ArrayList<>() ;
+        if(!CollectionUtils.isEmpty(list)){
+            for (TSugarProjectWithBLOBs t : list){
+                TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
+                tSugarProjectVO.setRoleType(userRole);
+                tSugarProjectVOSList.add(tSugarProjectVO);
+            }
         }
-        return array.toString();
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setRows(tSugarProjectVOSList);
+        tableDataInfo.setTotal(page.getTotal());
+        tableDataInfo.setCode(200);
+
+        return tableDataInfo;
     }
     /**
      * 新增项目列表信息记录

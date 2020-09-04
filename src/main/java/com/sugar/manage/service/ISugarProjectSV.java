@@ -1,5 +1,6 @@
 package com.sugar.manage.service;
 
+import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.vo.TSugarProjectVO;
 
@@ -12,8 +13,7 @@ public interface ISugarProjectSV {
      * @param projectVO 参数对象
      * @return 返回信息
      */
-    public List<TSugarProjectVO> getSugarProjectList(TSugarProjectVO projectVO);
-
+    public PageInfo<TSugarProjectWithBLOBs> getSugarProjectList(TSugarProjectVO projectVO);
 
     /**
      * 保存及更新项目信息
