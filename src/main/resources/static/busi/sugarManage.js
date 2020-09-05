@@ -51,52 +51,42 @@ $(function () {
                 "title": "商机推进阶段",
                 "halign":"center",
                 "align":"center",
-                "colspan": 9
+                "colspan": 9,
+                class:"th_red"
             },
             {
                 "title": "采购阶段",
                 "halign":"center",
                 "align":"center",
-                "colspan": 18
+                "colspan": 18,
+                class:"th_orange"
             },
             {
                 "title": "产品阶段",
                 "halign":"center",
                 "align":"center",
-                "colspan": 7
+                "colspan": 7,
+                class:"th_yellow"
             },
             {
                 "title": "研发阶段",
                 "halign":"center",
                 "align":"center",
-                "colspan": 12
+                "colspan": 12,
+                class:"th_darkblue"
             },
             {
                 field: 'operationPhase',
                 title: '运营阶段',
                 "colspan": 1,
-                rowspan: 2,
-                editable: {
-                    type: 'text',
-                    title: '运营阶段',
-                    validate: function (v) {
-                        if (!v) return '不能为空';
-
-                    }
-                }
+                rowspan: 1,
+                class:"th_purple"
             },{
                 field: 'maintainPhase',
                 title: '运维阶段',
                 "colspan": 1,
-                rowspan: 2,
-                editable: {
-                    type: 'text',
-                    title: '运维阶段',
-                    validate: function (v) {
-                        if (!v) return '不能为空';
-
-                    }
-                }
+                rowspan: 1,
+                class:"th_darkred",
             }, {
                 halign:"center",
                 title: '操作',
@@ -107,8 +97,8 @@ $(function () {
                         return '';
                     }
 
-                    var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-                        '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+                    var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel('+row.id+')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+                        '<button type="button" onclick="deleteModel('+row.id+')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
                     html += "</div>";
                     return html;
                 }
@@ -117,10 +107,9 @@ $(function () {
             align:"center",
             halign:"center",
             title: '序号',
-            height:'50px',
             field: 'id',
             formatter: function(value, row, index){
-                var html = "<div style='height:30px'>"+( index + 1) + "</div>";
+                var html = "<div style='height:20px'>"+( index + 1) + "</div>";
                 return html;
             }
         }, {
@@ -152,7 +141,6 @@ $(function () {
                     if (!v) return '不能为空';
 
                 },
-
             }
 
         },{
@@ -671,7 +659,30 @@ $(function () {
 
                 }
             }
-        }]],
+        },
+            {
+                field: 'operationPhase',
+                title: '运营阶段',
+                editable: {
+                    type: 'text',
+                    title: '运营阶段',
+                    validate: function (v) {
+                        if (!v) return '不能为空';
+
+                    }
+                }
+            },{
+                field: 'maintainPhase',
+                title: '运维阶段',
+                editable: {
+                    type: 'text',
+                    title: '运维阶段',
+                    validate: function (v) {
+                        if (!v) return '不能为空';
+
+                    }
+                }
+            }]],
         onEditableSave: function (field, row, oldValue, $el) {
             // alert("更新保存事件，原始值为" + oldValue);
             $.ajax({

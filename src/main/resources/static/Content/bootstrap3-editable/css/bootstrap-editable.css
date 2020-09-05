@@ -170,7 +170,7 @@
 a.editable-click, 
 a.editable-click:hover {
     text-decoration: none;
-    border-bottom: dashed 1px #0088cc;
+    /*border-bottom: dashed 1px #0088cc;*/
 }
 
 .editable-click.editable-disabled, 
@@ -182,9 +182,9 @@ a.editable-click.editable-disabled:hover {
 }
 
 .editable-empty, .editable-empty:hover, .editable-empty:focus{
-  font-style: italic; 
+  /*font-style: italic; */
   color: #DD1144;  
-  /* border-bottom: none; */
+   border-bottom: none;
   text-decoration: none;
 }
 
