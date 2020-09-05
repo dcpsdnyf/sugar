@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class IUserRoleSVImpl implements IUserRoleSV {
@@ -51,12 +53,15 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             List<Long> longList = new ArrayList<>();
 
-            String projectIds = "";
+            //String projectIds = "";
+            Map<String,String> projectIdMap = new HashMap<>();
             for (TUserRole userRole : userRoleList){
-                projectIds += userRole.getProjectId()+",";
+                //projectIds += userRole.getProjectId()+",";
+                projectIdMap.put(userRole.getProjectId()+"",userRole.getProjectId()+"");
                 longList.add(userRole.getRoleId());
             }
-            roleProjectVO.setProjectIds(projectIds);
+
+            roleProjectVO.setProjectIdMap(projectIdMap);
 
             TRoleExample exampleRole = new TRoleExample();
             TRoleExample.Criteria sqlRole = exampleRole.createCriteria();
@@ -64,11 +69,36 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             List<TRole> roleList = roleMapper.selectByExample(exampleRole);
             if(!CollectionUtils.isEmpty(roleList)){
-                String roleType = "";
+
+                Map<String,String> roleTypeMap = new HashMap<>();
+                //String roleType = "";
                 for (TRole role : roleList){
-                    roleType += role.getRoleType() + ",";
+                    //roleType += role.getRoleType() + ",";
+                    roleTypeMap.put(role.getRoleType()+"",role.getRoleName());
                 }
-                roleProjectVO.setRoleTypes(roleType);
+                roleProjectVO.setRoleTypeMap(roleTypeMap);
+
+                if(roleTypeMap.containsKey("1")){
+                    roleProjectVO.setDepMiddLelevel(true);
+                }
+                if(roleTypeMap.containsKey("2")){
+                    roleProjectVO.setBusinessManager(true);
+                }
+                if(roleTypeMap.containsKey("3")){
+                    roleProjectVO.setProjectManagement(true);
+                }
+                if(roleTypeMap.containsKey("4")){
+                    roleProjectVO.setProductManager(true);
+                }
+                if(roleTypeMap.containsKey("5")){
+                    roleProjectVO.setDevelopManager(true);
+                }
+                if(roleTypeMap.containsKey("6")){
+                    roleProjectVO.setOperateManager(true);
+                }
+                if(roleTypeMap.containsKey("7")){
+                    roleProjectVO.setMaintainManager(true);
+                }
             }
 
         }

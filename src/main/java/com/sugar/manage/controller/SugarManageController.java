@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: sugarManage
@@ -85,11 +86,10 @@ public class SugarManageController extends AppBaseController {
                 roleProjectVO = userRoleSV.getUserRoleList(user);
             }
 
-            String roleTypes = null;
-            String projectIds = null;
+            Map<String,String> projectIdMap = null;
             if(roleProjectVO!=null){
-                roleTypes = roleProjectVO.getRoleTypes();
-                projectIds = roleProjectVO.getProjectIds();
+
+                projectIdMap = roleProjectVO.getProjectIdMap();
             }
 
             PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
@@ -98,8 +98,27 @@ public class SugarManageController extends AppBaseController {
             if(!CollectionUtils.isEmpty(list)){
                 for (TSugarProjectWithBLOBs t : list){
                     TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
-                    tSugarProjectVO.setRoleType(roleTypes);
-                    tSugarProjectVO.setProjectIds(projectIds);
+
+                    if(roleProjectVO!=null){
+                        tSugarProjectVO.setDepMiddLelevel(roleProjectVO.isDepMiddLelevel());
+
+                        tSugarProjectVO.setBusinessManager(roleProjectVO.isBusinessManager());
+
+                        tSugarProjectVO.setProjectManagement(roleProjectVO.isProjectManagement());
+
+                        tSugarProjectVO.setProductManager(roleProjectVO.isProductManager());
+
+                        tSugarProjectVO.setDevelopManager(roleProjectVO.isDevelopManager());
+
+                        tSugarProjectVO.setOperateManager(roleProjectVO.isOperateManager());
+
+                        tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());
+                    }
+                    if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
+                        tSugarProjectVO.setRowEdit(true);
+                    }
+
+
                     tSugarProjectVOSList.add(tSugarProjectVO);
                 }
             }

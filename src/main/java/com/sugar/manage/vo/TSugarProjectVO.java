@@ -3,6 +3,7 @@ package com.sugar.manage.vo;
 
 import com.sugar.manage.dao.vo.BaseModel;
 import lombok.Data;
+import org.apache.catalina.Manager;
 
 import java.io.Serializable;
 
@@ -120,4 +121,29 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
     private String roleType;
 
     private String projectIds;
+
+    /**若无项目id,表示行不可编辑*/
+    private boolean isRowEdit;
+
+    /**是否部门中层角色,角色类型代表数字:1*/
+    private boolean isDepMiddLelevel;
+
+    /**是否商务经理角色,角色类型代表数字:2*/
+    private boolean isBusinessManager;
+
+    /**是否项目管理角色,角色类型代表数字:3*/
+    private boolean isProjectManagement;
+
+    /**是否产品经理角色,角色类型代表数字:4*/
+    private boolean isProductManager;
+
+    /**是否研发经理角色,角色类型代表数字:5*/
+    private boolean isDevelopManager;
+
+    /**是否运营经理角色,角色类型代表数字:6*/
+    private boolean isOperateManager;
+
+    /**是否运维经理角色,角色类型代表数字:7*/
+    private boolean isMaintainManager;
+
 }

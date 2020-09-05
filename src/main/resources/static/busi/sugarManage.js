@@ -103,7 +103,7 @@ $(function () {
                 "colspan": 1,
                 rowspan: 2,
                 formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-                    if(row.projectIds==null || row.projectIds.indexOf(row.id)==-1){
+                    if(!row.rowEdit){
                         return '';
                     }
 
@@ -698,8 +698,6 @@ $(function () {
         onLoadSuccess: function (data) {
             //var data = $('#tb_user').bootstrapTable('getData', true);
             var rows = data.rows;
-            var roleTypes=rows[0].roleType;         //角色类型列表，如1,2,3
-            var projectIds = rows[0].projectIds;    //项目id列表，如1,2,3
             for(var k=0;k<rows.length;k++) {
                 var id = rows[k].id;    //项目id
                 var productType = rows[k].productType;  //产品类型
@@ -761,7 +759,7 @@ $(function () {
 
                 //======================运营阶段======================
                 var maintainPhase = rows[k].maintainPhase == null ? '' : rows[k].maintainPhase;
-                if (projectIds==null || projectIds.indexOf(id) == -1) {
+                if (!rows[k].rowEdit) {
                     var productTypeObj = $('#tb_user tr[data-index=' + k + '] a[data-name="productType"]').parent();
                     $(productTypeObj).empty();
                     $(productTypeObj).text(productType);
@@ -968,7 +966,7 @@ $(function () {
                     $(obj48).text(maintainPhase);
 
                 } else {
-                    if (roleTypes==null || roleTypes.indexOf('1') == -1) { //项目名称
+                    if (!rows[k].depMiddLelevel) { //项目名称
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClueOpen"]').parent();
                         $(obj1).empty();
                         $(obj1).text(businessClueOpen);
@@ -977,7 +975,7 @@ $(function () {
                         $(obj2).empty();
                         $(obj2).text(businessClose);
                     }
-                    if (roleTypes==null || roleTypes.indexOf('2') == -1) {
+                    if (!rows[k].businessManager) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
                         $(obj1).empty();
                         $(obj1).text(businessClue0);
@@ -1006,7 +1004,7 @@ $(function () {
                         $(obj7).empty();
                         $(obj7).text(customerMaintainBackMoney);
                     }
-                    if (roleTypes==null || roleTypes.indexOf('3') == -1) {
+                    if (!rows[k].projectManagement) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
                         $(obj1).empty();
                         $(obj1).text(initialIntentionPlan);
@@ -1080,7 +1078,7 @@ $(function () {
                         $(obj18).text(finalPayment);
 
                     }
-                    if (roleTypes==null || roleTypes.indexOf('4') == -1) {
+                    if (!rows[k].productManager) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
                         $(obj1).empty();
                         $(obj1).text(designBrief);
@@ -1110,7 +1108,7 @@ $(function () {
                         $(obj7).text(proCheckDeliver);
                     }
 
-                    if (roleTypes==null || roleTypes.indexOf('5') == -1) {
+                    if (!rows[k].developManager) {
                         var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
                         $(obj1).empty();
                         $(obj1).text(technologySelection);
@@ -1160,13 +1158,13 @@ $(function () {
                         $(obj12).text(checkDeliver);
 
                     }
-                    if (roleTypes==null || roleTypes.indexOf('6') == -1) {
+                    if (!rows[k].operateManager) {
                         var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
                         $(obj).empty();
                         $(obj).text(operationPhase);
                     }
 
-                    if (roleTypes==null || roleTypes.indexOf('7') == -1) {
+                    if (!rows[k].maintainManager) {
                         var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
                         $(obj).empty();
                         $(obj).text(maintainPhase);
