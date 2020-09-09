@@ -123,27 +123,27 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
     private String projectIds;
 
     /**若无项目id,表示行不可编辑*/
-    private boolean isRowEdit;
+    private boolean rowEdit;
 
     /**是否部门中层角色,角色类型代表数字:1*/
-    private boolean isDepMiddLelevel;
+    private boolean depMiddLelevel;
 
     /**是否商务经理角色,角色类型代表数字:2*/
-    private boolean isBusinessManager;
+    private boolean businessManager;
 
     /**是否项目管理角色,角色类型代表数字:3*/
-    private boolean isProjectManagement;
+    private boolean projectManagement;
 
     /**是否产品经理角色,角色类型代表数字:4*/
-    private boolean isProductManager;
+    private boolean productManager;
 
     /**是否研发经理角色,角色类型代表数字:5*/
-    private boolean isDevelopManager;
+    private boolean developManager;
 
     /**是否运营经理角色,角色类型代表数字:6*/
-    private boolean isOperateManager;
+    private boolean operateManager;
 
     /**是否运维经理角色,角色类型代表数字:7*/
-    private boolean isMaintainManager;
+    private boolean maintainManager;
 
 }
