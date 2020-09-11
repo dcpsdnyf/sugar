@@ -46,6 +46,36 @@
 <body>
     <div class="panel-body" style="margin:0px 25px;padding-bottom:0px;">
         <h1 style="text-align:center;">项目管理</h1>
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="productType" class="col-sm-1 control-label">产品类型:</label>
+                <div class="col-sm-2">
+                    <select id="productType"  class="form-control">
+                        <option value="" selected="selected">全部</option>
+                        <option th:each="productTypes : ${productType}" th:text="${productTypes}" th:value="${productTypes}"></option>
+                    </select>
+                </div>
+                <label for="platformName" class="col-sm-1 control-label">平台名称:</label>
+                <div class="col-sm-2">
+                    <select id="platformName"  class="form-control">
+                        <option value="" selected="selected">全部</option>
+                        <option th:each="platformNames : ${platformName}" th:text="${platformNames}" th:value="${platformNames}"></option>
+                    </select>
+                </div>
+                <label for="groupName" class="col-sm-1 control-label">集团名称:</label>
+                <div class="col-sm-2">
+                    <select id="groupName"  class="form-control">
+                        <option value="" selected="selected">全部</option>
+                        <option th:each="groupNames : ${groupName}" th:text="${groupNames}" th:value="${groupNames}"></option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-primary" id="searchAll" ><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</a>
+                    <a class="btn btn-info" id="restAll"><i class="glyphicon glyphicon-refresh"></i>&nbsp;重置</a>
+                </div>
+            </div>
+        </form>
         <div id="toolbar" class="btn-group">
             <button id="btn_add" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
@@ -79,18 +109,12 @@
                             <input type="text" name="platformName" class="form-control" placeholder="平台名称">
                         </div>
                     </div>
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">集团</label>
-                        <div class="col-xs-10">
-                            <input type="text" name="groupName" class="form-control" placeholder="集团名称">
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
                     <button type="button" onclick="addProject()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -115,12 +139,6 @@
                             <label class="control-label col-xs-2">平台名称</label>
                             <div class="col-xs-10">
                                 <input type="text" name="platformName" class="form-control" placeholder="平台名称">
-                            </div>
-                        </div>
-                        <div class="row" style="padding:10px;">
-                            <label class="control-label col-xs-2">集团</label>
-                            <div class="col-xs-10">
-                                <input type="text" name="groupName" class="form-control" placeholder="集团名称">
                             </div>
                         </div>
                     </div>

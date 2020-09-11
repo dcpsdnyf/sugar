@@ -16,6 +16,9 @@ $(function () {
                 limit : params.limit,       // 每页显示数量
                 offset : params.offset,     // SQL语句起始索引
                 page : (params.offset / params.limit) + 1, //当前页码
+	            productType: $("#productType").val(),
+	            platformName: $("#platformName").val(),
+	            groupName: $("#groupName").val(),
             };
             return temp;
         },                                  //传递参数（*）
@@ -1189,6 +1192,17 @@ $(function () {
             }
         }
 });
+
+
+	$("#searchAll").on('click', function () {
+		$('#tb_user').bootstrapTable('refresh');
+	});
+	$("#restAll").on('click', function () {
+		$("#productType").val("全部");
+			$("#platformName").val("全部");
+			$("#groupName").val("全部");
+		$('#tb_user').bootstrapTable('refresh');
+	});
 
     //新增事件
     $("#btn_add").on('click', function () {

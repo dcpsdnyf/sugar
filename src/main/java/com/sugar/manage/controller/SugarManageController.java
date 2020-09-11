@@ -9,10 +9,12 @@ import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.model.TUser;
+import com.sugar.manage.dao.vo.GroupSugarList;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
+import com.sugar.manage.service.impl.ISugarProjectSVImpl;
 import com.sugar.manage.vo.RoleProjectVO;
 import com.sugar.manage.vo.SysResult;
 import com.sugar.manage.vo.TSugarProjectVO;
@@ -22,8 +24,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -53,19 +55,34 @@ public class SugarManageController extends AppBaseController {
     @Autowired
     private IUserRoleSV userRoleSV;
 
+    @Autowired
+    private ISugarProjectSVImpl iSugarProjectSV;
+
 
     /**
      * 项目进度初始化界面
      * @return
      */
     @RequestMapping("/init")
-    public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUserVO tUser){
+    public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUserVO tUser, Model model){
         if(!StringUtils.isBlank(tUser.getUserName()) || StringUtils.isNotBlank(tUser.getUserAccount())){
             TUser user = userSV.getUserList(tUser);
             if(tUser != null){
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
             }
         }
+        //查询列表详情再分组
+        GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList();
+        if(!CollectionUtils.isEmpty(sugarProjectGroupList.getProductType())){
+            model.addAttribute("productType",sugarProjectGroupList.getProductType());
+        }
+        if(!CollectionUtils.isEmpty(sugarProjectGroupList.getPlatformName())){
+            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName());
+        }
+        if(!CollectionUtils.isEmpty(sugarProjectGroupList.getGroupName())){
+            model.addAttribute("groupName",sugarProjectGroupList.getGroupName());
+        }
+
         return "sugarManage/sugarManage";
     }
 
