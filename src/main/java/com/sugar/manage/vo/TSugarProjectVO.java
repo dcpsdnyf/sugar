@@ -22,6 +22,9 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
     /** 平台名称 */
     private String platformName ;
 
+    /** 集团 */
+    private String groupName;
+
     private String businessClueOpen;
 
     private String businessClue0;

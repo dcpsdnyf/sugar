@@ -35,7 +35,7 @@ $(function () {
         cardView: false,                    //是否显示详细视图
         detailView: false,                   //是否显示父子表
         fixedColumns:true,//是否固定列
-        fixedNumber:3,//固定多少列，总左边开始数
+        fixedNumber:4,//固定多少列，总左边开始数
 
 
         selectItemName: 'parentItem',
@@ -45,7 +45,7 @@ $(function () {
                 "title": "项目信息",
                 "halign":"center",
                 "align":"center",
-                "colspan": 3
+                "colspan": 4
             },
             {
                 "title": "商机推进阶段",
@@ -121,9 +121,13 @@ $(function () {
             field: 'platformName',
             title: '平台名称'
         }, {
-            field: 'businessClueOpen',
-            title: '商机线索开启',
-            editable: {
+                field: 'groupName',
+                title: '集团'
+            },
+            {
+                field: 'businessClueOpen',
+                title: '商机线索开启',
+                editable: {
                 type: 'text',
                 title: '商机线索开启',
                 validate: function (v) {

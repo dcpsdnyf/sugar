@@ -12,6 +12,8 @@ public class TSugarProject implements Serializable {
 
     private String platformId;
 
+    private String groupName;
+
     private String status;
 
     private String createdStaff;
@@ -56,6 +58,14 @@ public class TSugarProject implements Serializable {
 
     public void setPlatformId(String platformId) {
         this.platformId = platformId == null ? null : platformId.trim();
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName == null ? null : groupName.trim();
     }
 
     public String getStatus() {
@@ -122,6 +132,7 @@ public class TSugarProject implements Serializable {
             && (this.getProductType() == null ? other.getProductType() == null : this.getProductType().equals(other.getProductType()))
             && (this.getPlatformName() == null ? other.getPlatformName() == null : this.getPlatformName().equals(other.getPlatformName()))
             && (this.getPlatformId() == null ? other.getPlatformId() == null : this.getPlatformId().equals(other.getPlatformId()))
+            && (this.getGroupName() == null ? other.getGroupName() == null : this.getGroupName().equals(other.getGroupName()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreatedStaff() == null ? other.getCreatedStaff() == null : this.getCreatedStaff().equals(other.getCreatedStaff()))
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
@@ -138,6 +149,7 @@ public class TSugarProject implements Serializable {
         result = prime * result + ((getProductType() == null) ? 0 : getProductType().hashCode());
         result = prime * result + ((getPlatformName() == null) ? 0 : getPlatformName().hashCode());
         result = prime * result + ((getPlatformId() == null) ? 0 : getPlatformId().hashCode());
+        result = prime * result + ((getGroupName() == null) ? 0 : getGroupName().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreatedStaff() == null) ? 0 : getCreatedStaff().hashCode());
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
@@ -157,6 +169,7 @@ public class TSugarProject implements Serializable {
         sb.append(", productType=").append(productType);
         sb.append(", platformName=").append(platformName);
         sb.append(", platformId=").append(platformId);
+        sb.append(", groupName=").append(groupName);
         sb.append(", status=").append(status);
         sb.append(", createdStaff=").append(createdStaff);
         sb.append(", createdTime=").append(createdTime);

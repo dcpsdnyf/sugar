@@ -1,0 +1,1 @@
+ALTER  TABLE  t_sugar_project  ADD   group_name  VARCHAR(128) COMMENT  '集团名称' ;
