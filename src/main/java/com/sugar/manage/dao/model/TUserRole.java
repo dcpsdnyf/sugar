@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class TUserRole implements Serializable {
     private Long id;
 
-    private Long roleId;
+    private String roleId;
 
     private Long userId;
 
-    private Long projectId;
+    private String projectId;
 
     private static final long serialVersionUID = 1L;
 
@@ -21,12 +21,12 @@ public class TUserRole implements Serializable {
         this.id = id;
     }
 
-    public Long getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
     public Long getUserId() {
@@ -37,12 +37,12 @@ public class TUserRole implements Serializable {
         this.userId = userId;
     }
 
-    public Long getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId == null ? null : projectId.trim();
     }
 
     @Override

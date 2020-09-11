@@ -11,6 +11,7 @@ import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.GroupSugarList;
 import com.sugar.manage.dao.vo.TableDataInfo;
+import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
@@ -202,8 +203,10 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/Edit")
     @ResponseBody
-    public String updateSugarProject(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {
-        int a=sugarProjectSV.updateSugarProject(tSugarProject);
+    public String updateSugarProject(TSugarProjectReqDTO reqDTO, HttpServletResponse response) throws Exception {
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        reqDTO.setUpdatedStaff(userId);
+        int a=sugarProjectSV.updateSugarProject(reqDTO);
             if (a>0){
                 JSONObject result=new JSONObject();
                 result.put("success",Boolean.TRUE);

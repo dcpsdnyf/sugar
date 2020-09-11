@@ -3,9 +3,9 @@
 <mapper namespace="com.sugar.manage.dao.mapper.TUserRoleMapper">
   <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TUserRole">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -101,8 +101,8 @@
   <insert id="insert" parameterType="com.sugar.manage.dao.model.TUserRole">
     insert into t_user_role (id, role_id, user_id, 
       project_id)
-    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
-      #{projectId,jdbcType=BIGINT})
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{projectId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TUserRole">
     insert into t_user_role
@@ -125,13 +125,13 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=BIGINT},
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="projectId != null">
-        #{projectId,jdbcType=BIGINT},
+        #{projectId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,13 +148,13 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=BIGINT},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.projectId != null">
-        project_id = #{record.projectId,jdbcType=BIGINT},
+        project_id = #{record.projectId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -164,9 +164,9 @@
   <update id="updateByExample" parameterType="map">
     update t_user_role
     set id = #{record.id,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=BIGINT},
-      project_id = #{record.projectId,jdbcType=BIGINT}
+      project_id = #{record.projectId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -175,22 +175,22 @@
     update t_user_role
     <set>
       <if test="roleId != null">
-        role_id = #{roleId,jdbcType=BIGINT},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="projectId != null">
-        project_id = #{projectId,jdbcType=BIGINT},
+        project_id = #{projectId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TUserRole">
     update t_user_role
-    set role_id = #{roleId,jdbcType=BIGINT},
+    set role_id = #{roleId,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},
-      project_id = #{projectId,jdbcType=BIGINT}
+      project_id = #{projectId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

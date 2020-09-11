@@ -2,6 +2,7 @@ package com.sugar.manage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
+import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.dao.vo.GroupSugarList;
 import com.sugar.manage.vo.TSugarProjectVO;
 
@@ -24,7 +25,7 @@ public interface ISugarProjectSV {
      */
     public void saveSugarProject(TSugarProjectWithBLOBs record);
 
-    public int updateSugarProject(TSugarProjectWithBLOBs project);
+    public int updateSugarProject(TSugarProjectReqDTO reqDTO);
 
     public int deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject);
 

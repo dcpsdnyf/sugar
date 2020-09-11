@@ -74,8 +74,11 @@ public class IUserSVImpl implements IUserSV {
         List<TUserRole> tUserRoleList = userRoleMapper.selectByExample(tUserRoleExample);
         List<Long> roleIdList = new ArrayList<>();
         if(!CollectionUtils.isEmpty(tUserRoleList)){
-            for(TUserRole userRole:tUserRoleList){
-                roleIdList.add(userRole.getRoleId());
+            TUserRole userRole = tUserRoleList.get(0);
+            String roleIds = userRole.getRoleId();  //结果以","隔开
+            String[] roleIdArr = roleIds.split(",");
+            for(String roleId:roleIdArr){
+                roleIdList.add(Long.parseLong(roleIds));
             }
 
             TRoleExample roleExample = new TRoleExample();

@@ -51,29 +51,38 @@ public class IUserRoleSVImpl implements IUserRoleSV {
         List<TUserRole> userRoleList = userRoleMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(userRoleList)){
 
-            List<Long> longList = new ArrayList<>();
+            TUserRole userRole = userRoleList.get(0);
+            List<Long> roleIdList = new ArrayList<>();
 
-            //String projectIds = "";
+            String roleIds = userRole.getRoleId();
+
+            String projectIds = userRole.getProjectId();
+
+            String[] roleIdArr = roleIds.split(",");
+            String[] projectIdArr = projectIds.split(",");
+
+            /*项目id*/
             Map<String,String> projectIdMap = new HashMap<>();
-            for (TUserRole userRole : userRoleList){
-                //projectIds += userRole.getProjectId()+",";
-                projectIdMap.put(userRole.getProjectId()+"",userRole.getProjectId()+"");
-                longList.add(userRole.getRoleId());
+            for (String projectId : projectIdArr){
+                projectIdMap.put(projectId+"",projectId+"");
+            }
+            roleProjectVO.setProjectIdMap(projectIdMap);
+
+            /*角色id*/
+            for(String roleId:roleIdArr){
+                roleIdList.add(Long.parseLong(roleId));
             }
 
-            roleProjectVO.setProjectIdMap(projectIdMap);
 
             TRoleExample exampleRole = new TRoleExample();
             TRoleExample.Criteria sqlRole = exampleRole.createCriteria();
-            sqlRole.andIdIn(longList);
+            sqlRole.andIdIn(roleIdList);
 
             List<TRole> roleList = roleMapper.selectByExample(exampleRole);
             if(!CollectionUtils.isEmpty(roleList)){
 
                 Map<String,String> roleTypeMap = new HashMap<>();
-                //String roleType = "";
                 for (TRole role : roleList){
-                    //roleType += role.getRoleType() + ",";
                     roleTypeMap.put(role.getRoleType()+"",role.getRoleName());
                 }
                 roleProjectVO.setRoleTypeMap(roleTypeMap);

@@ -140,10 +140,10 @@ $(function () {
             }
         },{
             field: 'businessClue0',
-            title: '1、商机线索0%：我方分析客户存在潜在需求',
+            title: '1、商机线索0%',
             editable: {
                 type: 'text',
-                title: '1、商机线索0%：我方分析客户存在潜在需求',
+                title: '1、商机线索0%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -152,10 +152,10 @@ $(function () {
 
         },{
             field: 'businessDiscover10',
-            title: '2、商机发现10%：深入交流明确需求',
+            title: '2、商机发现10%',
             editable: {
                 type: 'text',
-                title: '2、商机发现10%：深入交流明确需求',
+                title: '2、商机发现10%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -164,10 +164,10 @@ $(function () {
 
         },{
             field: 'businessEstablish25',
-            title: '3、商机确立25%：客户明确购买意愿/立项/预算',
+            title: '3、商机确立25%',
             editable: {
                 type: 'text',
-                title: '3、商机确立25%：客户明确购买意愿/立项/预算',
+                title: '3、商机确立25%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -176,10 +176,10 @@ $(function () {
 
         },{
             field: 'businessEstablish50',
-            title: '4、商机确立50%：客户启动招标/采购流程、我方入围',
+            title: '4、商机确立50%',
             editable: {
                 type: 'text',
-                title: '4、商机确立50%：客户启动招标/采购流程、我方入围',
+                title: '4、商机确立50%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -188,10 +188,10 @@ $(function () {
 
         },{
             field: 'businessEstablish75',
-            title: '5、商机确认75%：客户招标/采购，我方交流需求细则',
+            title: '5、商机确认75%',
             editable: {
                 type: 'text',
-                title: '5、商机确认75%：客户招标/采购，我方交流需求细则',
+                title: '5、商机确认75%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -200,10 +200,10 @@ $(function () {
 
         },{
             field: 'businessWin100',
-            title: '6、商机赢取100%：合同签订',
+            title: '6、商机赢取100%',
             editable: {
                 type: 'text',
-                title: '6、商机赢取100%：合同签订',
+                title: '6、商机赢取100%',
                 validate: function (v) {
                     if (!v) return '不能为空';
 
@@ -692,6 +692,8 @@ $(function () {
             }]],
         onEditableSave: function (field, row, oldValue, $el) {
             // alert("更新保存事件，原始值为" + oldValue);
+            debugger
+            row.fieldName = field;
             $.ajax({
                 type: "post",
                 url: WEB_ROOT + "/sugarManage/Edit",
@@ -1228,6 +1230,7 @@ var editModel = function (id) {
     $("#editMyModal input[name='id']").val(id);
     $("#editMyModal input[name='productType']").val(row.productType);
     $("#editMyModal input[name='platformName']").val(row.platformName);
+    $("#editMyModal input[name='groupName']").val(row.groupName);
 }
 
 //删除事件
@@ -1263,7 +1266,7 @@ function saveProjectInfo() {
         url: WEB_ROOT + "/sugarManage/Edit",
         data: $("#editForm").serialize(),
         dataType: 'JSON',
-        success: function (status) {
+        success: function (data) {
             //location.reload();
             confirmModal("提示", "更新成功！", function () {
                 window.location.reload();
@@ -1284,14 +1287,14 @@ function addProject() {
         data: $("#addForm").serialize(),
         dataType: 'JSON',
         success: function (result) {
-            confirmModal("提示", "新增成功！", function () {
+            confirmModal("提示", result.msg, function () {
                 window.location.reload();
             }, {}, function () {
                 window.location.reload();
             });
         },
         error: function () {
-            msgInfoModal('提示', "更新失败");
+            msgInfoModal('提示', "新增失败");
         }
     });
 }
