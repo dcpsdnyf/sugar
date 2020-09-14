@@ -21,6 +21,10 @@
         _getCaret       = BootstrapTable.prototype.getCaret;  // Add: Aleksej
 
     BootstrapTable.prototype.initFixedColumns = function () {
+        //防止有多次固定列出现
+        if ($(".fixed-table-header-columns").length > 0) {
+            return;
+        }
         this.$fixedHeader = $([
             '<div class="fixed-table-header-columns">',
             '<table>',
@@ -58,7 +62,7 @@
         var that = this, $trs = this.$header.find('tr').clone(true); //Fix: Aleksej "clone()" mit "clone(true)" ersetzt
         $trs.each(function () {
             // This causes layout problems:
-            //$(this).find('th:gt(' + (that.options.fixedNumber -1) + ')').remove(); // Fix: Aleksej "-1" hinnzugef�gt. Denn immer eine Spalte Mehr geblieben ist
+            //$(this).find('th:gt(' + (that.options.fixedNumber -1) + ')').remove(); // Fix: Aleksej "-1" hinnzugef�gt. Denn immer eine Spalte Mehr geblieben ist
             $(this).find('th:gt(' + that.options.fixedNumber + ')').remove();
         });
         this.$fixedHeaderColumns.html('').append($trs); 
@@ -146,7 +150,7 @@
 
     /**
     * Add: Aleksej
-    * Hook f�r getCaret. Aktualisieren Header bei Fixed-Columns wenn diese sortiert wurden
+    * Hook f�r getCaret. Aktualisieren Header bei Fixed-Columns wenn diese sortiert wurden
     * @method getCaret
     * @for BootstrapTable
     */
@@ -166,12 +170,12 @@
     };
 
     /**
-     * Add: Aleksej, zum berechnen von Scrollbar-Gr��e
+     * Add: Aleksej, zum berechnen von Scrollbar-Gr��e
      * @method calcScrollBarSize
      * @return Number
      */
     BootstrapTable.prototype.calcScrollBarSize = function () {
-        // Es ist egal, ob H�he oder Breite
+        // Es ist egal, ob H�he oder Breite
         var tmpWidth        = 100,
             $container      = $('<div>').css({
                 width       : tmpWidth, 
@@ -210,7 +214,7 @@
         }).show();
 
         this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
+            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.5);
         });
 
         // events
