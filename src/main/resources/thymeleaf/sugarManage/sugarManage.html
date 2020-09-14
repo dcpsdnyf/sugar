@@ -14,6 +14,7 @@
     <link th:href="@{/Content/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet" />
     <link th:href="@{/Content/bootstrap-table/bootstrap-table.min.css}"  rel="stylesheet" />
     <link th:href="@{/Content/bootstrap-table-fixed-columns-master/bootstrap-table-fixed-columns.css}"  rel="stylesheet" />
+    <link th:href="@{/Content/bootstrap-select/css/bootstrap-select.min.css}"  rel="stylesheet" />
     <style type="text/css">
         a:focus{text-decoration: none}
         a{
@@ -76,13 +77,22 @@
                 </div>
             </div>
         </form>
-        <div id="toolbar" class="btn-group">
+        <div id="toolbar" class="btn-group" style="width: 600px;">
             <button id="btn_add" type="button" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
             </button>
-            <button id="btn_export" type="button" class="btn btn-warning" onclick="exportSugar()" style="margin-left: 10px">
+            <button id="btn_export" type="button" class="btn btn-warning" onclick="exportSugar()" style="margin-left: 10px;">
                 <i class="glyphicon glyphicon-export"></i>导出
             </button>
+            <div  style="margin-left: 160px">
+                <select class="selectpicker" multiple onchange="selectHideRow(this)">
+                    <option value="1" >商机推进阶段</option>
+                    <option value="2" selected="selected">广西省</option>
+                    <option value="3" selected="selected">福建省</option>
+                    <option value="4">湖南省</option>
+                    <option value="5" selected="selected">山东省</option>
+                </select>
+            </div>
         </div>
         <table id="tb_user"></table>
     </div>
@@ -171,6 +181,7 @@
         <script th:src="@{/Content/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
         <script th:src="@{/Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js}"></script>
         <script th:src="@{/Content/bootstrap-table-fixed-columns-master/bootstrap-table-fixed-columns.js}"></script>
+        <script th:src="@{/Content/bootstrap-select/js/bootstrap-select.js}"></script>
         <script th:src="@{/busi/sugarManage.js}"></script>
         <script th:src="@{/busi/util_new.js}"></script>
 

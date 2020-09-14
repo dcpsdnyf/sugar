@@ -28,7 +28,7 @@ $(function () {
         pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
         search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
         strictSearch: true,
-        showColumns: true,                  //是否显示所有的列
+        showColumns: true,                  //是否显示所有的列 // 开启自定义列显示功能
 
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
@@ -55,6 +55,7 @@ $(function () {
                 "halign":"center",
                 "align":"center",
                 "colspan": 9,
+                id:'business',
                 class:"th_red"
             },
             {
@@ -111,6 +112,7 @@ $(function () {
             halign:"center",
             title: '序号',
             field: 'id',
+            switchable: false,
             formatter: function(value, row, index){
                 var html = "<div style='height:20px'>"+( index + 1) + "</div>";
                 return html;
@@ -119,12 +121,15 @@ $(function () {
             align:"center",
             halign:"center",
             field: 'productType',
+            switchable: false,
             title: '产品类型'
         }, {
             field: 'platformName',
+            switchable: false,
             title: '平台名称'
         }, {
                 field: 'groupName',
+                switchable: false,
                 title: '集团'
             },
             {
@@ -1195,6 +1200,8 @@ $(function () {
         }
 });
 
+    //$('#tb_user').bootstrapTable('hideColumn', 'productType');
+
 
 	$("#searchAll").on('click', function () {
 		$('#tb_user').bootstrapTable('refresh');
@@ -1297,4 +1304,34 @@ function addProject() {
             msgInfoModal('提示', "新增失败");
         }
     });
+}
+
+function selectHideRow(_this) {
+    var selectValue = $(_this).val();
+    if(selectValue != null){
+        //var selectList = "1,2,3".split(",");
+        for(var i=0;i< selectValue.length; i++ ){
+            var value = selectValue[i];
+            switch (value) {
+                case 1:
+                    $('#tb_user').bootstrapTable('hideColumn', 'business');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessClueOpen');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessClue0');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessDiscover10');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessEstablish25');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessEstablish50');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessEstablish75');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessWin100');
+                    $('#tb_user').bootstrapTable('hideColumn', 'customerMaintainBackMoney');
+                    $('#tb_user').bootstrapTable('hideColumn', 'businessClose');
+                case 2:12;
+
+            }
+        }
+    } else {
+
+    }
+
+    alert(selectValue);
+
 }
