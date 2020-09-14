@@ -78,7 +78,7 @@ public class IUserSVImpl implements IUserSV {
             String roleIds = userRole.getRoleId();  //结果以","隔开
             String[] roleIdArr = roleIds.split(",");
             for(String roleId:roleIdArr){
-                roleIdList.add(Long.parseLong(roleIds));
+                roleIdList.add(Long.parseLong(roleId));
             }
 
             TRoleExample roleExample = new TRoleExample();
