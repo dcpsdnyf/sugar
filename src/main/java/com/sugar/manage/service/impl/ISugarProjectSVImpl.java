@@ -7,8 +7,8 @@ import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
-import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.dao.vo.GroupSugarList;
+import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.vo.FieldNameMaps;
 import com.sugar.manage.vo.TSugarProjectVO;
@@ -17,9 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -75,7 +72,8 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
 
 		this.initParam(sql, projectVO);
-
+		//列表按照产品类型进行排序展示
+		example.setOrderByClause(" product_type asc ");
 		PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
 
 		List<TSugarProjectWithBLOBs> sugarProject = sugarProjectMapper.selectByExampleWithBLOBs(example);

@@ -87,10 +87,11 @@
             <div  style="margin-left: 160px">
                 <select class="selectpicker" multiple onchange="selectHideRow(this)">
                     <option value="1" >商机推进阶段</option>
-                    <option value="2" selected="selected">广西省</option>
-                    <option value="3" selected="selected">福建省</option>
-                    <option value="4">湖南省</option>
-                    <option value="5" selected="selected">山东省</option>
+                    <option value="2" >采购阶段</option>
+                    <option value="3" >产品阶段</option>
+                    <option value="4" >研发阶段</option>
+                    <option value="5" >运营阶段</option>
+                    <option value="6" >运维阶段</option>
                 </select>
             </div>
         </div>
@@ -185,5 +186,37 @@
         <script th:src="@{/busi/sugarManage.js}"></script>
         <script th:src="@{/busi/util_new.js}"></script>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="waitingModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">正在操作中...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">100%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" disabled class="btn btn-default" data-dismiss="modal">正在操作，请勿关闭或刷新页面！</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    　　　 <script>
+	    function showWaiting() {
+		    $('#waitingModal').modal({
+			    keyboard: false,
+			    backdrop: 'static',
+			    show: true
+		    });
+	    }
+	    function hideWaiting() {
+		    $('#waitingModal').modal('hide');
+	    }
+    </script>
 </body>
 </html>
