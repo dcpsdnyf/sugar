@@ -137,7 +137,8 @@ $(function () {
 				field: 'businessClueOpen',
 				title: '商机线索开启',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '商机线索开启',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -148,7 +149,8 @@ $(function () {
 				field: 'businessClue0',
 				title: '1、商机线索0%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '1、商机线索0%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -160,7 +162,8 @@ $(function () {
 				field: 'businessDiscover10',
 				title: '2、商机发现10%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '2、商机发现10%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -172,7 +175,8 @@ $(function () {
 				field: 'businessEstablish25',
 				title: '3、商机确立25%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '3、商机确立25%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -184,7 +188,8 @@ $(function () {
 				field: 'businessEstablish50',
 				title: '4、商机确立50%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '4、商机确立50%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -196,7 +201,8 @@ $(function () {
 				field: 'businessEstablish75',
 				title: '5、商机确认75%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '5、商机确认75%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -208,7 +214,8 @@ $(function () {
 				field: 'businessWin100',
 				title: '6、商机赢取100%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '6、商机赢取100%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -220,7 +227,8 @@ $(function () {
 				field: 'customerMaintainBackMoney',
 				title: '7、客户维护/回款阶段',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '7、客户维护/回款阶段',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -232,7 +240,8 @@ $(function () {
 				field: 'businessClose',
 				title: '商机关闭',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '商机关闭',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -244,7 +253,8 @@ $(function () {
 				field: 'initialIntentionPlan',
 				title: '1、初步意向方案',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '1、初步意向方案',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -256,7 +266,8 @@ $(function () {
 				field: 'writeProjectProposal',
 				title: '2、写立项方案',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '2、写立项方案',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -268,7 +279,8 @@ $(function () {
 				field: 'workingHoursAssess',
 				title: '3、工时评估',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '3、工时评估',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -280,7 +292,8 @@ $(function () {
 				field: 'businessNegotiation',
 				title: '4、商务谈判',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '4、商务谈判',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -292,7 +305,8 @@ $(function () {
 				field: 'requestDraft',
 				title: '5、请示拟写',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '5、请示拟写',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -304,7 +318,8 @@ $(function () {
 				field: 'attendMeeting',
 				title: '6、上会',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '6、上会',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -316,7 +331,8 @@ $(function () {
 				field: 'bidding',
 				title: '7、招投标',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '7、招投标',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -328,7 +344,8 @@ $(function () {
 				field: 'requestOaApproval',
 				title: '8、请示OA审批',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '8、请示OA审批',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -340,7 +357,8 @@ $(function () {
 				field: 'contractDraft',
 				title: '9、合同拟写',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '9、合同拟写',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -352,7 +370,8 @@ $(function () {
 				field: 'lawyerReview',
 				title: '10、律师审核',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '10、律师审核',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -364,7 +383,8 @@ $(function () {
 				field: 'contractOaApproval',
 				title: '11、合同OA审批',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '11、合同OA审批',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -376,7 +396,8 @@ $(function () {
 				field: 'usageSeal',
 				title: '12、用章',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '12、用章',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -388,7 +409,8 @@ $(function () {
 				field: 'otherSeal',
 				title: '13、对方盖章',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '13、对方盖章',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -400,7 +422,8 @@ $(function () {
 				field: 'scan',
 				title: '14、扫描',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '14、扫描',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -412,7 +435,8 @@ $(function () {
 				field: 'generalDepartmentFile',
 				title: '15、综合部归档',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '15、综合部归档',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -424,7 +448,8 @@ $(function () {
 				field: 'firstPayment',
 				title: '16、首付款',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '16、首付款',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -436,7 +461,8 @@ $(function () {
 				field: 'progressPayment',
 				title: '17、进度款',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '17、进度款',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -448,7 +474,8 @@ $(function () {
 				field: 'finalPayment',
 				title: '18、尾款',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '18、尾款',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -460,7 +487,8 @@ $(function () {
 				field: 'designBrief',
 				title: '1、设计概要',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '1、设计概要',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -472,7 +500,8 @@ $(function () {
 				field: 'detailedDesign',
 				title: '2、详细设计',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '2、详细设计',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -484,7 +513,8 @@ $(function () {
 				field: 'uiDesign',
 				title: '3、UI设计',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '3、UI设计',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -496,7 +526,8 @@ $(function () {
 				field: 'requirementDesign',
 				title: '4、需求设计',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '4、需求设计',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -508,7 +539,8 @@ $(function () {
 				field: 'requirementsReview',
 				title: '5、需求评审',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '5、需求评审',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -520,7 +552,8 @@ $(function () {
 				field: 'demandOrderConfirm',
 				title: '6、需求单确认',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '6、需求单确认',
 					validate: function (v) {
 						if (!v) return '用户名不能为空';
@@ -532,7 +565,8 @@ $(function () {
 				field: 'proCheckDeliver',
 				title: '7、验收',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '7、验收',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -544,7 +578,8 @@ $(function () {
 				field: 'technologySelection',
 				title: '1、技术选型',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '1、技术选型',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -554,7 +589,8 @@ $(function () {
 				field: 'environmentDeployment',
 				title: '2、环境部署',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '2、环境部署',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -565,7 +601,8 @@ $(function () {
 				field: 'frameworkDesign',
 				title: '3、框架设计',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '3、框架设计',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -576,7 +613,8 @@ $(function () {
 				field: 'developProgress10',
 				title: '4、开发进度10%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '4、开发进度10%',
 					validate: function (v) {
 						if (!v) {
@@ -588,7 +626,8 @@ $(function () {
 				field: 'developProgress25',
 				title: '5、开发进度25%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '5、开发进度25%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -599,7 +638,8 @@ $(function () {
 				field: 'developProgress50',
 				title: '6、开发进度50%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '6、开发进度50%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -610,7 +650,8 @@ $(function () {
 				field: 'developProgress75',
 				title: '7、开发进度75%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '7、开发进度75%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -621,7 +662,8 @@ $(function () {
 				field: 'developProgress100',
 				title: '8、开发进度100%',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '8、开发进度100%',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -632,7 +674,8 @@ $(function () {
 				field: 'insideTest',
 				title: '9、内部测试优化',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '9、内部测试优化',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -643,7 +686,8 @@ $(function () {
 				field: 'customerTest',
 				title: '10、客户测试优化',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '10、客户测试优化',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -654,7 +698,8 @@ $(function () {
 				field: 'implementDeliver',
 				title: '11、实施交付',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '11、实施交付',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -665,7 +710,8 @@ $(function () {
 				field: 'checkDeliver',
 				title: '12、验收',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '12、验收',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -677,7 +723,8 @@ $(function () {
 				field: 'operationPhase',
 				title: '运营阶段',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '运营阶段',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -688,7 +735,8 @@ $(function () {
 				field: 'maintainPhase',
 				title: '运维阶段',
 				editable: {
-					type: 'text',
+					type: 'textarea',
+					rows:"3",
 					title: '运维阶段',
 					validate: function (v) {
 						if (!v) return '不能为空';
@@ -700,6 +748,14 @@ $(function () {
 			// alert("更新保存事件，原始值为" + oldValue);
 			debugger
 			row.fieldName = field;
+			//添加编辑人修改处理
+			var userName=row[field];
+			if(userName.indexOf(":")==-1){
+				row[field]=$("#getUserName").val() + ":"+"\n" + userName;
+			}else {
+				var splitValue=userName.substring(userName.indexOf(":")+1,userName.length);
+				row[field]=$("#getUserName").val() + ":"+"\n" + splitValue;
+			}
 			$.ajax({
 				type: "post",
 				url: WEB_ROOT + "/sugarManage/Edit",
@@ -707,6 +763,7 @@ $(function () {
 				dataType: 'JSON',
 				success: function (status) {
 					confirmModal("提示", "保存成功！", function () {
+
 						window.location.reload();
 					}, {}, function () {
 						window.location.reload();
