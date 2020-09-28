@@ -51,7 +51,7 @@ private ITUserTaskService itUserTaskService;
         return resultMessage;
     }
 
-    @RequestMapping("/getRollBackInfo")
+    @RequestMapping("/addEntrustInfo")
     @ResponseBody
     public ResultMessage addEntrustInfo(TUserTask tUserTask,HttpServletRequest request) {
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
