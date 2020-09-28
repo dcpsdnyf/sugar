@@ -171,4 +171,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND
         TASK_TYPE = '00'
     </select>
+
+    <select id="getAllTaskNameByProductId" parameterType="String" resultType="String">
+        select
+        TASK_NAME
+        from
+        t_user_task
+        WHERE
+        PROJECT_ID = #{projectId}
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.vo.TUserTask;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -69,4 +70,6 @@ public interface TUserTaskMapper
     public List<TUserTask> getTaskInfoByProductIdAndTaskTypehsn(String projectId);
 
     public TUserTask getTaskInfoByProductId(String projectId);
+
+    public List<String> getAllTaskNameByProductId(String projectId);
 }
