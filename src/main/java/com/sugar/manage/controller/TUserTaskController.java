@@ -1,11 +1,9 @@
 package com.sugar.manage.controller;
 
 import com.sugar.common.utils.CookieUtils;
-import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
-import com.sugar.manage.service.IUserSV;
 import com.sugar.util.ResultMessage;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/TUserTaskCotroller")
-public class TUserTaskCotroller {
+@RequestMapping("/TUserTaskController")
+public class TUserTaskController {
 
 @Autowired
 private ITUserTaskService itUserTaskService;
