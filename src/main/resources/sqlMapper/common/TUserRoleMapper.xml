@@ -193,4 +193,14 @@
       project_id = #{projectId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getIsHasPowerToInsertTask" parameterType="Long" resultType="String">
+    SELECT
+    role_id
+    FROM
+    t_user_role
+    WHERE
+    user_id = #{userId,jdbcType=BIGINT};
+  </select>
+
 </mapper>

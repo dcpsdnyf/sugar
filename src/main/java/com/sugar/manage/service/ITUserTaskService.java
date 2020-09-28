@@ -3,7 +3,7 @@ package com.sugar.manage.service;
 
 import com.sugar.manage.dao.vo.TUserTask;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 /**
@@ -65,4 +65,6 @@ public interface ITUserTaskService
     public TUserTask getTaskInfoByUserIdAndProjectId(String projectId,String userId);
 
     public List<String> getAllTaskNameByProductId(String projectId);
+
+    public String getAllTaskNameByProductId(Long userId);
 }

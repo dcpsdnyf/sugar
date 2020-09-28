@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class TUserTaskServiceImpl implements ITUserTaskService {
     @Autowired
     private TUserTaskMapper tUserTaskMapper;
+    @Autowired
+    private TUserRoleMapper tUserRoleMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -291,6 +294,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     public List<String> getAllTaskNameByProductId(String projectId) {
 
         return tUserTaskMapper.getAllTaskNameByProductId(projectId);
+    }
+
+    @Override
+    public String getAllTaskNameByProductId(Long userId) {
+        return tUserRoleMapper.getIsHasPowerToInsertTask(userId);
     }
 }
 

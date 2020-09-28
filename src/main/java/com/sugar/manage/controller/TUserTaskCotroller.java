@@ -1,6 +1,7 @@
 package com.sugar.manage.controller;
 
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -22,8 +23,8 @@ public class TUserTaskCotroller {
 
 @Autowired
 private ITUserTaskService itUserTaskService;
-@Autowired
-private IUserSV iUserSV;
+
+
 
     /**
      * 指派按钮回显数据
@@ -56,7 +57,23 @@ private IUserSV iUserSV;
     @ResponseBody
     public ResultMessage addEntrustInfo(TUserTask tUserTask,HttpServletRequest request) {
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+
         ResultMessage resultMessage = new ResultMessage();
+        if (StringUtils.isBlank(userId)) {
+            resultMessage.setResultMassage("请登录");
+            resultMessage.setSuccess(false);
+            return resultMessage;
+        }
+
+       String roles = itUserTaskService.getAllTaskNameByProductId(Long.parseLong(userId));
+       String[] roleIdArr = roles.split(",");
+       boolean flag = Arrays.asList(roleIdArr).contains("9");
+       if (flag) {
+           resultMessage.setResultMassage("没有指派权限");
+           resultMessage.setSuccess(false);
+           return resultMessage;
+       }
+
         if (StringUtils.isBlank( tUserTask.getTaskPrincipal())) {
             resultMessage.setResultMassage("负责人为空");
             resultMessage.setSuccess(false);
