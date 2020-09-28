@@ -31,4 +31,6 @@ public interface TUserMapper {
     int updateByPrimaryKeySelective(TUser record);
 
     int updateByPrimaryKey(TUser record);
+
+    String getUserIdByUerName(String id);
 }

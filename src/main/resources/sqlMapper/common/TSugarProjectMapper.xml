@@ -13,6 +13,8 @@
     <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
     <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
@@ -63,6 +65,8 @@
     <result column="check_deliver" jdbcType="LONGVARCHAR" property="checkDeliver" />
     <result column="operation_phase" jdbcType="LONGVARCHAR" property="operationPhase" />
     <result column="maintain_phase" jdbcType="LONGVARCHAR" property="maintainPhase" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -137,7 +141,7 @@
     pro_check_deliver, technology_selection, environment_deployment, framework_design, 
     develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75, 
     develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver, 
-    operation_phase, maintain_phase
+    operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.sugar.manage.dao.model.TSugarProjectExample" resultMap="ResultMapWithBLOBs">
     select
@@ -212,7 +216,7 @@
       develop_progress_25, develop_progress_50, 
       develop_progress_75, develop_progress_100, 
       inside_test, customer_test, implement_deliver, 
-      check_deliver, operation_phase, maintain_phase
+      check_deliver, operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
       )
     values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
       #{platformId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
@@ -239,6 +243,7 @@
       #{developProgress75,jdbcType=LONGVARCHAR}, #{developProgress100,jdbcType=LONGVARCHAR}, 
       #{insideTest,jdbcType=LONGVARCHAR}, #{customerTest,jdbcType=LONGVARCHAR}, #{implementDeliver,jdbcType=LONGVARCHAR}, 
       #{checkDeliver,jdbcType=LONGVARCHAR}, #{operationPhase,jdbcType=LONGVARCHAR}, #{maintainPhase,jdbcType=LONGVARCHAR}
+      , #{taskPrincipal,jdbcType=LONGVARCHAR}, #{startTime,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
@@ -853,7 +858,9 @@
       implement_deliver = #{record.implementDeliver,jdbcType=LONGVARCHAR},
       check_deliver = #{record.checkDeliver,jdbcType=LONGVARCHAR},
       operation_phase = #{record.operationPhase,jdbcType=LONGVARCHAR},
-      maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR}
+      maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR},
+    TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=LONGVARCHAR},
+    START_TIME = #{record.startTime,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -870,6 +877,8 @@
       CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+    TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
+    START_TIME = #{record.startTime,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -1114,7 +1123,10 @@
       implement_deliver = #{implementDeliver,jdbcType=LONGVARCHAR},
       check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
       operation_phase = #{operationPhase,jdbcType=LONGVARCHAR},
-      maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR}
+      maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR},
+
+      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=LONGVARCHAR},
+      START_TIME = #{startTime,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TSugarProject">
@@ -1128,6 +1140,10 @@
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+
+       TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+
       sort = #{sort,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>

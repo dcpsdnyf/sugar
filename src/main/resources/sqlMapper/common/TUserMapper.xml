@@ -273,4 +273,13 @@
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getUserIdByUerName" parameterType="String" resultType="String">
+    SELECT
+    user_name
+    FROM
+    t_sys_user
+    WHERE
+    ID = #{id}
+  </select>
 </mapper>

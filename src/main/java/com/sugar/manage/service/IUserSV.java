@@ -19,4 +19,6 @@ public interface IUserSV {
      * @return
      */
     public boolean getAddAuthority(TUser user);
+
+    public String getUserIdByUerName(String id);
 }

@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
+import com.sugar.manage.dao.mapper.TUserTaskMapper;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.vo.GroupSugarList;
+import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.vo.FieldNameMaps;
@@ -17,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,6 +36,8 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
 	@Autowired
 	private TSugarProjectMapper sugarProjectMapper;
+	@Autowired
+    private TUserTaskMapper tUserTaskMapper;
 
 	/**
 	 * 初始化参数信息
@@ -116,7 +122,19 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	 */
 	@Override
 	public void saveSugarProject(TSugarProjectWithBLOBs record) {
-		sugarProjectMapper.insert(record);
+      int  count = sugarProjectMapper.insert(record);
+	    if (count>0) {
+            TUserTask tUserTask =new TUserTask();
+            tUserTask.setTaskPrincipal(record.getTaskPrincipal());
+            tUserTask.setStartTime(record.getStartTime());
+            tUserTask.setTaskType("00");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("1");
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date(System.currentTimeMillis());
+            tUserTask.setStartTime(formatter.format(date));
+            tUserTaskMapper.insertTUserTask(tUserTask);
+        }
 	}
 
     @Override

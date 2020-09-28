@@ -99,6 +99,28 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
 
     private String maintainPhase;
 
+    /** 开始时间 */
+    private String startTime;
+
+    /** 任务责任人 */
+    private String taskPrincipal;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getTaskPrincipal() {
+        return taskPrincipal;
+    }
+
+    public void setTaskPrincipal(String taskPrincipal) {
+        this.taskPrincipal = taskPrincipal;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public String getBusinessClueOpen() {

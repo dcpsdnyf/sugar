@@ -161,6 +161,17 @@ public class SugarManageController extends AppBaseController {
     public SysResult newlyAdded(HttpServletRequest request, TSugarProjectWithBLOBs record){
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         try {
+            if (StringUtils.isBlank(record.getTaskPrincipal())) {
+                return SysResult.success("新增失败，负责人不能为空",null);
+            }
+            if (StringUtils.isBlank(record.getStartTime())) {
+                return SysResult.success("新增失败，开始时间不能为空",null);
+            }
+            if (!"卢丽娜".equals(record.getTaskPrincipal()) || !"张洋洋".equals(record.getTaskPrincipal()) || !"姜仲一".equals(record.getTaskPrincipal())) {
+                return SysResult.success("新增失败，负责人只能为卢丽娜/张洋洋/姜仲一",null);
+            }
+
+
             if(StringUtils.isNotBlank(userId)){
                 TUser user = new TUser();
                 user.setId(Integer.parseInt(userId));

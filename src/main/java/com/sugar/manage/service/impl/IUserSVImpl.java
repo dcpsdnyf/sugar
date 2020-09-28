@@ -99,4 +99,10 @@ public class IUserSVImpl implements IUserSV {
         return false;
     }
 
+    @Override
+    public String getUserIdByUerName(String id) {
+
+        return userMapper.getUserIdByUerName(id);
+    }
+
 }
