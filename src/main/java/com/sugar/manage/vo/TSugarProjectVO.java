@@ -3,7 +3,6 @@ package com.sugar.manage.vo;
 
 import com.sugar.manage.dao.vo.BaseModel;
 import lombok.Data;
-import org.apache.catalina.Manager;
 
 import java.io.Serializable;
 
@@ -148,5 +147,11 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     /**是否运维经理角色,角色类型代表数字:7*/
     private boolean maintainManager;
+
+    /** 开始时间 */
+    private String startTime;
+
+    /** 任务责任人 */
+    private String taskPrincipal;
 
 }
