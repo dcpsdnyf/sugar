@@ -1354,7 +1354,7 @@ function exportSugar() {
 function saveAppointInfo() {
 	$.ajax({
 		type: "post",
-		url: WEB_ROOT + "/TUserTaskController/getRollBackInfo",
+		url: WEB_ROOT + "/TUserTaskController/addEntrustInfo",
 		data: $("#appointForm").serialize(),
 		dataType: 'JSON',
 		success: function (result) {
