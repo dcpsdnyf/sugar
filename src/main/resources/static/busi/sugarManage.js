@@ -38,7 +38,7 @@ $(function () {
 		cardView: false,                    //是否显示详细视图
 		detailView: false,                   //是否显示父子表
 		fixedColumns: true,//是否固定列
-		fixedNumber: 4,//固定多少列，总左边开始数
+		fixedNumber: 5,//固定多少列，总左边开始数
 
 
 		selectItemName: 'parentItem',
@@ -48,7 +48,7 @@ $(function () {
 				"title": "项目信息",
 				"halign": "center",
 				"align": "center",
-				"colspan": 4
+				"colspan": 5
 			},
 			{
 				"title": "商机推进阶段",
@@ -98,13 +98,21 @@ $(function () {
 				"colspan": 1,
 				rowspan: 2,
 				formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+					var html='';
 					if (!row.rowEdit) {
 						return '';
 					}
+					// if(row.managerLevel){
+						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;'+
+							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
+						html += "</div>";
+					// }else {
+					// 	html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+					// 		'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+					// 	html += "</div>";
+					// }
 
-					var html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-						'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
-					html += "</div>";
 					return html;
 				}
 			}
@@ -132,6 +140,10 @@ $(function () {
 			field: 'groupName',
 			switchable: false,
 			title: '集团'
+		},{
+			field: 'taskPrincipal',
+			switchable: false,
+			title: '负责人'
 		},
 			{
 				field: 'businessClueOpen',
@@ -1258,9 +1270,6 @@ $(function () {
 		}
 	});
 
-	//$('#tb_user').bootstrapTable('hideColumn', 'productType');
-
-
 	$("#searchAll").on('click', function () {
 		$('#tb_user').bootstrapTable('refresh');
 	});
@@ -1298,6 +1307,20 @@ var editModel = function (id) {
 	$("#editMyModal input[name='groupName']").val(row.groupName);
 }
 
+//指派事件
+var appointModel = function (id) {
+	debugger
+	//根据当前行的id获取当前的行数据
+	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+	//弹出模态框
+	$("#appointMyModal").modal();
+	//给弹出框里面的各个文本框赋值
+	$("#appointMyModal input[name='projectid']").val(id);
+	$("#appointMyModal input[name='deploySpeed']").val(row.deploySpeed);
+	$("#appointMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
+	$("#appointMyModal input[name='startTime']").val(row.startTime);
+}
+
 //删除事件
 var deleteModel = function (id) {
 	confirmModal("提示", "是否确定要删除该项目信息？", function () {
@@ -1325,6 +1348,26 @@ var deleteModel = function (id) {
 function exportSugar() {
 	var url = WEB_ROOT + "/sugarManage/exportSugarExcle";
 	window.open(url);
+}
+
+//指派
+function saveAppointInfo() {
+	$.ajax({
+		type: "post",
+		url: WEB_ROOT + "/TUserTaskController/getRollBackInfo",
+		data: $("#appointForm").serialize(),
+		dataType: 'JSON',
+		success: function (result) {
+			confirmModal("提示", result.msg, function () {
+				window.location.reload();
+			}, {}, function () {
+				window.location.reload();
+			});
+		},
+		error: function () {
+			msgInfoModal('提示', "指派失败");
+		}
+	});
 }
 
 function saveProjectInfo() {
@@ -1518,71 +1561,71 @@ function selectHideRow(_this) {
 }
 function roolBack(selectValue){
 
-		if(selectValue.indexOf('1')==-1){
+	if(selectValue.indexOf('1')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'businessClueOpen');
-			$('#tb_user').bootstrapTable('showColumn', 'businessClue0');
-			$('#tb_user').bootstrapTable('showColumn', 'businessDiscover10');
-			$('#tb_user').bootstrapTable('showColumn', 'businessEstablish25');
-			$('#tb_user').bootstrapTable('showColumn', 'businessEstablish50');
-			$('#tb_user').bootstrapTable('showColumn', 'businessEstablish75');
-			$('#tb_user').bootstrapTable('showColumn', 'businessWin100');
-			$('#tb_user').bootstrapTable('showColumn', 'customerMaintainBackMoney');
-			$('#tb_user').bootstrapTable('showColumn', 'businessClose');
-		}
-		if(selectValue.indexOf('2')==-1){
+		$('#tb_user').bootstrapTable('showColumn', 'businessClueOpen');
+		$('#tb_user').bootstrapTable('showColumn', 'businessClue0');
+		$('#tb_user').bootstrapTable('showColumn', 'businessDiscover10');
+		$('#tb_user').bootstrapTable('showColumn', 'businessEstablish25');
+		$('#tb_user').bootstrapTable('showColumn', 'businessEstablish50');
+		$('#tb_user').bootstrapTable('showColumn', 'businessEstablish75');
+		$('#tb_user').bootstrapTable('showColumn', 'businessWin100');
+		$('#tb_user').bootstrapTable('showColumn', 'customerMaintainBackMoney');
+		$('#tb_user').bootstrapTable('showColumn', 'businessClose');
+	}
+	if(selectValue.indexOf('2')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'initialIntentionPlan');
-			$('#tb_user').bootstrapTable('showColumn', 'writeProjectProposal');
-			$('#tb_user').bootstrapTable('showColumn', 'workingHoursAssess');
-			$('#tb_user').bootstrapTable('showColumn', 'businessNegotiation');
-			$('#tb_user').bootstrapTable('showColumn', 'requestDraft');
-			$('#tb_user').bootstrapTable('showColumn', 'attendMeeting');
-			$('#tb_user').bootstrapTable('showColumn', 'bidding');
-			$('#tb_user').bootstrapTable('showColumn', 'requestOaApproval');
-			$('#tb_user').bootstrapTable('showColumn', 'contractDraft');
-			$('#tb_user').bootstrapTable('showColumn', 'lawyerReview');
-			$('#tb_user').bootstrapTable('showColumn', 'contractOaApproval');
-			$('#tb_user').bootstrapTable('showColumn', 'usageSeal');
-			$('#tb_user').bootstrapTable('showColumn', 'otherSeal');
-			$('#tb_user').bootstrapTable('showColumn', 'scan');
-			$('#tb_user').bootstrapTable('showColumn', 'generalDepartmentFile');
-			$('#tb_user').bootstrapTable('showColumn', 'firstPayment');
-			$('#tb_user').bootstrapTable('showColumn', 'progressPayment');
-			$('#tb_user').bootstrapTable('showColumn', 'finalPayment');
-		}
-		if(selectValue.indexOf('3')==-1){
+		$('#tb_user').bootstrapTable('showColumn', 'initialIntentionPlan');
+		$('#tb_user').bootstrapTable('showColumn', 'writeProjectProposal');
+		$('#tb_user').bootstrapTable('showColumn', 'workingHoursAssess');
+		$('#tb_user').bootstrapTable('showColumn', 'businessNegotiation');
+		$('#tb_user').bootstrapTable('showColumn', 'requestDraft');
+		$('#tb_user').bootstrapTable('showColumn', 'attendMeeting');
+		$('#tb_user').bootstrapTable('showColumn', 'bidding');
+		$('#tb_user').bootstrapTable('showColumn', 'requestOaApproval');
+		$('#tb_user').bootstrapTable('showColumn', 'contractDraft');
+		$('#tb_user').bootstrapTable('showColumn', 'lawyerReview');
+		$('#tb_user').bootstrapTable('showColumn', 'contractOaApproval');
+		$('#tb_user').bootstrapTable('showColumn', 'usageSeal');
+		$('#tb_user').bootstrapTable('showColumn', 'otherSeal');
+		$('#tb_user').bootstrapTable('showColumn', 'scan');
+		$('#tb_user').bootstrapTable('showColumn', 'generalDepartmentFile');
+		$('#tb_user').bootstrapTable('showColumn', 'firstPayment');
+		$('#tb_user').bootstrapTable('showColumn', 'progressPayment');
+		$('#tb_user').bootstrapTable('showColumn', 'finalPayment');
+	}
+	if(selectValue.indexOf('3')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'designBrief');
-			$('#tb_user').bootstrapTable('showColumn', 'detailedDesign');
-			$('#tb_user').bootstrapTable('showColumn', 'uiDesign');
-			$('#tb_user').bootstrapTable('showColumn', 'requirementDesign');
-			$('#tb_user').bootstrapTable('showColumn', 'requirementsReview');
-			$('#tb_user').bootstrapTable('showColumn', 'demandOrderConfirm');
-			$('#tb_user').bootstrapTable('showColumn', 'proCheckDeliver');
-		}
-		if(selectValue.indexOf('4')==-1){
+		$('#tb_user').bootstrapTable('showColumn', 'designBrief');
+		$('#tb_user').bootstrapTable('showColumn', 'detailedDesign');
+		$('#tb_user').bootstrapTable('showColumn', 'uiDesign');
+		$('#tb_user').bootstrapTable('showColumn', 'requirementDesign');
+		$('#tb_user').bootstrapTable('showColumn', 'requirementsReview');
+		$('#tb_user').bootstrapTable('showColumn', 'demandOrderConfirm');
+		$('#tb_user').bootstrapTable('showColumn', 'proCheckDeliver');
+	}
+	if(selectValue.indexOf('4')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'technologySelection');
-			$('#tb_user').bootstrapTable('showColumn', 'environmentDeployment');
-			$('#tb_user').bootstrapTable('showColumn', 'frameworkDesign');
-			$('#tb_user').bootstrapTable('showColumn', 'developProgress10');
-			$('#tb_user').bootstrapTable('showColumn', 'developProgress25');
-			$('#tb_user').bootstrapTable('showColumn', 'developProgress50');
-			$('#tb_user').bootstrapTable('showColumn', 'developProgress75');
-			$('#tb_user').bootstrapTable('showColumn', 'developProgress100');
-			$('#tb_user').bootstrapTable('showColumn', 'insideTest');
-			$('#tb_user').bootstrapTable('showColumn', 'customerTest');
-			$('#tb_user').bootstrapTable('showColumn', 'implementDeliver');
-			$('#tb_user').bootstrapTable('showColumn', 'checkDeliver');
-		}
-		if(selectValue.indexOf('5')==-1){
+		$('#tb_user').bootstrapTable('showColumn', 'technologySelection');
+		$('#tb_user').bootstrapTable('showColumn', 'environmentDeployment');
+		$('#tb_user').bootstrapTable('showColumn', 'frameworkDesign');
+		$('#tb_user').bootstrapTable('showColumn', 'developProgress10');
+		$('#tb_user').bootstrapTable('showColumn', 'developProgress25');
+		$('#tb_user').bootstrapTable('showColumn', 'developProgress50');
+		$('#tb_user').bootstrapTable('showColumn', 'developProgress75');
+		$('#tb_user').bootstrapTable('showColumn', 'developProgress100');
+		$('#tb_user').bootstrapTable('showColumn', 'insideTest');
+		$('#tb_user').bootstrapTable('showColumn', 'customerTest');
+		$('#tb_user').bootstrapTable('showColumn', 'implementDeliver');
+		$('#tb_user').bootstrapTable('showColumn', 'checkDeliver');
+	}
+	if(selectValue.indexOf('5')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'operationPhase');
-		}
-		if(selectValue.indexOf('6')==-1){
+		$('#tb_user').bootstrapTable('showColumn', 'operationPhase');
+	}
+	if(selectValue.indexOf('6')==-1){
 
-			$('#tb_user').bootstrapTable('showColumn', 'maintainPhase');
-		}
+		$('#tb_user').bootstrapTable('showColumn', 'maintainPhase');
+	}
 
 }

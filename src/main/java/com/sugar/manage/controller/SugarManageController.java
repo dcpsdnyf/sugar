@@ -16,10 +16,7 @@ import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.service.impl.ISugarProjectSVImpl;
-import com.sugar.manage.vo.RoleProjectVO;
-import com.sugar.manage.vo.SysResult;
-import com.sugar.manage.vo.TSugarProjectVO;
-import com.sugar.manage.vo.TUserVO;
+import com.sugar.manage.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -35,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @program: sugarManage
@@ -59,7 +57,7 @@ public class SugarManageController extends AppBaseController {
     @Autowired
     private ISugarProjectSVImpl iSugarProjectSV;
 
-
+    private Boolean isShow = false;
     /**
      * 项目进度初始化界面
      * @return
@@ -73,16 +71,19 @@ public class SugarManageController extends AppBaseController {
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
             }
         }
+	    if(whetherVo.isShowLabel.containsKey(tUser.getUserName())){
+		    model.addAttribute("isShowLabel",isShow=true);
+	    }
         //查询列表详情再分组
         GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList();
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getProductType())){
-            model.addAttribute("productType",sugarProjectGroupList.getProductType());
+            model.addAttribute("productType",sugarProjectGroupList.getProductType().stream().filter(productType -> productType != null).collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getPlatformName())){
-            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName());
+            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName().stream().filter(platformName -> platformName != null).collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getGroupName())){
-            model.addAttribute("groupName",sugarProjectGroupList.getGroupName());
+            model.addAttribute("groupName",sugarProjectGroupList.getGroupName().stream().filter(groupName -> groupName != null).collect(Collectors.toList()));
         }
 
         return "sugarManage/sugarManage";
@@ -132,6 +133,7 @@ public class SugarManageController extends AppBaseController {
                         tSugarProjectVO.setOperateManager(roleProjectVO.isOperateManager());
 
                         tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());
+
                     }
                     if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
                         tSugarProjectVO.setRowEdit(true);
@@ -175,22 +177,16 @@ public class SugarManageController extends AppBaseController {
             if(StringUtils.isNotBlank(userId)){
                 TUser user = new TUser();
                 user.setId(Integer.parseInt(userId));
-
                 boolean addAuthority = userSV.getAddAuthority(user);
                 if(addAuthority){
                     record.setStatus("01");
                     sugarProjectSV.saveSugarProject(record);
-
                     return SysResult.success("新增成功",null);
-
-                    //return "redirect:/sugarManage/init";
                 }
-
             }
         }catch (Exception e){
             log.error(e.getMessage());
         }
-
         return SysResult.fail("新增失败,无新增权限");
     }
 

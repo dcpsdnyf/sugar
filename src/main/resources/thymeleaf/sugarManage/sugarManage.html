@@ -45,62 +45,62 @@
     </style>
 </head>
 <body>
-    <div class="panel-body" style="margin:0px 25px;padding-bottom:0px;">
-        <h1 style="text-align:center;margin-bottom: 50px" >项目管理</h1>
-        <input type="hidden" id="getUserName" th:value="${userName}">
+<div class="panel-body" style="margin:0px 25px;padding-bottom:0px;">
+    <h1 style="text-align:center;margin-bottom: 50px" >项目管理</h1>
+    <input type="hidden" id="getUserName" th:value="${userName}">
 
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label for="productType" class="col-sm-1 control-label">产品类型:</label>
-                <div class="col-sm-2">
-                    <select id="productType"  class="form-control">
-                        <option value="" selected="selected">全部</option>
-                        <option th:each="productTypes : ${productType}" th:text="${productTypes}" th:value="${productTypes}"></option>
-                    </select>
-                </div>
-                <label for="platformName" class="col-sm-1 control-label">平台名称:</label>
-                <div class="col-sm-2">
-                    <select id="platformName"  class="form-control">
-                        <option value="" selected="selected">全部</option>
-                        <option th:each="platformNames : ${platformName}" th:text="${platformNames}" th:value="${platformNames}"></option>
-                    </select>
-                </div>
-                <label for="groupName" class="col-sm-1 control-label">集团名称:</label>
-                <div class="col-sm-2">
-                    <select id="groupName"  class="form-control">
-                        <option value="" selected="selected">全部</option>
-                        <option th:each="groupNames : ${groupName}" th:text="${groupNames}" th:value="${groupNames}"></option>
-                    </select>
-                </div>
-                <div class="col-sm-3">
-                    <a class="btn btn-primary" id="searchAll" ><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</a>
-                    <a class="btn btn-info" id="restAll"><i class="glyphicon glyphicon-refresh"></i>&nbsp;重置</a>
-                </div>
-            </div>
-        </form>
-        <div id="toolbar" class="btn-group" style="width: 600px;">
-            <button id="btn_add" type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-            </button>
-            <button id="btn_export" type="button" class="btn btn-warning" onclick="exportSugar()" style="margin-left: 10px;">
-                <i class="glyphicon glyphicon-export"></i>导出
-            </button>
-            <div  style="margin-left: 160px">
-                <select class="selectpicker" multiple onchange="selectHideRow(this)">
-                    <option value="1" >商机推进阶段</option>
-                    <option value="2" >采购阶段</option>
-                    <option value="3" >产品阶段</option>
-                    <option value="4" >研发阶段</option>
-                    <option value="5" >运营阶段</option>
-                    <option value="6" >运维阶段</option>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="productType" class="col-sm-1 control-label">产品类型:</label>
+            <div class="col-sm-2">
+                <select id="productType"  class="form-control">
+                    <option value="" selected="selected">全部</option>
+                    <option th:each="productTypes : ${productType}" th:text="${productTypes}" th:value="${productTypes}"></option>
                 </select>
             </div>
+            <label for="platformName" class="col-sm-1 control-label">平台名称:</label>
+            <div class="col-sm-2">
+                <select id="platformName"  class="form-control">
+                    <option value="" selected="selected">全部</option>
+                    <option th:each="platformNames : ${platformName}" th:text="${platformNames}" th:value="${platformNames}"></option>
+                </select>
+            </div>
+            <label for="groupName" class="col-sm-1 control-label">集团名称:</label>
+            <div class="col-sm-2">
+                <select id="groupName"  class="form-control">
+                    <option value="" selected="selected">全部</option>
+                    <option th:each="groupNames : ${groupName}" th:text="${groupNames}" th:value="${groupNames}"></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-primary" id="searchAll" ><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</a>
+                <a class="btn btn-info" id="restAll"><i class="glyphicon glyphicon-refresh"></i>&nbsp;重置</a>
+            </div>
         </div>
-        <table id="tb_user"></table>
+    </form>
+    <div id="toolbar" class="btn-group" style="width: 600px;">
+        <button id="btn_add" type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_export" type="button" class="btn btn-warning" onclick="exportSugar()" style="margin-left: 10px;">
+            <i class="glyphicon glyphicon-export"></i>导出
+        </button>
+        <div  style="margin-left: 160px">
+            <select class="selectpicker" multiple onchange="selectHideRow(this)">
+                <option value="1" >商机推进阶段</option>
+                <option value="2" >采购阶段</option>
+                <option value="3" >产品阶段</option>
+                <option value="4" >研发阶段</option>
+                <option value="5" >运营阶段</option>
+                <option value="6" >运维阶段</option>
+            </select>
+        </div>
     </div>
+    <table id="tb_user"></table>
+</div>
 
-    <!--新增或者编辑的弹出框-->
-    <form id="addForm">
+<!--新增或者编辑的弹出框-->
+<form id="addForm">
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -127,6 +127,18 @@
                             <input type="text" name="groupName" class="form-control" placeholder="集团名称">
                         </div>
                     </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">负责人</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="taskPrincipal" class="form-control" placeholder="负责人">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">开始时间</label>
+                        <div class="col-xs-10">
+                            <input type="date" name="startTime" class="form-control" placeholder="开始时间">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
@@ -136,88 +148,175 @@
             </div>
         </div>
     </div>
-    </form>
-    <form th:action="@{/sugarManage/Edit}" id="editForm">
-        <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="editMyModalLabel">操作</h4>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="">
-                        <div class="row" style="padding:10px;">
-                            <label class="control-label col-xs-2">产品类型</label>
-                            <div class="col-xs-10">
-                                <input type="text" name="productType" class="form-control" placeholder="产品类型">
-                            </div>
-                        </div>
-                        <div class="row" style="padding:10px;">
-                            <label class="control-label col-xs-2">平台名称</label>
-                            <div class="col-xs-10">
-                                <input type="text" name="platformName" class="form-control" placeholder="平台名称">
-                            </div>
-                        </div>
-                        <div class="row" style="padding:10px;">
-                            <label class="control-label col-xs-2">集团</label>
-                            <div class="col-xs-10">
-                                <input type="text" name="groupName" class="form-control" placeholder="集团名称">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                        <button type="button" onclick="saveProjectInfo()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </form>
-        <!--必须的js文件-->
-        <script th:src="@{/Content/jquery-1.9.1.min.js}"></script>
-        <script th:src="@{/Content/bootstrap/js/bootstrap.min.js}"></script>
-        <script th:src="@{/Content/bootstrap3-editable/js/bootstrap-editable.js}"></script>
-        <script th:src="@{/Content/bootstrap-table/bootstrap-table.min.js}"></script>
-        <script th:src="@{/Content/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
-        <script th:src="@{/Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js}"></script>
-        <script th:src="@{/Content/bootstrap-table-fixed-columns-master/bootstrap-table-fixed-columns.js}"></script>
-        <script th:src="@{/Content/bootstrap-select/js/bootstrap-select.js}"></script>
-        <script th:src="@{/busi/sugarManage.js}"></script>
-        <script th:src="@{/busi/util_new.js}"></script>
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="waitingModal">
+</form>
+<form th:action="@{/sugarManage/Edit}" id="editForm">
+    <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">正在操作中...</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="editMyModalLabel">操作</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <span class="sr-only">100%</span>
+                    <input type="hidden" name="id" value="">
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">产品类型</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="productType" class="form-control" placeholder="产品类型">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">平台名称</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="platformName" class="form-control" placeholder="平台名称">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">集团</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="groupName" class="form-control" placeholder="集团名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <label class="control-label col-xs-2">负责人</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="taskPrincipal" class="form-control" placeholder="负责人">
+                    </div>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <label class="control-label col-xs-2">项目开始时间</label>
+                    <div class="col-xs-10">
+                        <input type="date" name="startTime" class="form-control" placeholder="项目开始时间">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" onclick="saveProjectInfo()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<!--指派-->
+<form th:action="@{/TUserTaskController/getRollBackInfo}" id="appointForm">
+    <div class="modal fade" id="appointMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="appointMyModalLabel">指派</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="">
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">项目阶段</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="deploySpeed" class="form-control" th:if="${isBusinessStage}" th:text="商机推进阶段">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">负责人</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="taskPrincipal" class="form-control" placeholder="负责人">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">时间</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="startTime" class="form-control" placeholder="时间">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" disabled class="btn btn-default" data-dismiss="modal">正在操作，请勿关闭或刷新页面！</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" onclick="saveAppointInfo()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                 </div>
+
             </div>
         </div>
     </div>
+</form>
 
-    　　　 <script>
-	    function showWaiting() {
-		    $('#waitingModal').modal({
-			    keyboard: false,
-			    backdrop: 'static',
-			    show: true
-		    });
-	    }
-	    function hideWaiting() {
-		    $('#waitingModal').modal('hide');
-	    }
-    </script>
+
+<div style="margin-left: 40px" th:if="${isShowLabel}">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#backlogs" aria-controls="home" role="tab" data-toggle="tab">待办</a></li>
+        <li role="presentation"><a href="#finish" aria-controls="profile" role="tab" data-toggle="tab">已办</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="backlogs" >暂无数据</div>
+        <div role="tabpanel" class="tab-pane" id="finish">暂无数据</div>
+
+    </div>
+
+</div>
+
+<div style="margin-left: 40px" th:unless="${isShowLabel}">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#backlog" aria-controls="home" role="tab" data-toggle="tab">待办</a></li>
+        <li role="presentation"><a href="#finished" aria-controls="profile" role="tab" data-toggle="tab">已办</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="backlog" ><table id="tb_backlog"></table></div>
+        <div role="tabpanel" class="tab-pane" id="finished"><table id="tb_finished"></table></div>
+
+    </div>
+
+</div>
+<!--必须的js文件-->
+<script th:src="@{/Content/jquery-1.9.1.min.js}"></script>
+<script th:src="@{/Content/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/Content/bootstrap3-editable/js/bootstrap-editable.js}"></script>
+<script th:src="@{/Content/bootstrap-table/bootstrap-table.min.js}"></script>
+<script th:src="@{/Content/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+<script th:src="@{/Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js}"></script>
+<script th:src="@{/Content/bootstrap-table-fixed-columns-master/bootstrap-table-fixed-columns.js}"></script>
+<script th:src="@{/Content/bootstrap-select/js/bootstrap-select.js}"></script>
+<script th:src="@{/busi/sugarManage.js}"></script>
+<script th:src="@{/busi/labelPage.js}"></script>
+<script th:src="@{/busi/util_new.js}"></script>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="waitingModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">正在操作中...</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" disabled class="btn btn-default" data-dismiss="modal">正在操作，请勿关闭或刷新页面！</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+　　　 <script>
+    function showWaiting() {
+        $('#waitingModal').modal({
+            keyboard: false,
+            backdrop: 'static',
+            show: true
+        });
+    }
+    function hideWaiting() {
+        $('#waitingModal').modal('hide');
+    }
+</script>
 </body>
 </html>
