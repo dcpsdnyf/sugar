@@ -101,7 +101,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         }
 		if (sugarProject.size()>0) {
 		    for (int i = 0;i<sugarProject.size();i++) {
-                sugarProject.get(i).setTaskPrincipal(hsmap.get(sugarProject.get(i).getId()));
+                sugarProject.get(i).setTaskPrincipal(hsmap.get(String.valueOf(sugarProject.get(i).getId())));
             }
         }
 		if (!CollectionUtils.isEmpty(sugarProject)) {
