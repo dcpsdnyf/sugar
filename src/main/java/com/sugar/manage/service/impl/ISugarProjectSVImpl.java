@@ -145,6 +145,10 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	public void saveSugarProject(TSugarProjectWithBLOBs record) {
       int  count = sugarProjectMapper.insert(record);
 	    if (count>0) {
+	        //再获取刚才插入数据的id
+          Long id =  sugarProjectMapper.getProjectId(record.getTaskPrincipal());
+
+
             TUserTask tUserTask =new TUserTask();
             tUserTask.setTaskPrincipal(record.getTaskPrincipal());
             tUserTask.setStartTime(record.getStartTime());
@@ -153,6 +157,9 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             tUserTask.setTaskName("1");
             Date date = new Date(System.currentTimeMillis());
             tUserTask.setCreatedTime(date);
+            if (id != 0) {
+                tUserTask.setProjectId(String.valueOf(id));
+            }
             tUserTaskMapper.insertTUserTask(tUserTask);
         }
 	}

@@ -169,10 +169,12 @@ public class SugarManageController extends AppBaseController {
             if (StringUtils.isBlank(record.getStartTime())) {
                 return SysResult.success("新增失败，开始时间不能为空",null);
             }
-            if (!"卢丽娜".equals(record.getTaskPrincipal()) || !"张洋洋".equals(record.getTaskPrincipal()) || !"姜仲一".equals(record.getTaskPrincipal())) {
-                return SysResult.success("新增失败，负责人只能为卢丽娜/张洋洋/姜仲一",null);
+            if (!"李佳娜".equals(record.getTaskPrincipal()) && !"谢帅".equals(record.getTaskPrincipal())) {
+                return SysResult.success("新增失败，新增用户责任人只能为李佳娜、谢帅",null);
             }
-
+            if (!"82".equals(userId) && !"26".equals(userId) && "47".equals(userId)) {
+                return SysResult.success("新增失败，没有新增用户权限",null);
+            }
 
             if(StringUtils.isNotBlank(userId)){
                 TUser user = new TUser();

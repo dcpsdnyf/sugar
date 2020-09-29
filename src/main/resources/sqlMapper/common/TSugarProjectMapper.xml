@@ -1147,4 +1147,13 @@
       sort = #{sort,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getProjectId" parameterType="String" resultType="Long">
+    SELECT
+    ID
+    FROM
+    t_sugar_project
+    WHERE
+    TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR}
+  </select>
 </mapper>

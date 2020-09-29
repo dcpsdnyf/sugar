@@ -189,7 +189,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE
         PROJECT_ID IN
         <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
-            #{pjid}
+        #{pjid}
         </foreach>
         AND
         CREATED_TIME = (
@@ -197,13 +197,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM
         t_user_task
         WHERE
-        PROJECT_ID
-        IN
+        PROJECT_ID IN
         <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
-            #{pjid}
+        #{pjid}
         </foreach>
         )
-
-
     </select>
 </mapper>
