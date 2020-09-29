@@ -66,7 +66,7 @@ private ITUserTaskService itUserTaskService;
        String roles = itUserTaskService.getAllTaskNameByProductId(Long.parseLong(userId));
        String[] roleIdArr = roles.split(",");
        boolean flag = Arrays.asList(roleIdArr).contains("9");
-       if (flag) {
+       if (!flag) {
            resultMessage.setResultMassage("没有指派权限");
            resultMessage.setSuccess(false);
            return resultMessage;

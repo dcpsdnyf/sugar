@@ -1315,8 +1315,8 @@ var appointModel = function (id) {
 	//弹出模态框
 	$("#appointMyModal").modal();
 	//给弹出框里面的各个文本框赋值
-	$("#appointMyModal input[name='projectid']").val(id);
-	$("#appointMyModal input[name='deploySpeed']").val(row.deploySpeed);
+	$("#appointMyModal input[name='projectId']").val(id);
+	$("#appointMyModal input[name='taskName']").val(row.deploySpeed);
 	$("#appointMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
 	$("#appointMyModal input[name='startTime']").val(row.startTime);
 }
@@ -1352,19 +1352,25 @@ function exportSugar() {
 
 //指派
 function saveAppointInfo() {
+	debugger;
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/addEntrustInfo",
 		data: $("#appointForm").serialize(),
 		dataType: 'JSON',
+		async:false,
 		success: function (result) {
-			confirmModal("提示", result.msg, function () {
+			debugger;
+			console(result);
+			confirmModal("提示", result.resultMassage, function () {
+
 				window.location.reload();
 			}, {}, function () {
 				window.location.reload();
 			});
 		},
 		error: function () {
+			debugger;
 			msgInfoModal('提示', "指派失败");
 		}
 	});
