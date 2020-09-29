@@ -1315,8 +1315,8 @@ var appointModel = function (id) {
 	//弹出模态框
 	$("#appointMyModal").modal();
 	//给弹出框里面的各个文本框赋值
-	$("#appointMyModal input[name='projectid']").val(id);
-	$("#appointMyModal input[name='deploySpeed']").val(row.deploySpeed);
+	$("#appointMyModal input[name='projectId']").val(id);
+	$("#appointMyModal input[name='taskName']").val(row.taskName);
 	$("#appointMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
 	$("#appointMyModal input[name='startTime']").val(row.startTime);
 }
