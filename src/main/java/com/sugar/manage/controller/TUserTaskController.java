@@ -31,25 +31,18 @@ private ITUserTaskService itUserTaskService;
      */
     @RequestMapping("/getRollBackInfo")
     @ResponseBody
-    public ResultMessage getRollBackInfo(HttpServletRequest request, TUserTask tUserTask) {
+    public SysResult getRollBackInfo(HttpServletRequest request, TUserTask tUserTask) {
         ResultMessage resultMessage = new ResultMessage();
         if (StringUtils.isBlank(tUserTask.getProjectId())) {
-            resultMessage.setResultMassage("未获得项目id");
-            resultMessage.setSuccess(false);
-            return resultMessage;
+            return SysResult.success("未获得项目id",null);
         }
         TUser user = new TUser();
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         if (StringUtils.isBlank(userId)) {
-            resultMessage.setResultMassage("未获得用户信息，请登录");
-            resultMessage.setSuccess(false);
-            return resultMessage;
+            return SysResult.success("未获得用户信息，请登录",null);
         }
         TUserTask task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(),userId);
-        resultMessage.setResultMassage("指派信息获取成功");
-        resultMessage.setSuccess(true);
-        resultMessage.setData(task);
-        return resultMessage;
+        return SysResult.success("未获得用户信息，请登录",task);
     }
 
     @RequestMapping("/addEntrustInfo")
