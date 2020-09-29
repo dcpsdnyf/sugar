@@ -1319,6 +1319,23 @@ var appointModel = function (id) {
 	$("#appointMyModal input[name='taskName']").val(row.taskName);
 	$("#appointMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
 	$("#appointMyModal input[name='startTime']").val(row.startTime);
+	$.ajax({
+		type: "post",
+		url: WEB_ROOT + "/TUserTaskController/getRollBackInfo",
+		data: $("#appointForm").serialize(),
+		dataType: 'JSON',
+		success: function (result) {
+			debugger
+			confirmModal("提示", result.msg, function () {
+				window.location.reload();
+			}, {}, function () {
+				window.location.reload();
+			});
+		},
+		error: function () {
+			msgInfoModal('提示', "指派失败");
+		}
+	});
 }
 
 //删除事件
@@ -1350,7 +1367,7 @@ function exportSugar() {
 	window.open(url);
 }
 
-//指派
+//指派保存
 function saveAppointInfo() {
 	debugger
 	$.ajax({

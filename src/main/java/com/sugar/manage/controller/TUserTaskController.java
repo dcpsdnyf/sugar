@@ -32,7 +32,6 @@ private ITUserTaskService itUserTaskService;
     @RequestMapping("/getRollBackInfo")
     @ResponseBody
     public SysResult getRollBackInfo(HttpServletRequest request, TUserTask tUserTask) {
-        ResultMessage resultMessage = new ResultMessage();
         if (StringUtils.isBlank(tUserTask.getProjectId())) {
             return SysResult.success("未获得项目id",null);
         }
