@@ -180,4 +180,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE
         PROJECT_ID = #{projectId}
     </select>
+
+    <select id="getTkPrincipalByPjId" resultMap="TUserTaskResult">
+        SELECT
+        TASK_PRINCIPAL,PROJECT_ID
+        FROM
+        t_user_task
+        WHERE
+        PROJECT_ID IN
+        <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
+            #{pjid}
+        </foreach>
+        AND
+        CREATED_TIME = (
+        SELECT  MAX(CREATED_TIME)
+        FROM
+        t_user_task
+        WHERE
+        PROJECT_ID
+        IN
+        <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
+            #{pjid}
+        </foreach>
+        )
+
+
+    </select>
 </mapper>

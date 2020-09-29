@@ -20,9 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -83,6 +81,29 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 		PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
 
 		List<TSugarProjectWithBLOBs> sugarProject = sugarProjectMapper.selectByExampleWithBLOBs(example);
+		//根据项目id获取任务表中最新负责人
+        List<String>  ls= new ArrayList<>();
+		if (sugarProject.size()>0) {
+		    for (TSugarProjectWithBLOBs sugpj : sugarProject) {
+              if (sugpj.getId() !=0 ) {
+                  ls.add(String.valueOf(sugpj.getId()));
+              }
+            }
+        }
+		HashMap<String,String> hsmap = new HashMap<>();
+        List<TUserTask> hsmp = tUserTaskMapper.getTkPrincipalByPjId(ls);
+		if (hsmp.size()>0) {
+		    for (int i = 0;i<hsmp.size();i++) {
+                if (StringUtils.isNotBlank(hsmp.get(i).getProjectId())) {
+                    hsmap.put(hsmp.get(i).getProjectId(),hsmp.get(i).getTaskPrincipal());
+                }
+            }
+        }
+		if (sugarProject.size()>0) {
+		    for (int i = 0;i<sugarProject.size();i++) {
+                sugarProject.get(i).setTaskPrincipal(hsmap.get(sugarProject.get(i).getId()));
+            }
+        }
 		if (!CollectionUtils.isEmpty(sugarProject)) {
 			PageInfo<TSugarProjectWithBLOBs> pageInfo = new PageInfo<>(sugarProject);
 			return pageInfo;
@@ -130,9 +151,8 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             tUserTask.setTaskType("00");
             tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("1");
-            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(System.currentTimeMillis());
-            tUserTask.setStartTime(formatter.format(date));
+            tUserTask.setCreatedTime(date);
             tUserTaskMapper.insertTUserTask(tUserTask);
         }
 	}
