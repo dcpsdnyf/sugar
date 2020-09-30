@@ -59,6 +59,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
      */
     @Override
     public int insertTUserTask(TUserTask tUserTask) {
+        tUserTask.setTaskType("01");
+        tUserTask.setTaskStatus("0");
+        tUserTask.setTaskName("1");//还没想好怎么根据用户判断大阶段，暂时写死1
         return tUserTaskMapper.insertTUserTask(tUserTask);
     }
 

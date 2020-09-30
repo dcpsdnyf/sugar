@@ -79,5 +79,5 @@ public interface TUserTaskMapper
 
     public List<TUserTask> getUndoTask(String taskPrincipal);
 
-    public int changeTaskStatusByPrincipalAndProjectId(String taskstatus,String projectId,String taskPrincipal);
+    public int changeTaskStatusByPrincipalAndProjectId(@Param("taskstatus") String taskstatus,@Param("projectId") String projectId,@Param("taskPrincipal") String taskPrincipal);
 }

@@ -135,8 +135,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         PROJECT_ID = #{projectId}
         AND
         TASK_NAME ='1'
-         AND
-        TASK_TYPE = '01'
+        AND
+        TASK_TYPE = '00'
     </select>
 
     <select id="getTaskInfoByProductIdAndTaskType" parameterType="String" resultMap="TUserTaskResult">
@@ -168,8 +168,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         PROJECT_ID = #{projectId}
         AND
         TASK_NAME ='1'
-        AND
-        TASK_TYPE = '00'
     </select>
 
     <select id="getAllTaskNameByProductId" parameterType="String" resultType="String">
@@ -179,6 +177,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         t_user_task
         WHERE
         PROJECT_ID = #{projectId}
+        AND
+        TASK_TYPE  = '01'
     </select>
 
     <select id="getTkPrincipalByPjId" resultMap="TUserTaskResult">
