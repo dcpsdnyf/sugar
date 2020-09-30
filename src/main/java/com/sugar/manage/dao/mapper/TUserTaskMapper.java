@@ -74,4 +74,8 @@ public interface TUserTaskMapper
     public List<String> getAllTaskNameByProductId(String projectId);
 
     public List<TUserTask> getTkPrincipalByPjId(@Param("projectIds") List<String> projectIds);
+
+    public List<TUserTask> getDoneTask(String taskPrincipal);
+
+    public List<TUserTask> getUndoTask(String taskPrincipal);
 }

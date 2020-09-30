@@ -3,14 +3,17 @@ package com.sugar.manage.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
+import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 
 /**
@@ -299,6 +302,26 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     @Override
     public String getAllTaskNameByProductId(Long userId) {
         return tUserRoleMapper.getIsHasPowerToInsertTask(userId);
+    }
+
+    @Override
+    public PageInfo<TUserTask> getDoneTask(String taskPrincipal) {
+        List<TUserTask> doneTkuser = tUserTaskMapper.getDoneTask(taskPrincipal);
+        if (!CollectionUtils.isEmpty(doneTkuser)) {
+            PageInfo<TUserTask> pageInfo = new PageInfo<>(doneTkuser);
+            return pageInfo;
+        }
+        return new PageInfo<>();
+    }
+
+    @Override
+    public PageInfo<TUserTask> getUndoTask(String taskPrincipal) {
+        List<TUserTask> unDoTkuser =  tUserTaskMapper.getUndoTask(taskPrincipal);
+        if (!CollectionUtils.isEmpty(unDoTkuser)) {
+            PageInfo<TUserTask> pageInfo = new PageInfo<>(unDoTkuser);
+            return pageInfo;
+        }
+        return new PageInfo<>();
     }
 }
 

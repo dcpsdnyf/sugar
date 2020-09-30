@@ -24,9 +24,22 @@ public class TableDataInfo implements Serializable
     /** 消息内容 */
     private int msg;
 
+    /** 消息内容 */
+    private String msginfo;
+
+    public String getMsginfo() {
+        return msginfo;
+    }
+
+    public void setMsginfo(String msginfo) {
+        this.msginfo = msginfo;
+    }
+
     /**
      * 表格数据对象
      */
+
+
     public TableDataInfo()
     {
     }

@@ -1,9 +1,13 @@
 package com.sugar.manage.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.TUserTask;
+import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ITUserTaskService;
+import com.sugar.manage.service.IUserRoleSV;
+import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.SysResult;
 import com.sugar.util.ResultMessage;
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +26,8 @@ public class TUserTaskController {
 
 @Autowired
 private ITUserTaskService itUserTaskService;
-
+@Autowired
+private IUserSV userRoleSV;
 
 
     /**
@@ -35,13 +40,11 @@ private ITUserTaskService itUserTaskService;
         if (StringUtils.isBlank(tUserTask.getProjectId())) {
             return SysResult.success("未获得项目id",null);
         }
-        TUser user = new TUser();
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         if (StringUtils.isBlank(userId)) {
             return SysResult.success("未获得用户信息，请登录",null);
         }
         TUserTask task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(),userId);
-
         switch(task.getTaskName()){
             case "1":
                 task.setTaskName("商务进阶阶段");
@@ -62,7 +65,6 @@ private ITUserTaskService itUserTaskService;
                 task.setTaskName("运维阶段");
                 break;
         }
-
         return SysResult.success("成功",task);
     }
 
@@ -70,12 +72,9 @@ private ITUserTaskService itUserTaskService;
     @ResponseBody
     public SysResult addEntrustInfo(TUserTask tUserTask,HttpServletRequest request) {
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-
-        ResultMessage resultMessage = new ResultMessage();
         if (StringUtils.isBlank(userId)) {
             return SysResult.success("请先登入",null);
         }
-
        String roles = itUserTaskService.getAllTaskNameByProductId(Long.parseLong(userId));
        String[] roleIdArr = roles.split(",");
        boolean flag = Arrays.asList(roleIdArr).contains("9");
@@ -123,5 +122,77 @@ private ITUserTaskService itUserTaskService;
         return SysResult.success("插入成功",null);
     }
 
+    /**
+     * 查询已办任务
+     * @return
+     */
+    @RequestMapping("/getDoneTask")
+    @ResponseBody
+    public TableDataInfo getDoneTask(HttpServletRequest request) {
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        if (StringUtils.isBlank(userId)) {//如果未获得用户id不返回任何信息
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        //1.根据用户id去用户表获取用户名
+       String username =  userRoleSV.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(username)) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        //1.用用户名去查询该用户的已办任务
+        PageInfo<TUserTask> tkuser = itUserTaskService.getDoneTask(username);
+        if (tkuser.getList().size() <= 0) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
 
+        tableDataInfo.setRows(tkuser.getList());
+        tableDataInfo.setTotal(tkuser.getList().size());
+        tableDataInfo.setCode(200);
+        return tableDataInfo;
+    }
+    /**
+     * 查询未办任务
+     * @return
+     */
+    @RequestMapping("/getUndoTask")
+    @ResponseBody
+    public TableDataInfo getUndoTask(HttpServletRequest request) {
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        if (StringUtils.isBlank(userId)) {//如果未获得用户id不返回任何信息
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        //1.根据用户id去用户表获取用户名
+        String username =  userRoleSV.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(username)) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        //1.用用户名去查询该用户的未办任务
+        PageInfo<TUserTask> tkuser = itUserTaskService.getUndoTask(username);
+        if (tkuser.getList().size() <= 0) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        tableDataInfo.setRows(tkuser.getList());
+        tableDataInfo.setTotal(tkuser.getList().size());
+        tableDataInfo.setCode(200);
+        return tableDataInfo;
+    }
 }

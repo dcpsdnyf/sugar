@@ -203,4 +203,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
         )
     </select>
+
+
+    <select id="getDoneTask" parameterType="String" resultMap="TUserTaskResult" >
+        <include refid="selectTUserTaskVo"/>
+        WHERE
+        TASK_PRINCIPAL = #{taskPrincipal}
+        AND
+        TASK_TYPE = '2'
+    </select>
+
+    <select id="getUndoTask" parameterType="String" resultMap="TUserTaskResult" >
+        <include refid="selectTUserTaskVo"/>
+        WHERE
+        TASK_PRINCIPAL = #{taskPrincipal}
+        AND
+        TASK_TYPE = '0'
+        OR
+        TASK_TYPE = '1'
+    </select>
+
 </mapper>

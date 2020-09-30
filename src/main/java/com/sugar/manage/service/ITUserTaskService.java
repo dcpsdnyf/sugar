@@ -1,6 +1,7 @@
 package com.sugar.manage.service;
 
 
+import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.vo.TUserTask;
 
 
@@ -67,4 +68,8 @@ public interface ITUserTaskService
     public List<String> getAllTaskNameByProductId(String projectId);
 
     public String getAllTaskNameByProductId(Long userId);
+
+    public PageInfo<TUserTask> getDoneTask(String taskPrincipal);
+
+    public PageInfo<TUserTask> getUndoTask(String taskPrincipal);
 }
