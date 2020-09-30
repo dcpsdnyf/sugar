@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.vo.TUserTask;
 
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -74,4 +75,7 @@ public interface ITUserTaskService
     public PageInfo<TUserTask> getUndoTask(String taskPrincipal);
 
     public int changeTaskStatusByPrincipalAndProjectId(String taskstatus,String projectId,String taskPrincipal);
+
+    public int delay(String userId,String projectId,String delayDay) throws ParseException;
+
 }

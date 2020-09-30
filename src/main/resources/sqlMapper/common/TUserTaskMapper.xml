@@ -22,10 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="estimatedTime"    column="ESTIMATED_TIME"    />
         <result property="taskInfo"    column="TASK_INFO"    />
         <result property="taskParentType"    column="TASK_PARENT_TYPE"    />
+        <result property="delayDay"    column="DELAY_DAY"    />
     </resultMap>
 
     <sql id="selectTUserTaskVo">
-        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE from t_user_task
+        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE,DELAY_DAY from t_user_task
     </sql>
 
     <select id="selectTUserTaskList" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
@@ -47,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="estimatedTime != null  and estimatedTime != ''"> and ESTIMATED_TIME = #{estimatedTime}</if>
             <if test="taskInfo != null  and taskInfo != ''"> and TASK_INFO = #{taskInfo}</if>
             <if test="taskParentType != null  and taskParentType != ''"> and TASK_PARENT_TYPE = #{taskParentType}</if>
+            <if test="delayDay != null  and delayDay != ''"> and DELAY_DAY = #{delayDay}</if>
         </where>
     </select>
     
@@ -74,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME,</if>
             <if test="taskInfo != null  and taskInfo != ''">TASK_INFO,</if>
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE,</if>
+            <if test="delayDay != null  and delayDay != ''">DELAY_DAY,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="status != null  and status != ''">#{status},</if>
@@ -92,6 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="estimatedTime != null  and estimatedTime != ''">#{estimatedTime},</if>
             <if test="taskInfo != null  and taskInfo != ''">#{taskInfo},</if>
             <if test="taskParentType != null  and taskParentType != ''">#{taskParentType},</if>
+            <if test="delayDay != null  and delayDay != ''">#{delayDay},</if>
          </trim>
     </insert>
 
@@ -114,6 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
             <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
+            <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
         </trim>
         where id = #{id}
     </update>
@@ -238,4 +243,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND
         TASK_PRINCIPAL = #{taskPrincipal}
     </update>
+
+    <update id="delayDay" parameterType="com.sugar.manage.dao.vo.TUserTask">
+        update
+        t_user_task
+        set START_TIME = #{startTime},DELAY_DAY = #{delayDay}
+        where
+        TASK_PRINCIPAL =  #{userName}
+        and
+        PROJECT_ID = #{projectId}
+        and
+        TASK_NAME = #{taskName}
+        and
+        TASK_STATUS = '0'
+        or
+        TASK_STATUS = '1'
+    </update>
+
+   <!-- <select id="getStartTimeByPrincipaiAndPJId" parameterType="String" resultType="String">
+        SELECT
+        START_TIME
+        FROM
+        t_user_task
+        WHERE
+        TASK_PRINCIPAL =  #{userName}
+        AND
+        PROJECT_ID = #{projectId}
+        AND
+        TASK_STATUS = '0'
+        OR
+        TASK_STATUS = '1'
+    </select>-->
+
+    <select id="getTaskInfoByPrincipalAndPJId" parameterType="String" resultMap="TUserTaskResult">
+        SELECT
+        <include refid="selectTUserTaskVo"/>
+        WHERE
+        TASK_PRINCIPAL =  #{userName}
+        AND
+        PROJECT_ID = #{projectId}
+        AND
+        TASK_STATUS = '0'
+        OR
+        TASK_STATUS = '1'
+    </select>
+
 </mapper>

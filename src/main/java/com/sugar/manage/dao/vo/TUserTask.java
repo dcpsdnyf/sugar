@@ -74,6 +74,16 @@ public class TUserTask
     /** 集团 */
     private String groupName;
 
+    private String delayDay;
+
+    public String getDelayDay() {
+        return delayDay;
+    }
+
+    public void setDelayDay(String delayDay) {
+        this.delayDay = delayDay;
+    }
+
     public String getProductType() {
         return productType;
     }

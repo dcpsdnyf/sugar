@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS t_user_task；
+DROP TABLE IF EXISTS t_user_task;
 CREATE TABLE t_user_task(
     id INT NOT NULL AUTO_INCREMENT  COMMENT 'id' ,
     STATUS VARCHAR(32)    COMMENT '状态（01有效，99失效）' ,
@@ -23,4 +23,6 @@ CREATE TABLE t_user_task(
 alter table t_sugar_project add  START_TIME varchar(200);
 
 alter table t_sugar_project add  TASK_PRINCIPAL varchar(200);
+
+alter table  t_user_task add DELAY_DAY VARCHAR(200);
 

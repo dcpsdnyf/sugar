@@ -80,4 +80,10 @@ public interface TUserTaskMapper
     public List<TUserTask> getUndoTask(String taskPrincipal);
 
     public int changeTaskStatusByPrincipalAndProjectId(@Param("taskstatus") String taskstatus,@Param("projectId") String projectId,@Param("taskPrincipal") String taskPrincipal);
+
+    public int delayDay(TUserTask tUserTask);
+
+    //public String getStartTimeByPrincipaiAndPJId(String userName,String projectId);
+
+    public TUserTask getTaskInfoByPrincipalAndPJId(String userName,String projectId);
 }

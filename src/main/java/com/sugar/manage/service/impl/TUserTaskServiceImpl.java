@@ -1,10 +1,17 @@
 package com.sugar.manage.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.common.utils.JsonUtil;
+import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
@@ -15,10 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * 【请填写功能名称】Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2020-09-28
  */
@@ -28,6 +37,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     private TUserTaskMapper tUserTaskMapper;
     @Autowired
     private TUserRoleMapper tUserRoleMapper;
+    @Autowired
+    private TUserMapper tUserMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -144,7 +155,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             HashMap<String, TUserTask> taskn = new HashMap<>();
 
             for (TUserTask tusk : tasklist) {
-                taskn.put(tusk.getTaskName(),tusk);
+                taskn.put(tusk.getTaskName(), tusk);
             }
             if (taskn.containsKey("2")) {
                 task.setTaskName("采购阶段");
@@ -241,7 +252,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             List<TUserTask> tasklist = tUserTaskMapper.getTaskInfoByProductIdAndTaskTypehsn(projectId);
             HashMap<String, TUserTask> taskn = new HashMap<>();
             for (TUserTask tusk : tasklist) {
-                taskn.put(tusk.getTaskName(),tusk);
+                taskn.put(tusk.getTaskName(), tusk);
             }
             if (taskn.containsKey("4")) {
                 task.setTaskName("研发阶段");
@@ -290,7 +301,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         }
         //如果是卢丽娜、张洋洋、姜仲一则返回一阶段信息
         if ("82".equals(userId) || "26".equals(userId) || "47".equals(userId)) {
-            TUserTask ustk =  tUserTaskMapper.getTaskInfoByProductId(projectId);
+            TUserTask ustk = tUserTaskMapper.getTaskInfoByProductId(projectId);
             return ustk;
         }
         return new TUserTask();
@@ -319,7 +330,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     @Override
     public PageInfo<TUserTask> getUndoTask(String taskPrincipal) {
-        List<TUserTask> unDoTkuser =  tUserTaskMapper.getUndoTask(taskPrincipal);
+        List<TUserTask> unDoTkuser = tUserTaskMapper.getUndoTask(taskPrincipal);
         if (!CollectionUtils.isEmpty(unDoTkuser)) {
             PageInfo<TUserTask> pageInfo = new PageInfo<>(unDoTkuser);
             return pageInfo;
@@ -329,8 +340,59 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     @Override
     public int changeTaskStatusByPrincipalAndProjectId(String taskstatus, String projectId, String taskPrincipal) {
-        return  tUserTaskMapper.changeTaskStatusByPrincipalAndProjectId(taskstatus,projectId,taskPrincipal);
+        return tUserTaskMapper.changeTaskStatusByPrincipalAndProjectId(taskstatus, projectId, taskPrincipal);
     }
+
+    @Override
+    public int delay(String userId, String projectId, String delayDay) throws ParseException {
+        //1.先根据用户id获取用户名
+        String userName = tUserMapper.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(userName)) {
+            return 0;
+        }
+        //2.根据用户名与项目id获取该用户未完成的任务
+        TUserTask tkuser = tUserTaskMapper.getTaskInfoByPrincipalAndPJId(userName,projectId);
+        if (StringUtils.isBlank(tkuser.getStartTime())) {
+            return 0;
+        }
+        //获取哪一个阶段
+        if (StringUtils.isBlank(tkuser.getTaskName())) {
+            return 0;
+        }
+        //3.把延期天数加上当前的startTime
+        TUserTask tsakuser = new TUserTask();
+        tsakuser.setStartTime(this.plusDay(Integer.parseInt(delayDay),tkuser.getStartTime()));
+        tsakuser.setDelayDay(delayDay);
+        tsakuser.setTaskPrincipal(userName);
+        tsakuser.setProjectId(projectId);
+        tsakuser.setTaskName(tkuser.getTaskName());
+        int count = tUserTaskMapper.delayDay(tsakuser);
+        if (count > 0 ) {
+            return count;
+        }
+        return 0;
+
+    }
+
+
+    /**
+     * 16      * 指定日期加上天数后的日期
+     * 17      * @param num 为增加的天数
+     * 18      * @param newDate 创建时间
+     * 19      * @return
+     * 20      * @throws ParseException
+     * 21
+     */
+    public String plusDay(int num, String newDate) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currdate = format.parse(newDate);
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, num);// num为增加的天数，可以改变的
+        currdate = ca.getTime();
+        String enddate = format.format(currdate);
+        return enddate;
+    }
+
 }
 
 

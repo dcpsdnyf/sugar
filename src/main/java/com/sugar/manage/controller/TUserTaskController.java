@@ -1,7 +1,9 @@
 package com.sugar.manage.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.common.utils.JsonUtil;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TableDataInfo;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -266,5 +269,44 @@ private ISugarProjectSV iSugarProjectSV;
         tableDataInfo.setTotal(tkuser.getList().size());
         tableDataInfo.setCode(200);
         return tableDataInfo;
+    }
+    /**
+     * 申请延期接口
+     * @return
+     */
+    @RequestMapping("/delay")
+    @ResponseBody
+    public String delay(TUserTask tUserTask,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        if (StringUtils.isBlank(userId)) {
+            return null;
+        }
+        if (StringUtils.isBlank(tUserTask.getProjectId())) {
+            return null;
+        }
+        if (StringUtils.isBlank(tUserTask.getDelayDay())) {
+            return null;
+        }
+        if (!this.isNumeric(tUserTask.getDelayDay())) {
+            return null;
+        }
+       int count = itUserTaskService.delay(userId,tUserTask.getProjectId(),tUserTask.getDelayDay());
+        if (count >0 ) {
+            JSONObject result=new JSONObject();
+            result.put("success",Boolean.TRUE);
+            JsonUtil.write(response,result);
+        }
+
+        return null;
+    }
+
+
+    public  boolean isNumeric(String str){
+        for (int i = 0; i < str.length(); i++){
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 }
