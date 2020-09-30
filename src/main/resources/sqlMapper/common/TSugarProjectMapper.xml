@@ -1156,4 +1156,15 @@
     WHERE
     TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="getProductHeaderByProjectIds" resultMap="BaseResultMap">
+    <include refid="Base_Column_List" />
+    WHERE
+    ID IN
+    <foreach item="id" collection="projectIds" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+
+  </select>
 </mapper>

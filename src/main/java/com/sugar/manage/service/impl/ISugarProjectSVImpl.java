@@ -6,6 +6,7 @@ import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
+import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.vo.GroupSugarList;
@@ -356,5 +357,11 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
 		return sugarLists;
 	}
+
+    @Override
+    public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds) {
+
+        return sugarProjectMapper.getProductHeaderByProjectIds(projectIds);
+    }
 
 }

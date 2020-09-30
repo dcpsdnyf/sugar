@@ -72,4 +72,6 @@ public interface ITUserTaskService
     public PageInfo<TUserTask> getDoneTask(String taskPrincipal);
 
     public PageInfo<TUserTask> getUndoTask(String taskPrincipal);
+
+    public int changeTaskStatusByPrincipalAndProjectId(String taskstatus,String projectId,String taskPrincipal);
 }

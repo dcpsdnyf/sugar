@@ -223,4 +223,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_TYPE = '1'
     </select>
 
+    <update id="changeTaskStatusByPrincipalAndProjectId" parameterType="String">
+        UPDATE
+        t_user_task
+        SET
+        TASK_STATUS = #{taskstatus}
+        WHERE
+        PROJECT_ID = #{projectId}
+        AND
+        TASK_PRINCIPAL = #{taskPrincipal}
+    </update>
 </mapper>

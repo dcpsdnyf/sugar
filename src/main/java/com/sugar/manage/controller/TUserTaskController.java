@@ -2,9 +2,11 @@ package com.sugar.manage.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TableDataInfo;
+import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.ITUserTaskService;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -28,6 +32,8 @@ public class TUserTaskController {
 private ITUserTaskService itUserTaskService;
 @Autowired
 private IUserSV userRoleSV;
+@Autowired
+private ISugarProjectSV iSugarProjectSV;
 
 
     /**
@@ -82,13 +88,13 @@ private IUserSV userRoleSV;
            return SysResult.success("没有指派权限",null);
        }
 
-        if (StringUtils.isBlank( tUserTask.getTaskPrincipal())) {
+        if (StringUtils.isBlank(tUserTask.getTaskPrincipal())) {
             return SysResult.success("负责人为空",null);
         }
-        if (StringUtils.isBlank( tUserTask.getStartTime())) {
+        if (StringUtils.isBlank(tUserTask.getStartTime())) {
             return SysResult.success("开始时间为空",null);
         }
-        if (StringUtils.isBlank( tUserTask.getProjectId())) {
+        if (StringUtils.isBlank(tUserTask.getProjectId())) {
             return SysResult.success("项目id为空",null);
         }
         //1.先判断该项目id的最新阶段，如果是被指派过的阶段则不允许新增
@@ -119,6 +125,13 @@ private IUserSV userRoleSV;
         if (count<=0) {
             return SysResult.success("插入失败",null);
         }
+        //1.根据用户id去用户表获取用户名
+        String username =  userRoleSV.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(username)) {
+            return SysResult.success("插入失败未获得登录信息",null);
+        }
+        //指派完以后顺便修改当前用户本任务的状态为完成
+       itUserTaskService.changeTaskStatusByPrincipalAndProjectId("2",tUserTask.getProjectId(),username);
         return SysResult.success("插入成功",null);
     }
 
@@ -153,8 +166,37 @@ private IUserSV userRoleSV;
             tableDataInfo.setCode(400);
             return tableDataInfo;
         }
+        List<Integer> projectIds = new ArrayList<>();
+        for (TUserTask tk : tkuser.getList()) {
+            if (StringUtils.isNotBlank(tk.getProjectId())) {
+                projectIds.add(Integer.parseInt(tk.getProjectId()));
+            }
+        }
+        List<TSugarProject> tsList = iSugarProjectSV.getProductHeaderByProjectIds(projectIds);
+        if (tsList.size() <= 0) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        TSugarProject tsuger  = new TSugarProject();
+        HashMap<String,TSugarProject> hsTPList = new HashMap<>();
+        for (int i = 0;i < tsList.size();i++) {
+            tsuger.setProductType(tsList.get(i).getProductType());
+            tsuger.setPlatformName(tsList.get(i).getPlatformName());
+            tsuger.setGroupName(tsList.get(i).getGroupName());
 
-        tableDataInfo.setRows(tkuser.getList());
+            hsTPList.put(String.valueOf(tsList.get(i).getId()),tsuger);
+        }
+        List<TUserTask> tkList = new ArrayList<>();
+        for (TUserTask tku :tkuser.getList()) {
+            TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
+            tku.setProductType(tsugerp.getProductType());
+            tku.setPlatformName(tsugerp.getPlatformName());
+            tku.setGroupName(tsugerp.getGroupName());
+            tkList.add(tku);
+        }
+        tableDataInfo.setRows(tkList);
         tableDataInfo.setTotal(tkuser.getList().size());
         tableDataInfo.setCode(200);
         return tableDataInfo;
@@ -190,7 +232,37 @@ private IUserSV userRoleSV;
             tableDataInfo.setCode(400);
             return tableDataInfo;
         }
-        tableDataInfo.setRows(tkuser.getList());
+        List<Integer> projectIds = new ArrayList<>();
+        for (TUserTask tk : tkuser.getList()) {
+            if (StringUtils.isNotBlank(tk.getProjectId())) {
+                projectIds.add(Integer.parseInt(tk.getProjectId()));
+            }
+        }
+        List<TSugarProject> tsList = iSugarProjectSV.getProductHeaderByProjectIds(projectIds);
+        if (tsList.size() <= 0) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
+        TSugarProject tsuger  = new TSugarProject();
+        HashMap<String,TSugarProject> hsTPList = new HashMap<>();
+        for (int i = 0;i < tsList.size();i++) {
+            tsuger.setProductType(tsList.get(i).getProductType());
+            tsuger.setPlatformName(tsList.get(i).getPlatformName());
+            tsuger.setGroupName(tsList.get(i).getGroupName());
+
+            hsTPList.put(String.valueOf(tsList.get(i).getId()),tsuger);
+        }
+        List<TUserTask> tkList = new ArrayList<>();
+        for (TUserTask tku :tkuser.getList()) {
+            TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
+            tku.setProductType(tsugerp.getProductType());
+            tku.setPlatformName(tsugerp.getPlatformName());
+            tku.setGroupName(tsugerp.getGroupName());
+            tkList.add(tku);
+        }
+        tableDataInfo.setRows(tkList);
         tableDataInfo.setTotal(tkuser.getList().size());
         tableDataInfo.setCode(200);
         return tableDataInfo;

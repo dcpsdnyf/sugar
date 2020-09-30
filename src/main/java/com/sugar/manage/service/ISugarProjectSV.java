@@ -1,6 +1,7 @@
 package com.sugar.manage.service;
 
 import com.github.pagehelper.PageInfo;
+import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.dao.vo.GroupSugarList;
@@ -36,5 +37,7 @@ public interface ISugarProjectSV {
      * @return sugar管理集合
      */
     public List<TSugarProjectWithBLOBs> selectSugarList(TSugarProjectWithBLOBs sugarList);
+
+    public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds);
 
 }

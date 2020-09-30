@@ -323,6 +323,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         }
         return new PageInfo<>();
     }
+
+    @Override
+    public int changeTaskStatusByPrincipalAndProjectId(String taskstatus, String projectId, String taskPrincipal) {
+        return  tUserTaskMapper.changeTaskStatusByPrincipalAndProjectId(taskstatus,projectId,taskPrincipal);
+    }
 }
 
 

@@ -65,7 +65,40 @@ public class TUserTask
     /** 任务大阶段状态 */
     private String taskParentType;
 
-    public void setId(Long id) 
+    /** 产品类型 */
+    private String productType ;
+
+    /** 平台名称 */
+    private String platformName ;
+
+    /** 集团 */
+    private String groupName;
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

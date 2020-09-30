@@ -42,4 +42,6 @@ public interface TSugarProjectMapper {
     int updateByPrimaryKey(TSugarProject record);
 
     Long getProjectId(String taskPrincipal);
+
+    List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds);
 }
