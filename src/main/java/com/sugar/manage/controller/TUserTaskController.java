@@ -3,20 +3,17 @@ package com.sugar.manage.controller;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
 import com.sugar.manage.dao.model.TSugarProject;
-import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.ITUserTaskService;
-import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.SysResult;
-import com.sugar.util.ResultMessage;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/TUserTaskController")
 public class TUserTaskController {
 

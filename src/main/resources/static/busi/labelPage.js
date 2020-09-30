@@ -2,7 +2,7 @@ $(function () {
 
 	//待办
 	$('#tb_backlog').bootstrapTable({
-		url: WEB_ROOT + "/TUserTaskController/getDoneTask",
+		url: WEB_ROOT + "/TUserTaskController/getUndoTask",
 		//data: data,                         //直接从本地数据初始化表格
 		method: 'get',                      //请求方式（*）
 		toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -137,7 +137,7 @@ $(function () {
 
 	//已办
 	$('#tb_finished').bootstrapTable({
-		url: WEB_ROOT + "/TUserTaskController/getUndoTask",
+		url: WEB_ROOT + "/TUserTaskController/getDoneTask",
 		//data: data,                         //直接从本地数据初始化表格
 		method: 'get',                      //请求方式（*）
 		toolbar: '#toolbar',                //工具按钮用哪个容器
