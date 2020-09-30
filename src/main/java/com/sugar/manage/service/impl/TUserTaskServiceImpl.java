@@ -293,7 +293,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             TUserTask ustk =  tUserTaskMapper.getTaskInfoByProductId(projectId);
             return ustk;
         }
-        return null;
+        return new TUserTask();
     }
 
     @Override

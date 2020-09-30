@@ -51,6 +51,9 @@ private ISugarProjectSV iSugarProjectSV;
             return SysResult.success("未获得用户信息，请登录",null);
         }
         TUserTask task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(),userId);
+        if (StringUtils.isBlank(task.getProjectId()) && StringUtils.isBlank(task.getTaskPrincipal()) && StringUtils.isBlank(task.getStartTime())) {
+            return SysResult.success("该用户没用指派权限",null);
+        }
         switch(task.getTaskName()){
             case "1":
                 task.setTaskName("商务进阶阶段");
