@@ -1325,15 +1325,10 @@ var appointModel = function (id) {
 		data: $("#appointForm").serialize(),
 		dataType: 'JSON',
 		success: function (result) {
-			debugger
-			confirmModal("提示", result.msg, function () {
-				window.location.reload();
-			}, {}, function () {
-				window.location.reload();
-			});
+
 		},
-		error: function () {
-			msgInfoModal('提示', "指派失败");
+		error: function (result) {
+			msgInfoModal('提示', result.msg);
 		}
 	});
 }

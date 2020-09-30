@@ -1,8 +1,8 @@
 $(function () {
 
-	//表格的初始化
+	//待办
 	$('#tb_backlog').bootstrapTable({
-		url: WEB_ROOT + "/sugarManage/getSugarProjectList",
+		url: WEB_ROOT + "/TUserTaskController/getDoneTask",
 		//data: data,                         //直接从本地数据初始化表格
 		method: 'get',                      //请求方式（*）
 		toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -16,9 +16,6 @@ $(function () {
 				limit: params.limit,       // 每页显示数量
 				offset: params.offset,     // SQL语句起始索引
 				page: (params.offset / params.limit) + 1, //当前页码
-				productType: $("#productType").val(),
-				platformName: $("#platformName").val(),
-				groupName: $("#groupName").val(),
 			};
 			return temp;
 		},                                  //传递参数（*）
@@ -138,8 +135,9 @@ $(function () {
 
 	});
 
+	//已办
 	$('#tb_finished').bootstrapTable({
-		url: WEB_ROOT + "/sugarManage/getSugarProjectList",
+		url: WEB_ROOT + "/TUserTaskController/getUndoTask",
 		//data: data,                         //直接从本地数据初始化表格
 		method: 'get',                      //请求方式（*）
 		toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -153,9 +151,6 @@ $(function () {
 				limit: params.limit,       // 每页显示数量
 				offset: params.offset,     // SQL语句起始索引
 				page: (params.offset / params.limit) + 1, //当前页码
-				productType: $("#productType").val(),
-				platformName: $("#platformName").val(),
-				groupName: $("#groupName").val(),
 			};
 			return temp;
 		},                                  //传递参数（*）
