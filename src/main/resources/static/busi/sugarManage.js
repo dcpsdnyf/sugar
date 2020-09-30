@@ -1309,7 +1309,6 @@ var editModel = function (id) {
 
 //指派事件
 var appointModel = function (id) {
-	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	//弹出模态框
@@ -1322,10 +1321,14 @@ var appointModel = function (id) {
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/getRollBackInfo",
-		data: $("#appointForm").serialize(),
+		data:  {"projectId":id},
 		dataType: 'JSON',
 		success: function (result) {
-
+			debugger
+			if(result!=null && data.taskName!=null){
+				var stage=result.data.taskName;
+				$("#taskName").val(stage);
+			}
 		},
 		error: function (result) {
 			msgInfoModal('提示', result.msg);
