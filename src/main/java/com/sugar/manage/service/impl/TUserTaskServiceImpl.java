@@ -111,41 +111,80 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     public TUserTask getTaskInfoByUserIdAndProjectId(String projectId, String userId) {
 
         TUserTask task = new TUserTask();
+        TUserTask tk = new TUserTask();
         if ("53".equals(userId) || "33".equals(userId)) {//如果是李佳娜、谢帅
             task = tUserTaskMapper.getTaskInfoByUserIdAndProjectIdtask1(projectId);
             if (task != null) {
-            if ("10".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
-                task.setTaskSubName("商机线索开启");
+                if ("10".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
+                    task.setTaskSubName("商机线索开启");
+                }
+                if ("11".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机线索0%");
+                }
+                if ("12".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机发现10%");
+                }
+                if ("13".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机确立25%");
+                }
+                if ("14".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机确立50%");
+                }
+                if ("15".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机确立75%");
+                }
+                if ("16".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机赢取100%");
+                }
+                if ("17".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("客户回款/维护阶段");
+                }
+                if ("18".equals(task.getTaskSubName())) {
+                    task.setTaskSubName("商机关闭");
+                }
+                if ("1".equals(task.getTaskName())) {
+                    task.setTaskName("商机推进阶段");
+                }
+                return task;
             }
-            if ("11".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机线索0%");
+            //如果为null说明只是新增没有指派过，就回显新增的负责人过去
+            if (task == null) {
+                tk= tUserTaskMapper.getOnlyAddPricipalTKName1(projectId);
+                if (tk != null) {
+                    if ("10".equals(tk.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
+                        tk.setTaskSubName("商机线索开启");
+                    }
+                    if ("11".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机线索0%");
+                    }
+                    if ("12".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机发现10%");
+                    }
+                    if ("13".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机确立25%");
+                    }
+                    if ("14".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机确立50%");
+                    }
+                    if ("15".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机确立75%");
+                    }
+                    if ("16".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机赢取100%");
+                    }
+                    if ("17".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("客户回款/维护阶段");
+                    }
+                    if ("18".equals(tk.getTaskSubName())) {
+                        tk.setTaskSubName("商机关闭");
+                    }
+                    if ("1".equals(tk.getTaskName())) {
+                        tk.setTaskName("商机推进阶段");
+                    }
+                    return tk;
+                }
             }
-            if ("12".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机发现10%");
-            }
-            if ("13".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机确立25%");
-            }
-            if ("14".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机确立50%");
-            }
-            if ("15".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机确立75%");
-            }
-            if ("16".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机赢取100%");
-            }
-            if ("17".equals(task.getTaskSubName())) {
-                task.setTaskSubName("客户回款/维护阶段");
-            }
-            if ("18".equals(task.getTaskSubName())) {
-                task.setTaskSubName("商机关闭");
-            }
-            if ("1".equals(task.getTaskName())) {
-                task.setTaskName("商机推进阶段");
-            }
-        }
-            return task;
+            return new TUserTask();
         }
 
 

@@ -302,4 +302,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_STATUS = '2'
     </select>
 
+    <select id="getOnlyAddPricipalTKName1" parameterType="String" resultMap="TUserTaskResult">
+        <include refid="selectTUserTaskVo"/>
+        WHERE
+        PROJECT_ID = #{projectId}
+        AND
+        TASK_NAME ='1'
+        AND
+        TASK_TYPE = '00'
+    </select>
+
 </mapper>
