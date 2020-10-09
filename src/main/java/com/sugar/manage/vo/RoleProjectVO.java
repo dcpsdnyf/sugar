@@ -39,4 +39,7 @@ public class RoleProjectVO {
 
     /**是否显示指派按钮*/
     private boolean isRoleAppoint;
+
+    /**是否显示申请延期按钮*/
+    private boolean isRoleDelay;
 }

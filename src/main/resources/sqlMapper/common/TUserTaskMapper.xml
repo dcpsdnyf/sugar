@@ -223,7 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE
         TASK_PRINCIPAL = #{taskPrincipal}
         AND
-        TASK_TYPE = '2'
+        TASK_STATUS = '2'
     </select>
 
     <select id="getUndoTask" parameterType="String" resultMap="TUserTaskResult" >

@@ -57,8 +57,13 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             String[] roleIdArr = roleIds.split(",");
             String[] projectIdArr = projectIds.split(",");
+            //用于控制指派按钮是否显示
             if(Arrays.asList(roleIdArr).contains("9")){
                 roleProjectVO.setRoleAppoint(true);
+            }
+            //用于控制申请延期按钮是否显示
+            if(Arrays.asList(roleIdArr).contains("10")){
+                roleProjectVO.setRoleDelay(true);
             }
             /*项目id*/
             Map<String,String> projectIdMap = new HashMap<>();
