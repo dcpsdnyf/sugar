@@ -76,6 +76,16 @@ public class TUserTask
 
     private String delayDay;
 
+    private String delayPeople;
+
+    public String getDelayPeople() {
+        return delayPeople;
+    }
+
+    public void setDelayPeople(String delayPeople) {
+        this.delayPeople = delayPeople;
+    }
+
     public String getDelayDay() {
         return delayDay;
     }

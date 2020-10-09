@@ -7,22 +7,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.sugar.common.utils.CookieUtils;
-import com.sugar.common.utils.JsonUtil;
+import com.sugar.manage.dao.mapper.TDelayMapper;
 import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
-import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
+import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-
-import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -39,7 +35,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     private TUserRoleMapper tUserRoleMapper;
     @Autowired
     private TUserMapper tUserMapper;
-
+    @Autowired
+    private TDelayMapper tDelayMapper;
     /**
      * 查询【请填写功能名称】
      *
@@ -359,16 +356,31 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         if (StringUtils.isBlank(tkuser.getTaskName())) {
             return 0;
         }
-        //3.把延期天数加上当前的startTime
-        TUserTask tsakuser = new TUserTask();
-        tsakuser.setStartTime(this.plusDay(Integer.parseInt(delayDay),tkuser.getStartTime()));
-        tsakuser.setDelayDay(delayDay);
-        tsakuser.setTaskPrincipal(userName);
-        tsakuser.setProjectId(projectId);
-        tsakuser.setTaskName(tkuser.getTaskName());
-        int count = tUserTaskMapper.delayDay(tsakuser);
+
+        TDelay tDelay = new TDelay();
+        tDelay.setDelayTime(delayDay);
+        tDelay.setDelayPeopleName(userName);
+        //1.查到谁给他指派的任务
+        TUserTask tk =  tUserTaskMapper.getPrincipal(projectId,tkuser.getTaskName());
+        tDelay.setAuditingPeopleName(tk.getTaskPrincipal());
+        tDelay.setProjectId(projectId);
+        tDelay.setTaskName(tkuser.getTaskName());
+        tDelay.setAuditingStatus("1");//默认为1失败
+      int count =  tDelayMapper.insertTDelay(tDelay);
         if (count > 0 ) {
-            return count;
+            //延期成功后给上级派发任务
+            //2.获取项目id,延期天数，延期人，延期任务名，并新增任务，指定负责人为tk.getTaskPrincipal();
+            TUserTask tkuse = new TUserTask();
+            tkuse.setDelayDay(delayDay);
+            tkuse.setDelayPeople(userName);
+            tkuse.setTaskName(tkuser.getTaskName());
+            tkuse.setProjectId(projectId);
+            tkuse.setTaskPrincipal(tk.getTaskPrincipal());
+           int coun = tUserTaskMapper.insertTUserTask(tkuse);
+           if (coun > 0) {
+               return 1;
+           }
+
         }
         return 0;
 

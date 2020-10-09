@@ -26,3 +26,20 @@ alter table t_sugar_project add  TASK_PRINCIPAL varchar(200);
 
 alter table  t_user_task add DELAY_DAY VARCHAR(200);
 
+alter table t_user_task add DELAY_PEOPLE VARCHAR(200);
+
+CREATE TABLE t_delay(
+    id INT NOT NULL AUTO_INCREMENT  COMMENT 'id' ,
+    STATUS VARCHAR(32)    COMMENT '状态（01有效，99失效）' ,
+    CREATED_STAFF VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_STAFF VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    DELAY_TIME VARCHAR(1024)    COMMENT '延期天数' ,
+    DELAY_PEOPLE_NAME VARCHAR(1024)    COMMENT '申请延期人' ,
+    AUDITING_PEOPLE_NAME VARCHAR(32)    COMMENT '审批延期人' ,
+    PROJECT_ID VARCHAR(128)    COMMENT '项目id' ,
+    TASK_NAME VARCHAR(32)    COMMENT '任务名称' ,
+    AUDITING_STATUS VARCHAR(32)    COMMENT '审批状态0通过1失败 审批状态0通过1失败' ,
+    PRIMARY KEY (id)
+);

@@ -103,7 +103,7 @@ private ISugarProjectSV iSugarProjectSV;
         //1.先判断该项目id的最新阶段，如果是被指派过的阶段则不允许新增
         List<String> hs = itUserTaskService.getAllTaskNameByProductId(tUserTask.getProjectId());
 
-        if ("53".equals(userId) && hs.contains("1")) {
+        if ("53".equals(userId) && hs.contains("1") || "33".equals(userId) && hs.contains("1")) {
             return SysResult.success("商机推进阶段已被指派过，无法重复指派",null);
         }
         if ("33".equals(userId) && hs.contains("1")) {
