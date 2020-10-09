@@ -165,6 +165,12 @@ private ISugarProjectSV iSugarProjectSV;
         }
         //1.用用户名去查询该用户的已办任务
         PageInfo<TUserTask> tkuser = itUserTaskService.getDoneTask(username);
+        if (tkuser.getList() == null) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
         if (tkuser.getList().size() <= 0) {
             tableDataInfo.setRows(null);
             tableDataInfo.setTotal(0);
