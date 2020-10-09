@@ -141,10 +141,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTUserTaskVo"/>
         WHERE
         PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='1'
-        AND
-        TASK_TYPE = '01'
     </select>
 
     <select id="getTaskInfoByProductIdAndTaskType" parameterType="String" resultMap="TUserTaskResult">

@@ -154,4 +154,6 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
     /** 任务责任人 */
     private String taskPrincipal;
 
+    /**是否显示指派按钮*/
+    private boolean isAppoint;
 }
