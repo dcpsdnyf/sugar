@@ -1,12 +1,5 @@
 package com.sugar.manage.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
 import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.mapper.TDelayMapper;
 import com.sugar.manage.dao.mapper.TUserMapper;
@@ -19,6 +12,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -113,6 +113,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         TUserTask task = new TUserTask();
         if ("53".equals(userId) || "33".equals(userId)) {//如果是李佳娜、谢帅
             task = tUserTaskMapper.getTaskInfoByUserIdAndProjectIdtask1(projectId);
+            if (task != null) {
             if ("10".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
                 task.setTaskSubName("商机线索开启");
             }
@@ -143,6 +144,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             if ("1".equals(task.getTaskName())) {
                 task.setTaskName("商机推进阶段");
             }
+        }
             return task;
         }
 

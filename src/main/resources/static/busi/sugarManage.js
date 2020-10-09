@@ -1264,8 +1264,10 @@ $(function () {
 						$(obj).empty();
 						$(obj).text(maintainPhase);
 					}
-				}
 
+				}
+				backlog();
+				finished();
 			}
 		}
 	});

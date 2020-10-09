@@ -230,10 +230,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTUserTaskVo"/>
         WHERE
         TASK_PRINCIPAL = #{taskPrincipal}
-        AND
-        TASK_TYPE = '0'
-        OR
-        TASK_TYPE = '1'
     </select>
 
     <update id="changeTaskStatusByPrincipalAndProjectId" parameterType="String">
