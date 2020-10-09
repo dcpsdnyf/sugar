@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class IUserRoleSVImpl implements IUserRoleSV {
@@ -60,7 +57,9 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             String[] roleIdArr = roleIds.split(",");
             String[] projectIdArr = projectIds.split(",");
-
+            if(Arrays.asList(roleIdArr).contains("9")){
+                roleProjectVO.setRoleAppoint(true);
+            }
             /*项目id*/
             Map<String,String> projectIdMap = new HashMap<>();
             for (String projectId : projectIdArr){

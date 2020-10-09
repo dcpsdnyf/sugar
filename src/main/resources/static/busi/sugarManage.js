@@ -98,20 +98,21 @@ $(function () {
 				"colspan": 1,
 				rowspan: 2,
 				formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+					debugger
 					var html='';
 					if (!row.rowEdit) {
 						return '';
 					}
-					// if(row.managerLevel){
+					if(row.appoint){
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;'+
 							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
 						html += "</div>";
-					// }else {
-					// 	html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-					// 		'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
-					// 	html += "</div>";
-					// }
+					}else {
+						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+						html += "</div>";
+					}
 
 					return html;
 				}
@@ -1267,7 +1268,7 @@ $(function () {
 
 				}
 				backlog();
-				finished();
+				// finished();
 			}
 		}
 	});
@@ -1327,7 +1328,7 @@ var appointModel = function (id) {
 		dataType: 'JSON',
 		success: function (result) {
 			debugger
-			if(result!=null && data.taskName!=null){
+			if(result!=null && result.data.taskName!=null){
 				var stage=result.data.taskName;
 				$("#taskName").val(stage);
 			}

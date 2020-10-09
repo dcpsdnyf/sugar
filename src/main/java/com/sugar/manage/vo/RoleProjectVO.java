@@ -37,4 +37,6 @@ public class RoleProjectVO {
     /**是否运维经理角色*/
     private boolean maintainManager;
 
+    /**是否显示指派按钮*/
+    private boolean isRoleAppoint;
 }
