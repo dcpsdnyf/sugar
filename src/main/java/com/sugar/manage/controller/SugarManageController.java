@@ -370,4 +370,15 @@ public class SugarManageController extends AppBaseController {
         }
         return rowList;
     }
+
+    @RequestMapping("/echartForProject")
+    public void echartForProject(String platFormName){
+        if(!StringUtils.isBlank(platFormName)){
+            //根据platFormName查询出Project
+            iSugarProjectSV.selectSugarProjectByName(platFormName);
+            //取出ID去根据开始时间降序排序去查询t_user_task的数据列表
+            //取出最后一条数据:大阶段开始的数据,取其开始时间      取出开始一条数据:大阶段目前处于位置,取其结束时间
+
+        }
+    }
 }
