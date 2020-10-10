@@ -364,4 +364,15 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         return sugarProjectMapper.getProductHeaderByProjectIds(projectIds);
     }
 
+    @Override
+    public TSugarProject selectSugarProjectByName(String platformName) {
+        TSugarProjectExample example = new TSugarProjectExample();
+        TSugarProjectExample.Criteria sql = example.createCriteria();
+        sql.andPlatformNameEqualTo(platformName);
+        List<TSugarProject> tSugarProjects = sugarProjectMapper.selectByExample(example);
+        TSugarProject sugarProject = new TSugarProject();
+        sugarProject = tSugarProjects.get(0);
+        return sugarProject;
+    }
+
 }

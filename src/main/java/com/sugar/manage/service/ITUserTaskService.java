@@ -81,4 +81,5 @@ public interface ITUserTaskService
     public void updateUserTask(TUserTask tUserTask);
     public int examine(String userId,String projectId,String staus) throws ParseException;
 
+    List<TUserTask> selectTUserTaskByProId(Integer projectId);
 }

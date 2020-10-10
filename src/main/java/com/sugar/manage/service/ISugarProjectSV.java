@@ -40,4 +40,10 @@ public interface ISugarProjectSV {
 
     public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds);
 
+    /**
+     * 根据平台名称去查询数据
+     * @param platformName
+     * @return
+     */
+    TSugarProject selectSugarProjectByName(String platformName);
 }

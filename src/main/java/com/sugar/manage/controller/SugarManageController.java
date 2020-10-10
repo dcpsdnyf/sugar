@@ -3,16 +3,16 @@ package com.sugar.manage.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.AppBaseController;
-import com.sugar.common.utils.CookieUtils;
-import com.sugar.common.utils.ExcelUtils;
-import com.sugar.common.utils.JsonUtil;
-import com.sugar.common.utils.ModelCopyUtil;
+import com.sugar.common.utils.*;
+import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.vo.GroupSugarList;
+import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.ISugarProjectSV;
+import com.sugar.manage.service.ITUserTaskService;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.service.impl.ISugarProjectSVImpl;
@@ -56,6 +56,9 @@ public class SugarManageController extends AppBaseController {
 
     @Autowired
     private ISugarProjectSVImpl iSugarProjectSV;
+
+    @Autowired
+    private ITUserTaskService itUserTaskService;
 
     private Boolean isShow = false;
     /**
@@ -372,13 +375,49 @@ public class SugarManageController extends AppBaseController {
     }
 
     @RequestMapping("/echartForProject")
-    public void echartForProject(String platFormName){
-        if(!StringUtils.isBlank(platFormName)){
+    @ResponseBody
+    public List<projectChartVO> echartForProject(String platformName,Model model){
+        if(!StringUtils.isBlank(platformName)){
             //根据platFormName查询出Project
-            iSugarProjectSV.selectSugarProjectByName(platFormName);
+            TSugarProject sugarProject = iSugarProjectSV.selectSugarProjectByName(platformName);
             //取出ID去根据开始时间降序排序去查询t_user_task的数据列表
+            List<TUserTask> tUserTasks = itUserTaskService.selectTUserTaskByProId(sugarProject.getId());
             //取出最后一条数据:大阶段开始的数据,取其开始时间      取出开始一条数据:大阶段目前处于位置,取其结束时间
-
+            Map<String,List<TUserTask>> map = tUserTasks.stream().collect(Collectors.groupingBy(TUserTask::getTaskName));
+            List<projectChartVO> UserTaskTimes = new ArrayList<>();
+            //商机推进
+            setUserTimes("1",map,UserTaskTimes);
+            setUserTimes("2",map,UserTaskTimes);
+            setUserTimes("3",map,UserTaskTimes);
+            setUserTimes("4",map,UserTaskTimes);
+            return UserTaskTimes;
         }
+        return null;
+    }
+
+    private void setUserTimes(String key, Map<String,List<TUserTask>> map,List<projectChartVO> UserTaskTimes){
+        List<TUserTask> tUserTasks = new ArrayList<>();
+        projectChartVO chartVO = new projectChartVO();
+        String[] projectStage = {"商机推进阶段","采购阶段","产品阶段","研发阶段", "运营阶段","运维阶段"};
+        //商机推进
+        tUserTasks =  map.get(key);
+        if (key.equals(tUserTasks.get(0).getTaskName())){
+            chartVO.setTaskName(key);
+            chartVO.setProjectStage(projectStage[Integer.parseInt(key)-1]);
+            chartVO.setStartTime(tUserTasks.get(0).getStartTime());
+        }
+        if (StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
+            chartVO.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+        }else {
+            chartVO.setEndTime(tUserTasks.get(tUserTasks.size()-1).getEndTime());
+        }
+        UserTaskTimes.add(chartVO);
+
+/*        UserTaskTimes.add(tUserTasks.get(0));
+        if(StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
+            tUserTasks.get(tUserTasks.size()-1).setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+        }
+        UserTaskTimes.add(tUserTasks.get(tUserTasks.size()-1));*/
+
     }
 }

@@ -347,6 +347,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_TYPE = '00'
     </select>
 
+    <select id="selectTUserTaskOrderByDate" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
+        <include refid="selectTUserTaskVo"/>
+        WHERE
+        PROJECT_ID = #{projectId}
+        AND
+        TASK_TYPE = #{taskType}
+        ORDER BY START_TIME
+        DESC
+    </select>
+
     <update id="updateTUserTaskById" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
         <trim prefix="SET" suffixOverrides=",">

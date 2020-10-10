@@ -1338,7 +1338,7 @@ function roolBack(selectValue) {
 
 
 function runInit() {
-	var myChart =
+/*	var myChart =
 		echarts.init(document.getElementById('chart'));
 	var option = {
 		tooltip: {
@@ -1363,7 +1363,6 @@ function runInit() {
 			splitLine: {show: false},
 			data: ['运维阶段','运营阶段','研发阶段','产品阶段','采购阶段','商机推进阶段']
 		},
-
 		series: [
 			{
 				type:'custom',
@@ -1394,63 +1393,111 @@ function runInit() {
 					x:[1,2],
 					y:0
 				},
-				data:
-					[
+				data:res
+/!*					[
 						{
 							//itemStyle:{normal:{color:black}},
 							name:'运维阶段',
-							value: [0, '2020-10-15', '2020-11-26']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '运营阶段',
-							value: [1, '2020-9-15', '2020-10-20']
-						},
-						// dataItem
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '研发阶段',
-							value: [2, '2020-08-10', '2020-9-12']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '产品阶段',
-							value: [3, '2020-07-14', '2020-8-1']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '采购阶段',
-							value: [4, '2020-07-3', '2020-07-25']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '商机推进阶段',
-							value: [5, '2020-06-25', '2020-07-09']
+							value: [0, "2020-10-15", "2020-11-26"]
 						}
-					]
+					]*!/
 			}
 		]
-	};
-	myChart.setOption(option);
+	};*/
 
 	//TODO:完成后端取数
-
-
-
+	var platformName = $("#productName").val();
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/sugarManage/echartForProject",
-		data: $("#productName").val(),
+		data: {"platformName":platformName},
 		dataType: 'JSON',
 		success: function (result) {
-/*			confirmModal("提示", result.msg, function () {
-				window.location.reload();
-			}, {}, function () {
-				window.location.reload();
-			});*/
+			debugger
+			var res=[];
+			var projectName=[];
+			$.each(result,function (key,v) {
+				console.log(key);
+				var value=[];
+				value.push(key);
+				value.push(v.startTime);
+				value.push(v.endTime);
+				//value = [key,v.startTime,v.endTime];
+				projectName.push(v.projectStage);
+				res.push({
+					value: value,
+					name: v.projectStage
+				});
+			});
+			var myChart =
+				echarts.init(document.getElementById('chart'));
+			var option = {
+				tooltip: {
+					formatter: function(params) {
+						return params.name + ':' + params.value[1] + '~' + params.value[2]
+					}
+				},
+				legend: {
+					data: ['时间']
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'time'
+				},
+				yAxis: {
+					type: 'category',
+					splitLine: {show: false},
+					data:['运维阶段','运营阶段','研发阶段','产品阶段','采购阶段','商机推进阶段']
+					//data: projectName
+				},
+				series: [
+					{
+						type:'custom',
+						renderItem: function(params, api){
+							var categoryIndex = api.value(0);
+							var start = api.coord([api.value(1), categoryIndex])
+							var end = api.coord([api.value(2), categoryIndex])
+							var height = 24
+
+							return{
+
+								type: 'rect',
+								shape: echarts.graphic.clipRectByRect({
+									x: start[0],
+									y: start[1] - height / 2,
+									width: end[0] - start[0],
+									height: height
+								}, {
+									x: params.coordSys.x,
+									y: params.coordSys.y,
+									width: params.coordSys.width,
+									height: params.coordSys.height
+								}),
+								style: api.style()
+							}
+						},
+						encode:{
+							x:[1,2],
+							y:0
+						},
+						data:res
+						/*					[
+                                                {
+                                                    //itemStyle:{normal:{color:black}},
+                                                    name:'运维阶段',
+                                                    value: [0, "2020-10-15", "2020-11-26"]
+                                                }
+                                            ]*/
+					}
+				]
+			};
+			//option.series.data=res;
+			myChart.setOption(option);
 		},
-/*		error: function () {
-			msgInfoModal('提示', "图表更新失败");
-		}*/
 	});
 }

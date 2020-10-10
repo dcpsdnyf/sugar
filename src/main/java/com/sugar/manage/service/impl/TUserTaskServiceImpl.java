@@ -533,6 +533,15 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         return 0;
     }
 
+    @Override
+    public List<TUserTask> selectTUserTaskByProId(Integer projectId) {
+        TUserTask tUserTask = new TUserTask();
+        tUserTask.setProjectId(String.valueOf(projectId));
+        tUserTask.setTaskType("01");
+        List<TUserTask> tUserTasks = tUserTaskMapper.selectTUserTaskOrderByDate(tUserTask);
+        return tUserTasks;
+    }
+
     /**
      * 16      * 指定日期加上天数后的日期
      * 17      * @param num 为增加的天数

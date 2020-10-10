@@ -90,5 +90,12 @@ public interface TUserTaskMapper
 
     public TUserTask getOnlyAddPricipalTKName1(String projectId);
 
+    /**
+     * 根据projectId查询Task数据并且按照开始日期降序排序
+     * @param tUserTask
+     * @return
+     */
+    List<TUserTask> selectTUserTaskOrderByDate(TUserTask tUserTask);
+
     public int updateTUserTaskById(TUserTask tUserTask);
 }
