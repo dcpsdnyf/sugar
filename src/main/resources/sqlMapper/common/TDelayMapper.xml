@@ -93,6 +93,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <update id="udaDelay" parameterType="com.sugar.manage.dao.vo.TDelay">
+        update t_delay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="auditingStatus != null  and auditingStatus != ''">AUDITING_STATUS = #{auditingStatus},</if>
+            <if test="status != null  and status != ''">STATUS = #{status},</if>
+        </trim>
+        <where>
+            <if test="delayPeopleName != null  and delayPeopleName != ''"> and DELAY_PEOPLE_NAME like concat('%', #{delayPeopleName}, '%')</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''"> and AUDITING_PEOPLE_NAME like concat('%', #{auditingPeopleName}, '%')</if>
+            <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
+            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
+        </where>
+    </update>
+
     <delete id="deleteTDelayById" parameterType="Long">
         delete from t_delay where id = #{id}
     </delete>

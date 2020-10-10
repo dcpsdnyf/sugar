@@ -46,6 +46,14 @@ public interface TDelayMapper
     public int updateTDelay(TDelay tDelay);
 
     /**
+     * 修改【请填写功能名称】
+     *
+     * @param tDelay 【请填写功能名称】
+     * @return 结果
+     */
+    public int udaDelay(TDelay tDelay);
+
+    /**
      * 删除【请填写功能名称】
      * 
      * @param id 【请填写功能名称】ID

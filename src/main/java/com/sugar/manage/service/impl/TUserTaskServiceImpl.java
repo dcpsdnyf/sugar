@@ -430,7 +430,40 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         return 0;
 
     }
+    @Override
+    public int examine(String projectId,String staus) throws ParseException {
+        TDelay delay = new TDelay();
+        delay.setProjectId(projectId);
+        delay.setStatus("99");
+        if("0".equals(staus)) {
+            delay.setAuditingStatus("0");
+            int count = tDelayMapper.udaDelay(delay);
+            if (count > 0) {
+                List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+                TUserTask task = new TUserTask();
+                task.setProjectId(projectId);
+                task.setStartTime(tUserTaskMapper.getProject(projectId).getStartTime());
+                for (TDelay s : delayList) {
+                    task.setDelayDay(s.getDelayTime());
+                    task.setDelayPeople(s.getDelayPeopleName());
+                }
+                task.setStartTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
+                task.setTaskStatus("2");
+                count=tUserTaskMapper.updateTUserTask(task);
+                if(count>0){
+                    return 1;
+                }else {
+                    return 0;
+                }
 
+            }
+        }
+        else {
+            int count = tDelayMapper.udaDelay(delay);
+            return 0;
+        }
+        return 0;
+    }
 
     /**
      * 16      * 指定日期加上天数后的日期

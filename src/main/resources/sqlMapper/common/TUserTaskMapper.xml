@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
         </trim>
-        where id = #{id}
+        where PROJECT_ID = #{projectId}
     </update>
     <update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
@@ -160,6 +160,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="getProject" parameterType="String" resultMap="TUserTaskResult">
+    <include refid="selectTUserTaskVo"/>
+    WHERE
+    PROJECT_ID = #{projectId}
+    </select>
+
 
     <select id="getTaskInfoByUserIdAndProjectIdtask1" parameterType="String" resultMap="TUserTaskResult">
         <include refid="selectTUserTaskVo"/>

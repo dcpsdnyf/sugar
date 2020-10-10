@@ -85,6 +85,8 @@ public interface TUserTaskMapper
 
     public TUserTask getTaskProject(String projectId);
 
+    public TUserTask getProject(String projectId);
+
     //public String getStartTimeByPrincipaiAndPJId(String userName,String projectId);
 
     public TUserTask getTaskInfoByPrincipalAndPJId(String userName,String projectId);

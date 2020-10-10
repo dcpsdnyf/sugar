@@ -6,6 +6,7 @@ import com.sugar.common.utils.CookieUtils;
 import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProject;
+import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -307,6 +309,26 @@ private ISugarProjectSV iSugarProjectSV;
             JsonUtil.write(response,result);
         }
 
+        return null;
+    }
+    /**
+     * 审核申请延期接口
+     * @return
+     */
+    @RequestMapping("/examine")
+    @ResponseBody
+    public String examine(String projectId,String staus,HttpServletRequest request, HttpServletResponse response) throws Exception{
+        if (StringUtils.isBlank(projectId)) {
+            return null;
+        }
+        if (StringUtils.isBlank(staus)) {
+            return null;
+        }
+        if(itUserTaskService.examine(projectId,staus)>0){
+            JSONObject result=new JSONObject();
+            result.put("success",Boolean.TRUE);
+            JsonUtil.write(response,result);
+        }
         return null;
     }
 
