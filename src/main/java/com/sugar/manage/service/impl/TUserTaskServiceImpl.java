@@ -467,6 +467,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tkuse.setTaskName(tkuser.getTaskName());
             tkuse.setProjectId(projectId);
             tkuse.setTaskPrincipal(tk.getTaskPrincipal());
+            tkuse.setStartTime(tk.getStartTime());
             tkuse.setTaskInfo("延期申请");
             tkuse.setTaskStatus("0");
            int coun = tUserTaskMapper.insertTUserTask(tkuse);
@@ -494,16 +495,16 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             int count = tDelayMapper.udaDelay(delay);
             if (count > 0) {
                 List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
-
                 TUserTask task = new TUserTask();
                 for (TDelay s : delayList) {
                     task.setDelayDay(s.getDelayTime());
                     task.setDelayPeople(s.getDelayPeopleName());
-                    task.setTaskPrincipal(s.getDelayPeopleName());
+                    task.setTaskPrincipal(s.getAuditingPeopleName());
                 }
                 task.setProjectId(projectId);
-                task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal()).getStartTime());
-                task.setStartTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
+                task.setTaskInfo("延期申请");
+                task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal(),task.getTaskInfo()).getStartTime());
+                task.setEndTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
                 task.setTaskStatus("2");
                 count=tUserTaskMapper.updateTUserTask(task);
                 if(count>0){
@@ -514,7 +515,19 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             }
         }
         else {
+            delay.setAuditingStatus("1");
             int count = tDelayMapper.udaDelay(delay);
+            List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+            TUserTask task = new TUserTask();
+            for (TDelay s : delayList) {
+                task.setDelayDay(s.getDelayTime());
+                task.setDelayPeople(s.getDelayPeopleName());
+                task.setTaskPrincipal(s.getAuditingPeopleName());
+            }
+            task.setProjectId(projectId);
+            task.setTaskStatus("2");
+            task.setTaskInfo("延期申请");
+            tUserTaskMapper.updateTUserTask(task);
             return 0;
         }
         return 0;

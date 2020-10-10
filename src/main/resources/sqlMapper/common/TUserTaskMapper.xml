@@ -124,6 +124,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
         </trim>
         where PROJECT_ID = #{projectId}
+        AND
+        TASK_PRINCIPAL = #{taskPrincipal}
+        AND
+        TASK_INFO = #{taskInfo}
     </update>
     <update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
@@ -167,6 +171,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     PROJECT_ID = #{projectId}
     AND
     TASK_PRINCIPAL = #{taskPrincipal}
+    AND
+    TASK_INFO = #{taskInfo}
     </select>
 
 
@@ -269,7 +275,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         UPDATE
         t_user_task
         SET
-        TASK_STATUS = '2'
+        TASK_STATUS = '2',END_TIME = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
         WHERE
         PROJECT_ID = #{projectId}
         AND

@@ -126,7 +126,11 @@ function backlog() {
 			halign: "center",
 			field: 'taskSubName',
 			switchable: false,
-			title: '任务子名称'
+			title: '任务子名称',
+			formatter: function (value, row, index) {
+				var taskSubName = getTaskSubName(value);
+				return taskSubName;
+			}
 		},{
 			align: "center",
 			halign: "center",
@@ -313,6 +317,11 @@ function finished() {
 			field: 'taskSubName',
 			switchable: false,
 			title: '任务子名称',
+			formatter: function (value, row, index) {
+				var taskSubName = getTaskSubName(value);
+				return taskSubName;
+			}
+
 		},{
 			align: "center",
 			halign: "center",
@@ -324,24 +333,115 @@ function finished() {
 			halign: "center",
 			field: 'endTime',
 			switchable: false,
-			title: '完成时间',
+			title: '完成时间'
 		},{
 			align: "center",
 			halign: "center",
 			field: 'taskInfo',
-			title: '任务内容',
-			editable: {
-				type: 'textarea',
-				rows:"3",
-				title: '任务内容',
-				validate: function (v) {
-					if (!v) return '不能为空';
-
-				}
-			}
+			title: '任务内容'
 		}],
 
 	});
+}
+
+function getTaskSubName(value) {
+	var taskSubName = "";
+	switch (value) {
+		case "100": taskSubName = "商机线索开启";
+			break;
+		case "101": taskSubName = "1、商机线索0%";
+			break;
+		case "102": taskSubName = "2、商机发现10%";
+			break;
+		case "103": taskSubName = "3、商机确立25%";
+			break;
+		case "104": taskSubName = "4、商机确立50%";
+			break;
+		case "105": taskSubName = "5、商机确认75%";
+			break;
+		case "106": taskSubName = "6、商机赢取100%";
+			break;
+		case "107": taskSubName = "7、客户维护/回款阶段";
+			break;
+		case "108": taskSubName = "商机关闭";
+			break;
+		case "201": taskSubName = "1、初步意向方案";
+			break;
+		case "202": taskSubName = "2、写立项方案";
+			break;
+		case "203": taskSubName = "3、工时评估";
+			break;
+		case "204": taskSubName = "4、商务谈判";
+			break;
+		case "205": taskSubName = "5、请示拟写";
+			break;
+		case "206": taskSubName = "6、上会";
+			break;
+		case "207": taskSubName = "7、招投标";
+			break;
+		case "208": taskSubName = "8、请示OA审批";
+			break;
+		case "209": taskSubName = "9、合同拟写";
+			break;
+		case "210": taskSubName = "10、律师审核";
+			break;
+		case "211": taskSubName = "11、合同OA审批";
+			break;
+		case "212": taskSubName = "12、用章";
+			break;
+		case "213": taskSubName = "13、对方盖章";
+			break;
+		case "214": taskSubName = "14、扫描";
+			break;
+		case "215": taskSubName = "15、综合部归档";
+			break;
+		case "216": taskSubName = "16、首付款";
+			break;
+		case "217": taskSubName = "17、进度款";
+			break;
+		case "218": taskSubName = "18、尾款";
+			break;
+		case "301": taskSubName = "1、设计概要";
+			break;
+		case "302": taskSubName = "2、详细设计";
+			break;
+		case "303": taskSubName = "3、UI设计";
+			break;
+		case "304": taskSubName = "4、需求设计";
+			break;
+		case "305": taskSubName = "5、需求评审";
+			break;
+		case "306": taskSubName = "6、需求单确认";
+			break;
+		case "307": taskSubName = "7、验收";
+			break;
+		case "401": taskSubName = "1、技术选型";
+			break;
+		case "402": taskSubName = "2、环境部署";
+			break;
+		case "403": taskSubName = "3、框架设计";
+			break;
+		case "404": taskSubName = "4、开发进度10%";
+			break;
+		case "405": taskSubName = "5、开发进度25%";
+			break;
+		case "406": taskSubName = "6、开发进度50%";
+			break;
+		case "407": taskSubName = "7、开发进度75%";
+			break;
+		case "408": taskSubName = "8、开发进度100%";
+			break;
+		case "409": taskSubName = "9、内部测试优化";
+			break;
+		case "410": taskSubName = "10、客户测试优化";
+			break;
+		case "411": taskSubName = "11、实施交付";
+			break;
+		case "412": taskSubName = "12、验收";
+			break;
+
+	}
+	return taskSubName;
 }
 
 
