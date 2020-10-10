@@ -89,4 +89,6 @@ public interface TUserTaskMapper
     public TUserTask getPrincipal(@Param("projectId") String projectId,@Param("taskName") String taskName);
 
     public TUserTask getOnlyAddPricipalTKName1(String projectId);
+
+    public int updateTUserTaskById(TUserTask tUserTask);
 }
