@@ -390,6 +390,8 @@ public class SugarManageController extends AppBaseController {
             setUserTimes("2",map,UserTaskTimes);
             setUserTimes("3",map,UserTaskTimes);
             setUserTimes("4",map,UserTaskTimes);
+            setUserTimes("5",map,UserTaskTimes);
+            setUserTimes("6",map,UserTaskTimes);
             return UserTaskTimes;
         }
         return null;
@@ -399,20 +401,24 @@ public class SugarManageController extends AppBaseController {
         List<TUserTask> tUserTasks = new ArrayList<>();
         projectChartVO chartVO = new projectChartVO();
         String[] projectStage = {"商机推进阶段","采购阶段","产品阶段","研发阶段", "运营阶段","运维阶段"};
-        //商机推进
-        tUserTasks =  map.get(key);
-        if (key.equals(tUserTasks.get(0).getTaskName())){
+        if(!CollectionUtils.isEmpty(map)) {
+            //商机推进
+            tUserTasks = map.get(key);
+        }
+        if (tUserTasks!=null && key.equals(tUserTasks.get(0).getTaskName())){
             chartVO.setTaskName(key);
             chartVO.setProjectStage(projectStage[Integer.parseInt(key)-1]);
             chartVO.setStartTime(tUserTasks.get(0).getStartTime());
         }
-        if (StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
+        if (tUserTasks!=null && StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             chartVO.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
-        }else {
+        }
+        if(tUserTasks!=null && !StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             chartVO.setEndTime(tUserTasks.get(tUserTasks.size()-1).getEndTime());
         }
-        UserTaskTimes.add(chartVO);
-
+        if(chartVO!=null) {
+            UserTaskTimes.add(chartVO);
+        }
 /*        UserTaskTimes.add(tUserTasks.get(0));
         if(StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             tUserTasks.get(tUserTasks.size()-1).setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));

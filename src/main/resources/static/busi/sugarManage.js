@@ -404,275 +404,78 @@ $(function () {
 		onLoadSuccess: function (data) {
 			//var data = $('#tb_user').bootstrapTable('getData', true);
 			var rows = data.rows;
+			if(rows!=null) {
 			for (var k = 0; k < rows.length; k++) {
-				var id = rows[k].id;    //项目id
-				var productType = rows[k].productType;  //产品类型
-				var platformName = rows[k].platformName;    //平台名称
-				//======================商机推进阶段======================
-				var businessClueOpen = rows[k].businessClueOpen == null ? '' : rows[k].businessClueOpen; //商机线索
-				var businessClose = rows[k].businessClose == null ? '' : rows[k].businessClose;  //商机关闭
-				var businessClue0 = rows[k].businessClue0 == null ? '' : rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
-				var businessDiscover10 = rows[k].businessDiscover10 == null ? '' : rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
-				var businessEstablish25 = rows[k].businessEstablish25 == null ? '' : rows[k].businessEstablish25;//3、商机确立25%：客户明确购买意愿/立项/预算
-				var businessEstablish50 = rows[k].businessEstablish50 == null ? '' : rows[k].businessEstablish50;//4、商机确立50%：客户启动招标/采购流程、我方入围
-				var businessEstablish75 = rows[k].businessEstablish75 == null ? '' : rows[k].businessEstablish75;//5、商机确认75%：客户招标/采购，我方交流需求细则
-				var businessWin100 = rows[k].businessWin100 == null ? '' : rows[k].businessWin100;          // 6、商机赢取100%：合同签订
-				var customerMaintainBackMoney = rows[k].customerMaintainBackMoney == null ? '' : rows[k].customerMaintainBackMoney;// 7、客户维护/回款阶段
-				//======================采购阶段======================
-				var initialIntentionPlan = rows[k].initialIntentionPlan == null ? '' : rows[k].initialIntentionPlan;     //1、初步意向方案（采购阶段）
-				var writeProjectProposal = rows[k].writeProjectProposal == null ? '' : rows[k].writeProjectProposal;     // 2、写立项方案
-				var workingHoursAssess = rows[k].workingHoursAssess == null ? '' : rows[k].workingHoursAssess;         // 3、工时评估
-				var businessNegotiation = rows[k].businessNegotiation == null ? '' : rows[k].businessNegotiation;       // 4、商务谈判
-				var requestDraft = rows[k].requestDraft == null ? '' : rows[k].requestDraft;                     // 5、请示拟写
-				var attendMeeting = rows[k].attendMeeting == null ? '' : rows[k].attendMeeting;                   // 6、上会
-				var bidding = rows[k].bidding == null ? '' : rows[k].bidding;                               // 7、招投标
-				var requestOaApproval = rows[k].requestOaApproval == null ? '' : rows[k].requestOaApproval;           // 8、请示OA审批
-				var contractDraft = rows[k].contractDraft == null ? '' : rows[k].contractDraft;                   // 9、合同拟写
-				var lawyerReview = rows[k].lawyerReview == null ? '' : rows[k].lawyerReview;                     // 10、律师审核
-				var contractOaApproval = rows[k].contractOaApproval == null ? '' : rows[k].contractOaApproval;         // 11、合同OA审批
-				var usageSeal = rows[k].usageSeal == null ? '' : rows[k].usageSeal;                           // 12、用章
-				var otherSeal = rows[k].otherSeal == null ? '' : rows[k].otherSeal;                           // 13、对方盖章
-				var scan = rows[k].scan == null ? '' : rows[k].scan;                                     // 14、扫描
-				var generalDepartmentFile = rows[k].generalDepartmentFile == null ? '' : rows[k].generalDepartmentFile;   // 15、综合部归档
-				var firstPayment = rows[k].firstPayment == null ? '' : rows[k].firstPayment;                     // 16、首付款
-				var progressPayment = rows[k].progressPayment == null ? '' : rows[k].progressPayment;               // 17、进度款
-				var finalPayment = rows[k].finalPayment == null ? '' : rows[k].finalPayment;                     // 18、尾款
-				//======================产品阶段======================
-				var designBrief = rows[k].designBrief == null ? '' : rows[k].designBrief;                       // 1、设计概要
-				var detailedDesign = rows[k].detailedDesign == null ? '' : rows[k].detailedDesign;                 // 2、详细设计
-				var uiDesign = rows[k].uiDesign == null ? '' : rows[k].uiDesign;                             // 3、UI设计
-				var requirementDesign = rows[k].requirementDesign == null ? '' : rows[k].requirementDesign;           // 4、需求设计
-				var requirementsReview = rows[k].requirementsReview == null ? '' : rows[k].requirementsReview;         // 5、需求评审
-				var demandOrderConfirm = rows[k].demandOrderConfirm == null ? '' : rows[k].demandOrderConfirm;         // 6、需求单确认
-				var proCheckDeliver = rows[k].proCheckDeliver == null ? '' : rows[k].proCheckDeliver;               // 7、验收
+					var id = rows[k].id;    //项目id
+					var productType = rows[k].productType;  //产品类型
+					var platformName = rows[k].platformName;    //平台名称
+					//======================商机推进阶段======================
+					var businessClueOpen = rows[k].businessClueOpen == null ? '' : rows[k].businessClueOpen; //商机线索
+					var businessClose = rows[k].businessClose == null ? '' : rows[k].businessClose;  //商机关闭
+					var businessClue0 = rows[k].businessClue0 == null ? '' : rows[k].businessClue0;  //1、商机线索0%：我方分析客户存在潜在需求
+					var businessDiscover10 = rows[k].businessDiscover10 == null ? '' : rows[k].businessDiscover10; //2、商机发现10%：深入交流明确需求
+					var businessEstablish25 = rows[k].businessEstablish25 == null ? '' : rows[k].businessEstablish25;//3、商机确立25%：客户明确购买意愿/立项/预算
+					var businessEstablish50 = rows[k].businessEstablish50 == null ? '' : rows[k].businessEstablish50;//4、商机确立50%：客户启动招标/采购流程、我方入围
+					var businessEstablish75 = rows[k].businessEstablish75 == null ? '' : rows[k].businessEstablish75;//5、商机确认75%：客户招标/采购，我方交流需求细则
+					var businessWin100 = rows[k].businessWin100 == null ? '' : rows[k].businessWin100;          // 6、商机赢取100%：合同签订
+					var customerMaintainBackMoney = rows[k].customerMaintainBackMoney == null ? '' : rows[k].customerMaintainBackMoney;// 7、客户维护/回款阶段
+					//======================采购阶段======================
+					var initialIntentionPlan = rows[k].initialIntentionPlan == null ? '' : rows[k].initialIntentionPlan;     //1、初步意向方案（采购阶段）
+					var writeProjectProposal = rows[k].writeProjectProposal == null ? '' : rows[k].writeProjectProposal;     // 2、写立项方案
+					var workingHoursAssess = rows[k].workingHoursAssess == null ? '' : rows[k].workingHoursAssess;         // 3、工时评估
+					var businessNegotiation = rows[k].businessNegotiation == null ? '' : rows[k].businessNegotiation;       // 4、商务谈判
+					var requestDraft = rows[k].requestDraft == null ? '' : rows[k].requestDraft;                     // 5、请示拟写
+					var attendMeeting = rows[k].attendMeeting == null ? '' : rows[k].attendMeeting;                   // 6、上会
+					var bidding = rows[k].bidding == null ? '' : rows[k].bidding;                               // 7、招投标
+					var requestOaApproval = rows[k].requestOaApproval == null ? '' : rows[k].requestOaApproval;           // 8、请示OA审批
+					var contractDraft = rows[k].contractDraft == null ? '' : rows[k].contractDraft;                   // 9、合同拟写
+					var lawyerReview = rows[k].lawyerReview == null ? '' : rows[k].lawyerReview;                     // 10、律师审核
+					var contractOaApproval = rows[k].contractOaApproval == null ? '' : rows[k].contractOaApproval;         // 11、合同OA审批
+					var usageSeal = rows[k].usageSeal == null ? '' : rows[k].usageSeal;                           // 12、用章
+					var otherSeal = rows[k].otherSeal == null ? '' : rows[k].otherSeal;                           // 13、对方盖章
+					var scan = rows[k].scan == null ? '' : rows[k].scan;                                     // 14、扫描
+					var generalDepartmentFile = rows[k].generalDepartmentFile == null ? '' : rows[k].generalDepartmentFile;   // 15、综合部归档
+					var firstPayment = rows[k].firstPayment == null ? '' : rows[k].firstPayment;                     // 16、首付款
+					var progressPayment = rows[k].progressPayment == null ? '' : rows[k].progressPayment;               // 17、进度款
+					var finalPayment = rows[k].finalPayment == null ? '' : rows[k].finalPayment;                     // 18、尾款
+					//======================产品阶段======================
+					var designBrief = rows[k].designBrief == null ? '' : rows[k].designBrief;                       // 1、设计概要
+					var detailedDesign = rows[k].detailedDesign == null ? '' : rows[k].detailedDesign;                 // 2、详细设计
+					var uiDesign = rows[k].uiDesign == null ? '' : rows[k].uiDesign;                             // 3、UI设计
+					var requirementDesign = rows[k].requirementDesign == null ? '' : rows[k].requirementDesign;           // 4、需求设计
+					var requirementsReview = rows[k].requirementsReview == null ? '' : rows[k].requirementsReview;         // 5、需求评审
+					var demandOrderConfirm = rows[k].demandOrderConfirm == null ? '' : rows[k].demandOrderConfirm;         // 6、需求单确认
+					var proCheckDeliver = rows[k].proCheckDeliver == null ? '' : rows[k].proCheckDeliver;               // 7、验收
 
-				//======================研发阶段======================
-				var technologySelection = rows[k].technologySelection == null ? '' : rows[k].technologySelection;      //1、技术选型
-				var environmentDeployment = rows[k].environmentDeployment == null ? '' : rows[k].environmentDeployment;  //2、环境部署
-				var frameworkDesign = rows[k].frameworkDesign == null ? '' : rows[k].frameworkDesign;              //  3、框架设计
-				var developProgress10 = rows[k].developProgress10 == null ? '' : rows[k].developProgress10;          //4、开发进度10%
-				var developProgress25 = rows[k].developProgress25 == null ? '' : rows[k].developProgress25;          //5、开发进度25%
-				var developProgress50 = rows[k].developProgress50 == null ? '' : rows[k].developProgress50;          //6、开发进度50%
-				var developProgress75 = rows[k].developProgress75 == null ? '' : rows[k].developProgress75;          //7、开发进度75%
-				var developProgress100 = rows[k].developProgress100 == null ? '' : rows[k].developProgress100;        //8、开发进度100%
-				var insideTest = rows[k].insideTest == null ? '' : rows[k].insideTest;                        //9、内部测试优化
-				var customerTest = rows[k].customerTest == null ? '' : rows[k].customerTest;                    //10、客户测试优化
-				var implementDeliver = rows[k].implementDeliver == null ? '' : rows[k].implementDeliver;            //11、实施交付
-				var checkDeliver = rows[k].checkDeliver == null ? '' : rows[k].checkDeliver;                    //12、验收
+					//======================研发阶段======================
+					var technologySelection = rows[k].technologySelection == null ? '' : rows[k].technologySelection;      //1、技术选型
+					var environmentDeployment = rows[k].environmentDeployment == null ? '' : rows[k].environmentDeployment;  //2、环境部署
+					var frameworkDesign = rows[k].frameworkDesign == null ? '' : rows[k].frameworkDesign;              //  3、框架设计
+					var developProgress10 = rows[k].developProgress10 == null ? '' : rows[k].developProgress10;          //4、开发进度10%
+					var developProgress25 = rows[k].developProgress25 == null ? '' : rows[k].developProgress25;          //5、开发进度25%
+					var developProgress50 = rows[k].developProgress50 == null ? '' : rows[k].developProgress50;          //6、开发进度50%
+					var developProgress75 = rows[k].developProgress75 == null ? '' : rows[k].developProgress75;          //7、开发进度75%
+					var developProgress100 = rows[k].developProgress100 == null ? '' : rows[k].developProgress100;        //8、开发进度100%
+					var insideTest = rows[k].insideTest == null ? '' : rows[k].insideTest;                        //9、内部测试优化
+					var customerTest = rows[k].customerTest == null ? '' : rows[k].customerTest;                    //10、客户测试优化
+					var implementDeliver = rows[k].implementDeliver == null ? '' : rows[k].implementDeliver;            //11、实施交付
+					var checkDeliver = rows[k].checkDeliver == null ? '' : rows[k].checkDeliver;                    //12、验收
 
-				//======================运营阶段======================
-				var operationPhase = rows[k].operationPhase == null ? '' : rows[k].operationPhase;
+					//======================运营阶段======================
+					var operationPhase = rows[k].operationPhase == null ? '' : rows[k].operationPhase;
 
-				//======================运营阶段======================
-				var maintainPhase = rows[k].maintainPhase == null ? '' : rows[k].maintainPhase;
-				if (!rows[k].rowEdit) {
-					var productTypeObj = $('#tb_user tr[data-index=' + k + '] a[data-name="productType"]').parent();
-					$(productTypeObj).empty();
-					$(productTypeObj).text(productType);
+					//======================运营阶段======================
+					var maintainPhase = rows[k].maintainPhase == null ? '' : rows[k].maintainPhase;
+					if (!rows[k].rowEdit) {
+						var productTypeObj = $('#tb_user tr[data-index=' + k + '] a[data-name="productType"]').parent();
+						$(productTypeObj).empty();
+						$(productTypeObj).text(productType);
 
-					var platformNameObj = $('#tb_user tr[data-index=' + k + '] a[data-name="platformName"]').parent();
-					$(platformNameObj).empty();
-					$(platformNameObj).text(platformName);
+						var platformNameObj = $('#tb_user tr[data-index=' + k + '] a[data-name="platformName"]').parent();
+						$(platformNameObj).empty();
+						$(platformNameObj).text(platformName);
 
-					//==================商机推进阶段==================
-					var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClueOpen"]').parent();
-					$(obj1).empty();
-					$(obj1).text(businessClueOpen);
-
-					var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClose"]').parent();
-					$(obj2).empty();
-					$(obj2).text(businessClose);
-
-					var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
-					$(obj3).empty();
-					$(obj3).text(businessClue0);
-
-					var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessDiscover10"]').parent();
-					$(obj4).empty();
-					$(obj4).text(businessDiscover10);
-
-					var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish25"]').parent();
-					$(obj5).empty();
-					$(obj5).text(businessEstablish25);
-
-					var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish50"]').parent();
-					$(obj6).empty();
-					$(obj6).text(businessEstablish50);
-
-					var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish75"]').parent();
-					$(obj7).empty();
-					$(obj7).text(businessEstablish75);
-
-					var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessWin100"]').parent();
-					$(obj8).empty();
-					$(obj8).text(businessWin100);
-
-					var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerMaintainBackMoney"]').parent();
-					$(obj9).empty();
-					$(obj9).text(customerMaintainBackMoney);
-
-					//==================采购阶段==================
-					var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
-					$(obj10).empty();
-					$(obj10).text(initialIntentionPlan);
-
-					var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="writeProjectProposal"]').parent();
-					$(obj11).empty();
-					$(obj11).text(writeProjectProposal);
-
-					var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="workingHoursAssess"]').parent();
-					$(obj12).empty();
-					$(obj12).text(workingHoursAssess);
-
-					var obj13 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessNegotiation"]').parent();
-					$(obj13).empty();
-					$(obj13).text(businessNegotiation);
-
-					var obj14 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestDraft"]').parent();
-					$(obj14).empty();
-					$(obj14).text(requestDraft);
-
-					var obj15 = $('#tb_user tr[data-index=' + k + '] a[data-name="attendMeeting"]').parent();
-					$(obj15).empty();
-					$(obj15).text(attendMeeting);
-
-					var obj16 = $('#tb_user tr[data-index=' + k + '] a[data-name="bidding"]').parent();
-					$(obj16).empty();
-					$(obj16).text(bidding);
-
-					var obj17 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestOaApproval"]').parent();
-					$(obj17).empty();
-					$(obj17).text(requestOaApproval);
-
-					var obj18 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractDraft"]').parent();
-					$(obj18).empty();
-					$(obj18).text(contractDraft);
-
-					var obj19 = $('#tb_user tr[data-index=' + k + '] a[data-name="lawyerReview"]').parent();
-					$(obj19).empty();
-					$(obj19).text(lawyerReview);
-
-					var obj20 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractOaApproval"]').parent();
-					$(obj20).empty();
-					$(obj20).text(contractOaApproval);
-
-					var obj21 = $('#tb_user tr[data-index=' + k + '] a[data-name="usageSeal"]').parent();
-					$(obj21).empty();
-					$(obj21).text(usageSeal);
-
-					var obj22 = $('#tb_user tr[data-index=' + k + '] a[data-name="otherSeal"]').parent();
-					$(obj22).empty();
-					$(obj22).text(otherSeal);
-
-					var obj23 = $('#tb_user tr[data-index=' + k + '] a[data-name="scan"]').parent();
-					$(obj23).empty();
-					$(obj23).text(scan);
-
-					var obj24 = $('#tb_user tr[data-index=' + k + '] a[data-name="generalDepartmentFile"]').parent();
-					$(obj24).empty();
-					$(obj24).text(generalDepartmentFile);
-
-					var obj25 = $('#tb_user tr[data-index=' + k + '] a[data-name="firstPayment"]').parent();
-					$(obj25).empty();
-					$(obj25).text(firstPayment);
-
-					var obj26 = $('#tb_user tr[data-index=' + k + '] a[data-name="progressPayment"]').parent();
-					$(obj26).empty();
-					$(obj26).text(progressPayment);
-
-					var obj27 = $('#tb_user tr[data-index=' + k + '] a[data-name="finalPayment"]').parent();
-					$(obj27).empty();
-					$(obj27).text(finalPayment);
-
-					//==================产品阶段==================
-					var obj28 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
-					$(obj28).empty();
-					$(obj28).text(designBrief);
-
-					var obj29 = $('#tb_user tr[data-index=' + k + '] a[data-name="detailedDesign"]').parent();
-					$(obj29).empty();
-					$(obj29).text(detailedDesign);
-
-					var obj30 = $('#tb_user tr[data-index=' + k + '] a[data-name="uiDesign"]').parent();
-					$(obj30).empty();
-					$(obj30).text(uiDesign);
-
-					var obj31 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementDesign"]').parent();
-					$(obj31).empty();
-					$(obj31).text(requirementDesign);
-
-					var obj32 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementsReview"]').parent();
-					$(obj32).empty();
-					$(obj32).text(requirementsReview);
-
-					var obj33 = $('#tb_user tr[data-index=' + k + '] a[data-name="demandOrderConfirm"]').parent();
-					$(obj33).empty();
-					$(obj33).text(demandOrderConfirm);
-
-					var obj34 = $('#tb_user tr[data-index=' + k + '] a[data-name="proCheckDeliver"]').parent();
-					$(obj34).empty();
-					$(obj34).text(proCheckDeliver);
-
-					//==================研发阶段==================
-					var obj35 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
-					$(obj35).empty();
-					$(obj35).text(technologySelection);
-
-					var obj36 = $('#tb_user tr[data-index=' + k + '] a[data-name="environmentDeployment"]').parent();
-					$(obj36).empty();
-					$(obj36).text(environmentDeployment);
-
-					var obj37 = $('#tb_user tr[data-index=' + k + '] a[data-name="frameworkDesign"]').parent();
-					$(obj37).empty();
-					$(obj37).text(frameworkDesign);
-
-					var obj38 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress10"]').parent();
-					$(obj38).empty();
-					$(obj38).text(developProgress10);
-
-					var obj39 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress25"]').parent();
-					$(obj39).empty();
-					$(obj39).text(developProgress25);
-
-					var obj40 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress50"]').parent();
-					$(obj40).empty();
-					$(obj40).text(developProgress50);
-
-					var obj41 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress75"]').parent();
-					$(obj41).empty();
-					$(obj41).text(developProgress75);
-
-					var obj42 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress100"]').parent();
-					$(obj42).empty();
-					$(obj42).text(developProgress100);
-
-					var obj43 = $('#tb_user tr[data-index=' + k + '] a[data-name="insideTest"]').parent();
-					$(obj43).empty();
-					$(obj43).text(insideTest);
-
-					var obj44 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerTest"]').parent();
-					$(obj44).empty();
-					$(obj44).text(customerTest);
-
-					var obj45 = $('#tb_user tr[data-index=' + k + '] a[data-name="implementDeliver"]').parent();
-					$(obj45).empty();
-					$(obj45).text(implementDeliver);
-
-					var obj46 = $('#tb_user tr[data-index=' + k + '] a[data-name="checkDeliver"]').parent();
-					$(obj46).empty();
-					$(obj46).text(checkDeliver);
-
-					//==================运营阶段==================
-					var obj47 = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
-					$(obj47).empty();
-					$(obj47).text(operationPhase);
-					//==================运维阶段==================
-					var obj48 = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
-					$(obj48).empty();
-					$(obj48).text(maintainPhase);
-
-				} else {
-					if (!rows[k].depMiddLelevel) { //项目名称
+						//==================商机推进阶段==================
 						var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClueOpen"]').parent();
 						$(obj1).empty();
 						$(obj1).text(businessClueOpen);
@@ -680,205 +483,404 @@ $(function () {
 						var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClose"]').parent();
 						$(obj2).empty();
 						$(obj2).text(businessClose);
-					}
-					if (!rows[k].businessManager) {
-						var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
-						$(obj1).empty();
-						$(obj1).text(businessClue0);
 
-						var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessDiscover10"]').parent();
-						$(obj2).empty();
-						$(obj2).text(businessDiscover10);
-
-						var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish25"]').parent();
+						var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
 						$(obj3).empty();
-						$(obj3).text(businessEstablish25);
+						$(obj3).text(businessClue0);
 
-						var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish50"]').parent();
+						var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessDiscover10"]').parent();
 						$(obj4).empty();
-						$(obj4).text(businessEstablish50);
+						$(obj4).text(businessDiscover10);
 
-						var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish75"]').parent();
+						var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish25"]').parent();
 						$(obj5).empty();
-						$(obj5).text(businessEstablish75);
+						$(obj5).text(businessEstablish25);
 
-						var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessWin100"]').parent();
+						var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish50"]').parent();
 						$(obj6).empty();
-						$(obj6).text(businessWin100);
+						$(obj6).text(businessEstablish50);
 
-						var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerMaintainBackMoney"]').parent();
+						var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish75"]').parent();
 						$(obj7).empty();
-						$(obj7).text(customerMaintainBackMoney);
-					}
-					if (!rows[k].projectManagement) {
-						var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
-						$(obj1).empty();
-						$(obj1).text(initialIntentionPlan);
+						$(obj7).text(businessEstablish75);
 
-						var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="writeProjectProposal"]').parent();
-						$(obj2).empty();
-						$(obj2).text(writeProjectProposal);
-
-						var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="workingHoursAssess"]').parent();
-						$(obj3).empty();
-						$(obj3).text(workingHoursAssess);
-
-						var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessNegotiation"]').parent();
-						$(obj4).empty();
-						$(obj4).text(businessNegotiation);
-
-						var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestDraft"]').parent();
-						$(obj5).empty();
-						$(obj5).text(requestDraft);
-
-						var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="attendMeeting"]').parent();
-						$(obj6).empty();
-						$(obj6).text(attendMeeting);
-
-						var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="bidding"]').parent();
-						$(obj7).empty();
-						$(obj7).text(bidding);
-
-						var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestOaApproval"]').parent();
+						var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessWin100"]').parent();
 						$(obj8).empty();
-						$(obj8).text(requestOaApproval);
+						$(obj8).text(businessWin100);
 
-						var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractDraft"]').parent();
+						var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerMaintainBackMoney"]').parent();
 						$(obj9).empty();
-						$(obj9).text(contractDraft);
+						$(obj9).text(customerMaintainBackMoney);
 
-						var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="lawyerReview"]').parent();
+						//==================采购阶段==================
+						var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
 						$(obj10).empty();
-						$(obj10).text(lawyerReview);
+						$(obj10).text(initialIntentionPlan);
 
-						var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractOaApproval"]').parent();
+						var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="writeProjectProposal"]').parent();
 						$(obj11).empty();
-						$(obj11).text(contractOaApproval);
+						$(obj11).text(writeProjectProposal);
 
-						var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="usageSeal"]').parent();
+						var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="workingHoursAssess"]').parent();
 						$(obj12).empty();
-						$(obj12).text(usageSeal);
+						$(obj12).text(workingHoursAssess);
 
-						var obj13 = $('#tb_user tr[data-index=' + k + '] a[data-name="otherSeal"]').parent();
+						var obj13 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessNegotiation"]').parent();
 						$(obj13).empty();
-						$(obj13).text(otherSeal);
+						$(obj13).text(businessNegotiation);
 
-						var obj14 = $('#tb_user tr[data-index=' + k + '] a[data-name="scan"]').parent();
+						var obj14 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestDraft"]').parent();
 						$(obj14).empty();
-						$(obj14).text(scan);
+						$(obj14).text(requestDraft);
 
-						var obj15 = $('#tb_user tr[data-index=' + k + '] a[data-name="generalDepartmentFile"]').parent();
+						var obj15 = $('#tb_user tr[data-index=' + k + '] a[data-name="attendMeeting"]').parent();
 						$(obj15).empty();
-						$(obj15).text(generalDepartmentFile);
+						$(obj15).text(attendMeeting);
 
-						var obj16 = $('#tb_user tr[data-index=' + k + '] a[data-name="firstPayment"]').parent();
+						var obj16 = $('#tb_user tr[data-index=' + k + '] a[data-name="bidding"]').parent();
 						$(obj16).empty();
-						$(obj16).text(firstPayment);
+						$(obj16).text(bidding);
 
-						var obj17 = $('#tb_user tr[data-index=' + k + '] a[data-name="progressPayment"]').parent();
+						var obj17 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestOaApproval"]').parent();
 						$(obj17).empty();
-						$(obj17).text(progressPayment);
+						$(obj17).text(requestOaApproval);
 
-						var obj18 = $('#tb_user tr[data-index=' + k + '] a[data-name="finalPayment"]').parent();
+						var obj18 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractDraft"]').parent();
 						$(obj18).empty();
-						$(obj18).text(finalPayment);
+						$(obj18).text(contractDraft);
+
+						var obj19 = $('#tb_user tr[data-index=' + k + '] a[data-name="lawyerReview"]').parent();
+						$(obj19).empty();
+						$(obj19).text(lawyerReview);
+
+						var obj20 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractOaApproval"]').parent();
+						$(obj20).empty();
+						$(obj20).text(contractOaApproval);
+
+						var obj21 = $('#tb_user tr[data-index=' + k + '] a[data-name="usageSeal"]').parent();
+						$(obj21).empty();
+						$(obj21).text(usageSeal);
+
+						var obj22 = $('#tb_user tr[data-index=' + k + '] a[data-name="otherSeal"]').parent();
+						$(obj22).empty();
+						$(obj22).text(otherSeal);
+
+						var obj23 = $('#tb_user tr[data-index=' + k + '] a[data-name="scan"]').parent();
+						$(obj23).empty();
+						$(obj23).text(scan);
+
+						var obj24 = $('#tb_user tr[data-index=' + k + '] a[data-name="generalDepartmentFile"]').parent();
+						$(obj24).empty();
+						$(obj24).text(generalDepartmentFile);
+
+						var obj25 = $('#tb_user tr[data-index=' + k + '] a[data-name="firstPayment"]').parent();
+						$(obj25).empty();
+						$(obj25).text(firstPayment);
+
+						var obj26 = $('#tb_user tr[data-index=' + k + '] a[data-name="progressPayment"]').parent();
+						$(obj26).empty();
+						$(obj26).text(progressPayment);
+
+						var obj27 = $('#tb_user tr[data-index=' + k + '] a[data-name="finalPayment"]').parent();
+						$(obj27).empty();
+						$(obj27).text(finalPayment);
+
+						//==================产品阶段==================
+						var obj28 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
+						$(obj28).empty();
+						$(obj28).text(designBrief);
+
+						var obj29 = $('#tb_user tr[data-index=' + k + '] a[data-name="detailedDesign"]').parent();
+						$(obj29).empty();
+						$(obj29).text(detailedDesign);
+
+						var obj30 = $('#tb_user tr[data-index=' + k + '] a[data-name="uiDesign"]').parent();
+						$(obj30).empty();
+						$(obj30).text(uiDesign);
+
+						var obj31 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementDesign"]').parent();
+						$(obj31).empty();
+						$(obj31).text(requirementDesign);
+
+						var obj32 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementsReview"]').parent();
+						$(obj32).empty();
+						$(obj32).text(requirementsReview);
+
+						var obj33 = $('#tb_user tr[data-index=' + k + '] a[data-name="demandOrderConfirm"]').parent();
+						$(obj33).empty();
+						$(obj33).text(demandOrderConfirm);
+
+						var obj34 = $('#tb_user tr[data-index=' + k + '] a[data-name="proCheckDeliver"]').parent();
+						$(obj34).empty();
+						$(obj34).text(proCheckDeliver);
+
+						//==================研发阶段==================
+						var obj35 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
+						$(obj35).empty();
+						$(obj35).text(technologySelection);
+
+						var obj36 = $('#tb_user tr[data-index=' + k + '] a[data-name="environmentDeployment"]').parent();
+						$(obj36).empty();
+						$(obj36).text(environmentDeployment);
+
+						var obj37 = $('#tb_user tr[data-index=' + k + '] a[data-name="frameworkDesign"]').parent();
+						$(obj37).empty();
+						$(obj37).text(frameworkDesign);
+
+						var obj38 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress10"]').parent();
+						$(obj38).empty();
+						$(obj38).text(developProgress10);
+
+						var obj39 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress25"]').parent();
+						$(obj39).empty();
+						$(obj39).text(developProgress25);
+
+						var obj40 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress50"]').parent();
+						$(obj40).empty();
+						$(obj40).text(developProgress50);
+
+						var obj41 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress75"]').parent();
+						$(obj41).empty();
+						$(obj41).text(developProgress75);
+
+						var obj42 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress100"]').parent();
+						$(obj42).empty();
+						$(obj42).text(developProgress100);
+
+						var obj43 = $('#tb_user tr[data-index=' + k + '] a[data-name="insideTest"]').parent();
+						$(obj43).empty();
+						$(obj43).text(insideTest);
+
+						var obj44 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerTest"]').parent();
+						$(obj44).empty();
+						$(obj44).text(customerTest);
+
+						var obj45 = $('#tb_user tr[data-index=' + k + '] a[data-name="implementDeliver"]').parent();
+						$(obj45).empty();
+						$(obj45).text(implementDeliver);
+
+						var obj46 = $('#tb_user tr[data-index=' + k + '] a[data-name="checkDeliver"]').parent();
+						$(obj46).empty();
+						$(obj46).text(checkDeliver);
+
+						//==================运营阶段==================
+						var obj47 = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
+						$(obj47).empty();
+						$(obj47).text(operationPhase);
+						//==================运维阶段==================
+						var obj48 = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
+						$(obj48).empty();
+						$(obj48).text(maintainPhase);
+
+					} else {
+						if (!rows[k].depMiddLelevel) { //项目名称
+							var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClueOpen"]').parent();
+							$(obj1).empty();
+							$(obj1).text(businessClueOpen);
+
+							var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClose"]').parent();
+							$(obj2).empty();
+							$(obj2).text(businessClose);
+						}
+						if (!rows[k].businessManager) {
+							var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessClue0"]').parent();
+							$(obj1).empty();
+							$(obj1).text(businessClue0);
+
+							var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessDiscover10"]').parent();
+							$(obj2).empty();
+							$(obj2).text(businessDiscover10);
+
+							var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish25"]').parent();
+							$(obj3).empty();
+							$(obj3).text(businessEstablish25);
+
+							var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish50"]').parent();
+							$(obj4).empty();
+							$(obj4).text(businessEstablish50);
+
+							var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessEstablish75"]').parent();
+							$(obj5).empty();
+							$(obj5).text(businessEstablish75);
+
+							var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessWin100"]').parent();
+							$(obj6).empty();
+							$(obj6).text(businessWin100);
+
+							var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerMaintainBackMoney"]').parent();
+							$(obj7).empty();
+							$(obj7).text(customerMaintainBackMoney);
+						}
+						if (!rows[k].projectManagement) {
+							var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="initialIntentionPlan"]').parent();
+							$(obj1).empty();
+							$(obj1).text(initialIntentionPlan);
+
+							var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="writeProjectProposal"]').parent();
+							$(obj2).empty();
+							$(obj2).text(writeProjectProposal);
+
+							var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="workingHoursAssess"]').parent();
+							$(obj3).empty();
+							$(obj3).text(workingHoursAssess);
+
+							var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="businessNegotiation"]').parent();
+							$(obj4).empty();
+							$(obj4).text(businessNegotiation);
+
+							var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestDraft"]').parent();
+							$(obj5).empty();
+							$(obj5).text(requestDraft);
+
+							var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="attendMeeting"]').parent();
+							$(obj6).empty();
+							$(obj6).text(attendMeeting);
+
+							var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="bidding"]').parent();
+							$(obj7).empty();
+							$(obj7).text(bidding);
+
+							var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="requestOaApproval"]').parent();
+							$(obj8).empty();
+							$(obj8).text(requestOaApproval);
+
+							var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractDraft"]').parent();
+							$(obj9).empty();
+							$(obj9).text(contractDraft);
+
+							var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="lawyerReview"]').parent();
+							$(obj10).empty();
+							$(obj10).text(lawyerReview);
+
+							var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="contractOaApproval"]').parent();
+							$(obj11).empty();
+							$(obj11).text(contractOaApproval);
+
+							var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="usageSeal"]').parent();
+							$(obj12).empty();
+							$(obj12).text(usageSeal);
+
+							var obj13 = $('#tb_user tr[data-index=' + k + '] a[data-name="otherSeal"]').parent();
+							$(obj13).empty();
+							$(obj13).text(otherSeal);
+
+							var obj14 = $('#tb_user tr[data-index=' + k + '] a[data-name="scan"]').parent();
+							$(obj14).empty();
+							$(obj14).text(scan);
+
+							var obj15 = $('#tb_user tr[data-index=' + k + '] a[data-name="generalDepartmentFile"]').parent();
+							$(obj15).empty();
+							$(obj15).text(generalDepartmentFile);
+
+							var obj16 = $('#tb_user tr[data-index=' + k + '] a[data-name="firstPayment"]').parent();
+							$(obj16).empty();
+							$(obj16).text(firstPayment);
+
+							var obj17 = $('#tb_user tr[data-index=' + k + '] a[data-name="progressPayment"]').parent();
+							$(obj17).empty();
+							$(obj17).text(progressPayment);
+
+							var obj18 = $('#tb_user tr[data-index=' + k + '] a[data-name="finalPayment"]').parent();
+							$(obj18).empty();
+							$(obj18).text(finalPayment);
+
+						}
+						if (!rows[k].productManager) {
+							var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
+							$(obj1).empty();
+							$(obj1).text(designBrief);
+
+							var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="detailedDesign"]').parent();
+							$(obj2).empty();
+							$(obj2).text(detailedDesign);
+
+							var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="uiDesign"]').parent();
+							$(obj3).empty();
+							$(obj3).text(uiDesign);
+
+							var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementDesign"]').parent();
+							$(obj4).empty();
+							$(obj4).text(requirementDesign);
+
+							var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementsReview"]').parent();
+							$(obj5).empty();
+							$(obj5).text(requirementsReview);
+
+							var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="demandOrderConfirm"]').parent();
+							$(obj6).empty();
+							$(obj6).text(demandOrderConfirm);
+
+							var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="proCheckDeliver"]').parent();
+							$(obj7).empty();
+							$(obj7).text(proCheckDeliver);
+						}
+
+						if (!rows[k].developManager) {
+							var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
+							$(obj1).empty();
+							$(obj1).text(technologySelection);
+
+							var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="environmentDeployment"]').parent();
+							$(obj12).empty();
+							$(obj2).text(environmentDeployment);
+
+							var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="frameworkDesign"]').parent();
+							$(obj3).empty();
+							$(obj3).text(frameworkDesign);
+
+							var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress10"]').parent();
+							$(obj4).empty();
+							$(obj4).text(developProgress10);
+
+							var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress25"]').parent();
+							$(obj5).empty();
+							$(obj5).text(developProgress25);
+
+							var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress50"]').parent();
+							$(obj6).empty();
+							$(obj6).text(developProgress50);
+
+							var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress75"]').parent();
+							$(obj7).empty();
+							$(obj7).text(developProgress75);
+
+							var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress100"]').parent();
+							$(obj8).empty();
+							$(obj8).text(developProgress100);
+
+							var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="insideTest"]').parent();
+							$(obj9).empty();
+							$(obj9).text(insideTest);
+
+							var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerTest"]').parent();
+							$(obj10).empty();
+							$(obj10).text(customerTest);
+
+							var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="implementDeliver"]').parent();
+							$(obj11).empty();
+							$(obj11).text(implementDeliver);
+
+							var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="checkDeliver"]').parent();
+							$(obj12).empty();
+							$(obj12).text(checkDeliver);
+
+						}
+						if (!rows[k].operateManager) {
+							var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
+							$(obj).empty();
+							$(obj).text(operationPhase);
+						}
+
+						if (!rows[k].maintainManager) {
+							var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
+							$(obj).empty();
+							$(obj).text(maintainPhase);
+						}
 
 					}
-					if (!rows[k].productManager) {
-						var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="designBrief"]').parent();
-						$(obj1).empty();
-						$(obj1).text(designBrief);
-
-						var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="detailedDesign"]').parent();
-						$(obj2).empty();
-						$(obj2).text(detailedDesign);
-
-						var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="uiDesign"]').parent();
-						$(obj3).empty();
-						$(obj3).text(uiDesign);
-
-						var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementDesign"]').parent();
-						$(obj4).empty();
-						$(obj4).text(requirementDesign);
-
-						var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="requirementsReview"]').parent();
-						$(obj5).empty();
-						$(obj5).text(requirementsReview);
-
-						var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="demandOrderConfirm"]').parent();
-						$(obj6).empty();
-						$(obj6).text(demandOrderConfirm);
-
-						var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="proCheckDeliver"]').parent();
-						$(obj7).empty();
-						$(obj7).text(proCheckDeliver);
-					}
-
-					if (!rows[k].developManager) {
-						var obj1 = $('#tb_user tr[data-index=' + k + '] a[data-name="technologySelection"]').parent();
-						$(obj1).empty();
-						$(obj1).text(technologySelection);
-
-						var obj2 = $('#tb_user tr[data-index=' + k + '] a[data-name="environmentDeployment"]').parent();
-						$(obj12).empty();
-						$(obj2).text(environmentDeployment);
-
-						var obj3 = $('#tb_user tr[data-index=' + k + '] a[data-name="frameworkDesign"]').parent();
-						$(obj3).empty();
-						$(obj3).text(frameworkDesign);
-
-						var obj4 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress10"]').parent();
-						$(obj4).empty();
-						$(obj4).text(developProgress10);
-
-						var obj5 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress25"]').parent();
-						$(obj5).empty();
-						$(obj5).text(developProgress25);
-
-						var obj6 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress50"]').parent();
-						$(obj6).empty();
-						$(obj6).text(developProgress50);
-
-						var obj7 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress75"]').parent();
-						$(obj7).empty();
-						$(obj7).text(developProgress75);
-
-						var obj8 = $('#tb_user tr[data-index=' + k + '] a[data-name="developProgress100"]').parent();
-						$(obj8).empty();
-						$(obj8).text(developProgress100);
-
-						var obj9 = $('#tb_user tr[data-index=' + k + '] a[data-name="insideTest"]').parent();
-						$(obj9).empty();
-						$(obj9).text(insideTest);
-
-						var obj10 = $('#tb_user tr[data-index=' + k + '] a[data-name="customerTest"]').parent();
-						$(obj10).empty();
-						$(obj10).text(customerTest);
-
-						var obj11 = $('#tb_user tr[data-index=' + k + '] a[data-name="implementDeliver"]').parent();
-						$(obj11).empty();
-						$(obj11).text(implementDeliver);
-
-						var obj12 = $('#tb_user tr[data-index=' + k + '] a[data-name="checkDeliver"]').parent();
-						$(obj12).empty();
-						$(obj12).text(checkDeliver);
-
-					}
-					if (!rows[k].operateManager) {
-						var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="operationPhase"]').parent();
-						$(obj).empty();
-						$(obj).text(operationPhase);
-					}
-
-					if (!rows[k].maintainManager) {
-						var obj = $('#tb_user tr[data-index=' + k + '] a[data-name="maintainPhase"]').parent();
-						$(obj).empty();
-						$(obj).text(maintainPhase);
-					}
-
+					backlog();
+					finished();
 				}
-				backlog();
-				finished();
 			}
 		}
 	});
