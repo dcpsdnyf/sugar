@@ -79,24 +79,48 @@ function backlog() {
 			field: 'taskPrincipal',
 			switchable: false,
 			title: '任务责任人'
-		}, {
-			align: "center",
-			halign: "center",
-			field: 'taskType',
-			switchable: false,
-			title: '任务类型'
 		},{
 			align: "center",
 			halign: "center",
 			field: 'taskStatus',
 			switchable: false,
-			title: '任务状态'
+			title: '任务状态',
+			formatter: function (value, row, index) {
+				if(value=='0'){
+					return '待进行';
+				}
+				if(value=='1'){
+					return '进行中';
+				}
+				if(value=='2'){
+					return '已完成';
+				}
+			}
 		}, {
 			align: "center",
 			halign: "center",
 			field: 'taskName',
 			switchable: false,
-			title: '任务名称'
+			title: '任务名称',
+			formatter: function (value, row, index) {
+				if(value=='1'){
+					return '商机推进阶段';
+				}
+				if(value=='2'){
+					return '采购阶段';
+				}
+				if(value=='3'){
+					return '产品阶段';
+				}if(value=='4'){
+					return '研发阶段';
+				}
+				if(value=='5'){
+					return '运营阶段';
+				}
+				if(value=='6'){
+					return '运维阶段';
+				}
+			}
 		},{
 			align: "center",
 			halign: "center",
@@ -215,30 +239,57 @@ function finished() {
 			field: 'taskPrincipal',
 			switchable: false,
 			title: '任务责任人'
-		}, {
-			align: "center",
-			halign: "center",
-			field: 'taskType',
-			switchable: false,
-			title: '任务类型'
 		},{
 			align: "center",
 			halign: "center",
 			field: 'taskStatus',
 			switchable: false,
-			title: '任务状态'
+			title: '任务状态',
+			formatter: function (value, row, index) {
+				if(value=='0'){
+					return '待进行';
+				}
+				if(value=='1'){
+					return '进行中';
+				}
+				if(value=='2'){
+					return '已完成';
+				}
+			}
 		}, {
 			align: "center",
 			halign: "center",
 			field: 'taskName',
 			switchable: false,
-			title: '任务名称'
+			title: '任务名称',
+			formatter: function (value, row, index) {
+				if(value=='1'){
+					return '商机推进阶段';
+				}
+				if(value=='2'){
+					return '采购阶段';
+				}
+				if(value=='3'){
+					return '产品阶段';
+				}if(value=='4'){
+					return '研发阶段';
+				}
+				if(value=='5'){
+					return '运营阶段';
+				}
+				if(value=='6'){
+					return '运维阶段';
+				}
+			}
 		},{
 			align: "center",
 			halign: "center",
 			field: 'taskSubName',
 			switchable: false,
-			title: '任务子名称'
+			title: '任务子名称',
+			formatter: function (value, row, index) {
+
+			}
 		},{
 			align: "center",
 			halign: "center",
@@ -250,7 +301,7 @@ function finished() {
 			halign: "center",
 			field: 'endTime',
 			switchable: false,
-			title: '完成时间'
+			title: '完成时间',
 		},{
 			align: "center",
 			halign: "center",
