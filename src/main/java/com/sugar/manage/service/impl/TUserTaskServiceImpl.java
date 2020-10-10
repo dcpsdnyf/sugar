@@ -494,12 +494,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             int count = tDelayMapper.udaDelay(delay);
             if (count > 0) {
                 List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
-
                 TUserTask task = new TUserTask();
                 for (TDelay s : delayList) {
                     task.setDelayDay(s.getDelayTime());
                     task.setDelayPeople(s.getDelayPeopleName());
-                    task.setTaskPrincipal(s.getDelayPeopleName());
+                    task.setTaskPrincipal(s.getAuditingPeopleName());
                 }
                 task.setProjectId(projectId);
                 task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal()).getStartTime());
@@ -515,6 +514,16 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         }
         else {
             int count = tDelayMapper.udaDelay(delay);
+            List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+            TUserTask task = new TUserTask();
+            for (TDelay s : delayList) {
+                task.setDelayDay(s.getDelayTime());
+                task.setDelayPeople(s.getDelayPeopleName());
+                task.setTaskPrincipal(s.getAuditingPeopleName());
+            }
+            task.setProjectId(projectId);
+            task.setTaskStatus("2");
+            tUserTaskMapper.updateTUserTask(task);
             return 0;
         }
         return 0;

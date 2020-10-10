@@ -124,6 +124,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
         </trim>
         where PROJECT_ID = #{projectId}
+        AND
+        TASK_PRINCIPAL = #{taskPrincipal}
     </update>
     <update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
