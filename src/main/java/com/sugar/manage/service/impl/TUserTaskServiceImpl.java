@@ -3,7 +3,6 @@ package com.sugar.manage.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.manage.dao.mapper.*;
-import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTask;

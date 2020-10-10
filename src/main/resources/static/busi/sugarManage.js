@@ -98,6 +98,7 @@ $(function () {
 				"colspan": 1,
 				rowspan: 2,
 				formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+					debugger
 					var html = '';
 					if (!row.rowEdit) {
 						return '';
@@ -105,8 +106,12 @@ $(function () {
 					if (row.appoint) {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >;'+
-							'<button type="button" onclick="examine(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >审核延期</button >';
+							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
+						html += "</div>";
+					} else if(row.delay){
+						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
+							'<button type="button" onclick="delayModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >';
 						html += "</div>";
 					} else {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
@@ -149,613 +154,217 @@ $(function () {
 			{
 				field: 'businessClueOpen',
 				title: '商机线索开启',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '商机线索开启',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					}
-				}
 			}, {
 				field: 'businessClue0',
 				title: '1、商机线索0%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '1、商机线索0%',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					},
-				}
-
 			}, {
 				field: 'businessDiscover10',
 				title: '2、商机发现10%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '2、商机发现10%',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					}
-				}
-
 			}, {
 				field: 'businessEstablish25',
 				title: '3、商机确立25%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '3、商机确立25%',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					}
-				}
-
 			}, {
 				field: 'businessEstablish50',
 				title: '4、商机确立50%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '4、商机确立50%',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					}
-				}
-
 			}, {
 				field: 'businessEstablish75',
 				title: '5、商机确认75%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '5、商机确认75%',
-					validate: function (v) {
-						if (!v) return '不能为空';
-
-					}
-				}
-
 			}, {
 				field: 'businessWin100',
 				title: '6、商机赢取100%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '6、商机赢取100%',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'customerMaintainBackMoney',
 				title: '7、客户维护/回款阶段',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '7、客户维护/回款阶段',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'businessClose',
 				title: '商机关闭',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '商机关闭',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'initialIntentionPlan',
 				title: '1、初步意向方案',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '1、初步意向方案',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'writeProjectProposal',
 				title: '2、写立项方案',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '2、写立项方案',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'workingHoursAssess',
 				title: '3、工时评估',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '3、工时评估',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'businessNegotiation',
 				title: '4、商务谈判',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '4、商务谈判',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'requestDraft',
 				title: '5、请示拟写',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '5、请示拟写',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'attendMeeting',
 				title: '6、上会',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '6、上会',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'bidding',
 				title: '7、招投标',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '7、招投标',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'requestOaApproval',
 				title: '8、请示OA审批',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '8、请示OA审批',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'contractDraft',
 				title: '9、合同拟写',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '9、合同拟写',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'lawyerReview',
 				title: '10、律师审核',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '10、律师审核',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'contractOaApproval',
 				title: '11、合同OA审批',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '11、合同OA审批',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'usageSeal',
 				title: '12、用章',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '12、用章',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'otherSeal',
 				title: '13、对方盖章',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '13、对方盖章',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'scan',
 				title: '14、扫描',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '14、扫描',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'generalDepartmentFile',
 				title: '15、综合部归档',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '15、综合部归档',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'firstPayment',
 				title: '16、首付款',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '16、首付款',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'progressPayment',
 				title: '17、进度款',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '17、进度款',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'finalPayment',
 				title: '18、尾款',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '18、尾款',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'designBrief',
 				title: '1、设计概要',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '1、设计概要',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'detailedDesign',
 				title: '2、详细设计',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '2、详细设计',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'uiDesign',
 				title: '3、UI设计',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '3、UI设计',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'requirementDesign',
 				title: '4、需求设计',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '4、需求设计',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'requirementsReview',
 				title: '5、需求评审',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '5、需求评审',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'demandOrderConfirm',
 				title: '6、需求单确认',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '6、需求单确认',
-					validate: function (v) {
-						if (!v) return '用户名不能为空';
-
-					}
-				}
 
 			}, {
 				field: 'proCheckDeliver',
 				title: '7、验收',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '7、验收',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 
 			}, {
 				field: 'technologySelection',
 				title: '1、技术选型',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '1、技术选型',
-					validate: function (v) {
-						if (!v) return '不能为空';
-					}
-				}
+
 			}, {
 				field: 'environmentDeployment',
 				title: '2、环境部署',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '2、环境部署',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'frameworkDesign',
 				title: '3、框架设计',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '3、框架设计',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'developProgress10',
 				title: '4、开发进度10%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '4、开发进度10%',
-					validate: function (v) {
-						if (!v) {
-							return '不能为空';
-						}
-					}
-				}
+
 			}, {
 				field: 'developProgress25',
 				title: '5、开发进度25%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '5、开发进度25%',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'developProgress50',
 				title: '6、开发进度50%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '6、开发进度50%',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'developProgress75',
 				title: '7、开发进度75%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '7、开发进度75%',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'developProgress100',
 				title: '8、开发进度100%',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '8、开发进度100%',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'insideTest',
 				title: '9、内部测试优化',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '9、内部测试优化',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'customerTest',
 				title: '10、客户测试优化',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '10、客户测试优化',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'implementDeliver',
 				title: '11、实施交付',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '11、实施交付',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'checkDeliver',
 				title: '12、验收',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '12、验收',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			},
 			{
 				field: 'operationPhase',
 				title: '运营阶段',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '运营阶段',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}, {
 				field: 'maintainPhase',
 				title: '运维阶段',
-				editable: {
-					type: 'textarea',
-					rows: "3",
-					title: '运维阶段',
-					validate: function (v) {
-						if (!v) return '不能为空';
 
-					}
-				}
 			}]],
 		onEditableSave: function (field, row, oldValue, $el) {
 			// alert("更新保存事件，原始值为" + oldValue);
@@ -1268,7 +877,7 @@ $(function () {
 
 				}
 				backlog();
-				// finished();
+				finished();
 			}
 		}
 	});
@@ -1312,7 +921,6 @@ var editModel = function (id) {
 
 //指派事件
 var appointModel = function (id) {
-	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	//弹出模态框
@@ -1344,16 +952,18 @@ var appointModel = function (id) {
 		}
 	});
 }
-//审核事件
-var examine = function (id) {
-	debugger
+
+//申请延期事件
+var delayModel = function (id) {
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
-	$("#ww").val(id);
 	//弹出模态框
-	$("#examineModel").modal();
-
+	$("#delayMyModal").modal();
+	//给弹出框里面的各个文本框赋值
+	$("#delayMyModal input[name='projectId']").val(id);
+	$("#delayMyModal input[name='delayDay']").val(row.delayDay);
 }
+
 //删除事件
 var deleteModel = function (id) {
 	confirmModal("提示", "是否确定要删除该项目信息？", function () {
@@ -1404,26 +1014,28 @@ function saveAppointInfo() {
 		}
 	});
 }
-//审核
-function examineAj(e) {
-	debugger
-//根据当前行的id获取当前的行数据
-	var projectId=document.getElementById("ww").value;
+
+//申请延期保存
+function saveDelayInfo() {
 	$.ajax({
 		type: "post",
-		url: WEB_ROOT + "/TUserTaskController/examine",
-		data: {"projectId":projectId,"staus":e},
+		url: WEB_ROOT + "/TUserTaskController/delay",
+		data: $("#delayForm").serialize(),
+		dataType: 'JSON',
 		success: function (result) {
 			debugger
-			confirmModal("提示", "审核成功通过！", function () {
+			confirmModal("提示", result.msg, function () {
 				window.location.reload();
-			})
+			}, {}, function () {
+				window.location.reload();
+			});
 		},
 		error: function () {
-			msgInfoModal('提示', "不通过");
+			msgInfoModal('提示', "申请延期失败");
 		}
 	});
 }
+
 function saveProjectInfo() {
 	$.ajax({
 		type: "post",

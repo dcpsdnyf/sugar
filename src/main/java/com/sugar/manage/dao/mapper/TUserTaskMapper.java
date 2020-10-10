@@ -4,7 +4,6 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.vo.TUserTask;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -83,13 +82,9 @@ public interface TUserTaskMapper
 
     public int delayDay(TUserTask tUserTask);
 
-    public TUserTask getTaskProject(String projectId);
-
     public TUserTask getProject(String projectId);
 
-    //public String getStartTimeByPrincipaiAndPJId(String userName,String projectId);
-
-    public TUserTask getTaskInfoByPrincipalAndPJId(String userName,String projectId);
+    public TUserTask getTaskInfoByPrincipalAndPJId(@Param("userName") String userName,@Param("projectId") String projectId);
 
     public TUserTask getPrincipal(@Param("projectId") String projectId,@Param("taskName") String taskName);
 
