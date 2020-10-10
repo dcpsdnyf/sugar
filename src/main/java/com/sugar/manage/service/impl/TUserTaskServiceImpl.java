@@ -504,7 +504,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 task.setProjectId(projectId);
                 task.setTaskInfo("延期申请");
                 task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal(),task.getTaskInfo()).getStartTime());
-                task.setStartTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
+                task.setEndTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
                 task.setTaskStatus("2");
                 count=tUserTaskMapper.updateTUserTask(task);
                 if(count>0){
