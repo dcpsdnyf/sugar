@@ -68,11 +68,58 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
      */
     @Override
     public int insertTUserTask(TUserTask tUserTask) {
-        tUserTask.setTaskType("01");
-        tUserTask.setTaskStatus("0");
-        tUserTask.setTaskName("1");//还没想好怎么根据用户判断大阶段，暂时写死1
-        tUserTask.setTaskSubName("100");
-        return tUserTaskMapper.insertTUserTask(tUserTask);
+        TUserTask hadUserTask = new TUserTask();
+        hadUserTask.setProjectId(tUserTask.getProjectId());
+        hadUserTask.setTaskType("01");
+        //查询任务列表是否有任务数据
+        List<TUserTask> taskList = tUserTaskMapper.selectTUserTaskList(hadUserTask);
+        HashMap<String, String> taskMap = new HashMap<>();
+
+        if(!CollectionUtils.isEmpty(taskList)){
+            for(TUserTask task:taskList){
+                taskMap.put(task.getTaskName(),task.getTaskName());
+            }
+        }
+
+        tUserTask.setCreatedTime(DateUtils.getNowDate());
+        tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+        if(CollectionUtils.isEmpty(taskList)){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("1");
+            tUserTask.setTaskSubName("100");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("2")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("2");
+            tUserTask.setTaskSubName("201");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("3")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("3");
+            tUserTask.setTaskSubName("301");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("4")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("4");
+            tUserTask.setTaskSubName("401");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("5")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("5");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("6")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("6");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }
+
+        return 0;
     }
 
     /**
@@ -409,6 +456,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         tDelay.setProjectId(projectId);
         tDelay.setTaskName(tkuser.getTaskName());
         tDelay.setAuditingStatus("1");//默认为1失败
+        tDelay.setStatus("01");
       int count =  tDelayMapper.insertTDelay(tDelay);
         if (count > 0 ) {
             //延期成功后给上级派发任务
@@ -420,6 +468,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tkuse.setProjectId(projectId);
             tkuse.setTaskPrincipal(tk.getTaskPrincipal());
             tkuse.setTaskInfo("延期申请");
+            tkuse.setTaskStatus("0");
            int coun = tUserTaskMapper.insertTUserTask(tkuse);
            if (coun > 0) {
                return 1;
@@ -430,22 +479,30 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     }
     @Override
-    public int examine(String projectId,String staus) throws ParseException {
+    public int examine(String userId,String projectId,String staus) throws ParseException {
+        //1.先根据用户id获取用户名
+        String userName = tUserMapper.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(userName)) {
+            return 0;
+        }
         TDelay delay = new TDelay();
         delay.setProjectId(projectId);
+        delay.setAuditingPeopleName(userName);
         delay.setStatus("99");
         if("0".equals(staus)) {
             delay.setAuditingStatus("0");
             int count = tDelayMapper.udaDelay(delay);
             if (count > 0) {
                 List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+
                 TUserTask task = new TUserTask();
-                task.setProjectId(projectId);
-                task.setStartTime(tUserTaskMapper.getProject(projectId).getStartTime());
                 for (TDelay s : delayList) {
                     task.setDelayDay(s.getDelayTime());
                     task.setDelayPeople(s.getDelayPeopleName());
+                    task.setTaskPrincipal(s.getDelayPeopleName());
                 }
+                task.setProjectId(projectId);
+                task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal()).getStartTime());
                 task.setStartTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
                 task.setTaskStatus("2");
                 count=tUserTaskMapper.updateTUserTask(task);
@@ -454,7 +511,6 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 }else {
                     return 0;
                 }
-
             }
         }
         else {

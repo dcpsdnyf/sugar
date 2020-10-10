@@ -233,7 +233,6 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
                     <button type="button" onclick="saveAppointInfo()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -266,7 +265,20 @@
         </div>
     </div>
 </form>
-
+<!--审核-->
+<form>
+    <div class="modal fade" id="examineModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-footer">
+                    <input type="hidden" id="ww" >
+                    <button type="button" onclick="examineAj(0)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>通过</button>
+                    <button type="button" onclick="examineAj(1)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>不通过</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div style="margin-left: 40px;width: 96%" th:if="${isShowLabel}">
 
     <!-- Nav tabs -->

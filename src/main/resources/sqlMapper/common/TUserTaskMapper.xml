@@ -165,6 +165,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <include refid="selectTUserTaskVo"/>
     WHERE
     PROJECT_ID = #{projectId}
+    AND
+    TASK_PRINCIPAL = #{taskPrincipal}
     </select>
 
 
