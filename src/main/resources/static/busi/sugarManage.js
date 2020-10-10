@@ -922,6 +922,8 @@ var editModel = function (id) {
 	$("#editMyModal input[name='productType']").val(row.productType);
 	$("#editMyModal input[name='platformName']").val(row.platformName);
 	$("#editMyModal input[name='groupName']").val(row.groupName);
+	$("#editMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
+	$("#editMyModal input[name='startTime']").val(row.startTime);
 }
 
 //指派事件
@@ -932,8 +934,6 @@ var appointModel = function (id) {
 	$("#appointMyModal").modal();
 	//给弹出框里面的各个文本框赋值
 	$("#appointMyModal input[name='projectId']").val(id);
-	$("#appointMyModal input[name='taskPrincipal']").val(row.taskPrincipal);
-	$("#appointMyModal input[name='startTime']").val(row.startTime);
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/getRollBackInfo",
@@ -946,9 +946,9 @@ var appointModel = function (id) {
 				$("#appointMyModal input[name='taskName']").val(stage);
 				if (result.data.taskType == "01") {
 					var head = result.data.taskPrincipal;
-					var apponitTime = result.data.startTime;
+					var apponitTime = result.data.estimatedTime;
 					$("#appointMyModal input[name='taskPrincipal']").val(head);
-					$("#appointMyModal input[name='startTime']").val(apponitTime);
+					$("#appointMyModal input[name='estimatedTime']").val(apponitTime);
 				}
 			}
 		},

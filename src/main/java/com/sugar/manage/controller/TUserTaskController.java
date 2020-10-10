@@ -98,8 +98,8 @@ private ISugarProjectSV iSugarProjectSV;
         if (StringUtils.isBlank(tUserTask.getTaskPrincipal())) {
             return SysResult.success("负责人为空",null);
         }
-        if (StringUtils.isBlank(tUserTask.getStartTime())) {
-            return SysResult.success("开始时间为空",null);
+        if (StringUtils.isBlank(tUserTask.getEstimatedTime())) {
+            return SysResult.success("预计时间为空",null);
         }
         if (StringUtils.isBlank(tUserTask.getProjectId())) {
             return SysResult.success("项目id为空",null);
