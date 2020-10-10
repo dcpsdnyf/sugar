@@ -313,11 +313,13 @@
     </div>
 </div>
 
-<div style="margin-left: 40px;width: 96%">
+<div style="margin-left: 50px;width: 100%;margin-top: 10px">
 <select id="productName"  class="form-control" style="width: 200px; margin-left:-10px; ">
     <option th:each="platformNames : ${platformName}" th:text="${platformNames}" th:value="${platformNames}" selected="selected"></option>
 </select>
 </div>
+
+
 <!-- Echart -->
 <div id="chart" style=" width: 1000px; height: 400px; margin:0px auto;"></div>
 

@@ -1418,6 +1418,7 @@ function runInit() {
 			debugger
 			var res=[];
 			var projectName=[];
+			const colors = ['#5ebbbd', '#c0504d', '#20bb2c', '#9b3f5b','#5ebbbd','#c0504d'];
 			$.each(result,function (key,v) {
 				console.log(key);
 				var value=[];
@@ -1427,6 +1428,7 @@ function runInit() {
 				//value = [key,v.startTime,v.endTime];
 				projectName.push(v.projectStage);
 				res.push({
+					itemStyle:{normal:{color:colors[key]}},
 					value: value,
 					name: v.projectStage
 				});
@@ -1454,7 +1456,8 @@ function runInit() {
 				yAxis: {
 					type: 'category',
 					splitLine: {show: false},
-					data:['运维阶段','运营阶段','研发阶段','产品阶段','采购阶段','商机推进阶段']
+					//data:['运维阶段','运营阶段','研发阶段','产品阶段','采购阶段','商机推进阶段']
+					data:['商机推进阶段','采购阶段','产品阶段','研发阶段','运营阶段','运维阶段']
 					//data: projectName
 				},
 				series: [
