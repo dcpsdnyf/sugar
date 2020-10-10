@@ -6,7 +6,6 @@ import com.sugar.common.utils.CookieUtils;
 import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProject;
-import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -175,6 +173,12 @@ private ISugarProjectSV iSugarProjectSV;
             tableDataInfo.setCode(400);
             return tableDataInfo;
         }
+        if (tkuser.getList() == null) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
         if (tkuser.getList().size() <= 0) {
             tableDataInfo.setRows(null);
             tableDataInfo.setTotal(0);
@@ -241,6 +245,12 @@ private ISugarProjectSV iSugarProjectSV;
         }
         //1.用用户名去查询该用户的未办任务
         PageInfo<TUserTask> tkuser = itUserTaskService.getUndoTask(username);
+        if (tkuser.getList() == null) {
+            tableDataInfo.setRows(null);
+            tableDataInfo.setTotal(0);
+            tableDataInfo.setCode(400);
+            return tableDataInfo;
+        }
         if (tkuser.getList().size() <= 0) {
             tableDataInfo.setRows(null);
             tableDataInfo.setTotal(0);

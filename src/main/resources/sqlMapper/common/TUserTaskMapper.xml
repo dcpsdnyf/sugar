@@ -306,7 +306,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>-->
 
     <select id="getTaskInfoByPrincipalAndPJId" parameterType="String" resultMap="TUserTaskResult">
-        SELECT
         <include refid="selectTUserTaskVo"/>
         WHERE
         TASK_PRINCIPAL =  #{userName}
@@ -319,18 +318,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getPrincipal" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
-        SELECT
-        TASK_PRINCIPAL
-        FROM
-        t_user_task
+        <include refid="selectTUserTaskVo"/>
         WHERE
-        PROJECT_ID = #{projectId}
+        PROJECT_ID =#{projectId}
         AND
-        TASK_TYPE = '0'
+        TASK_TYPE ='00'
         AND
-        TASK_NAME = {taskName}
+        TASK_STATUS ='2'
         AND
-        TASK_STATUS = '2'
+        TASK_NAME = #{taskName}
     </select>
 
     <select id="getOnlyAddPricipalTKName1" parameterType="String" resultMap="TUserTaskResult">

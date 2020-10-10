@@ -1,7 +1,5 @@
 $(function () {
 
-
-
 	//表格的初始化
 	$('#tb_user').bootstrapTable({
 		url: WEB_ROOT + "/sugarManage/getSugarProjectList",
@@ -210,6 +208,8 @@ $(function () {
 				field: 'requestDraft',
 				title: '5、请示拟写',
 
+					}
+				}
 
 			}, {
 				field: 'attendMeeting',
@@ -366,7 +366,7 @@ $(function () {
 			}, {
 				field: 'maintainPhase',
 				title: '运维阶段',
-				
+
 			}]],
 		onEditableSave: function (field, row, oldValue, $el) {
 			// alert("更新保存事件，原始值为" + oldValue);
@@ -1299,121 +1299,4 @@ function roolBack(selectValue) {
 		$('#tb_user').bootstrapTable('showColumn', 'maintainPhase');
 	}
 
-
-}
-
-
-function runInit() {
-	var myChart =
-		echarts.init(document.getElementById('chart'));
-	var option = {
-		tooltip: {
-			formatter: function(params) {
-				return params.name + ':' + params.value[1] + '~' + params.value[2]
-			}
-		},
-		legend: {
-			data: ['时间']
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: {
-			type: 'time'
-		},
-		yAxis: {
-			type: 'category',
-			splitLine: {show: false},
-			data: ['运维阶段','运营阶段','研发阶段','产品阶段','采购阶段','商机推进阶段']
-		},
-
-		series: [
-			{
-				type:'custom',
-				renderItem: function(params, api){
-					var categoryIndex = api.value(0);
-					var start = api.coord([api.value(1), categoryIndex])
-					var end = api.coord([api.value(2), categoryIndex])
-					var height = 24
-
-					return{
-
-						type: 'rect',
-						shape: echarts.graphic.clipRectByRect({
-							x: start[0],
-							y: start[1] - height / 2,
-							width: end[0] - start[0],
-							height: height
-						}, {
-							x: params.coordSys.x,
-							y: params.coordSys.y,
-							width: params.coordSys.width,
-							height: params.coordSys.height
-						}),
-						style: api.style()
-					}
-				},
-				encode:{
-					x:[1,2],
-					y:0
-				},
-				data:
-					[
-						{
-							//itemStyle:{normal:{color:black}},
-							name:'运维阶段',
-							value: [0, '2020-10-15', '2020-11-26']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '运营阶段',
-							value: [1, '2020-9-15', '2020-10-20']
-						},
-						// dataItem
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '研发阶段',
-							value: [2, '2020-08-10', '2020-9-12']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '产品阶段',
-							value: [3, '2020-07-14', '2020-8-1']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '采购阶段',
-							value: [4, '2020-07-3', '2020-07-25']
-						},
-						{
-							//itemStyle: { normal: { color:black }},
-							name: '商机推进阶段',
-							value: [5, '2020-06-25', '2020-07-09']
-						}
-					]
-			}
-		]
-	};
-	myChart.setOption(option);
-
-	//TODO:完成后端取数
-	$.ajax({
-		type: "post",
-		url: WEB_ROOT + "/sugarManage/echartForProject",
-		data: $("#productName").val(),
-		dataType: 'JSON',
-		success: function (result) {
-/*			confirmModal("提示", result.msg, function () {
-				window.location.reload();
-			}, {}, function () {
-				window.location.reload();
-			});*/
-		},
-/*		error: function () {
-			msgInfoModal('提示', "图表更新失败");
-		}*/
-	});
 }

@@ -313,9 +313,6 @@ function finished() {
 			field: 'taskSubName',
 			switchable: false,
 			title: '任务子名称',
-			formatter: function (value, row, index) {
-
-			}
 		},{
 			align: "center",
 			halign: "center",
