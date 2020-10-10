@@ -420,6 +420,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tkuse.setTaskName(tkuser.getTaskName());
             tkuse.setProjectId(projectId);
             tkuse.setTaskPrincipal(tk.getTaskPrincipal());
+            tkuse.setTaskInfo("延期申请");
            int coun = tUserTaskMapper.insertTUserTask(tkuse);
            if (coun > 0) {
                return 1;
@@ -440,7 +441,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
      * 21
      */
     public String plusDay(int num, String newDate) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date currdate = format.parse(newDate);
         Calendar ca = Calendar.getInstance();
         ca.add(Calendar.DATE, num);// num为增加的天数，可以改变的

@@ -79,5 +79,6 @@ public interface ITUserTaskService
     public int delay(String userId,String projectId,String delayDay) throws ParseException;
 
     public void updateUserTask(TUserTask tUserTask);
+    public int examine(String projectId,String staus) throws ParseException;
 
 }

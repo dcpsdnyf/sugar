@@ -106,12 +106,8 @@ $(function () {
 					if (row.appoint) {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
-						html += "</div>";
-					} else if(row.delay){
-						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="delayModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >';
+							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >;'+
+							'<button type="button" onclick="examine(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >审核延期</button >';
 						html += "</div>";
 					} else {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
@@ -952,16 +948,15 @@ var appointModel = function (id) {
 		}
 	});
 }
-
-//申请延期事件
-var delayModel = function (id) {
+//审核事件
+var examine = function (id) {
+	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+	$("#ww").val(id);
 	//弹出模态框
-	$("#delayMyModal").modal();
-	//给弹出框里面的各个文本框赋值
-	$("#delayMyModal input[name='projectId']").val(id);
-	$("#delayMyModal input[name='delayDay']").val(row.delayDay);
+	$("#examineModel").modal();
+
 }
 
 //删除事件
@@ -1014,24 +1009,23 @@ function saveAppointInfo() {
 		}
 	});
 }
-
-//申请延期保存
-function saveDelayInfo() {
+//审核
+function examineAj(e) {
+	debugger
+//根据当前行的id获取当前的行数据
+	var projectId=document.getElementById("ww").value;
 	$.ajax({
 		type: "post",
-		url: WEB_ROOT + "/TUserTaskController/delay",
-		data: $("#delayForm").serialize(),
-		dataType: 'JSON',
+		url: WEB_ROOT + "/TUserTaskController/examine",
+		data: {"projectId":projectId,"staus":e},
 		success: function (result) {
 			debugger
-			confirmModal("提示", result.msg, function () {
+			confirmModal("提示", "审核成功通过！", function () {
 				window.location.reload();
-			}, {}, function () {
-				window.location.reload();
-			});
+			})
 		},
 		error: function () {
-			msgInfoModal('提示', "申请延期失败");
+			msgInfoModal('提示', "不通过");
 		}
 	});
 }
