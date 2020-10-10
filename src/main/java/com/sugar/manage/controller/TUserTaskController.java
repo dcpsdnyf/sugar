@@ -298,7 +298,7 @@ private ISugarProjectSV iSugarProjectSV;
      */
     @RequestMapping("/delay")
     @ResponseBody
-    public String delay(TUserTask tUserTask,HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public SysResult delay(TUserTask tUserTask,HttpServletRequest request, HttpServletResponse response) throws Exception {
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         if (StringUtils.isBlank(userId)) {
             return null;
@@ -314,9 +314,7 @@ private ISugarProjectSV iSugarProjectSV;
         }
        int count = itUserTaskService.delay(userId,tUserTask.getProjectId(),tUserTask.getDelayDay());
         if (count >0 ) {
-            JSONObject result=new JSONObject();
-            result.put("success",Boolean.TRUE);
-            JsonUtil.write(response,result);
+            return SysResult.success("成功",null);
         }
 
         return null;
