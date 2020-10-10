@@ -71,7 +71,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         tUserTask.setTaskType("01");
         tUserTask.setTaskStatus("0");
         tUserTask.setTaskName("1");//还没想好怎么根据用户判断大阶段，暂时写死1
-        tUserTask.setTaskSubName("10");
+        tUserTask.setTaskSubName("100");
         return tUserTaskMapper.insertTUserTask(tUserTask);
     }
 
@@ -486,50 +486,261 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     public void updateUserTask(TUserTask tUserTask) {
         tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
         tUserTask.setTaskStatus("2");
-        tUserTaskMapper.updateTUserTask(tUserTask);
-
+        tUserTaskMapper.updateTUserTaskById(tUserTask);
+        String taskName = tUserTask.getTaskName();
         TSugarProjectWithBLOBs project = tSugarProjectMapper.selectByPrimaryKey(Integer.parseInt(tUserTask.getProjectId()));
 
-        switch (tUserTask.getTaskSubName()){
-            case "100":
-                project.setBusinessClueOpen(tUserTask.getTaskInfo());
-                break;
-            case "101":
-                project.setBusinessClueOpen(null);
-                project.setBusinessClue0(tUserTask.getTaskInfo());
-                break;
-            case "102":
-                project.setBusinessClue0(null);
-                project.setBusinessDiscover10(tUserTask.getTaskInfo());
-                break;
-            case "103": //自动开启采购阶段第一步
-                project.setBusinessDiscover10(null);
-                project.setBusinessEstablish25(tUserTask.getTaskInfo());
+        if("1".equals(tUserTask.getTaskName())){
+            switch (tUserTask.getTaskSubName()){
+                case "100":
+                    project.setBusinessClueOpen(tUserTask.getTaskInfo());
+                    break;
+                case "101":
+                    project.setBusinessClueOpen(null);
+                    project.setBusinessClue0(tUserTask.getTaskInfo());
+                    break;
+                case "102":
+                    project.setBusinessClue0(null);
+                    project.setBusinessDiscover10(tUserTask.getTaskInfo());
+                    break;
+                case "103": //自动开启采购阶段第一步
+                    project.setBusinessDiscover10(null);
+                    project.setBusinessEstablish25(tUserTask.getTaskInfo());
 
-                TUserTask newUserTask = new TUserTask();
-                newUserTask.setTaskName("2");
-                newUserTask.setProjectId(tUserTask.getProjectId());
-                newUserTask.setTaskPrincipal("尹罗琦");
-                newUserTask.setTaskType("00");
-                newUserTask.setTaskStatus("0");
-                newUserTask.setCreatedTime(DateUtils.getNowDate());
-                tUserTaskMapper.insertTUserTask(newUserTask);
-                break;
+                    TUserTask newUserTask = new TUserTask();
+                    newUserTask.setTaskName("2");
+                    newUserTask.setProjectId(tUserTask.getProjectId());
+                    newUserTask.setTaskPrincipal("尹罗琦");
+                    newUserTask.setTaskType("00");
+                    newUserTask.setTaskStatus("0");
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    newUserTask.setCreatedTime(DateUtils.getNowDate());
+                    tUserTaskMapper.insertTUserTask(newUserTask);
+                    break;
+                case "104":
+                    project.setBusinessEstablish25(null);
+                    project.setBusinessEstablish50(tUserTask.getTaskInfo());
+                    break;
+                case "105":
+                    project.setBusinessEstablish50(null);
+                    project.setBusinessEstablish75(tUserTask.getTaskInfo());
+                    break;
+                case "106":
+                    project.setBusinessEstablish75(null);
+                    project.setBusinessWin100(tUserTask.getTaskInfo());
+                    break;
+                case "107":
+                    project.setBusinessWin100(null);
+                    project.setCustomerMaintainBackMoney(tUserTask.getTaskInfo());
+                    break;
+                case "108":
+                    project.setCustomerMaintainBackMoney(null);
+                    project.setBusinessClose(tUserTask.getTaskInfo());
+                    break;
+            }
+        }else if("2".equals(tUserTask.getTaskName())){
+            switch (tUserTask.getTaskSubName()){
+                case "201":
+                    project.setInitialIntentionPlan(tUserTask.getTaskInfo());
+                    break;
+                case "202":
+                    project.setInitialIntentionPlan(null);
+                    project.setWriteProjectProposal(tUserTask.getTaskInfo());
+                    break;
+                case "203":
+                    project.setWriteProjectProposal(null);
+                    project.setWorkingHoursAssess(tUserTask.getTaskInfo());
+                    break;
+                case "204":
+                    project.setWorkingHoursAssess(null);
+                    project.setBusinessNegotiation(tUserTask.getTaskInfo());
+                    break;
+                case "205":
+                    project.setBusinessNegotiation(null);
+                    project.setRequestDraft(tUserTask.getTaskInfo());
+                    break;
+                case "206":
+                    project.setRequestDraft(null);
+                    project.setAttendMeeting(tUserTask.getTaskInfo());
+                    break;
+                case "207":
+                    project.setAttendMeeting(null);
+                    project.setBidding(tUserTask.getTaskInfo());
+                    break;
+                case "208":
+                    project.setBidding(null);
+                    project.setRequestOaApproval(tUserTask.getTaskInfo());
+                    break;
+                case "209":
+                    project.setRequestOaApproval(null);
+                    project.setContractDraft(tUserTask.getTaskInfo());
+
+                    TUserTask newUserTask = new TUserTask();
+                    newUserTask.setTaskName("3");
+                    newUserTask.setProjectId(tUserTask.getProjectId());
+                    newUserTask.setTaskPrincipal("尹罗琦");
+                    newUserTask.setTaskType("00");
+                    newUserTask.setTaskStatus("0");
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    newUserTask.setCreatedTime(DateUtils.getNowDate());
+                    //自动开启产品阶段的第一步（设计概要）
+                    tUserTaskMapper.insertTUserTask(newUserTask);
+                    break;
+                case "210":
+                    project.setContractDraft(null);
+                    project.setLawyerReview(tUserTask.getTaskInfo());
+                    break;
+                case "211":
+                    project.setLawyerReview(null);
+                    project.setContractOaApproval(tUserTask.getTaskInfo());
+                    break;
+                case "212":
+                    project.setContractOaApproval(null);
+                    project.setUsageSeal(tUserTask.getTaskInfo());
+                    break;
+                case "213":
+                    project.setUsageSeal(null);
+                    project.setOtherSeal(tUserTask.getTaskInfo());
+                    break;
+                case "214":
+                    project.setOtherSeal(null);
+                    project.setScan(tUserTask.getTaskInfo());
+                    break;
+                case "215":
+                    project.setScan(null);
+                    project.setGeneralDepartmentFile(tUserTask.getTaskInfo());
+                    break;
+                case "216":
+                    project.setGeneralDepartmentFile(null);
+                    project.setFirstPayment(tUserTask.getTaskInfo());
+                    break;
+                case "217":
+                    project.setFirstPayment(null);
+                    project.setProgressPayment(tUserTask.getTaskInfo());
+                    break;
+                case "218":
+                    project.setProgressPayment(null);
+                    project.setFinalPayment(tUserTask.getTaskInfo());
+                    break;
+            }
+        }else if("3".equals(tUserTask.getTaskName())){
+            switch (tUserTask.getTaskSubName()){
+                case "301":
+                    project.setDesignBrief(tUserTask.getTaskInfo());
+                    break;
+                case "302":
+                    project.setDesignBrief(null);
+                    project.setDetailedDesign(tUserTask.getTaskInfo());
+                    break;
+                case "303":
+                    project.setDetailedDesign(null);
+                    project.setUiDesign(tUserTask.getTaskInfo());
+
+                    TUserTask newUserTask = new TUserTask();
+                    newUserTask.setTaskName("4");
+                    newUserTask.setProjectId(tUserTask.getProjectId());
+                    newUserTask.setTaskPrincipal("黄斯楠");
+                    newUserTask.setTaskType("00");
+                    newUserTask.setTaskStatus("0");
+                    newUserTask.setCreatedTime(DateUtils.getNowDate());
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    //自动开启产品阶段的第一步（设计概要）
+                    tUserTaskMapper.insertTUserTask(newUserTask);
+                    break;
+                case "304":
+                    project.setUiDesign(null);
+                    project.setRequirementDesign(tUserTask.getTaskInfo());
+                    break;
+                case "305":
+                    project.setRequirementDesign(null);
+                    project.setRequirementsReview(tUserTask.getTaskInfo());
+                    break;
+                case "306":
+                    project.setRequirementsReview(null);
+                    project.setDemandOrderConfirm(tUserTask.getTaskInfo());
+                    break;
+                case "307":
+                    project.setDemandOrderConfirm(null);
+                    project.setProCheckDeliver(tUserTask.getTaskInfo());
+                    break;
+            }
+        }else if("4".equals(tUserTask.getTaskName())){
+            switch (tUserTask.getTaskSubName()){
+                case "401":
+                    project.setTechnologySelection(tUserTask.getTaskInfo());
+                    break;
+                case "402":
+                    project.setTechnologySelection(null);
+                    project.setEnvironmentDeployment(tUserTask.getTaskInfo());
+                    break;
+                case "403":
+                    project.setEnvironmentDeployment(null);
+                    project.setFrameworkDesign(tUserTask.getTaskInfo());
+                    break;
+                case "404":
+                    project.setFrameworkDesign(null);
+                    project.setDevelopProgress10(tUserTask.getTaskInfo());
+                    break;
+                case "405":
+                    project.setDevelopProgress10(null);
+                    project.setDevelopProgress25(tUserTask.getTaskInfo());
+                    break;
+                case "406":
+                    project.setDevelopProgress25(null);
+                    project.setDevelopProgress50(tUserTask.getTaskInfo());
+                    break;
+                case "407":
+                    project.setDevelopProgress50(null);
+                    project.setDevelopProgress75(tUserTask.getTaskInfo());
+                    break;
+                case "408":
+                    project.setDevelopProgress75(null);
+                    project.setDevelopProgress100(tUserTask.getTaskInfo());
+                    break;
+                case "409":
+                    project.setDevelopProgress100(null);
+                    project.setInsideTest(tUserTask.getTaskInfo());
+                    break;
+                case "410":
+                    project.setInsideTest(null);
+                    project.setCustomerTest(tUserTask.getTaskInfo());
+                    break;
+                case "411":
+                    project.setCustomerTest(null);
+                    project.setImplementDeliver(tUserTask.getTaskInfo());
+                    break;
+                case "412":
+                    project.setImplementDeliver(null);
+                    project.setCheckDeliver(tUserTask.getTaskInfo());
+                    break;
+            }
+        }else if("5".equals(tUserTask.getTaskName())){
+            project.setOperationPhase(tUserTask.getTaskInfo());
+        }else if("6".equals(tUserTask.getTaskName())){
+            project.setMaintainPhase(tUserTask.getTaskInfo());
         }
+
 
         tSugarProjectMapper.updateByPrimaryKeyWithBLOBs(project);
 
         String taskSubName = tUserTask.getTaskSubName();
-        if(StringUtils.isNotBlank(taskSubName)){
-            tUserTask.setId(null);
-            tUserTask.setTaskStatus("0");
-            int newTaskSubName = Integer.parseInt(taskSubName)+1;
-            tUserTask.setTaskSubName(newTaskSubName+"");
-            tUserTask.setTaskInfo(null);
+        //小阶段不是最后一个才新增
+        if(!"108".equals(taskSubName) && !"218".equals(taskSubName) && !"307".equals(taskSubName) && !"412".equals(taskSubName) && !"5".equals(taskName) && !"6".equals(taskName)){
+            if(StringUtils.isNotBlank(taskSubName)){
+                tUserTask.setId(null);
+                tUserTask.setTaskStatus("0");
+                int newTaskSubName = Integer.parseInt(taskSubName)+1;
+                tUserTask.setTaskSubName(newTaskSubName+"");
+                tUserTask.setTaskInfo(null);
+                tUserTask.setCreatedTime(DateUtils.getNowDate());
+                tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                tUserTask.setEndTime(null);
 
-            //自动生成下一阶段任务
-            tUserTaskMapper.insertTUserTask(tUserTask);
+                //自动生成下一阶段任务
+                tUserTaskMapper.insertTUserTask(tUserTask);
+            }
         }
+
 
 
     }
