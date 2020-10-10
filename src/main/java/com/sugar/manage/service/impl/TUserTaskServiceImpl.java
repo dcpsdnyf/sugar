@@ -68,11 +68,58 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
      */
     @Override
     public int insertTUserTask(TUserTask tUserTask) {
-        tUserTask.setTaskType("01");
-        tUserTask.setTaskStatus("0");
-        tUserTask.setTaskName("1");//还没想好怎么根据用户判断大阶段，暂时写死1
-        tUserTask.setTaskSubName("100");
-        return tUserTaskMapper.insertTUserTask(tUserTask);
+        TUserTask hadUserTask = new TUserTask();
+        hadUserTask.setProjectId(tUserTask.getProjectId());
+        hadUserTask.setTaskType("01");
+        //查询任务列表是否有任务数据
+        List<TUserTask> taskList = tUserTaskMapper.selectTUserTaskList(hadUserTask);
+        HashMap<String, String> taskMap = new HashMap<>();
+
+        if(!CollectionUtils.isEmpty(taskList)){
+            for(TUserTask task:taskList){
+                taskMap.put(task.getTaskName(),task.getTaskName());
+            }
+        }
+
+        tUserTask.setCreatedTime(DateUtils.getNowDate());
+        tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+        if(CollectionUtils.isEmpty(taskList)){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("1");
+            tUserTask.setTaskSubName("100");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("2")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("2");
+            tUserTask.setTaskSubName("201");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("3")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("3");
+            tUserTask.setTaskSubName("301");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("4")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("4");
+            tUserTask.setTaskSubName("401");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("5")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("5");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }else if(!taskMap.containsKey("6")){
+            tUserTask.setTaskType("01");
+            tUserTask.setTaskStatus("0");
+            tUserTask.setTaskName("6");
+            return tUserTaskMapper.insertTUserTask(tUserTask);
+        }
+
+        return 0;
     }
 
     /**
