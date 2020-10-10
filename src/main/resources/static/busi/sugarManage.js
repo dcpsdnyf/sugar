@@ -107,7 +107,7 @@ $(function () {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >'+
-							'<button type="button" onclick="examine (' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >';
+							'<button type="button" onclick="examine (' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px;margin-left: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >';
 						html += "</div>";
 					} else if(row.delay){
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +

@@ -271,7 +271,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         UPDATE
         t_user_task
         SET
-        TASK_STATUS = '2'
+        TASK_STATUS = '2',END_TIME = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')
         WHERE
         PROJECT_ID = #{projectId}
         AND
