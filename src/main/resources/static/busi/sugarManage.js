@@ -1047,12 +1047,18 @@ function examineAj(e) {
 		data: {"projectId":projectId,"staus":e},
 		success: function (result) {
 			debugger
-			confirmModal("提示", "审核成功通过！", function () {
-				window.location.reload();
-			})
+			if ("false"==result){
+				confirmModal("提示", "审核结果:不通过！", function () {
+					window.location.reload();
+				})
+			}else {
+				confirmModal("提示", "审核结果:通过！", function () {
+					window.location.reload();
+				})
+			}
 		},
 		error: function () {
-			msgInfoModal('提示', "不通过");
+			msgInfoModal('提示', "异常");
 		}
 	});
 }

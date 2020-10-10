@@ -126,6 +126,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where PROJECT_ID = #{projectId}
         AND
         TASK_PRINCIPAL = #{taskPrincipal}
+        AND
+        TASK_INFO = #{taskInfo}
     </update>
     <update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
@@ -169,6 +171,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     PROJECT_ID = #{projectId}
     AND
     TASK_PRINCIPAL = #{taskPrincipal}
+    AND
+    TASK_INFO = #{taskInfo}
     </select>
 
 

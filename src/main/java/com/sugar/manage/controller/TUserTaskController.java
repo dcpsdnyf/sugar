@@ -343,7 +343,7 @@ private ISugarProjectSV iSugarProjectSV;
             result.put("success",Boolean.TRUE);
             JsonUtil.write(response,result);
         }
-        return null;
+        return "false";
     }
 
 
