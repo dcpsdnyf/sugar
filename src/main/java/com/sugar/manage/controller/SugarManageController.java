@@ -408,10 +408,12 @@ public class SugarManageController extends AppBaseController {
         if (tUserTasks!=null && key.equals(tUserTasks.get(0).getTaskName())){
             chartVO.setTaskName(key);
             chartVO.setProjectStage(projectStage[Integer.parseInt(key)-1]);
-            chartVO.setStartTime(tUserTasks.get(0).getStartTime());
+            String startTime = simplify(tUserTasks.get(0).getStartTime());
+            chartVO.setStartTime(startTime);
         }
         if (tUserTasks!=null && StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
-            chartVO.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+            String endTime = simplify(DateUtils.dateTimeNow("YYYY-MM-dd"));
+            chartVO.setEndTime(endTime);
         }
         if(tUserTasks!=null && !StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             chartVO.setEndTime(tUserTasks.get(tUserTasks.size()-1).getEndTime());
@@ -419,11 +421,25 @@ public class SugarManageController extends AppBaseController {
         if(chartVO!=null) {
             UserTaskTimes.add(chartVO);
         }
-/*        UserTaskTimes.add(tUserTasks.get(0));
-        if(StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
-            tUserTasks.get(tUserTasks.size()-1).setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
-        }
-        UserTaskTimes.add(tUserTasks.get(tUserTasks.size()-1));*/
+    }
 
+    private String simplify(String date){
+        int index1 =date.indexOf("-");
+        int index2 =date.lastIndexOf("-");
+        int month;
+        int day;
+        int year=Integer.parseInt(date.substring(0,index1));
+        if(date.substring(index1+1,index1+2).equals("0")){
+            month=Integer.parseInt(date.substring(index1+2,index1+3));
+        }else {
+            month=Integer.parseInt(date.substring(index1+1,index1+3));
+        }
+        if(date.substring(index2+1,index2+2).equals("0")){
+            day=Integer.parseInt(date.substring(index2+2,index2+3));
+        }else{
+            day=Integer.parseInt(date.substring(index2+1,index2+3));
+        }
+        String date1=(year+"-"+month+"-"+day)+"";
+        return  date1;
     }
 }

@@ -353,8 +353,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         PROJECT_ID = #{projectId}
         AND
         TASK_TYPE = #{taskType}
-        ORDER BY START_TIME
-        DESC
+        ORDER BY TASK_SUB_NAME
+        ASC
     </select>
 
     <update id="updateTUserTaskById" parameterType="com.sugar.manage.dao.vo.TUserTask">

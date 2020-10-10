@@ -1491,13 +1491,6 @@ function runInit() {
 							y:0
 						},
 						data:res
-						/*					[
-                                                {
-                                                    //itemStyle:{normal:{color:black}},
-                                                    name:'运维阶段',
-                                                    value: [0, "2020-10-15", "2020-11-26"]
-                                                }
-                                            ]*/
 					}
 				]
 			};
