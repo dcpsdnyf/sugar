@@ -26,15 +26,15 @@ function backlog() {
 		//strictSearch: true,
 		//showColumns: true,                  //是否显示所有的列 // 开启自定义列显示功能
 
-		/*showRefresh: true,                  //是否显示刷新按钮
-		minimumCountColumns: 2,             //最少允许的列数
-		clickToSelect: true,                //是否启用点击选中行
+		// showRefresh: true,                  //是否显示刷新按钮
+		// minimumCountColumns: 2,             //最少允许的列数
+		// clickToSelect: true,                //是否启用点击选中行
 		uniqueId: "id",                     //每一行的唯一标识，一般为主键列
-		showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
-		cardView: false,                    //是否显示详细视图
-		detailView: false,                   //是否显示父子表
-		fixedColumns: true,//是否固定列
-		fixedNumber: 4,//固定多少列，总左边开始数*/
+		// showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+		// cardView: false,                    //是否显示详细视图
+		// detailView: false,                   //是否显示父子表
+		// fixedColumns: true,//是否固定列
+		// fixedNumber: 4,//固定多少列，总左边开始数
 
 
 		//selectItemName: 'parentItem',
@@ -155,6 +155,32 @@ function backlog() {
 				}
 			}
 		}],
+		onEditableSave: function (field, row, oldValue, $el) {
+			// alert("更新保存事件，原始值为" + oldValue);
+			debugger
+			$.ajax({
+				type: "POST",
+				url: WEB_ROOT + "/TUserTaskController/updateUserTask",
+				data: row,
+				dataType: 'JSON',
+				traditional: true,
+				success: function (result) {
+					debugger
+					if(result!=null && result.status==200){
+						confirmModal("提示", "保存成功！", function () {
+
+							window.location.reload();
+						}, {}, function () {
+							window.location.reload();
+						});
+					}
+				},
+				error: function () {
+					msgInfoModal('提示', "编辑失败");
+				}
+
+			});
+		}
 
 	});
 }
@@ -189,7 +215,7 @@ function finished() {
 		// showRefresh: true,                  //是否显示刷新按钮
 		// minimumCountColumns: 2,             //最少允许的列数
 		// clickToSelect: true,                //是否启用点击选中行
-		// uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+		uniqueId: "id",                     //每一行的唯一标识，一般为主键列
 		// showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
 		// cardView: false,                    //是否显示详细视图
 		// detailView: false,                   //是否显示父子表
@@ -306,7 +332,6 @@ function finished() {
 			align: "center",
 			halign: "center",
 			field: 'taskInfo',
-			switchable: false,
 			title: '任务内容',
 			editable: {
 				type: 'textarea',

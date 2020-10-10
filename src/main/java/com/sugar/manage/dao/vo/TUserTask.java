@@ -2,6 +2,8 @@ package com.sugar.manage.dao.vo;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Date;
  * @author ruoyi
  * @date 2020-09-28
  */
-public class TUserTask
+public class TUserTask implements Serializable
 {
     private static final long serialVersionUID = 1L;
 

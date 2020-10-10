@@ -229,7 +229,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getUndoTask" parameterType="String" resultMap="TUserTaskResult" >
         <include refid="selectTUserTaskVo"/>
         WHERE
-        TASK_PRINCIPAL = #{taskPrincipal}
+        TASK_PRINCIPAL = #{taskPrincipal} and TASK_STATUS != '2'
     </select>
 
     <update id="changeTaskStatusByPrincipalAndProjectId" parameterType="String">

@@ -1,10 +1,10 @@
 package com.sugar.manage.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.sugar.manage.dao.mapper.TDelayMapper;
-import com.sugar.manage.dao.mapper.TUserMapper;
-import com.sugar.manage.dao.mapper.TUserRoleMapper;
-import com.sugar.manage.dao.mapper.TUserTaskMapper;
+import com.sugar.common.utils.DateUtils;
+import com.sugar.manage.dao.mapper.*;
+import com.sugar.manage.dao.model.TSugarProject;
+import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTask;
 import com.sugar.manage.service.ITUserTaskService;
@@ -37,6 +37,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     private TUserMapper tUserMapper;
     @Autowired
     private TDelayMapper tDelayMapper;
+    @Autowired
+    private TSugarProjectMapper tSugarProjectMapper;
     /**
      * 查询【请填写功能名称】
      *
@@ -116,34 +118,34 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         if ("53".equals(userId) || "33".equals(userId)) {//如果是李佳娜、谢帅
             task = tUserTaskMapper.getTaskInfoByUserIdAndProjectIdtask1(projectId);
             if (task != null) {
-                if ("10".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
+                if ("100".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
                     task.setTaskSubName("商机线索开启");
                 }
-                if ("11".equals(task.getTaskSubName())) {
+                if ("101".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机线索0%");
                 }
-                if ("12".equals(task.getTaskSubName())) {
+                if ("102".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机发现10%");
                 }
-                if ("13".equals(task.getTaskSubName())) {
+                if ("103".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机确立25%");
                 }
-                if ("14".equals(task.getTaskSubName())) {
+                if ("104".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机确立50%");
                 }
-                if ("15".equals(task.getTaskSubName())) {
+                if ("105".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机确立75%");
                 }
-                if ("16".equals(task.getTaskSubName())) {
+                if ("106".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机赢取100%");
                 }
-                if ("17".equals(task.getTaskSubName())) {
+                if ("107".equals(task.getTaskSubName())) {
                     task.setTaskSubName("客户回款/维护阶段");
                 }
-                if ("18".equals(task.getTaskSubName())) {
+                if ("108".equals(task.getTaskSubName())) {
                     task.setTaskSubName("商机关闭");
                 }
-                if ("1".equals(task.getTaskName())) {
+                if ("109".equals(task.getTaskName())) {
                     task.setTaskName("商机推进阶段");
                 }
                 return task;
@@ -152,34 +154,34 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             if (task == null) {
                 tk= tUserTaskMapper.getOnlyAddPricipalTKName1(projectId);
                 if (tk != null) {
-                    if ("10".equals(tk.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
+                    if ("100".equals(tk.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
                         tk.setTaskSubName("商机线索开启");
                     }
-                    if ("11".equals(tk.getTaskSubName())) {
+                    if ("101".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机线索0%");
                     }
-                    if ("12".equals(tk.getTaskSubName())) {
+                    if ("102".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机发现10%");
                     }
-                    if ("13".equals(tk.getTaskSubName())) {
+                    if ("103".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机确立25%");
                     }
-                    if ("14".equals(tk.getTaskSubName())) {
+                    if ("104".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机确立50%");
                     }
-                    if ("15".equals(tk.getTaskSubName())) {
+                    if ("105".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机确立75%");
                     }
-                    if ("16".equals(tk.getTaskSubName())) {
+                    if ("106".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机赢取100%");
                     }
-                    if ("17".equals(tk.getTaskSubName())) {
+                    if ("107".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("客户回款/维护阶段");
                     }
-                    if ("18".equals(tk.getTaskSubName())) {
+                    if ("108".equals(tk.getTaskSubName())) {
                         tk.setTaskSubName("商机关闭");
                     }
-                    if ("1".equals(tk.getTaskName())) {
+                    if ("109".equals(tk.getTaskName())) {
                         tk.setTaskName("商机推进阶段");
                     }
                     return tk;
@@ -198,58 +200,58 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             }
             if (taskn.containsKey("2")) {
                 task.setTaskName("采购阶段");
-                if ("21".equals(taskn.get("2").getTaskSubName())) {
+                if ("201".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("初步意向方案");
                 }
-                if ("22".equals(taskn.get("2").getTaskSubName())) {
+                if ("202".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("写立项方案");
                 }
-                if ("23".equals(taskn.get("2").getTaskSubName())) {
+                if ("203".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("工时评估");
                 }
-                if ("24".equals(taskn.get("2").getTaskSubName())) {
+                if ("204".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("商务谈判");
                 }
-                if ("25".equals(taskn.get("2").getTaskSubName())) {
+                if ("205".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("请示拟写");
                 }
-                if ("26".equals(taskn.get("2").getTaskSubName())) {
+                if ("206".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("上会");
                 }
-                if ("27".equals(taskn.get("2").getTaskSubName())) {
+                if ("207".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("招投标");
                 }
-                if ("28".equals(taskn.get("2").getTaskSubName())) {
+                if ("208".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("请示OA审批");
                 }
-                if ("29".equals(taskn.get("2").getTaskSubName())) {
+                if ("209".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("合同拟写");
                 }
-                if ("291".equals(taskn.get("2").getTaskSubName())) {
+                if ("210".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("律师审核");
                 }
-                if ("292".equals(taskn.get("2").getTaskSubName())) {
+                if ("211".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("合同OA审批");
                 }
-                if ("293".equals(taskn.get("2").getTaskSubName())) {
+                if ("212".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("用章");
                 }
-                if ("294".equals(taskn.get("2").getTaskSubName())) {
+                if ("213".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("对方盖章");
                 }
-                if ("295".equals(taskn.get("2").getTaskSubName())) {
+                if ("214".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("扫描");
                 }
-                if ("296".equals(taskn.get("2").getTaskSubName())) {
+                if ("215".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("综合部归档");
                 }
-                if ("297".equals(taskn.get("2").getTaskSubName())) {
+                if ("216".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("首付款");
                 }
-                if ("298".equals(taskn.get("2").getTaskSubName())) {
+                if ("217".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("进度款");
                 }
-                if ("299".equals(taskn.get("2").getTaskSubName())) {
+                if ("218".equals(taskn.get("2").getTaskSubName())) {
                     task.setTaskSubName("尾款");
                 }
 
@@ -257,25 +259,25 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
             if (taskn.containsKey("3")) {
                 task.setTaskName("产品阶段");
-                if ("31".equals(taskn.get("3").getTaskSubName())) {
+                if ("301".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("设计概要");
                 }
-                if ("32".equals(taskn.get("3").getTaskSubName())) {
+                if ("302".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("详细设计");
                 }
-                if ("33".equals(taskn.get("3").getTaskSubName())) {
+                if ("303".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("UI设计");
                 }
-                if ("34".equals(taskn.get("3").getTaskSubName())) {
+                if ("304".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("需求设计");
                 }
-                if ("35".equals(taskn.get("3").getTaskSubName())) {
+                if ("305".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("需求审批");
                 }
-                if ("36".equals(taskn.get("3").getTaskSubName())) {
+                if ("306".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("需求单确认");
                 }
-                if ("37".equals(taskn.get("3").getTaskSubName())) {
+                if ("307".equals(taskn.get("3").getTaskSubName())) {
                     task.setTaskSubName("验收");
                 }
 
@@ -295,40 +297,40 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             }
             if (taskn.containsKey("4")) {
                 task.setTaskName("研发阶段");
-                if ("41".equals(taskn.get("4").getTaskSubName())) {
+                if ("401".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("技术选型");
                 }
-                if ("42".equals(taskn.get("4").getTaskSubName())) {
+                if ("402".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("环境部署");
                 }
-                if ("43".equals(taskn.get("4").getTaskSubName())) {
+                if ("403".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("框架设计");
                 }
-                if ("44".equals(taskn.get("4").getTaskSubName())) {
+                if ("404".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("开发进度10");
                 }
-                if ("45".equals(taskn.get("4").getTaskSubName())) {
+                if ("405".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("开发进度25");
                 }
-                if ("46".equals(taskn.get("4").getTaskSubName())) {
+                if ("406".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("开发进度50");
                 }
-                if ("47".equals(taskn.get("4").getTaskSubName())) {
+                if ("407".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("开发进度75");
                 }
-                if ("48".equals(taskn.get("4").getTaskSubName())) {
+                if ("408".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("开发进度100");
                 }
-                if ("49".equals(taskn.get("4").getTaskSubName())) {
+                if ("409".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("内部测试优化");
                 }
-                if ("50".equals(taskn.get("4").getTaskSubName())) {
+                if ("410".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("客户测试优化");
                 }
-                if ("51".equals(taskn.get("4").getTaskSubName())) {
+                if ("411".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("实施交付");
                 }
-                if ("52".equals(taskn.get("4").getTaskSubName())) {
+                if ("412".equals(taskn.get("4").getTaskSubName())) {
                     task.setTaskSubName("验收");
                 }
             }
@@ -447,6 +449,57 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         return enddate;
     }
 
+    @Override
+    public void updateUserTask(TUserTask tUserTask) {
+        tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
+        tUserTask.setTaskStatus("2");
+        tUserTaskMapper.updateTUserTask(tUserTask);
+
+        TSugarProjectWithBLOBs project = tSugarProjectMapper.selectByPrimaryKey(Integer.parseInt(tUserTask.getProjectId()));
+
+        switch (tUserTask.getTaskSubName()){
+            case "100":
+                project.setBusinessClueOpen(tUserTask.getTaskInfo());
+                break;
+            case "101":
+                project.setBusinessClueOpen(null);
+                project.setBusinessClue0(tUserTask.getTaskInfo());
+                break;
+            case "102":
+                project.setBusinessClue0(null);
+                project.setBusinessDiscover10(tUserTask.getTaskInfo());
+                break;
+            case "103": //自动开启采购阶段第一步
+                project.setBusinessDiscover10(null);
+                project.setBusinessEstablish25(tUserTask.getTaskInfo());
+
+                TUserTask newUserTask = new TUserTask();
+                newUserTask.setTaskName("2");
+                newUserTask.setProjectId(tUserTask.getProjectId());
+                newUserTask.setTaskPrincipal("尹罗琦");
+                newUserTask.setTaskType("00");
+                newUserTask.setTaskStatus("0");
+                newUserTask.setCreatedTime(DateUtils.getNowDate());
+                tUserTaskMapper.insertTUserTask(newUserTask);
+                break;
+        }
+
+        tSugarProjectMapper.updateByPrimaryKeyWithBLOBs(project);
+
+        String taskSubName = tUserTask.getTaskSubName();
+        if(StringUtils.isNotBlank(taskSubName)){
+            tUserTask.setId(null);
+            tUserTask.setTaskStatus("0");
+            int newTaskSubName = Integer.parseInt(taskSubName)+1;
+            tUserTask.setTaskSubName(newTaskSubName+"");
+            tUserTask.setTaskInfo(null);
+
+            //自动生成下一阶段任务
+            tUserTaskMapper.insertTUserTask(tUserTask);
+        }
+
+
+    }
 }
 
 

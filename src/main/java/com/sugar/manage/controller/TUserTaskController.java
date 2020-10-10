@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
 import com.sugar.common.utils.JsonUtil;
+import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.vo.TUserTask;
+import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.ITUserTaskService;
@@ -105,7 +107,7 @@ private ISugarProjectSV iSugarProjectSV;
         //1.先判断该项目id的最新阶段，如果是被指派过的阶段则不允许新增
         List<String> hs = itUserTaskService.getAllTaskNameByProductId(tUserTask.getProjectId());
 
-        if ("53".equals(userId) && hs.contains("1") || "33".equals(userId) && hs.contains("1")) {
+        if (("53".equals(userId) && hs.contains("1")) || ("33".equals(userId) && hs.contains("1"))) {
             return SysResult.success("商机推进阶段已被指派过，无法重复指派",null);
         }
         if ("33".equals(userId) && hs.contains("1")) {
@@ -316,5 +318,18 @@ private ISugarProjectSV iSugarProjectSV;
             }
         }
         return true;
+    }
+
+    /**
+     *
+     */
+    @RequestMapping("/updateUserTask")
+    @ResponseBody
+    public SysResult updateUserTask(TUserTaskVO tUserTaskVO){
+
+        TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
+        itUserTaskService.updateUserTask(userTask);
+
+        return SysResult.success();
     }
 }
