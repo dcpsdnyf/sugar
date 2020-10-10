@@ -106,7 +106,8 @@ $(function () {
 					if (row.appoint) {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
+							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >'+
+							'<button type="button" onclick="examine (' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >';
 						html += "</div>";
 					} else if(row.delay){
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
@@ -1035,7 +1036,36 @@ function saveDelayInfo() {
 		}
 	});
 }
+//审核
+function examineAj(e) {
+	debugger
+//根据当前行的id获取当前的行数据
+	var projectId=document.getElementById("ww").value;
+	$.ajax({
+		type: "post",
+		url: WEB_ROOT + "/TUserTaskController/examine",
+		data: {"projectId":projectId,"staus":e},
+		success: function (result) {
+			debugger
+			confirmModal("提示", "审核成功通过！", function () {
+				window.location.reload();
+			})
+		},
+		error: function () {
+			msgInfoModal('提示', "不通过");
+		}
+	});
+}
+//审核事件
+var examine = function (id) {
+	debugger
+	//根据当前行的id获取当前的行数据
+	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+	$("#ww").val(id);
+	//弹出模态框
+	$("#examineModel").modal();
 
+}
 function saveProjectInfo() {
 	$.ajax({
 		type: "post",

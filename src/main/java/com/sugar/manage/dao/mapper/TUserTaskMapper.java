@@ -82,7 +82,7 @@ public interface TUserTaskMapper
 
     public int delayDay(TUserTask tUserTask);
 
-    public TUserTask getProject(String projectId);
+    public TUserTask getProject(@Param("projectId") String projectId,@Param("taskPrincipal") String taskPrincipal);
 
     public TUserTask getTaskInfoByPrincipalAndPJId(@Param("userName") String userName,@Param("projectId") String projectId);
 

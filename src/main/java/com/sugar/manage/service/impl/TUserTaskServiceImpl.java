@@ -409,6 +409,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         tDelay.setProjectId(projectId);
         tDelay.setTaskName(tkuser.getTaskName());
         tDelay.setAuditingStatus("1");//默认为1失败
+        tDelay.setStatus("01");
       int count =  tDelayMapper.insertTDelay(tDelay);
         if (count > 0 ) {
             //延期成功后给上级派发任务
@@ -420,6 +421,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tkuse.setProjectId(projectId);
             tkuse.setTaskPrincipal(tk.getTaskPrincipal());
             tkuse.setTaskInfo("延期申请");
+            tkuse.setTaskStatus("0");
            int coun = tUserTaskMapper.insertTUserTask(tkuse);
            if (coun > 0) {
                return 1;
@@ -430,22 +432,30 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     }
     @Override
-    public int examine(String projectId,String staus) throws ParseException {
+    public int examine(String userId,String projectId,String staus) throws ParseException {
+        //1.先根据用户id获取用户名
+        String userName = tUserMapper.getUserIdByUerName(userId);
+        if (StringUtils.isBlank(userName)) {
+            return 0;
+        }
         TDelay delay = new TDelay();
         delay.setProjectId(projectId);
+        delay.setAuditingPeopleName(userName);
         delay.setStatus("99");
         if("0".equals(staus)) {
             delay.setAuditingStatus("0");
             int count = tDelayMapper.udaDelay(delay);
             if (count > 0) {
                 List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+
                 TUserTask task = new TUserTask();
-                task.setProjectId(projectId);
-                task.setStartTime(tUserTaskMapper.getProject(projectId).getStartTime());
                 for (TDelay s : delayList) {
                     task.setDelayDay(s.getDelayTime());
                     task.setDelayPeople(s.getDelayPeopleName());
+                    task.setTaskPrincipal(s.getDelayPeopleName());
                 }
+                task.setProjectId(projectId);
+                task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal()).getStartTime());
                 task.setStartTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
                 task.setTaskStatus("2");
                 count=tUserTaskMapper.updateTUserTask(task);
@@ -454,7 +464,6 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 }else {
                     return 0;
                 }
-
             }
         }
         else {

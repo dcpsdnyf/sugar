@@ -328,13 +328,17 @@ private ISugarProjectSV iSugarProjectSV;
     @RequestMapping("/examine")
     @ResponseBody
     public String examine(String projectId,String staus,HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+        if (StringUtils.isBlank(userId)) {
+            return null;
+        }
         if (StringUtils.isBlank(projectId)) {
             return null;
         }
         if (StringUtils.isBlank(staus)) {
             return null;
         }
-        if(itUserTaskService.examine(projectId,staus)>0){
+        if(itUserTaskService.examine(userId,projectId,staus)>0){
             JSONObject result=new JSONObject();
             result.put("success",Boolean.TRUE);
             JsonUtil.write(response,result);
