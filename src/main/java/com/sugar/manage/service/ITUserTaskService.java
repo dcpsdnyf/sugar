@@ -82,4 +82,10 @@ public interface ITUserTaskService
     public int examine(String userId,String projectId,String staus) throws ParseException;
 
     List<TUserTask> selectTUserTaskByProId(Integer projectId);
+
+    /**
+     * 更新用户任务状态为进行中
+     * @param tUserTask
+     */
+    public void updateUserTaskToProgressing(TUserTask tUserTask);
 }

@@ -61,9 +61,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 用户指派生成任务数据
      *
-     * @param tUserTask 【请填写功能名称】
+     * @param tUserTask
      * @return 结果
      */
     @Override
@@ -82,39 +82,30 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         }
 
         tUserTask.setCreatedTime(DateUtils.getNowDate());
-        tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+        tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+        tUserTask.setStatus("01");
+        tUserTask.setTaskType("01");
+        tUserTask.setTaskStatus("0");
         if(CollectionUtils.isEmpty(taskList)){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("1");
             tUserTask.setTaskSubName("100");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }else if(!taskMap.containsKey("2")){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("2");
             tUserTask.setTaskSubName("201");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }else if(!taskMap.containsKey("3")){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("3");
             tUserTask.setTaskSubName("301");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }else if(!taskMap.containsKey("4")){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("4");
             tUserTask.setTaskSubName("401");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }else if(!taskMap.containsKey("5")){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("5");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }else if(!taskMap.containsKey("6")){
-            tUserTask.setTaskType("01");
-            tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("6");
             return tUserTaskMapper.insertTUserTask(tUserTask);
         }
@@ -158,7 +149,6 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     @Override
     public TUserTask getTaskInfoByUserIdAndProjectId(String projectId, String userId) {
-
         TUserTask task = new TUserTask();
         TUserTask tk = new TUserTask();
         if ("53".equals(userId) || "33".equals(userId)) {//如果是李佳娜、谢帅
@@ -562,7 +552,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     @Override
     public void updateUserTask(TUserTask tUserTask) {
-        tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
+        tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
         tUserTask.setTaskStatus("2");
         tUserTaskMapper.updateTUserTaskById(tUserTask);
         String taskName = tUserTask.getTaskName();
@@ -591,7 +581,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskPrincipal("尹罗琦");
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
-                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
                     newUserTask.setCreatedTime(DateUtils.getNowDate());
                     tUserTaskMapper.insertTUserTask(newUserTask);
                     break;
@@ -659,7 +649,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskPrincipal("尹罗琦");
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
-                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
                     newUserTask.setCreatedTime(DateUtils.getNowDate());
                     //自动开启产品阶段的第一步（设计概要）
                     tUserTaskMapper.insertTUserTask(newUserTask);
@@ -721,7 +711,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
                     newUserTask.setCreatedTime(DateUtils.getNowDate());
-                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
                     //自动开启产品阶段的第一步（设计概要）
                     tUserTaskMapper.insertTUserTask(newUserTask);
                     break;
@@ -807,11 +797,12 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             if(StringUtils.isNotBlank(taskSubName)){
                 tUserTask.setId(null);
                 tUserTask.setTaskStatus("0");
+                tUserTask.setStatus("01");
                 int newTaskSubName = Integer.parseInt(taskSubName)+1;
                 tUserTask.setTaskSubName(newTaskSubName+"");
                 tUserTask.setTaskInfo(null);
                 tUserTask.setCreatedTime(DateUtils.getNowDate());
-                tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd"));
+                tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
                 tUserTask.setEndTime(null);
 
                 //自动生成下一阶段任务
@@ -821,6 +812,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 
 
+    }
+
+    @Override
+    public void updateUserTaskToProgressing(TUserTask tUserTask) {
+        tUserTaskMapper.updateTUserTaskById(tUserTask);
     }
 }
 

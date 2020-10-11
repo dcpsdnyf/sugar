@@ -3,6 +3,7 @@ package com.sugar.manage.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
+import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProject;
@@ -355,7 +356,7 @@ private ISugarProjectSV iSugarProjectSV;
     }
 
     /**
-     *
+     *被指派人填写任务信息确认完成后更新到对应项目列表
      */
     @RequestMapping("/updateUserTask")
     @ResponseBody
@@ -364,6 +365,20 @@ private ISugarProjectSV iSugarProjectSV;
         TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
         itUserTaskService.updateUserTask(userTask);
 
+        return SysResult.success();
+    }
+
+    /**
+     * 更新用户任务为进行中
+     * @return
+     */
+    @RequestMapping("/updateUserTaskToProgressing")
+    @ResponseBody
+    public SysResult updateUserTaskToProgressing(TUserTaskVO tUserTaskVO){
+        TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
+        userTask.setTaskStatus("1");
+        userTask.setUpdatedTime(DateUtils.getNowDate());
+        itUserTaskService.updateUserTaskToProgressing(userTask);
         return SysResult.success();
     }
 }

@@ -184,6 +184,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_NAME ='1'
         AND
         TASK_TYPE = '01'
+        order by CREATED_TIME desc
+        limit 0,1
     </select>
 
     <select id="getTaskInfoByProductIdAndTaskType" parameterType="String" resultMap="TUserTaskResult">

@@ -143,7 +143,14 @@ function backlog() {
 			field: 'endTime',
 			switchable: false,
 			title: '完成时间'
-		},{
+		},
+			{
+				align: "center",
+				halign: "center",
+				field: 'estimatedTime',
+				switchable: false,
+				title: '整体预计完成时间'
+			},{
 			align: "center",
 			halign: "center",
 			field: 'taskInfo',
@@ -158,26 +165,32 @@ function backlog() {
 
 				}
 			}
-		}],
+		},
+            {
+				align: "center",
+				halign: "center",
+				field: "option",
+                title: '操作',
+				switchable: false,
+                formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+                    var html = '';
+                    html = '<div style=\'width:100%;\'>' +
+                        '<button type="button" onclick="updateUserTask(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;'+
+						'<button type="button" onclick="examine (' + row.projectId + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 5px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >'+
+						'<button type="button" onclick="examine (' + row.projectId + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 5px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >'+
+						'</div>';
+                    return html;
+                }
+            }],
 		onEditableSave: function (field, row, oldValue, $el) {
 			// alert("更新保存事件，原始值为" + oldValue);
-			debugger
 			$.ajax({
 				type: "POST",
-				url: WEB_ROOT + "/TUserTaskController/updateUserTask",
+				url: WEB_ROOT + "/TUserTaskController/updateUserTaskToProgressing",
 				data: row,
 				dataType: 'JSON',
-				traditional: true,
 				success: function (result) {
-					debugger
-					if(result!=null && result.status==200){
-						confirmModal("提示", "保存成功！", function () {
-
-							window.location.reload();
-						}, {}, function () {
-							window.location.reload();
-						});
-					}
+                    window.location.reload();
 				},
 				error: function () {
 					msgInfoModal('提示', "编辑失败");
@@ -442,6 +455,32 @@ function getTaskSubName(value) {
 
 	}
 	return taskSubName;
+}
+
+function updateUserTask(id) {
+    var row = $("#tb_backlog").bootstrapTable('getRowByUniqueId', id);
+    if(row.taskInfo==null || row.taskInfo==''){
+		msgInfoModal('提示', "任务内容为空，请填写");
+		return
+	}
+
+    $.ajax({
+        type: "POST",
+        url: WEB_ROOT + "/TUserTaskController/updateUserTask",
+        data: row,
+        dataType: 'JSON',
+        success: function (result) {
+            confirmModal("提示", "保存成功！", function () {
+                window.location.reload();
+            }, {}, function () {
+                window.location.reload();
+            });
+        },
+        error: function () {
+            msgInfoModal('提示', "编辑失败");
+        }
+
+    });
 }
 
 
