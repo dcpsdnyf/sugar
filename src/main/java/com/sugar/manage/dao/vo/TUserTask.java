@@ -37,6 +37,9 @@ public class TUserTask implements Serializable
     /** 项目id */
     private String projectId;
 
+    /** 负责人 */
+    private String principal;
+
     /** 任务责任人 */
     private String taskPrincipal;
 
@@ -272,6 +275,14 @@ public class TUserTask implements Serializable
     public String getTaskParentType() 
     {
         return taskParentType;
+    }
+
+    public String getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(String principal) {
+        this.principal = principal;
     }
 
     @Override

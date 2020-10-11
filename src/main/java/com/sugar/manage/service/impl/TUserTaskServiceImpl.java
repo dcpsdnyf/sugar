@@ -81,6 +81,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             }
         }
 
+        TSugarProjectWithBLOBs project = tSugarProjectMapper.selectByPrimaryKey(Integer.parseInt(tUserTask.getProjectId()));
+
+        if(project!=null){
+            tUserTask.setPrincipal(project.getTaskPrincipal());
+        }
         tUserTask.setCreatedTime(DateUtils.getNowDate());
         tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
         tUserTask.setStatus("01");
@@ -579,6 +584,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskName("2");
                     newUserTask.setProjectId(tUserTask.getProjectId());
                     newUserTask.setTaskPrincipal("尹罗琦");
+                    newUserTask.setPrincipal(tUserTask.getPrincipal());
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
                     newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
@@ -647,6 +653,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskName("3");
                     newUserTask.setProjectId(tUserTask.getProjectId());
                     newUserTask.setTaskPrincipal("尹罗琦");
+                    newUserTask.setPrincipal(tUserTask.getPrincipal());
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
                     newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
@@ -708,6 +715,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                     newUserTask.setTaskName("4");
                     newUserTask.setProjectId(tUserTask.getProjectId());
                     newUserTask.setTaskPrincipal("黄斯楠");
+                    newUserTask.setPrincipal(tUserTask.getPrincipal());
                     newUserTask.setTaskType("00");
                     newUserTask.setTaskStatus("0");
                     newUserTask.setCreatedTime(DateUtils.getNowDate());

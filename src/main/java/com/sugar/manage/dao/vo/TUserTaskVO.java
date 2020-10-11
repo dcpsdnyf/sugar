@@ -25,6 +25,9 @@ public class TUserTaskVO implements Serializable
     /** 项目id */
     private String projectId;
 
+    /** 负责人 */
+    private String principal;
+
     /** 任务责任人 */
     private String taskPrincipal;
 

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.TSugarProjectExMapper">
+  <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TSugarProject">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
+    <result column="platform_id" jdbcType="VARCHAR" property="platformId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
+    <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
+    <result column="business_clue_0" jdbcType="LONGVARCHAR" property="businessClue0" />
+    <result column="business_discover_10" jdbcType="LONGVARCHAR" property="businessDiscover10" />
+    <result column="business_establish_25" jdbcType="LONGVARCHAR" property="businessEstablish25" />
+    <result column="business_establish_50" jdbcType="LONGVARCHAR" property="businessEstablish50" />
+    <result column="business_establish_75" jdbcType="LONGVARCHAR" property="businessEstablish75" />
+    <result column="business_win_100" jdbcType="LONGVARCHAR" property="businessWin100" />
+    <result column="customer_maintain_back_money" jdbcType="LONGVARCHAR" property="customerMaintainBackMoney" />
+    <result column="business_close" jdbcType="LONGVARCHAR" property="businessClose" />
+    <result column="initial_intention_plan" jdbcType="LONGVARCHAR" property="initialIntentionPlan" />
+    <result column="write_project_proposal" jdbcType="LONGVARCHAR" property="writeProjectProposal" />
+    <result column="working_hours_assess" jdbcType="LONGVARCHAR" property="workingHoursAssess" />
+    <result column="business_negotiation" jdbcType="LONGVARCHAR" property="businessNegotiation" />
+    <result column="request_draft" jdbcType="LONGVARCHAR" property="requestDraft" />
+    <result column="attend_meeting" jdbcType="LONGVARCHAR" property="attendMeeting" />
+    <result column="bidding" jdbcType="LONGVARCHAR" property="bidding" />
+    <result column="request_oa_approval" jdbcType="LONGVARCHAR" property="requestOaApproval" />
+    <result column="contract_draft" jdbcType="LONGVARCHAR" property="contractDraft" />
+    <result column="lawyer_review" jdbcType="LONGVARCHAR" property="lawyerReview" />
+    <result column="contract_oa_approval" jdbcType="LONGVARCHAR" property="contractOaApproval" />
+    <result column="usage_seal" jdbcType="LONGVARCHAR" property="usageSeal" />
+    <result column="other_seal" jdbcType="LONGVARCHAR" property="otherSeal" />
+    <result column="scan" jdbcType="LONGVARCHAR" property="scan" />
+    <result column="general_department_file" jdbcType="LONGVARCHAR" property="generalDepartmentFile" />
+    <result column="first_payment" jdbcType="LONGVARCHAR" property="firstPayment" />
+    <result column="progress_payment" jdbcType="LONGVARCHAR" property="progressPayment" />
+    <result column="final_payment" jdbcType="LONGVARCHAR" property="finalPayment" />
+    <result column="design_brief" jdbcType="LONGVARCHAR" property="designBrief" />
+    <result column="detailed_design" jdbcType="LONGVARCHAR" property="detailedDesign" />
+    <result column="ui_design" jdbcType="LONGVARCHAR" property="uiDesign" />
+    <result column="requirement_design" jdbcType="LONGVARCHAR" property="requirementDesign" />
+    <result column="requirements_review" jdbcType="LONGVARCHAR" property="requirementsReview" />
+    <result column="demand_order_confirm" jdbcType="LONGVARCHAR" property="demandOrderConfirm" />
+    <result column="pro_check_deliver" jdbcType="LONGVARCHAR" property="proCheckDeliver" />
+    <result column="technology_selection" jdbcType="LONGVARCHAR" property="technologySelection" />
+    <result column="environment_deployment" jdbcType="LONGVARCHAR" property="environmentDeployment" />
+    <result column="framework_design" jdbcType="LONGVARCHAR" property="frameworkDesign" />
+    <result column="develop_progress_10" jdbcType="LONGVARCHAR" property="developProgress10" />
+    <result column="develop_progress_25" jdbcType="LONGVARCHAR" property="developProgress25" />
+    <result column="develop_progress_50" jdbcType="LONGVARCHAR" property="developProgress50" />
+    <result column="develop_progress_75" jdbcType="LONGVARCHAR" property="developProgress75" />
+    <result column="develop_progress_100" jdbcType="LONGVARCHAR" property="developProgress100" />
+    <result column="inside_test" jdbcType="LONGVARCHAR" property="insideTest" />
+    <result column="customer_test" jdbcType="LONGVARCHAR" property="customerTest" />
+    <result column="implement_deliver" jdbcType="LONGVARCHAR" property="implementDeliver" />
+    <result column="check_deliver" jdbcType="LONGVARCHAR" property="checkDeliver" />
+    <result column="operation_phase" jdbcType="LONGVARCHAR" property="operationPhase" />
+    <result column="maintain_phase" jdbcType="LONGVARCHAR" property="maintainPhase" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, product_type, platform_name, platform_id, group_name, status, CREATED_STAFF, 
+    CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, sort
+  </sql>
+  <sql id="Blob_Column_List">
+    business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
+    business_establish_50, business_establish_75, business_win_100, customer_maintain_back_money, 
+    business_close, initial_intention_plan, write_project_proposal, working_hours_assess, 
+    business_negotiation, request_draft, attend_meeting, bidding, request_oa_approval, 
+    contract_draft, lawyer_review, contract_oa_approval, usage_seal, other_seal, scan, 
+    general_department_file, first_payment, progress_payment, final_payment, design_brief, 
+    detailed_design, ui_design, requirement_design, requirements_review, demand_order_confirm, 
+    pro_check_deliver, technology_selection, environment_deployment, framework_design, 
+    develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75, 
+    develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver, 
+    operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
+  </sql>
+
+  <insert id="insertSugarProject" useGeneratedKeys="true" keyProperty="id" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
+    insert into t_sugar_project (ID, product_type, platform_name, 
+      platform_id, group_name, status, 
+      CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, 
+      UPDATED_TIME, sort, business_clue_open, 
+      business_clue_0, business_discover_10, 
+      business_establish_25, business_establish_50, 
+      business_establish_75, business_win_100, 
+      customer_maintain_back_money, business_close, 
+      initial_intention_plan, write_project_proposal, 
+      working_hours_assess, business_negotiation, 
+      request_draft, attend_meeting, bidding, 
+      request_oa_approval, contract_draft, 
+      lawyer_review, contract_oa_approval, 
+      usage_seal, other_seal, scan, 
+      general_department_file, first_payment, 
+      progress_payment, final_payment, 
+      design_brief, detailed_design, ui_design, 
+      requirement_design, requirements_review, 
+      demand_order_confirm, pro_check_deliver, 
+      technology_selection, environment_deployment, 
+      framework_design, develop_progress_10, 
+      develop_progress_25, develop_progress_50, 
+      develop_progress_75, develop_progress_100, 
+      inside_test, customer_test, implement_deliver, 
+      check_deliver, operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
+      #{platformId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createdStaff,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, 
+      #{updatedTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{businessClueOpen,jdbcType=LONGVARCHAR}, 
+      #{businessClue0,jdbcType=LONGVARCHAR}, #{businessDiscover10,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish25,jdbcType=LONGVARCHAR}, #{businessEstablish50,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish75,jdbcType=LONGVARCHAR}, #{businessWin100,jdbcType=LONGVARCHAR}, 
+      #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, #{businessClose,jdbcType=LONGVARCHAR}, 
+      #{initialIntentionPlan,jdbcType=LONGVARCHAR}, #{writeProjectProposal,jdbcType=LONGVARCHAR}, 
+      #{workingHoursAssess,jdbcType=LONGVARCHAR}, #{businessNegotiation,jdbcType=LONGVARCHAR}, 
+      #{requestDraft,jdbcType=LONGVARCHAR}, #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, 
+      #{requestOaApproval,jdbcType=LONGVARCHAR}, #{contractDraft,jdbcType=LONGVARCHAR}, 
+      #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
+      #{usageSeal,jdbcType=LONGVARCHAR}, #{otherSeal,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR}, 
+      #{generalDepartmentFile,jdbcType=LONGVARCHAR}, #{firstPayment,jdbcType=LONGVARCHAR}, 
+      #{progressPayment,jdbcType=LONGVARCHAR}, #{finalPayment,jdbcType=LONGVARCHAR}, 
+      #{designBrief,jdbcType=LONGVARCHAR}, #{detailedDesign,jdbcType=LONGVARCHAR}, #{uiDesign,jdbcType=LONGVARCHAR}, 
+      #{requirementDesign,jdbcType=LONGVARCHAR}, #{requirementsReview,jdbcType=LONGVARCHAR}, 
+      #{demandOrderConfirm,jdbcType=LONGVARCHAR}, #{proCheckDeliver,jdbcType=LONGVARCHAR}, 
+      #{technologySelection,jdbcType=LONGVARCHAR}, #{environmentDeployment,jdbcType=LONGVARCHAR}, 
+      #{frameworkDesign,jdbcType=LONGVARCHAR}, #{developProgress10,jdbcType=LONGVARCHAR}, 
+      #{developProgress25,jdbcType=LONGVARCHAR}, #{developProgress50,jdbcType=LONGVARCHAR}, 
+      #{developProgress75,jdbcType=LONGVARCHAR}, #{developProgress100,jdbcType=LONGVARCHAR}, 
+      #{insideTest,jdbcType=LONGVARCHAR}, #{customerTest,jdbcType=LONGVARCHAR}, #{implementDeliver,jdbcType=LONGVARCHAR}, 
+      #{checkDeliver,jdbcType=LONGVARCHAR}, #{operationPhase,jdbcType=LONGVARCHAR}, #{maintainPhase,jdbcType=LONGVARCHAR},
+      #{taskPrincipal,jdbcType=LONGVARCHAR},#{startTime,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+</mapper>

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
+import com.sugar.manage.dao.mapper.TSugarProjectExMapper;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
 import com.sugar.manage.dao.model.TSugarProject;
@@ -37,6 +38,8 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	private TSugarProjectMapper sugarProjectMapper;
 	@Autowired
     private TUserTaskMapper tUserTaskMapper;
+    @Autowired
+    TSugarProjectExMapper sugarProjectExMapper;
 
 	/**
 	 * 初始化参数信息
@@ -82,7 +85,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 		PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
 
 		List<TSugarProjectWithBLOBs> sugarProject = sugarProjectMapper.selectByExampleWithBLOBs(example);
-		//根据项目id获取任务表中最新负责人
+		/*//根据项目id获取任务表中最新负责人
         List<String>  ls= new ArrayList<>();
 		if (sugarProject.size()>0) {
 		    for (TSugarProjectWithBLOBs sugpj : sugarProject) {
@@ -104,7 +107,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 		    for (int i = 0;i<sugarProject.size();i++) {
                 sugarProject.get(i).setTaskPrincipal(hsmap.get(String.valueOf(sugarProject.get(i).getId())));
             }
-        }
+        }*/
 		if (!CollectionUtils.isEmpty(sugarProject)) {
 			PageInfo<TSugarProjectWithBLOBs> pageInfo = new PageInfo<>(sugarProject);
 			return pageInfo;
@@ -144,23 +147,22 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	 */
 	@Override
 	public void saveSugarProject(TSugarProjectWithBLOBs record) {
-      int  count = sugarProjectMapper.insert(record);
+      int  count = sugarProjectExMapper.insertSugarProject(record);
 	    if (count>0) {
 	        //再获取刚才插入数据的id
-          Long id =  sugarProjectMapper.getProjectId(record.getTaskPrincipal());
+            //Long id =  sugarProjectMapper.getProjectId(record.getTaskPrincipal());
 
 
             TUserTask tUserTask =new TUserTask();
+            tUserTask.setPrincipal(record.getTaskPrincipal());
             tUserTask.setTaskPrincipal(record.getTaskPrincipal());
             tUserTask.setStartTime(record.getStartTime());
             tUserTask.setTaskType("00");
             tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("1");
-            Date date = new Date(System.currentTimeMillis());
-            tUserTask.setCreatedTime(date);
-            if (id != 0) {
-                tUserTask.setProjectId(String.valueOf(id));
-            }
+            tUserTask.setCreatedTime(DateUtils.getNowDate());
+            tUserTask.setProjectId(record.getId()+"");
+
             tUserTaskMapper.insertTUserTask(tUserTask);
         }
 	}

@@ -404,7 +404,7 @@ $(function () {
 		onLoadSuccess: function (data) {
 			//var data = $('#tb_user').bootstrapTable('getData', true);
 			var rows = data.rows;
-			if(rows!=null) {
+			/*if(rows!=null) {
 			for (var k = 0; k < rows.length; k++) {
 					var id = rows[k].id;    //项目id
 					var productType = rows[k].productType;  //产品类型
@@ -878,10 +878,12 @@ $(function () {
 						}
 
 					}
-					backlog();
-					finished();
+
 				}
-			}
+			}*/
+
+			backlog();
+			finished();
 		}
 	});
 

@@ -24,10 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="taskParentType"    column="TASK_PARENT_TYPE"    />
         <result property="delayDay"    column="DELAY_DAY"    />
         <result property="delayPeople"    column="DELAY_PEOPLE"    />
+        <result property="principal"    column="principal"    />
     </resultMap>
 
     <sql id="selectTUserTaskVo">
-        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE,DELAY_DAY,DELAY_PEOPLE from t_user_task
+        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE,DELAY_DAY,DELAY_PEOPLE,principal from t_user_task
     </sql>
 
     <select id="selectTUserTaskList" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
@@ -50,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskInfo != null  and taskInfo != ''"> and TASK_INFO = #{taskInfo}</if>
             <if test="taskParentType != null  and taskParentType != ''"> and TASK_PARENT_TYPE = #{taskParentType}</if>
             <if test="delayDay != null  and delayDay != ''"> and DELAY_DAY = #{delayDay}</if>
+            <if test="principal != null  and principal != ''"> and principal = #{principal}</if>
         </where>
     </select>
     
@@ -79,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE,</if>
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY,</if>
             <if test="delayPeople != null  and delayPeople != ''">DELAY_PEOPLE,</if>
+            <if test="principal != null  and principal != ''">principal,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="status != null  and status != ''">#{status},</if>
@@ -99,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskParentType != null  and taskParentType != ''">#{taskParentType},</if>
             <if test="delayDay != null  and delayDay != ''">#{delayDay},</if>
             <if test="delayPeople != null  and delayPeople != ''">#{delayPeople},</if>
+            <if test="principal != null  and principal != ''">#{principal},</if>
          </trim>
     </insert>
 
@@ -122,6 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+            <if test="principal != null  and principal != ''">principal = #{principal},</if>
         </trim>
         where PROJECT_ID = #{projectId}
         AND
@@ -379,6 +384,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
             <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
             <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+            <if test="principal != null  and principal != ''">principal = #{principal},</if>
         </trim>
         where id = #{id}
     </update>
