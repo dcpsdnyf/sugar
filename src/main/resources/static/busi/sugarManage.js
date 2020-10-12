@@ -1078,7 +1078,6 @@ var examine = function (id,taskName) {
 	$("#tN").val(taskName);
 	//弹出模态框
 	$("#examineModel").modal();
-
 }
 function saveProjectInfo() {
 	$.ajax({

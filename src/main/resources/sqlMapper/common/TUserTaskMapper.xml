@@ -136,6 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND
         TASK_NAME = #{taskName}
     </update>
+
     <update id="updateTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update t_user_task
         <trim prefix="SET" suffixOverrides=",">

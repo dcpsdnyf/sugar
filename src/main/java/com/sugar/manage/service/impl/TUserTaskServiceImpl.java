@@ -505,6 +505,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 task.setTaskName(taskName);
                 count=tUserTaskMapper.updateTUserTask(task);
                 if(count>0){
+                    //修改预计完成时间
                     TUserTask userTask=new TUserTask();
                     userTask.setTaskType("01");
                     userTask.setTaskName(taskName);

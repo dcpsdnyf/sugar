@@ -348,8 +348,6 @@ private ISugarProjectSV iSugarProjectSV;
         }
         return "false";
     }
-
-
     public  boolean isNumeric(String str){
         for (int i = 0; i < str.length(); i++){
             if (!Character.isDigit(str.charAt(i))){

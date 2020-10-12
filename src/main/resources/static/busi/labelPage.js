@@ -201,7 +201,6 @@ function backlog() {
 
 	});
 }
-
 function finished() {
 	$('#tb_finished').bootstrapTable({
 		url: WEB_ROOT + "/TUserTaskController/getDoneTask",
