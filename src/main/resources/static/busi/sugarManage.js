@@ -1356,15 +1356,17 @@ function runInit() {
 			$.each(result,function (key,v) {
 				console.log(key);
 				var value=[];
-				value.push(key);
-				value.push(v.startTime);
-				value.push(v.endTime);
-				projectName.push(v.projectStage);
-				res.push({
-					itemStyle:{normal:{color:colors[key]}},
-					value: value,
-					name: v.projectStage
-				});
+				if(v.startTime!=null && v.endTime!=null && v.projectStage!=null){
+					value.push(key);
+					value.push(v.startTime);
+					value.push(v.endTime);
+					projectName.push(v.projectStage);
+					res.push({
+						itemStyle:{normal:{color:colors[key]}},
+						value: value,
+						name: v.projectStage
+					});
+				}
 			});
 			var myChart =
 				echarts.init(document.getElementById('chart'));
