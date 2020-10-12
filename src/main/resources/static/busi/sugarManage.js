@@ -108,7 +108,9 @@ $(function () {
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="appointModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-top: 10px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >指派</button >';
 						html += "</div>";
-					}  else {
+					} else if (row.delay) {
+						var html = '';
+					} else {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="deleteModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
 						html += "</div>";
@@ -359,7 +361,7 @@ $(function () {
 			}, {
 				field: 'maintainPhase',
 				title: '运维阶段',
-				
+
 			}]],
 		onEditableSave: function (field, row, oldValue, $el) {
 			// alert("更新保存事件，原始值为" + oldValue);
@@ -1036,29 +1038,28 @@ function saveDelayInfo() {
 		}
 	});
 }
+
 //审核
 function examineAj(e) {
 	debugger
 //根据当前行的id获取当前的行数据
-	var projectId=document.getElementById("ww").value;
-	var taskName=document.getElementById("tN").value;
+	var projectId = document.getElementById("ww").value;
+	var taskName = document.getElementById("tN").value;
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/examine",
-		data: {"projectId":projectId,"staus":e,"taskName":taskName},
+		data: {"projectId": projectId, "staus": e, "taskName": taskName},
 		success: function (result) {
 			debugger
-			if ("false"==result){
+			if ("false" == result) {
 				confirmModal("提示", "审核结果:不通过！", function () {
 					window.location.reload();
 				})
-			}
-			else if ("null"==result){
+			} else if ("null" == result) {
 				confirmModal("提示", "无项目审核", function () {
 					window.location.reload();
 				})
-			}
-			 else{
+			} else {
 				confirmModal("提示", "审核结果:通过！", function () {
 					window.location.reload();
 				})
@@ -1069,8 +1070,9 @@ function examineAj(e) {
 		}
 	});
 }
+
 //审核事件
-var examine = function (id,taskName) {
+var examine = function (id, taskName) {
 	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
@@ -1079,6 +1081,7 @@ var examine = function (id,taskName) {
 	//弹出模态框
 	$("#examineModel").modal();
 }
+
 function saveProjectInfo() {
 	$.ajax({
 		type: "post",
@@ -1347,22 +1350,22 @@ function runInit() {
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/sugarManage/echartForProject",
-		data: {"platformName":platformName},
+		data: {"platformName": platformName},
 		dataType: 'JSON',
 		success: function (result) {
-			var res=[];
-			var projectName=[];
-			const colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B','#800080','#8B0000'];
-			$.each(result,function (key,v) {
+			var res = [];
+			var projectName = [];
+			const colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
+			$.each(result, function (key, v) {
 				console.log(key);
-				var value=[];
-				if(v.startTime!=null && v.endTime!=null && v.projectStage!=null){
+				var value = [];
+				if (v.startTime != null && v.endTime != null && v.projectStage != null) {
 					value.push(key);
 					value.push(v.startTime);
 					value.push(v.endTime);
 					projectName.push(v.projectStage);
 					res.push({
-						itemStyle:{normal:{color:colors[key]}},
+						itemStyle: {normal: {color: colors[key]}},
 						value: value,
 						name: v.projectStage
 					});
@@ -1372,7 +1375,7 @@ function runInit() {
 				echarts.init(document.getElementById('chart'));
 			var option = {
 				tooltip: {
-					formatter: function(params) {
+					formatter: function (params) {
 						return params.name + ':' + params.value[1] + '~' + params.value[2]
 					}
 				},
@@ -1391,18 +1394,18 @@ function runInit() {
 				yAxis: {
 					type: 'category',
 					splitLine: {show: false},
-					data:['商机推进阶段','采购阶段','产品阶段','研发阶段','运营阶段','运维阶段']
+					data: ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段']
 				},
 				series: [
 					{
-						type:'custom',
-						renderItem: function(params, api){
+						type: 'custom',
+						renderItem: function (params, api) {
 							var categoryIndex = api.value(0);
 							var start = api.coord([api.value(1), categoryIndex])
 							var end = api.coord([api.value(2), categoryIndex])
 							var height = 24
 
-							return{
+							return {
 
 								type: 'rect',
 								shape: echarts.graphic.clipRectByRect({
@@ -1419,11 +1422,11 @@ function runInit() {
 								style: api.style()
 							}
 						},
-						encode:{
-							x:[1,2],
-							y:0
+						encode: {
+							x: [1, 2],
+							y: 0
 						},
-						data:res
+						data: res
 					}
 				]
 			};

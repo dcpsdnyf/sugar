@@ -138,6 +138,8 @@ public class SugarManageController extends AppBaseController {
                         tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());
 
                         tSugarProjectVO.setAppoint(roleProjectVO.isRoleAppoint());
+
+                        tSugarProjectVO.setDelay(roleProjectVO.isRoleDelay());
                     }
                     if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
                         tSugarProjectVO.setRowEdit(true);
