@@ -426,8 +426,14 @@ public class SugarManageController extends AppBaseController {
     private String simplify(String date){
         int index1 =date.indexOf("-");
         int index2 =date.lastIndexOf("-");
+        String time = "";
+        if(date.indexOf(" ")!=-1){
+            int index3 = date.indexOf(" ");
+            time =" " + date.substring(index3+1);
+        }
         int month;
         int day;
+
         int year=Integer.parseInt(date.substring(0,index1));
         if(date.substring(index1+1,index1+2).equals("0")){
             month=Integer.parseInt(date.substring(index1+2,index1+3));
@@ -439,7 +445,7 @@ public class SugarManageController extends AppBaseController {
         }else{
             day=Integer.parseInt(date.substring(index2+1,index2+3));
         }
-        String date1=(year+"-"+month+"-"+day)+"";
+        String date1=(year+"-"+month+"-"+day)+""+time;
         return  date1;
     }
 }
