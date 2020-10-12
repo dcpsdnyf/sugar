@@ -354,6 +354,12 @@ function finished() {
 		},{
 			align: "center",
 			halign: "center",
+			field: 'estimatedTime',
+			switchable: false,
+			title: '整体预计完成时间'
+		},{
+			align: "center",
+			halign: "center",
 			field: 'taskInfo',
 			title: '任务内容'
 		}],
