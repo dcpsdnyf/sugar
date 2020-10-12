@@ -20,6 +20,7 @@ import com.sugar.manage.vo.SysResult;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -90,7 +91,7 @@ private ITUserTaskService itUserTaskService;
 
 	@RequestMapping("/addEntrustInfo")
 	@ResponseBody
-	public SysResult addEntrustInfo(TUserTask tUserTask, HttpServletRequest request) {
+	public SysResult addEntrustInfo(TUserTaskVO tUserTaskVO, HttpServletRequest request) {
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isBlank(userId)) {
 			return SysResult.success("请先登入", null);
@@ -102,39 +103,27 @@ private ITUserTaskService itUserTaskService;
 			return SysResult.success("没有指派权限", null);
 		}
 
-		if (StringUtils.isBlank(tUserTask.getTaskPrincipal())) {
+		if (StringUtils.isBlank(tUserTaskVO.getTaskPrincipal())) {
 			return SysResult.success("负责人为空", null);
 		}
-		if (StringUtils.isBlank(tUserTask.getEstimatedTime())) {
+		if (StringUtils.isBlank(tUserTaskVO.getEstimatedTime())) {
 			return SysResult.success("预计时间为空", null);
 		}
-		if (StringUtils.isBlank(tUserTask.getProjectId())) {
+		if (StringUtils.isBlank(tUserTaskVO.getProjectId())) {
 			return SysResult.success("项目id为空", null);
 		}
-		//1.先判断该项目id的最新阶段，如果是被指派过的阶段则不允许新增
-		List<String> hs = itUserTaskService.getAllTaskNameByProductId(tUserTask.getProjectId());
 
-		if (("53".equals(userId) && hs.contains("1")) || ("33".equals(userId) && hs.contains("1"))) {
-			return SysResult.success("商机推进阶段已被指派过，无法重复指派", null);
+		TUserTaskVO tUserTaskVOTemp = new TUserTaskVO();
+		tUserTaskVOTemp.setTaskName(tUserTaskVO.getBigId());
+		tUserTaskVOTemp.setProjectId(tUserTaskVO.getProjectId());
+		tUserTaskVOTemp.setTaskType("01");
+		/**查询该阶段是否被指派过*/
+		List<TUserTaskVO> tUserTaskVOList = itUserTaskService.selectTUserTaskList(tUserTaskVOTemp);
+		if(!CollectionUtils.isEmpty(tUserTaskVOList)){
+			return SysResult.success("该阶段已被指派过，请勿重复指派", null);
 		}
-		if ("33".equals(userId) && hs.contains("1")) {
-			return SysResult.success("商机推进阶段已被指派过，无法重复指派", null);
-		}
-		if ("80".equals(userId) && hs.contains("2")) {
-			return SysResult.success("采购阶段已被指派过，无法重复指派", null);
-		}
-		if ("80".equals(userId) && hs.contains("3")) {
-			return SysResult.success("产品阶段已被指派过，无法重复指派", null);
-		}
-		if ("80".equals(userId) && hs.contains("5")) {
-			return SysResult.success("运营阶段已被指派过，无法重复指派", null);
-		}
-		if ("20".equals(userId) && hs.contains("4")) {
-			return SysResult.success("研发阶段已被指派过，无法重复指派", null);
-		}
-		if ("20".equals(userId) && hs.contains("6")) {
-			return SysResult.success("运维阶段已被指派过，无法重复指派", null);
-		}
+
+		TUserTask tUserTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
 		int count = itUserTaskService.insertTUserTask(tUserTask);
 		if (count <= 0) {
 			return SysResult.success("插入失败", null);

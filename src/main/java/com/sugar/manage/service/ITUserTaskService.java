@@ -30,7 +30,7 @@ public interface ITUserTaskService
      * @param tUserTask 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<TUserTask> selectTUserTaskList(TUserTask tUserTask);
+    public List<TUserTaskVO> selectTUserTaskList(TUserTaskVO tUserTask);
 
     /**
      * 新增【请填写功能名称】

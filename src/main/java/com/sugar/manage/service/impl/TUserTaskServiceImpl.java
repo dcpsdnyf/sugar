@@ -55,12 +55,18 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	/**
 	 * 查询【请填写功能名称】列表
 	 *
-	 * @param tUserTask 【请填写功能名称】
+	 * @param tUserTaskVO 【请填写功能名称】
 	 * @return 【请填写功能名称】
 	 */
 	@Override
-	public List<TUserTask> selectTUserTaskList(TUserTask tUserTask) {
-		return tUserTaskMapper.selectTUserTaskList(tUserTask);
+	public List<TUserTaskVO> selectTUserTaskList(TUserTaskVO tUserTaskVO) {
+        TUserTask tUserTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
+        List<TUserTask> tUserTaskList = tUserTaskMapper.selectTUserTaskList(tUserTask);
+        if(!CollectionUtils.isEmpty(tUserTaskList)){
+            List<TUserTaskVO> tUserTaskVOList = ModelCopyUtil.copyToList(tUserTaskList, TUserTaskVO.class);
+            return tUserTaskVOList;
+        }
+        return null;
 	}
 
 	/**
