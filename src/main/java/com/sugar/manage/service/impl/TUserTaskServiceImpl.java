@@ -441,7 +441,6 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         if (StringUtils.isBlank(tkuser.getTaskName())) {
             return 0;
         }
-
         TDelay tDelay = new TDelay();
         tDelay.setDelayTime(delayDay);
         tDelay.setDelayPeopleName(userName);
@@ -463,6 +462,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tkuse.setProjectId(projectId);
             tkuse.setTaskPrincipal(tk.getTaskPrincipal());
             tkuse.setStartTime(tk.getStartTime());
+            tkuse.setEstimatedTime(tkuser.getEstimatedTime());
             tkuse.setTaskInfo("延期申请");
             tkuse.setTaskStatus("0");
            int coun = tUserTaskMapper.insertTUserTask(tkuse);
@@ -475,7 +475,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
     }
     @Override
-    public int examine(String userId,String projectId,String staus) throws ParseException {
+    public int examine(String userId,String projectId,String staus,String taskName) throws ParseException {
         //1.先根据用户id获取用户名
         String userName = tUserMapper.getUserIdByUerName(userId);
         if (StringUtils.isBlank(userName)) {
@@ -485,6 +485,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
         delay.setProjectId(projectId);
         delay.setAuditingPeopleName(userName);
         delay.setStatus("99");
+        delay.setTaskName(taskName);
         if("0".equals(staus)) {
             delay.setAuditingStatus("0");
             int count = tDelayMapper.udaDelay(delay);
@@ -498,11 +499,17 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 }
                 task.setProjectId(projectId);
                 task.setTaskInfo("延期申请");
-                task.setStartTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal(),task.getTaskInfo()).getStartTime());
-                task.setEndTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getStartTime()));
+                task.setEstimatedTime(tUserTaskMapper.getProject(projectId,task.getTaskPrincipal(),task.getTaskInfo()).getEstimatedTime());
+                task.setEstimatedTime(this.plusDay(Integer.parseInt(task.getDelayDay()),task.getEstimatedTime()));
                 task.setTaskStatus("2");
+                task.setTaskName(taskName);
                 count=tUserTaskMapper.updateTUserTask(task);
                 if(count>0){
+                    TUserTask userTask=new TUserTask();
+                    userTask.setTaskType("01");
+                    userTask.setTaskName(taskName);
+                    userTask.setEstimatedTime(task.getEstimatedTime());
+                    tUserTaskMapper.updateTask(userTask);
                     return 1;
                 }else {
                     return 0;
@@ -525,7 +532,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
             tUserTaskMapper.updateTUserTask(task);
             return 0;
         }
-        return 0;
+        return -1;
     }
 
     @Override
@@ -546,7 +553,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
      * 21
      */
     public String plusDay(int num, String newDate) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date currdate = format.parse(newDate);
         Calendar ca = Calendar.getInstance();
         ca.add(Calendar.DATE, num);// num为增加的天数，可以改变的

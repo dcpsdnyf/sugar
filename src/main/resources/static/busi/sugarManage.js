@@ -1041,17 +1041,24 @@ function examineAj(e) {
 	debugger
 //根据当前行的id获取当前的行数据
 	var projectId=document.getElementById("ww").value;
+	var taskName=document.getElementById("tN").value;
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/examine",
-		data: {"projectId":projectId,"staus":e},
+		data: {"projectId":projectId,"staus":e,"taskName":taskName},
 		success: function (result) {
 			debugger
 			if ("false"==result){
 				confirmModal("提示", "审核结果:不通过！", function () {
 					window.location.reload();
 				})
-			}else {
+			}
+			else if ("null"==result){
+				confirmModal("提示", "无项目审核", function () {
+					window.location.reload();
+				})
+			}
+			 else{
 				confirmModal("提示", "审核结果:通过！", function () {
 					window.location.reload();
 				})
@@ -1063,11 +1070,12 @@ function examineAj(e) {
 	});
 }
 //审核事件
-var examine = function (id) {
+var examine = function (id,taskName) {
 	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	$("#ww").val(id);
+	$("#tN").val(taskName);
 	//弹出模态框
 	$("#examineModel").modal();
 

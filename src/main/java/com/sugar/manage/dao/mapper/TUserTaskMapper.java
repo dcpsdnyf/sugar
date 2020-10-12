@@ -46,6 +46,8 @@ public interface TUserTaskMapper
      */
     public int updateTUserTask(TUserTask tUserTask);
 
+    public int updateTask(TUserTask tUserTask);
+
     /**
      * 删除【请填写功能名称】
      * 
