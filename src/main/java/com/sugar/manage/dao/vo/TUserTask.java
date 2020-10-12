@@ -1,5 +1,6 @@
 package com.sugar.manage.dao.vo;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @author ruoyi
  * @date 2020-09-28
  */
+@Data
 public class TUserTask implements Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -82,6 +84,12 @@ public class TUserTask implements Serializable
     private String delayDay;
 
     private String delayPeople;
+
+    /**是否显示指派按钮*/
+    private boolean isAppoint;
+
+    /**是否显示申请延期按钮*/
+    private boolean isDelay;
 
     public String getDelayPeople() {
         return delayPeople;

@@ -156,7 +156,4 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     /**是否显示指派按钮*/
     private boolean isAppoint;
-
-    /**是否显示申请延期按钮*/
-    private boolean isDelay;
 }
