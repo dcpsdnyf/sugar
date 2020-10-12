@@ -136,7 +136,7 @@
                     <div class="row" style="padding:10px;">
                         <label class="control-label col-xs-2">开始时间</label>
                         <div class="col-xs-10">
-                            <input type="datetime-local" name="startTime" class="form-control" placeholder="开始时间">
+                            <input type="text" onFocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" name="startTime" class="form-control" placeholder="开始时间">
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                 <div class="row" style="padding:10px;">
                     <label class="control-label col-xs-2">项目开始时间</label>
                     <div class="col-xs-10">
-                        <input type="datetime-local" name="startTime" class="form-control" placeholder="项目开始时间">
+                        <input type="text" onFocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" name="startTime" class="form-control" placeholder="项目开始时间">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -225,7 +225,7 @@
                     <div class="row" style="padding:10px;">
                         <label class="control-label col-xs-2">预计时间</label>
                         <div class="col-xs-10">
-                            <input type="datetime-local" name="estimatedTime" class="form-control" placeholder="预计时间">
+                            <input type="text" onFocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" name="estimatedTime" class="form-control" placeholder="预计时间">
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
                     <div class="row" style="padding:10px;">
                         <label class="control-label col-xs-2">延期天数</label>
                         <div class="col-xs-10">
-                            <input type="text" name="delayDay"  placeholder="延期天数" style="width: 30%"><span>天</span>
+                            <input type="text" onFocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" name="delayDay"  class="form-control" placeholder="延期天数">
                         </div>
                     </div>
                 </div>
@@ -338,6 +338,7 @@
 <script th:src="@{/busi/sugarManage.js}"></script>
 <script th:src="@{/busi/labelPage.js}"></script>
 <script th:src="@{/busi/util_new.js}"></script>
+<script th:src="@{/scripts/My97DatePicker/WdatePicker.js}"></script>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="waitingModal">
     <div class="modal-dialog" role="document">
