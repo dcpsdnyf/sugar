@@ -403,17 +403,17 @@ public class SugarManageController extends AppBaseController {
             //商机推进
             tUserTasks = map.get(key);
         }
-        if (tUserTasks!=null && key.equals(tUserTasks.get(0).getTaskName())){
+        if (tUserTasks.size()!=0 && tUserTasks!=null && key.equals(tUserTasks.get(0).getTaskName())){
             chartVO.setTaskName(key);
             chartVO.setProjectStage(projectStage[Integer.parseInt(key)-1]);
             String startTime = simplify(tUserTasks.get(0).getStartTime());
             chartVO.setStartTime(startTime);
         }
-        if (tUserTasks!=null && StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
+        if (tUserTasks.size()!=0 && tUserTasks!=null && StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             String endTime = simplify(DateUtils.dateTimeNow("YYYY-MM-dd"));
             chartVO.setEndTime(endTime);
         }
-        if(tUserTasks!=null && !StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
+        if(tUserTasks.size()!=0 && tUserTasks!=null && !StringUtils.isBlank(tUserTasks.get(tUserTasks.size()-1).getEndTime())){
             chartVO.setEndTime(tUserTasks.get(tUserTasks.size()-1).getEndTime());
         }
         if(chartVO!=null) {
