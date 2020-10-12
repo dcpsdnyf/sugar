@@ -176,7 +176,7 @@ function backlog() {
 					debugger
                     var html = '';
 	                if(row.delay){html = '<div style=\'width:100%;\'>' +
-		                '<button type="button" onclick="updateUserTask(' + row.projectId + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;'+
+		                '<button type="button" onclick="updateUserTask(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;'+
 		                '<button type="button" onclick="delayModel(' + row.projectId + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >'+
 		                '</div>';
 	                }else if (row.appoint) {
