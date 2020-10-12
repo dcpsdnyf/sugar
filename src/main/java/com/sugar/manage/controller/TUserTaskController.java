@@ -59,7 +59,7 @@ private ITUserTaskService itUserTaskService;
 		if (StringUtils.isBlank(userId)) {
 			return SysResult.success("未获得用户信息，请登录", null);
 		}
-		TUserTask task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(), userId);
+		TUserTaskVO task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(), userId);
 		if (task != null) {
 			if (StringUtils.isBlank(task.getProjectId()) && StringUtils.isBlank(task.getTaskPrincipal()) && StringUtils.isBlank(task.getStartTime())) {
 				return SysResult.success("该用户没用指派权限", null);

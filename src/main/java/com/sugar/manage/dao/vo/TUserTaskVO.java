@@ -3,7 +3,6 @@ package com.sugar.manage.dao.vo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 public class TUserTaskVO implements Serializable
@@ -70,4 +69,7 @@ public class TUserTaskVO implements Serializable
     private String delayDay;
 
     private String delayPeople;
+
+    //大段ID用于回显指派时的项目阶段
+    private String bigId;
 }

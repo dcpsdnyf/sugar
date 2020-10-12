@@ -3,7 +3,7 @@ package com.sugar.manage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sugar.manage.dao.vo.TUserTask;
-
+import com.sugar.manage.dao.vo.TUserTaskVO;
 
 import java.text.ParseException;
 import java.util.List;
@@ -64,7 +64,7 @@ public interface ITUserTaskService
      */
     public int deleteTUserTaskById(Long id);
 
-    public TUserTask getTaskInfoByUserIdAndProjectId(String projectId,String userId);
+    public TUserTaskVO getTaskInfoByUserIdAndProjectId(String projectId, String userId);
 
     public List<String> getAllTaskNameByProductId(String projectId);
 
