@@ -795,10 +795,34 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
                 case "412":
                     project.setImplementDeliver(null);
                     project.setCheckDeliver(tUserTask.getTaskInfo());
+
+                    TUserTask newUserTask = new TUserTask();
+                    newUserTask.setTaskName("5");
+                    newUserTask.setProjectId(tUserTask.getProjectId());
+                    newUserTask.setTaskPrincipal("尹罗琦");
+                    newUserTask.setPrincipal(tUserTask.getPrincipal());
+                    newUserTask.setTaskType("00");
+                    newUserTask.setTaskStatus("0");
+                    newUserTask.setCreatedTime(DateUtils.getNowDate());
+                    newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+                    //研发阶段完成自动开启运营阶段
+                    tUserTaskMapper.insertTUserTask(newUserTask);
                     break;
             }
         }else if("5".equals(tUserTask.getTaskName())){
             project.setOperationPhase(tUserTask.getTaskInfo());
+
+            TUserTask newUserTask = new TUserTask();
+            newUserTask.setTaskName("6");
+            newUserTask.setProjectId(tUserTask.getProjectId());
+            newUserTask.setTaskPrincipal("黄斯楠");
+            newUserTask.setPrincipal(tUserTask.getPrincipal());
+            newUserTask.setTaskType("00");
+            newUserTask.setTaskStatus("0");
+            newUserTask.setCreatedTime(DateUtils.getNowDate());
+            newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+            //运维阶段完成自动开启运维阶段
+            tUserTaskMapper.insertTUserTask(newUserTask);
         }else if("6".equals(tUserTask.getTaskName())){
             project.setMaintainPhase(tUserTask.getTaskInfo());
         }
