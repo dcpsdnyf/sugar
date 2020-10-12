@@ -398,8 +398,12 @@ private ITUserTaskService itUserTaskService;
 	@ResponseBody
 	public SysResult updateUserTaskToProgressing(TUserTaskVO tUserTaskVO) {
 		TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
-		userTask.setTaskStatus("1");
-		userTask.setUpdatedTime(DateUtils.getNowDate());
+		if("00".equals(tUserTaskVO.getTaskType())){
+			userTask.setTaskInfo("");
+		}else {
+			userTask.setTaskStatus("1");
+			userTask.setUpdatedTime(DateUtils.getNowDate());
+		}
 		itUserTaskService.updateUserTaskToProgressing(userTask);
 		return SysResult.success();
 	}

@@ -188,6 +188,7 @@ function backlog() {
                 }
             }],
 		onEditableSave: function (field, row, oldValue, $el) {
+			debugger
 			// alert("更新保存事件，原始值为" + oldValue);
 			$.ajax({
 				type: "POST",
@@ -195,6 +196,7 @@ function backlog() {
 				data: row,
 				dataType: 'JSON',
 				success: function (result) {
+					debugger
                     window.location.reload();
 				},
 				error: function () {
