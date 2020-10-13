@@ -363,7 +363,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
     @Override
     public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds) {
 
-        return sugarProjectMapper.getProductHeaderByProjectIds(projectIds);
+        return sugarProjectExMapper.getProductHeaderByProjectIds(projectIds);
     }
 
     @Override

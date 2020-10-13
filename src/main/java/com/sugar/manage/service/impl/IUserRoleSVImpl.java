@@ -5,6 +5,7 @@ import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.*;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.vo.RoleProjectVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -53,26 +54,28 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             String roleIds = userRole.getRoleId();
 
-            String projectIds = userRole.getProjectId();
+            //String projectIds = userRole.getProjectId();
+            if(StringUtils.isNotBlank(roleIds)){
+                String[] roleIdArr = roleIds.split(",");
+                //String[] projectIdArr = projectIds.split(",");
+                //用于控制指派按钮是否显示
+                if(Arrays.asList(roleIdArr).contains("9")){
+                    roleProjectVO.setRoleAppoint(true);
+                }
+                //用于控制申请延期按钮是否显示
+                if(Arrays.asList(roleIdArr).contains("10")){
+                    roleProjectVO.setRoleDelay(true);
+                }
+            }
 
-            String[] roleIdArr = roleIds.split(",");
-            String[] projectIdArr = projectIds.split(",");
-            //用于控制指派按钮是否显示
-            if(Arrays.asList(roleIdArr).contains("9")){
-                roleProjectVO.setRoleAppoint(true);
-            }
-            //用于控制申请延期按钮是否显示
-            if(Arrays.asList(roleIdArr).contains("10")){
-                roleProjectVO.setRoleDelay(true);
-            }
             /*项目id*/
-            Map<String,String> projectIdMap = new HashMap<>();
+           /* Map<String,String> projectIdMap = new HashMap<>();
             for (String projectId : projectIdArr){
                 projectIdMap.put(projectId+"",projectId+"");
             }
             roleProjectVO.setProjectIdMap(projectIdMap);
 
-            /*角色id*/
+            *//*角色id*//*
             for(String roleId:roleIdArr){
                 roleIdList.add(Long.parseLong(roleId));
             }
@@ -80,10 +83,10 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
             TRoleExample exampleRole = new TRoleExample();
             TRoleExample.Criteria sqlRole = exampleRole.createCriteria();
-            sqlRole.andIdIn(roleIdList);
+            sqlRole.andIdIn(roleIdList);*/
 
-            List<TRole> roleList = roleMapper.selectByExample(exampleRole);
-            if(!CollectionUtils.isEmpty(roleList)){
+            //List<TRole> roleList = roleMapper.selectByExample(exampleRole);
+            /*if(!CollectionUtils.isEmpty(roleList)){
 
                 Map<String,String> roleTypeMap = new HashMap<>();
                 for (TRole role : roleList){
@@ -112,7 +115,7 @@ public class IUserRoleSVImpl implements IUserRoleSV {
                 if(roleTypeMap.containsKey("7")){
                     roleProjectVO.setMaintainManager(true);
                 }
-            }
+            }*/
 
         }
         return roleProjectVO;

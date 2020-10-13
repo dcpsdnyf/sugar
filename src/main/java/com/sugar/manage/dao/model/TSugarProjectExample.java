@@ -375,76 +375,6 @@ public class TSugarProjectExample {
             return (Criteria) this;
         }
 
-        public Criteria andGroupNameIsNull() {
-            addCriterion("group_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameIsNotNull() {
-            addCriterion("group_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameEqualTo(String value) {
-            addCriterion("group_name =", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameNotEqualTo(String value) {
-            addCriterion("group_name <>", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameGreaterThan(String value) {
-            addCriterion("group_name >", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameGreaterThanOrEqualTo(String value) {
-            addCriterion("group_name >=", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameLessThan(String value) {
-            addCriterion("group_name <", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameLessThanOrEqualTo(String value) {
-            addCriterion("group_name <=", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameLike(String value) {
-            addCriterion("group_name like", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameNotLike(String value) {
-            addCriterion("group_name not like", value, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameIn(List<String> values) {
-            addCriterion("group_name in", values, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameNotIn(List<String> values) {
-            addCriterion("group_name not in", values, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameBetween(String value1, String value2) {
-            addCriterion("group_name between", value1, value2, "groupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andGroupNameNotBetween(String value1, String value2) {
-            addCriterion("group_name not between", value1, value2, "groupName");
-            return (Criteria) this;
-        }
-
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;
@@ -832,6 +762,216 @@ public class TSugarProjectExample {
 
         public Criteria andSortNotBetween(Integer value1, Integer value2) {
             addCriterion("sort not between", value1, value2, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIsNull() {
+            addCriterion("group_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIsNotNull() {
+            addCriterion("group_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameEqualTo(String value) {
+            addCriterion("group_name =", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotEqualTo(String value) {
+            addCriterion("group_name <>", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameGreaterThan(String value) {
+            addCriterion("group_name >", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameGreaterThanOrEqualTo(String value) {
+            addCriterion("group_name >=", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLessThan(String value) {
+            addCriterion("group_name <", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLessThanOrEqualTo(String value) {
+            addCriterion("group_name <=", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameLike(String value) {
+            addCriterion("group_name like", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotLike(String value) {
+            addCriterion("group_name not like", value, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameIn(List<String> values) {
+            addCriterion("group_name in", values, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotIn(List<String> values) {
+            addCriterion("group_name not in", values, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameBetween(String value1, String value2) {
+            addCriterion("group_name between", value1, value2, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupNameNotBetween(String value1, String value2) {
+            addCriterion("group_name not between", value1, value2, "groupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeIsNull() {
+            addCriterion("START_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeIsNotNull() {
+            addCriterion("START_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeEqualTo(String value) {
+            addCriterion("START_TIME =", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeNotEqualTo(String value) {
+            addCriterion("START_TIME <>", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeGreaterThan(String value) {
+            addCriterion("START_TIME >", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("START_TIME >=", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeLessThan(String value) {
+            addCriterion("START_TIME <", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeLessThanOrEqualTo(String value) {
+            addCriterion("START_TIME <=", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeLike(String value) {
+            addCriterion("START_TIME like", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeNotLike(String value) {
+            addCriterion("START_TIME not like", value, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeIn(List<String> values) {
+            addCriterion("START_TIME in", values, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeNotIn(List<String> values) {
+            addCriterion("START_TIME not in", values, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeBetween(String value1, String value2) {
+            addCriterion("START_TIME between", value1, value2, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartTimeNotBetween(String value1, String value2) {
+            addCriterion("START_TIME not between", value1, value2, "startTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalIsNull() {
+            addCriterion("TASK_PRINCIPAL is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalIsNotNull() {
+            addCriterion("TASK_PRINCIPAL is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalEqualTo(String value) {
+            addCriterion("TASK_PRINCIPAL =", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalNotEqualTo(String value) {
+            addCriterion("TASK_PRINCIPAL <>", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalGreaterThan(String value) {
+            addCriterion("TASK_PRINCIPAL >", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("TASK_PRINCIPAL >=", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalLessThan(String value) {
+            addCriterion("TASK_PRINCIPAL <", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("TASK_PRINCIPAL <=", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalLike(String value) {
+            addCriterion("TASK_PRINCIPAL like", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalNotLike(String value) {
+            addCriterion("TASK_PRINCIPAL not like", value, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalIn(List<String> values) {
+            addCriterion("TASK_PRINCIPAL in", values, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalNotIn(List<String> values) {
+            addCriterion("TASK_PRINCIPAL not in", values, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalBetween(String value1, String value2) {
+            addCriterion("TASK_PRINCIPAL between", value1, value2, "taskPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskPrincipalNotBetween(String value1, String value2) {
+            addCriterion("TASK_PRINCIPAL not between", value1, value2, "taskPrincipal");
             return (Criteria) this;
         }
     }

@@ -6,15 +6,15 @@
     <result column="product_type" jdbcType="VARCHAR" property="productType" />
     <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
     <result column="platform_id" jdbcType="VARCHAR" property="platformId" />
-    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
     <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
     <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
     <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
@@ -65,8 +65,6 @@
     <result column="check_deliver" jdbcType="LONGVARCHAR" property="checkDeliver" />
     <result column="operation_phase" jdbcType="LONGVARCHAR" property="operationPhase" />
     <result column="maintain_phase" jdbcType="LONGVARCHAR" property="maintainPhase" />
-    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
-    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -127,8 +125,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, product_type, platform_name, platform_id, group_name, status, CREATED_STAFF, 
-    CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, sort
+    ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME, 
+    UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL
   </sql>
   <sql id="Blob_Column_List">
     business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
@@ -141,7 +139,7 @@
     pro_check_deliver, technology_selection, environment_deployment, framework_design, 
     develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75, 
     develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver, 
-    operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
+    operation_phase, maintain_phase
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.sugar.manage.dao.model.TSugarProjectExample" resultMap="ResultMapWithBLOBs">
     select
@@ -193,18 +191,18 @@
   </delete>
   <insert id="insert" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     insert into t_sugar_project (ID, product_type, platform_name, 
-      platform_id, group_name, status, 
-      CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, 
-      UPDATED_TIME, sort, business_clue_open, 
-      business_clue_0, business_discover_10, 
-      business_establish_25, business_establish_50, 
-      business_establish_75, business_win_100, 
-      customer_maintain_back_money, business_close, 
-      initial_intention_plan, write_project_proposal, 
-      working_hours_assess, business_negotiation, 
-      request_draft, attend_meeting, bidding, 
-      request_oa_approval, contract_draft, 
-      lawyer_review, contract_oa_approval, 
+      platform_id, status, CREATED_STAFF, 
+      CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, 
+      sort, group_name, START_TIME, 
+      TASK_PRINCIPAL, business_clue_open, business_clue_0, 
+      business_discover_10, business_establish_25, 
+      business_establish_50, business_establish_75, 
+      business_win_100, customer_maintain_back_money, 
+      business_close, initial_intention_plan, 
+      write_project_proposal, working_hours_assess, 
+      business_negotiation, request_draft, 
+      attend_meeting, bidding, request_oa_approval, 
+      contract_draft, lawyer_review, contract_oa_approval, 
       usage_seal, other_seal, scan, 
       general_department_file, first_payment, 
       progress_payment, final_payment, 
@@ -216,21 +214,21 @@
       develop_progress_25, develop_progress_50, 
       develop_progress_75, develop_progress_100, 
       inside_test, customer_test, implement_deliver, 
-      check_deliver, operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
+      check_deliver, operation_phase, maintain_phase
       )
     values (#{id,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
-      #{platformId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{createdStaff,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, 
-      #{updatedTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{businessClueOpen,jdbcType=LONGVARCHAR}, 
-      #{businessClue0,jdbcType=LONGVARCHAR}, #{businessDiscover10,jdbcType=LONGVARCHAR}, 
-      #{businessEstablish25,jdbcType=LONGVARCHAR}, #{businessEstablish50,jdbcType=LONGVARCHAR}, 
-      #{businessEstablish75,jdbcType=LONGVARCHAR}, #{businessWin100,jdbcType=LONGVARCHAR}, 
-      #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, #{businessClose,jdbcType=LONGVARCHAR}, 
-      #{initialIntentionPlan,jdbcType=LONGVARCHAR}, #{writeProjectProposal,jdbcType=LONGVARCHAR}, 
-      #{workingHoursAssess,jdbcType=LONGVARCHAR}, #{businessNegotiation,jdbcType=LONGVARCHAR}, 
-      #{requestDraft,jdbcType=LONGVARCHAR}, #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, 
-      #{requestOaApproval,jdbcType=LONGVARCHAR}, #{contractDraft,jdbcType=LONGVARCHAR}, 
-      #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
+      #{platformId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{taskPrincipal,jdbcType=VARCHAR}, #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
+      #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR}, 
+      #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, 
+      #{businessClose,jdbcType=LONGVARCHAR}, #{initialIntentionPlan,jdbcType=LONGVARCHAR}, 
+      #{writeProjectProposal,jdbcType=LONGVARCHAR}, #{workingHoursAssess,jdbcType=LONGVARCHAR}, 
+      #{businessNegotiation,jdbcType=LONGVARCHAR}, #{requestDraft,jdbcType=LONGVARCHAR}, 
+      #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, #{requestOaApproval,jdbcType=LONGVARCHAR}, 
+      #{contractDraft,jdbcType=LONGVARCHAR}, #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
       #{usageSeal,jdbcType=LONGVARCHAR}, #{otherSeal,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR}, 
       #{generalDepartmentFile,jdbcType=LONGVARCHAR}, #{firstPayment,jdbcType=LONGVARCHAR}, 
       #{progressPayment,jdbcType=LONGVARCHAR}, #{finalPayment,jdbcType=LONGVARCHAR}, 
@@ -243,7 +241,6 @@
       #{developProgress75,jdbcType=LONGVARCHAR}, #{developProgress100,jdbcType=LONGVARCHAR}, 
       #{insideTest,jdbcType=LONGVARCHAR}, #{customerTest,jdbcType=LONGVARCHAR}, #{implementDeliver,jdbcType=LONGVARCHAR}, 
       #{checkDeliver,jdbcType=LONGVARCHAR}, #{operationPhase,jdbcType=LONGVARCHAR}, #{maintainPhase,jdbcType=LONGVARCHAR}
-      , #{taskPrincipal,jdbcType=LONGVARCHAR}, #{startTime,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
@@ -260,9 +257,6 @@
       </if>
       <if test="platformId != null">
         platform_id,
-      </if>
-      <if test="groupName != null">
-        group_name,
       </if>
       <if test="status != null">
         status,
@@ -281,6 +275,15 @@
       </if>
       <if test="sort != null">
         sort,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="taskPrincipal != null">
+        TASK_PRINCIPAL,
       </if>
       <if test="businessClueOpen != null">
         business_clue_open,
@@ -440,9 +443,6 @@
       <if test="platformId != null">
         #{platformId,jdbcType=VARCHAR},
       </if>
-      <if test="groupName != null">
-        #{groupName,jdbcType=VARCHAR},
-      </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
@@ -460,6 +460,15 @@
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPrincipal != null">
+        #{taskPrincipal,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -628,9 +637,6 @@
       <if test="record.platformId != null">
         platform_id = #{record.platformId,jdbcType=VARCHAR},
       </if>
-      <if test="record.groupName != null">
-        group_name = #{record.groupName,jdbcType=VARCHAR},
-      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
       </if>
@@ -648,6 +654,15 @@
       </if>
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskPrincipal != null">
+        TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
       </if>
       <if test="record.businessClueOpen != null">
         business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
@@ -804,13 +819,15 @@
       product_type = #{record.productType,jdbcType=VARCHAR},
       platform_name = #{record.platformName,jdbcType=VARCHAR},
       platform_id = #{record.platformId,jdbcType=VARCHAR},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
       sort = #{record.sort,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
       business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
@@ -858,9 +875,7 @@
       implement_deliver = #{record.implementDeliver,jdbcType=LONGVARCHAR},
       check_deliver = #{record.checkDeliver,jdbcType=LONGVARCHAR},
       operation_phase = #{record.operationPhase,jdbcType=LONGVARCHAR},
-      maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR},
-    TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=LONGVARCHAR},
-    START_TIME = #{record.startTime,jdbcType=LONGVARCHAR}
+      maintain_phase = #{record.maintainPhase,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -871,15 +886,15 @@
       product_type = #{record.productType,jdbcType=VARCHAR},
       platform_name = #{record.platformName,jdbcType=VARCHAR},
       platform_id = #{record.platformId,jdbcType=VARCHAR},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
-    TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
-    START_TIME = #{record.startTime,jdbcType=VARCHAR},
-      sort = #{record.sort,jdbcType=INTEGER}
+      sort = #{record.sort,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -895,9 +910,6 @@
       </if>
       <if test="platformId != null">
         platform_id = #{platformId,jdbcType=VARCHAR},
-      </if>
-      <if test="groupName != null">
-        group_name = #{groupName,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -916,6 +928,15 @@
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPrincipal != null">
+        TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -1069,13 +1090,15 @@
     set product_type = #{productType,jdbcType=VARCHAR},
       platform_name = #{platformName,jdbcType=VARCHAR},
       platform_id = #{platformId,jdbcType=VARCHAR},
-      group_name = #{groupName,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
       sort = #{sort,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
       business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
@@ -1123,10 +1146,7 @@
       implement_deliver = #{implementDeliver,jdbcType=LONGVARCHAR},
       check_deliver = #{checkDeliver,jdbcType=LONGVARCHAR},
       operation_phase = #{operationPhase,jdbcType=LONGVARCHAR},
-      maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR},
-
-      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=LONGVARCHAR},
-      START_TIME = #{startTime,jdbcType=LONGVARCHAR}
+      maintain_phase = #{maintainPhase,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TSugarProject">
@@ -1134,42 +1154,15 @@
     set product_type = #{productType,jdbcType=VARCHAR},
       platform_name = #{platformName,jdbcType=VARCHAR},
       platform_id = #{platformId,jdbcType=VARCHAR},
-      group_name = #{groupName,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
       CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
       UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
       UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
-
-       TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
-        START_TIME = #{startTime,jdbcType=VARCHAR},
-
-      sort = #{sort,jdbcType=INTEGER}
+      sort = #{sort,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
-  <select id="getProjectId" parameterType="String" resultType="Long">
-    SELECT
-    ID
-    FROM
-    t_sugar_project
-    WHERE
-    TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR}
-  </select>
-
-
-  <select id="getProductHeaderByProjectIds" resultMap="BaseResultMap">
-    select
-
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_sugar_project
-    WHERE
-    ID IN
-    <foreach item="id" collection="projectIds" open="(" separator="," close=")">
-      #{id}
-    </foreach>
-
-  </select>
 </mapper>

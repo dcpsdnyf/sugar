@@ -109,11 +109,11 @@ public class SugarManageController extends AppBaseController {
                 roleProjectVO = userRoleSV.getUserRoleList(user);
             }
 
-            Map<String,String> projectIdMap = null;
+           /* Map<String,String> projectIdMap = null;
             if(roleProjectVO!=null){
 
                 projectIdMap = roleProjectVO.getProjectIdMap();
-            }
+            }*/
 
             PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
             List<TSugarProjectWithBLOBs> list = page.getList();
@@ -123,7 +123,7 @@ public class SugarManageController extends AppBaseController {
                     TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
 
                     if(roleProjectVO!=null){
-                        tSugarProjectVO.setDepMiddLelevel(roleProjectVO.isDepMiddLelevel());
+                        /*tSugarProjectVO.setDepMiddLelevel(roleProjectVO.isDepMiddLelevel());
 
                         tSugarProjectVO.setBusinessManager(roleProjectVO.isBusinessManager());
 
@@ -135,15 +135,15 @@ public class SugarManageController extends AppBaseController {
 
                         tSugarProjectVO.setOperateManager(roleProjectVO.isOperateManager());
 
-                        tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());
+                        tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());*/
 
                         tSugarProjectVO.setAppoint(roleProjectVO.isRoleAppoint());
 
                         tSugarProjectVO.setDelay(roleProjectVO.isRoleDelay());
                     }
-                    if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
+                    /*if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
                         tSugarProjectVO.setRowEdit(true);
-                    }
+                    }*/
 
 
                     tSugarProjectVOSList.add(tSugarProjectVO);

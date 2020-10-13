@@ -98,7 +98,6 @@ $(function () {
 				"colspan": 1,
 				rowspan: 2,
 				formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-					debugger
 					var html = '';
 					if (row.appoint) {
 						html = '<div style=\'width:150px;\'><button type="button" onclick="editModel(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +

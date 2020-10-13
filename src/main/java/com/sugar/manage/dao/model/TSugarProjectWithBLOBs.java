@@ -501,13 +501,15 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
             && (this.getProductType() == null ? other.getProductType() == null : this.getProductType().equals(other.getProductType()))
             && (this.getPlatformName() == null ? other.getPlatformName() == null : this.getPlatformName().equals(other.getPlatformName()))
             && (this.getPlatformId() == null ? other.getPlatformId() == null : this.getPlatformId().equals(other.getPlatformId()))
-            && (this.getGroupName() == null ? other.getGroupName() == null : this.getGroupName().equals(other.getGroupName()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreatedStaff() == null ? other.getCreatedStaff() == null : this.getCreatedStaff().equals(other.getCreatedStaff()))
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
             && (this.getUpdatedStaff() == null ? other.getUpdatedStaff() == null : this.getUpdatedStaff().equals(other.getUpdatedStaff()))
             && (this.getUpdatedTime() == null ? other.getUpdatedTime() == null : this.getUpdatedTime().equals(other.getUpdatedTime()))
             && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()))
+            && (this.getGroupName() == null ? other.getGroupName() == null : this.getGroupName().equals(other.getGroupName()))
+            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
+            && (this.getTaskPrincipal() == null ? other.getTaskPrincipal() == null : this.getTaskPrincipal().equals(other.getTaskPrincipal()))
             && (this.getBusinessClueOpen() == null ? other.getBusinessClueOpen() == null : this.getBusinessClueOpen().equals(other.getBusinessClueOpen()))
             && (this.getBusinessClue0() == null ? other.getBusinessClue0() == null : this.getBusinessClue0().equals(other.getBusinessClue0()))
             && (this.getBusinessDiscover10() == null ? other.getBusinessDiscover10() == null : this.getBusinessDiscover10().equals(other.getBusinessDiscover10()))
@@ -566,13 +568,15 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
         result = prime * result + ((getProductType() == null) ? 0 : getProductType().hashCode());
         result = prime * result + ((getPlatformName() == null) ? 0 : getPlatformName().hashCode());
         result = prime * result + ((getPlatformId() == null) ? 0 : getPlatformId().hashCode());
-        result = prime * result + ((getGroupName() == null) ? 0 : getGroupName().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreatedStaff() == null) ? 0 : getCreatedStaff().hashCode());
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
         result = prime * result + ((getUpdatedStaff() == null) ? 0 : getUpdatedStaff().hashCode());
         result = prime * result + ((getUpdatedTime() == null) ? 0 : getUpdatedTime().hashCode());
         result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
+        result = prime * result + ((getGroupName() == null) ? 0 : getGroupName().hashCode());
+        result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
+        result = prime * result + ((getTaskPrincipal() == null) ? 0 : getTaskPrincipal().hashCode());
         result = prime * result + ((getBusinessClueOpen() == null) ? 0 : getBusinessClueOpen().hashCode());
         result = prime * result + ((getBusinessClue0() == null) ? 0 : getBusinessClue0().hashCode());
         result = prime * result + ((getBusinessDiscover10() == null) ? 0 : getBusinessDiscover10().hashCode());
