@@ -1,281 +1,288 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sugar.manage.dao.mapper.TUserTaskMapper">
-    
-    <resultMap type="com.sugar.manage.dao.vo.TUserTask" id="TUserTaskResult">
-        <result property="id"    column="id"    />
-        <result property="status"    column="STATUS"    />
-        <result property="createdStaff"    column="CREATED_STAFF"    />
-        <result property="createdTime"    column="CREATED_TIME"    />
-        <result property="updatedStaff"    column="UPDATED_STAFF"    />
-        <result property="updatedTime"    column="UPDATED_TIME"    />
-        <result property="projectId"    column="PROJECT_ID"    />
-        <result property="taskPrincipal"    column="TASK_PRINCIPAL"    />
-        <result property="taskType"    column="TASK_TYPE"    />
-        <result property="taskStatus"    column="TASK_STATUS"    />
-        <result property="taskName"    column="TASK_NAME"    />
-        <result property="taskSubName"    column="TASK_SUB_NAME"    />
-        <result property="startTime"    column="START_TIME"    />
-        <result property="endTime"    column="END_TIME"    />
-        <result property="estimatedTime"    column="ESTIMATED_TIME"    />
-        <result property="taskInfo"    column="TASK_INFO"    />
-        <result property="taskParentType"    column="TASK_PARENT_TYPE"    />
-        <result property="delayDay"    column="DELAY_DAY"    />
-        <result property="delayPeople"    column="DELAY_PEOPLE"    />
-        <result property="principal"    column="principal"    />
-    </resultMap>
 
-    <sql id="selectTUserTaskVo">
+	<resultMap type="com.sugar.manage.dao.vo.TUserTask" id="TUserTaskResult">
+		<result property="id" column="id"/>
+		<result property="status" column="STATUS"/>
+		<result property="createdStaff" column="CREATED_STAFF"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="updatedStaff" column="UPDATED_STAFF"/>
+		<result property="updatedTime" column="UPDATED_TIME"/>
+		<result property="projectId" column="PROJECT_ID"/>
+		<result property="taskPrincipal" column="TASK_PRINCIPAL"/>
+		<result property="taskType" column="TASK_TYPE"/>
+		<result property="taskStatus" column="TASK_STATUS"/>
+		<result property="taskName" column="TASK_NAME"/>
+		<result property="taskSubName" column="TASK_SUB_NAME"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="estimatedTime" column="ESTIMATED_TIME"/>
+		<result property="taskInfo" column="TASK_INFO"/>
+		<result property="taskParentType" column="TASK_PARENT_TYPE"/>
+		<result property="delayDay" column="DELAY_DAY"/>
+		<result property="delayPeople" column="DELAY_PEOPLE"/>
+		<result property="principal" column="principal"/>
+	</resultMap>
+
+	<sql id="selectTUserTaskVo">
         select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE,DELAY_DAY,DELAY_PEOPLE,principal from t_user_task
     </sql>
 
-    <select id="selectTUserTaskList" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        <where>  
-            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
-            <if test="createdStaff != null  and createdStaff != ''"> and CREATED_STAFF = #{createdStaff}</if>
-            <if test="createdTime != null "> and CREATED_TIME = #{createdTime}</if>
-            <if test="updatedStaff != null  and updatedStaff != ''"> and UPDATED_STAFF = #{updatedStaff}</if>
-            <if test="updatedTime != null "> and UPDATED_TIME = #{updatedTime}</if>
-            <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''"> and TASK_PRINCIPAL = #{taskPrincipal}</if>
-            <if test="taskType != null  and taskType != ''"> and TASK_TYPE = #{taskType}</if>
-            <if test="taskStatus != null  and taskStatus != ''"> and TASK_STATUS = #{taskStatus}</if>
-            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
-            <if test="taskSubName != null  and taskSubName != ''"> and TASK_SUB_NAME like concat('%', #{taskSubName}, '%')</if>
-            <if test="startTime != null  and startTime != ''"> and START_TIME = #{startTime}</if>
-            <if test="endTime != null  and endTime != ''"> and END_TIME = #{endTime}</if>
-            <if test="estimatedTime != null  and estimatedTime != ''"> and ESTIMATED_TIME = #{estimatedTime}</if>
-            <if test="taskInfo != null  and taskInfo != ''"> and TASK_INFO = #{taskInfo}</if>
-            <if test="taskParentType != null  and taskParentType != ''"> and TASK_PARENT_TYPE = #{taskParentType}</if>
-            <if test="delayDay != null  and delayDay != ''"> and DELAY_DAY = #{delayDay}</if>
-            <if test="principal != null  and principal != ''"> and principal = #{principal}</if>
-        </where>
-    </select>
-    
-    <select id="selectTUserTaskById" parameterType="Long" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask" useGeneratedKeys="true" keyProperty="id">
-        insert into t_user_task
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="status != null  and status != ''">STATUS,</if>
-            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF,</if>
-            <if test="createdTime != null ">CREATED_TIME,</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF,</if>
-            <if test="updatedTime != null ">UPDATED_TIME,</if>
-            <if test="projectId != null  and projectId != ''">PROJECT_ID,</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL,</if>
-            <if test="taskType != null  and taskType != ''">TASK_TYPE,</if>
-            <if test="taskStatus != null  and taskStatus != ''">TASK_STATUS,</if>
-            <if test="taskName != null  and taskName != ''">TASK_NAME,</if>
-            <if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME,</if>
-            <if test="startTime != null  and startTime != ''">START_TIME,</if>
-            <if test="endTime != null  and endTime != ''">END_TIME,</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME,</if>
-            <if test="taskInfo != null  and taskInfo != ''">TASK_INFO,</if>
-            <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE,</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_DAY,</if>
-            <if test="delayPeople != null  and delayPeople != ''">DELAY_PEOPLE,</if>
-            <if test="principal != null  and principal != ''">principal,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="status != null  and status != ''">#{status},</if>
-            <if test="createdStaff != null  and createdStaff != ''">#{createdStaff},</if>
-            <if test="createdTime != null ">#{createdTime},</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">#{updatedStaff},</if>
-            <if test="updatedTime != null ">#{updatedTime},</if>
-            <if test="projectId != null  and projectId != ''">#{projectId},</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">#{taskPrincipal},</if>
-            <if test="taskType != null  and taskType != ''">#{taskType},</if>
-            <if test="taskStatus != null  and taskStatus != ''">#{taskStatus},</if>
-            <if test="taskName != null  and taskName != ''">#{taskName},</if>
-            <if test="taskSubName != null  and taskSubName != ''">#{taskSubName},</if>
-            <if test="startTime != null  and startTime != ''">#{startTime},</if>
-            <if test="endTime != null  and endTime != ''">#{endTime},</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">#{estimatedTime},</if>
-            <if test="taskInfo != null  and taskInfo != ''">#{taskInfo},</if>
-            <if test="taskParentType != null  and taskParentType != ''">#{taskParentType},</if>
-            <if test="delayDay != null  and delayDay != ''">#{delayDay},</if>
-            <if test="delayPeople != null  and delayPeople != ''">#{delayPeople},</if>
-            <if test="principal != null  and principal != ''">#{principal},</if>
-         </trim>
-    </insert>
+	<select id="selectTUserTaskList" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		<where>
+			<if test="status != null  and status != ''">and STATUS = #{status}</if>
+			<if test="createdStaff != null  and createdStaff != ''">and CREATED_STAFF = #{createdStaff}</if>
+			<if test="createdTime != null ">and CREATED_TIME = #{createdTime}</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">and UPDATED_STAFF = #{updatedStaff}</if>
+			<if test="updatedTime != null ">and UPDATED_TIME = #{updatedTime}</if>
+			<if test="projectId != null  and projectId != ''">and PROJECT_ID = #{projectId}</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">and TASK_PRINCIPAL = #{taskPrincipal}</if>
+			<if test="taskType != null  and taskType != ''">and TASK_TYPE = #{taskType}</if>
+			<if test="taskStatus != null  and taskStatus != ''">and TASK_STATUS = #{taskStatus}</if>
+			<if test="taskName != null  and taskName != ''">and TASK_NAME like concat('%', #{taskName}, '%')</if>
+			<if test="taskSubName != null  and taskSubName != ''">and TASK_SUB_NAME like concat('%', #{taskSubName},
+				'%')
+			</if>
+			<if test="startTime != null  and startTime != ''">and START_TIME = #{startTime}</if>
+			<if test="endTime != null  and endTime != ''">and END_TIME = #{endTime}</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">and ESTIMATED_TIME = #{estimatedTime}</if>
+			<if test="taskInfo != null  and taskInfo != ''">and TASK_INFO = #{taskInfo}</if>
+			<if test="taskParentType != null  and taskParentType != ''">and TASK_PARENT_TYPE = #{taskParentType}</if>
+			<if test="delayDay != null  and delayDay != ''">and DELAY_DAY = #{delayDay}</if>
+			<if test="principal != null  and principal != ''">and principal = #{principal}</if>
+		</where>
+	</select>
 
-    <update id="updateTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
-        update t_user_task
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="status != null  and status != ''">STATUS = #{status},</if>
-            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
-            <if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
-            <if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
-            <if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
-            <if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
-            <if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
-            <if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
-            <if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
-            <if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
-            <if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
-            <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
-            <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
-            <if test="principal != null  and principal != ''">principal = #{principal},</if>
-        </trim>
-        where PROJECT_ID = #{projectId}
-        AND
-        TASK_PRINCIPAL = #{taskPrincipal}
-        AND
-        TASK_INFO = #{taskInfo}
-        AND
-        TASK_NAME = #{taskName}
-    </update>
+	<select id="selectTUserTaskById" parameterType="Long" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		where id = #{id}
+	</select>
 
-    <update id="updateTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
-        update t_user_task
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="status != null  and status != ''">STATUS = #{status},</if>
-            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
-            <if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
-            <if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
-            <if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
-            <if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
-            <if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
-            <if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
-            <if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
-            <if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
-            <if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
-            <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
-            <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
-            <if test="principal != null  and principal != ''">principal = #{principal},</if>
-        </trim>
-        <where>
-            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
-            <if test="createdStaff != null  and createdStaff != ''"> and CREATED_STAFF = #{createdStaff}</if>
-            <if test="createdTime != null "> and CREATED_TIME = #{createdTime}</if>
-            <if test="updatedStaff != null  and updatedStaff != ''"> and UPDATED_STAFF = #{updatedStaff}</if>
-            <if test="updatedTime != null "> and UPDATED_TIME = #{updatedTime}</if>
-            <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''"> and TASK_PRINCIPAL = #{taskPrincipal}</if>
-            <if test="taskType != null  and taskType != ''"> and TASK_TYPE = #{taskType}</if>
-            <if test="taskStatus != null  and taskStatus != ''"> and TASK_STATUS = #{taskStatus}</if>
-            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
-            <if test="taskSubName != null  and taskSubName != ''"> and TASK_SUB_NAME like concat('%', #{taskSubName}, '%')</if>
-            <if test="startTime != null  and startTime != ''"> and START_TIME = #{startTime}</if>
-            <if test="endTime != null  and endTime != ''"> and END_TIME = #{endTime}</if>
-            <if test="taskInfo != null  and taskInfo != ''"> and TASK_INFO = #{taskInfo}</if>
-            <if test="taskParentType != null  and taskParentType != ''"> and TASK_PARENT_TYPE = #{taskParentType}</if>
-            <if test="delayDay != null  and delayDay != ''"> and DELAY_DAY = #{delayDay}</if>
-            <if test="principal != null  and principal != ''"> and principal = #{principal}</if>
-        </where>
-    </update>
+	<insert id="insertTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask" useGeneratedKeys="true"
+	        keyProperty="id">
+		insert into t_user_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="status != null  and status != ''">STATUS,</if>
+			<if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF,</if>
+			<if test="createdTime != null ">CREATED_TIME,</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF,</if>
+			<if test="updatedTime != null ">UPDATED_TIME,</if>
+			<if test="projectId != null  and projectId != ''">PROJECT_ID,</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL,</if>
+			<if test="taskType != null  and taskType != ''">TASK_TYPE,</if>
+			<if test="taskStatus != null  and taskStatus != ''">TASK_STATUS,</if>
+			<if test="taskName != null  and taskName != ''">TASK_NAME,</if>
+			<if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME,</if>
+			<if test="startTime != null  and startTime != ''">START_TIME,</if>
+			<if test="endTime != null  and endTime != ''">END_TIME,</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME,</if>
+			<if test="taskInfo != null  and taskInfo != ''">TASK_INFO,</if>
+			<if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE,</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_DAY,</if>
+			<if test="delayPeople != null  and delayPeople != ''">DELAY_PEOPLE,</if>
+			<if test="principal != null  and principal != ''">principal,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="status != null  and status != ''">#{status},</if>
+			<if test="createdStaff != null  and createdStaff != ''">#{createdStaff},</if>
+			<if test="createdTime != null ">#{createdTime},</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">#{updatedStaff},</if>
+			<if test="updatedTime != null ">#{updatedTime},</if>
+			<if test="projectId != null  and projectId != ''">#{projectId},</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">#{taskPrincipal},</if>
+			<if test="taskType != null  and taskType != ''">#{taskType},</if>
+			<if test="taskStatus != null  and taskStatus != ''">#{taskStatus},</if>
+			<if test="taskName != null  and taskName != ''">#{taskName},</if>
+			<if test="taskSubName != null  and taskSubName != ''">#{taskSubName},</if>
+			<if test="startTime != null  and startTime != ''">#{startTime},</if>
+			<if test="endTime != null  and endTime != ''">#{endTime},</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">#{estimatedTime},</if>
+			<if test="taskInfo != null  and taskInfo != ''">#{taskInfo},</if>
+			<if test="taskParentType != null  and taskParentType != ''">#{taskParentType},</if>
+			<if test="delayDay != null  and delayDay != ''">#{delayDay},</if>
+			<if test="delayPeople != null  and delayPeople != ''">#{delayPeople},</if>
+			<if test="principal != null  and principal != ''">#{principal},</if>
+		</trim>
+	</insert>
 
-    <update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
-        update t_user_task
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="status != null  and status != ''">STATUS = #{status},</if>
-            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
-            <if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
-            <if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
-            <if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
-            <if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
-            <if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
-            <if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
-            <if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
-            <if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
-            <if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
-            <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
-            <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_PEOPLE = #{delayPeople},</if>
-        </trim>
-        where PROJECT_ID = #{projectId}
-    </update>
+	<update id="updateTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
+		update t_user_task
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="status != null  and status != ''">STATUS = #{status},</if>
+			<if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
+			<if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
+			<if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
+			<if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
+			<if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
+			<if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
+			<if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
+			<if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
+			<if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
+			<if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
+			<if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
+			<if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+			<if test="principal != null  and principal != ''">principal = #{principal},</if>
+		</trim>
+		where PROJECT_ID = #{projectId}
+		AND
+		TASK_PRINCIPAL = #{taskPrincipal}
+		AND
+		TASK_INFO = #{taskInfo}
+		AND
+		TASK_NAME = #{taskName}
+	</update>
 
-    <delete id="deleteTUserTaskById" parameterType="Long">
+	<update id="updateTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
+		update t_user_task
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="status != null  and status != ''">STATUS = #{status},</if>
+			<if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
+			<if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
+			<if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
+			<if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
+			<if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
+			<if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
+			<if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
+			<if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
+			<if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
+			<if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
+			<if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
+			<if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+			<if test="principal != null  and principal != ''">principal = #{principal},</if>
+		</trim>
+		<where>
+			<if test="status != null  and status != ''">and STATUS = #{status}</if>
+			<if test="createdStaff != null  and createdStaff != ''">and CREATED_STAFF = #{createdStaff}</if>
+			<if test="createdTime != null ">and CREATED_TIME = #{createdTime}</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">and UPDATED_STAFF = #{updatedStaff}</if>
+			<if test="updatedTime != null ">and UPDATED_TIME = #{updatedTime}</if>
+			<if test="projectId != null  and projectId != ''">and PROJECT_ID = #{projectId}</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">and TASK_PRINCIPAL = #{taskPrincipal}</if>
+			<if test="taskType != null  and taskType != ''">and TASK_TYPE = #{taskType}</if>
+			<if test="taskStatus != null  and taskStatus != ''">and TASK_STATUS = #{taskStatus}</if>
+			<if test="taskName != null  and taskName != ''">and TASK_NAME like concat('%', #{taskName}, '%')</if>
+			<if test="taskSubName != null  and taskSubName != ''">and TASK_SUB_NAME like concat('%', #{taskSubName},
+				'%')
+			</if>
+			<if test="startTime != null  and startTime != ''">and START_TIME = #{startTime}</if>
+			<if test="endTime != null  and endTime != ''">and END_TIME = #{endTime}</if>
+			<if test="taskInfo != null  and taskInfo != ''">and TASK_INFO = #{taskInfo}</if>
+			<if test="taskParentType != null  and taskParentType != ''">and TASK_PARENT_TYPE = #{taskParentType}</if>
+			<if test="delayDay != null  and delayDay != ''">and DELAY_DAY = #{delayDay}</if>
+			<if test="principal != null  and principal != ''">and principal = #{principal}</if>
+		</where>
+	</update>
+
+	<update id="udaTUserTask" parameterType="com.sugar.manage.dao.vo.TUserTask">
+		update t_user_task
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="status != null  and status != ''">STATUS = #{status},</if>
+			<if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
+			<if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
+			<if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
+			<if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
+			<if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
+			<if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
+			<if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
+			<if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
+			<if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
+			<if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
+			<if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
+			<if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_PEOPLE = #{delayPeople},</if>
+		</trim>
+		where PROJECT_ID = #{projectId}
+	</update>
+
+	<delete id="deleteTUserTaskById" parameterType="Long">
         delete from t_user_task where id = #{id}
     </delete>
 
-    <delete id="deleteTUserTaskByIds" parameterType="String">
-        delete from t_user_task where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+	<delete id="deleteTUserTaskByIds" parameterType="String">
+		delete from t_user_task where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 
-    <select id="getProject" parameterType="String" resultMap="TUserTaskResult">
-    <include refid="selectTUserTaskVo"/>
-    WHERE
-    PROJECT_ID = #{projectId}
-    AND
-    TASK_PRINCIPAL = #{taskPrincipal}
-    AND
-    TASK_INFO = #{taskInfo}
-    </select>
+	<select id="getProject" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_PRINCIPAL = #{taskPrincipal}
+		AND
+		TASK_INFO = #{taskInfo}
+		AND
+		TASK_STATUS = #{taskStatus}
+	</select>
 
 
-    <select id="getTaskInfoByUserIdAndProjectIdtask1" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='1'
-        AND
-        TASK_TYPE = '01'
-        order by CREATED_TIME desc
-        limit 0,1
-    </select>
+	<select id="getTaskInfoByUserIdAndProjectIdtask1" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_NAME ='1'
+		AND
+		TASK_TYPE = '01'
+		order by CREATED_TIME desc
+		limit 0,1
+	</select>
 
-    <select id="getTaskInfoByProductIdAndTaskType" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='2'
-        OR
-        TASK_NAME ='3'
-        OR
-        TASK_NAME ='5'
-        AND
-        TASK_TYPE = '01'
-    </select>
+	<select id="getTaskInfoByProductIdAndTaskType" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_NAME ='2'
+		OR
+		TASK_NAME ='3'
+		OR
+		TASK_NAME ='5'
+		AND
+		TASK_TYPE = '01'
+	</select>
 
-    <select id="getTaskInfoByProductIdAndTaskTypehsn" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='4'
-        OR
-        TASK_NAME ='6'
-        AND
-        TASK_TYPE = '01'
-    </select>
+	<select id="getTaskInfoByProductIdAndTaskTypehsn" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_NAME ='4'
+		OR
+		TASK_NAME ='6'
+		AND
+		TASK_TYPE = '01'
+	</select>
 
-    <select id="getTaskInfoByProductId" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='1'
-        AND
-        TASK_TYPE = '00'
-    </select>
+	<select id="getTaskInfoByProductId" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_NAME ='1'
+		AND
+		TASK_TYPE = '00'
+	</select>
 
-    <select id="getAllTaskNameByProductId" parameterType="String" resultType="String">
+	<select id="getAllTaskNameByProductId" parameterType="String" resultType="String">
         select
         TASK_NAME
         from
@@ -286,45 +293,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_TYPE  = '01'
     </select>
 
-    <select id="getTkPrincipalByPjId" resultMap="TUserTaskResult">
-        SELECT
-        TASK_PRINCIPAL,PROJECT_ID
-        FROM
-        t_user_task
-        WHERE
-        PROJECT_ID IN
-        <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
-        #{pjid}
-        </foreach>
-        AND
-        CREATED_TIME = (
-        SELECT  MAX(CREATED_TIME)
-        FROM
-        t_user_task
-        WHERE
-        PROJECT_ID IN
-        <foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
-        #{pjid}
-        </foreach>
-        )
-    </select>
+	<select id="getTkPrincipalByPjId" resultMap="TUserTaskResult">
+		SELECT
+		TASK_PRINCIPAL,PROJECT_ID
+		FROM
+		t_user_task
+		WHERE
+		PROJECT_ID IN
+		<foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
+			#{pjid}
+		</foreach>
+		AND
+		CREATED_TIME = (
+		SELECT MAX(CREATED_TIME)
+		FROM
+		t_user_task
+		WHERE
+		PROJECT_ID IN
+		<foreach item="pjid" collection="projectIds" open="(" separator="," close=")">
+			#{pjid}
+		</foreach>
+		)
+	</select>
 
 
-    <select id="getDoneTask" parameterType="String" resultMap="TUserTaskResult" >
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        TASK_PRINCIPAL = #{taskPrincipal}
-        AND
-        TASK_STATUS = '2'
-    </select>
+	<select id="getDoneTask" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		TASK_PRINCIPAL = #{taskPrincipal}
+		AND
+		TASK_STATUS = '2'
+	</select>
 
-    <select id="getUndoTask" parameterType="String" resultMap="TUserTaskResult" >
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        TASK_PRINCIPAL = #{taskPrincipal} and TASK_STATUS != '2'
-    </select>
+	<select id="getUndoTask" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		TASK_PRINCIPAL = #{taskPrincipal} and TASK_STATUS != '2'
+	</select>
 
-    <update id="changeTaskStatusByPrincipalAndProjectId" parameterType="String">
+	<update id="changeTaskStatusByPrincipalAndProjectId" parameterType="String">
         UPDATE
         t_user_task
         SET
@@ -335,7 +342,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_PRINCIPAL = #{taskPrincipal}
     </update>
 
-    <update id="delayDay" parameterType="com.sugar.manage.dao.vo.TUserTask">
+	<update id="delayDay" parameterType="com.sugar.manage.dao.vo.TUserTask">
         update
         t_user_task
         set START_TIME = #{startTime},DELAY_DAY = #{delayDay}
@@ -351,88 +358,89 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         TASK_STATUS = '1'
     </update>
 
-   <!-- <select id="getStartTimeByPrincipaiAndPJId" parameterType="String" resultType="String">
-        SELECT
-        START_TIME
-        FROM
-        t_user_task
-        WHERE
-        TASK_PRINCIPAL =  #{userName}
-        AND
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_STATUS = '0'
-        OR
-        TASK_STATUS = '1'
-    </select>-->
+	<!-- <select id="getStartTimeByPrincipaiAndPJId" parameterType="String" resultType="String">
+		 SELECT
+		 START_TIME
+		 FROM
+		 t_user_task
+		 WHERE
+		 TASK_PRINCIPAL =  #{userName}
+		 AND
+		 PROJECT_ID = #{projectId}
+		 AND
+		 TASK_STATUS = '0'
+		 OR
+		 TASK_STATUS = '1'
+	 </select>-->
 
-    <select id="getTaskInfoByPrincipalAndPJId" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        TASK_PRINCIPAL =  #{userName}
-        AND
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_STATUS = '0'
-        OR
-        TASK_STATUS = '1'
-    </select>
+	<select id="getTaskInfoByPrincipalAndPJId" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		TASK_PRINCIPAL = #{userName}
+		AND
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_STATUS = '0'
+		OR
+		TASK_STATUS = '1'
+	</select>
 
-    <select id="getPrincipal" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID =#{projectId}
-        AND
-        TASK_TYPE ='00'
-        AND
-        TASK_STATUS ='2'
-        AND
-        TASK_NAME = #{taskName}
-    </select>
+	<select id="getPrincipal" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID =#{projectId}
+		AND
+		TASK_TYPE ='00'
+		AND
+		TASK_STATUS ='2'
+		AND
+		TASK_NAME = #{taskName}
+	</select>
 
-    <select id="getOnlyAddPricipalTKName1" parameterType="String" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_NAME ='1'
-        AND
-        TASK_TYPE = '00'
-    </select>
+	<select id="getOnlyAddPricipalTKName1" parameterType="String" resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_NAME ='1'
+		AND
+		TASK_TYPE = '00'
+	</select>
 
-    <select id="selectTUserTaskOrderByDate" parameterType="com.sugar.manage.dao.vo.TUserTask" resultMap="TUserTaskResult">
-        <include refid="selectTUserTaskVo"/>
-        WHERE
-        PROJECT_ID = #{projectId}
-        AND
-        TASK_TYPE = #{taskType}
-        ORDER BY TASK_SUB_NAME
-        ASC
-    </select>
+	<select id="selectTUserTaskOrderByDate" parameterType="com.sugar.manage.dao.vo.TUserTask"
+	        resultMap="TUserTaskResult">
+		<include refid="selectTUserTaskVo"/>
+		WHERE
+		PROJECT_ID = #{projectId}
+		AND
+		TASK_TYPE = #{taskType}
+		ORDER BY TASK_SUB_NAME
+		ASC
+	</select>
 
-    <update id="updateTUserTaskById" parameterType="com.sugar.manage.dao.vo.TUserTask">
-        update t_user_task
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="status != null  and status != ''">STATUS = #{status},</if>
-            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
-            <if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
-            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
-            <if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
-            <if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
-            <if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
-            <if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
-            <if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
-            <if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
-            <if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
-            <if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
-            <if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
-            <if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
-            <if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
-            <if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
-            <if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
-            <if test="principal != null  and principal != ''">principal = #{principal},</if>
-        </trim>
-        where id = #{id}
-    </update>
+	<update id="updateTUserTaskById" parameterType="com.sugar.manage.dao.vo.TUserTask">
+		update t_user_task
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="status != null  and status != ''">STATUS = #{status},</if>
+			<if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
+			<if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
+			<if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
+			<if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
+			<if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
+			<if test="taskPrincipal != null  and taskPrincipal != ''">TASK_PRINCIPAL = #{taskPrincipal},</if>
+			<if test="taskType != null  and taskType != ''">TASK_TYPE = #{taskType},</if>
+			<if test="taskStatus != null  and taskStatus != ''">TASK_STATUS = #{taskStatus},</if>
+			<if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
+			<if test="taskSubName != null  and taskSubName != ''">TASK_SUB_NAME = #{taskSubName},</if>
+			<if test="startTime != null  and startTime != ''">START_TIME = #{startTime},</if>
+			<if test="endTime != null  and endTime != ''">END_TIME = #{endTime},</if>
+			<if test="estimatedTime != null  and estimatedTime != ''">ESTIMATED_TIME = #{estimatedTime},</if>
+			<if test="taskInfo != null  and taskInfo != ''">TASK_INFO = #{taskInfo},</if>
+			<if test="taskParentType != null  and taskParentType != ''">TASK_PARENT_TYPE = #{taskParentType},</if>
+			<if test="delayDay != null  and delayDay != ''">DELAY_DAY = #{delayDay},</if>
+			<if test="principal != null  and principal != ''">principal = #{principal},</if>
+		</trim>
+		where id = #{id}
+	</update>
 
 </mapper>

@@ -502,7 +502,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		TDelay delay = new TDelay();
 		delay.setProjectId(projectId);
 		delay.setAuditingPeopleName(userName);
-		delay.setStatus("99");
+		delay.setStatus("01");
 		delay.setTaskName(taskName);
 		if ("0".equals(staus)) {
 			delay.setAuditingStatus("0");
@@ -517,9 +517,10 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				}
 				task.setProjectId(projectId);
 				task.setTaskInfo("延期申请");
-				task.setEstimatedTime(tUserTaskMapper.getProject(projectId, task.getTaskPrincipal(), task.getTaskInfo()).getDelayDay());
+				task.setEstimatedTime(tUserTaskMapper.getProject(projectId, task.getTaskPrincipal(), task.getTaskInfo(),"0").getDelayDay());
 				task.setTaskStatus("2");
 				task.setTaskName(taskName);
+				task.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
 				count = tUserTaskMapper.updateTUserTask(task);
 				if (count > 0) {
 					//修改预计完成时间

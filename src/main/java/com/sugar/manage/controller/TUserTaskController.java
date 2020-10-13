@@ -86,7 +86,7 @@ private ITUserTaskService itUserTaskService;
 					break;
 			}
 		}
-		return SysResult.success("成功", task);
+ 		return SysResult.success("成功", task);
 	}
 
 	@RequestMapping("/addEntrustInfo")
