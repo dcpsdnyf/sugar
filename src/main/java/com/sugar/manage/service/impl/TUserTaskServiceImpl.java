@@ -199,6 +199,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				if ("109".equals(task.getTaskName())) {
 					task.setTaskName("商机推进阶段");
 				}
+				task.setTaskName("商机推进阶段");
 				task.setBigId("1");
 				return task;
 			}
