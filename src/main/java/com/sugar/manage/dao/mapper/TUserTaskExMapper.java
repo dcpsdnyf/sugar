@@ -12,7 +12,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-09-28
  */
-public interface TUserTaskMapper 
+public interface TUserTaskExMapper
 {
     /**
      * 查询【请填写功能名称】

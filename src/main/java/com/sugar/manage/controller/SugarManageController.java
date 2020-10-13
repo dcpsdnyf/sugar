@@ -69,7 +69,9 @@ public class SugarManageController extends AppBaseController {
     public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUserVO tUser, Model model){
         if(!StringUtils.isBlank(tUser.getUserName()) || StringUtils.isNotBlank(tUser.getUserAccount())){
             TUser user = userSV.getUserList(tUser);
-	        model.addAttribute("userName",user.getUserName());
+            if(user!=null){
+                model.addAttribute("userName",user.getUserName());
+            }
             if(tUser != null){
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
             }

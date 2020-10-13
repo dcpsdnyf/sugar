@@ -31,7 +31,7 @@ import java.util.List;
 @Service
 public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Autowired
-	private TUserTaskMapper tUserTaskMapper;
+	private TUserTaskExMapper tUserTaskMapper;
 	@Autowired
 	private TUserRoleMapper tUserRoleMapper;
 	@Autowired

@@ -6,7 +6,7 @@ import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectExMapper;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
-import com.sugar.manage.dao.mapper.TUserTaskMapper;
+import com.sugar.manage.dao.mapper.TUserTaskExMapper;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,7 +36,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	@Autowired
 	private TSugarProjectMapper sugarProjectMapper;
 	@Autowired
-    private TUserTaskMapper tUserTaskMapper;
+    private TUserTaskExMapper tUserTaskMapper;
     @Autowired
     TSugarProjectExMapper sugarProjectExMapper;
 
