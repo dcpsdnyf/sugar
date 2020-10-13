@@ -506,9 +506,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		delay.setTaskName(taskName);
 		if ("0".equals(staus)) {
 			delay.setAuditingStatus("0");
+            List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
 			int count = tDelayMapper.udaDelay(delay);
 			if (count > 0) {
-				List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
 				TUserTask task = new TUserTask();
 				for (TDelay s : delayList) {
 					task.setDelayDay(s.getDelayTime());

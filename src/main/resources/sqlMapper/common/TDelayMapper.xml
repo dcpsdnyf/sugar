@@ -36,7 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="auditingPeopleName != null  and auditingPeopleName != ''"> and AUDITING_PEOPLE_NAME like concat('%', #{auditingPeopleName}, '%')</if>
             <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
             <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
-            <if test="auditingStatus != null  and auditingStatus != ''"> and AUDITING_STATUS = #{auditingStatus}</if>
         </where>
     </select>
     
