@@ -61,31 +61,6 @@ private ITUserTaskService itUserTaskService;
 			return SysResult.success("未获得用户信息，请登录", null);
 		}
 		TUserTaskVO task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(), userId);
-		if (task != null) {
-			if (StringUtils.isBlank(task.getProjectId()) && StringUtils.isBlank(task.getTaskPrincipal()) && StringUtils.isBlank(task.getStartTime())) {
-				return SysResult.success("该用户没用指派权限", null);
-			}
-			switch (task.getTaskName()) {
-				case "1":
-					task.setTaskName("商务进阶阶段");
-					break;
-				case "2":
-					task.setTaskName("采购阶段");
-					break;
-				case "3":
-					task.setTaskName("产品阶段");
-					break;
-				case "4":
-					task.setTaskName("研发阶段");
-					break;
-				case "5":
-					task.setTaskName("运营阶段");
-					break;
-				case "6":
-					task.setTaskName("运维阶段");
-					break;
-			}
-		}
  		return SysResult.success("成功", task);
 	}
 

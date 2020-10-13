@@ -245,11 +245,12 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		}
 
 
-		if ("80".equals(userId)) {//如果是尹罗琦
+		if ("80".equals(userId)) {//如果是尹罗琪
 			List<TUserTask> tasklist = tUserTaskMapper.getTaskInfoByProductIdAndTaskType(projectId);
-			HashMap<String, TUserTask> taskn = new HashMap<>();
+			List<TUserTaskVO> tUserTaskVOS = ModelCopyUtil.copyToList(tasklist, TUserTaskVO.class);
+			HashMap<String, TUserTaskVO> taskn = new HashMap<>();
 
-			for (TUserTask tusk : tasklist) {
+			for (TUserTaskVO tusk : tUserTaskVOS) {
 				taskn.put(tusk.getTaskName(), tusk);
 			}
 			if (taskn.containsKey("2")) {
@@ -308,6 +309,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				if ("218".equals(taskn.get("2").getTaskSubName())) {
 					task.setTaskSubName("尾款");
 				}
+				task.setTaskType(taskn.get("2").getTaskType());
+				task.setTaskPrincipal(taskn.get("2").getTaskPrincipal());
+				task.setEstimatedTime(taskn.get("2").getEstimatedTime());
                 task.setBigId("2");
 			}
 
@@ -334,11 +338,17 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				if ("307".equals(taskn.get("3").getTaskSubName())) {
 					task.setTaskSubName("验收");
 				}
+				task.setTaskType(taskn.get("3").getTaskType());
+				task.setTaskPrincipal(taskn.get("3").getTaskPrincipal());
+				task.setEstimatedTime(taskn.get("3").getEstimatedTime());
                 task.setBigId("3");
 			}
 			if (taskn.containsKey("5")) {
 				task.setTaskName("运营阶段");
 				task.setTaskSubName("运营阶段");
+				task.setTaskType(taskn.get("5").getTaskType());
+				task.setTaskPrincipal(taskn.get("5").getTaskPrincipal());
+				task.setEstimatedTime(taskn.get("5").getEstimatedTime());
                 task.setBigId("5");
 			}
 			return task;
@@ -346,8 +356,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 		if ("20".equals(userId)) {//如果是黄斯南
 			List<TUserTask> tasklist = tUserTaskMapper.getTaskInfoByProductIdAndTaskTypehsn(projectId);
-			HashMap<String, TUserTask> taskn = new HashMap<>();
-			for (TUserTask tusk : tasklist) {
+			List<TUserTaskVO> tUserTaskVOS = ModelCopyUtil.copyToList(tasklist, TUserTaskVO.class);
+			HashMap<String, TUserTaskVO> taskn = new HashMap<>();
+			for (TUserTaskVO tusk : tUserTaskVOS) {
 				taskn.put(tusk.getTaskName(), tusk);
 			}
 			if (taskn.containsKey("4")) {
@@ -388,11 +399,17 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				if ("412".equals(taskn.get("4").getTaskSubName())) {
 					task.setTaskSubName("验收");
 				}
+				task.setTaskType(taskn.get("4").getTaskType());
+				task.setTaskPrincipal(taskn.get("4").getTaskPrincipal());
+				task.setEstimatedTime(taskn.get("4").getEstimatedTime());
                 task.setBigId("4");
 			}
 			if (taskn.containsKey("6")) {
 				task.setTaskName("运维阶段");
 				task.setTaskSubName("技术选型");
+				task.setTaskType(taskn.get("5").getTaskType());
+				task.setTaskPrincipal(taskn.get("6").getTaskPrincipal());
+				task.setEstimatedTime(taskn.get("6").getEstimatedTime());
                 task.setBigId("6");
 			}
 			return task;
@@ -608,7 +625,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					TUserTask newUserTask = new TUserTask();
 					newUserTask.setTaskName("2");
 					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琦");
+					newUserTask.setTaskPrincipal("尹罗琪");
 					newUserTask.setPrincipal(tUserTask.getPrincipal());
 					newUserTask.setTaskType("00");
 					newUserTask.setTaskStatus("0");
@@ -677,7 +694,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					TUserTask newUserTask = new TUserTask();
 					newUserTask.setTaskName("3");
 					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琦");
+					newUserTask.setTaskPrincipal("尹罗琪");
 					newUserTask.setPrincipal(tUserTask.getPrincipal());
 					newUserTask.setTaskType("00");
 					newUserTask.setTaskStatus("0");
@@ -817,7 +834,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					TUserTask newUserTask = new TUserTask();
 					newUserTask.setTaskName("5");
 					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琦");
+					newUserTask.setTaskPrincipal("尹罗琪");
 					newUserTask.setPrincipal(tUserTask.getPrincipal());
 					newUserTask.setTaskType("00");
 					newUserTask.setTaskStatus("0");
