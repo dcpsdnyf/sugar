@@ -498,7 +498,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			tkuse.setTaskPrincipal(tk.getTaskPrincipal());
 			tkuse.setStartTime(tk.getStartTime());
 			tkuse.setEstimatedTime(tkuser.getEstimatedTime());
-			tkuse.setTaskInfo("延期申请");
+			tkuse.setTaskInfo("延期申请"+delayDay);
 			tkuse.setTaskStatus("0");
 			int coun = tUserTaskMapper.insertTUserTask(tkuse);
 			if (coun > 0) {
@@ -534,7 +534,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					task.setTaskPrincipal(s.getAuditingPeopleName());
 				}
 				task.setProjectId(projectId);
-				task.setTaskInfo("延期申请");
+				task.setTaskInfo("延期申请"+task.getDelayDay());
 				task.setEstimatedTime(tUserTaskMapper.getProject(projectId, task.getTaskPrincipal(), task.getTaskInfo(),"0").getDelayDay());
 				task.setTaskStatus("2");
 				task.setTaskName(taskName);
