@@ -8,7 +8,7 @@ import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TUser;
-import com.sugar.manage.dao.vo.TUserTask;
+import com.sugar.manage.dao.model.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
@@ -255,22 +255,26 @@ private ITUserTaskService itUserTaskService;
 
 			hsTPList.put(String.valueOf(tsList.get(i).getId()), tsuger);
 		}
-		List<TUserTask> tkList = new ArrayList<>();
+		List<TUserTaskVO> tkList = new ArrayList<>();
 		TUser user = new TUser();
 		RoleProjectVO roleProjectVO = null;
 		if (StringUtils.isNotBlank(userId)) {
 			user.setId(Integer.parseInt(userId));
 			roleProjectVO = userRoleSVE.getUserRoleList(user);
 		}
-		for (TUserTask tku : tkuser.getList()) {
-			TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
-			tku.setProductType(tsugerp.getProductType());
-			tku.setPlatformName(tsugerp.getPlatformName());
-			tku.setGroupName(tsugerp.getGroupName());
-			tku.setAppoint(roleProjectVO.isRoleAppoint());
-            tku.setDelay(roleProjectVO.isRoleDelay());
-			tkList.add(tku);
+		if(!CollectionUtils.isEmpty(tkuser.getList())){
+			List<TUserTaskVO> tUserTaskVOList = ModelCopyUtil.copyToList(tkuser.getList(), TUserTaskVO.class);
+			for (TUserTaskVO tku : tUserTaskVOList) {
+				TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
+				tku.setProductType(tsugerp.getProductType());
+				tku.setPlatformName(tsugerp.getPlatformName());
+				tku.setGroupName(tsugerp.getGroupName());
+				tku.setAppoint(roleProjectVO.isRoleAppoint());
+				tku.setDelay(roleProjectVO.isRoleDelay());
+				tkList.add(tku);
+			}
 		}
+
 		tableDataInfo.setRows(tkList);
 		tableDataInfo.setTotal(tkuser.getList().size());
 		tableDataInfo.setCode(200);

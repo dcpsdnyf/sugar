@@ -1,7 +1,7 @@
 package com.sugar.manage.dao.mapper;
 
 
-import com.sugar.manage.dao.vo.TUserTask;
+import com.sugar.manage.dao.model.TUserTask;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

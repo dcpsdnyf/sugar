@@ -2,7 +2,7 @@ package com.sugar.manage.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.sugar.manage.dao.vo.TUserTask;
+import com.sugar.manage.dao.model.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 
 import java.text.ParseException;

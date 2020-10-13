@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.TUserTaskMapper">
+  <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TUserTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="projectId" />
+    <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="TASK_TYPE" jdbcType="VARCHAR" property="taskType" />
+    <result column="TASK_STATUS" jdbcType="VARCHAR" property="taskStatus" />
+    <result column="TASK_NAME" jdbcType="VARCHAR" property="taskName" />
+    <result column="TASK_SUB_NAME" jdbcType="VARCHAR" property="taskSubName" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+    <result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+    <result column="ESTIMATED_TIME" jdbcType="VARCHAR" property="estimatedTime" />
+    <result column="TASK_INFO" jdbcType="VARCHAR" property="taskInfo" />
+    <result column="TASK_PARENT_TYPE" jdbcType="VARCHAR" property="taskParentType" />
+    <result column="DELAY_DAY" jdbcType="VARCHAR" property="delayDay" />
+    <result column="DELAY_PEOPLE" jdbcType="VARCHAR" property="delayPeople" />
+    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, 
+    TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, 
+    ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE, DELAY_DAY, DELAY_PEOPLE, principal, 
+    product_type, platform_name, group_name
+  </sql>
+  <select id="selectByExample" parameterType="com.sugar.manage.dao.model.TUserTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sugar.manage.dao.model.TUserTaskExample">
+    delete from t_user_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sugar.manage.dao.model.TUserTask">
+    insert into t_user_task (id, STATUS, CREATED_STAFF, 
+      CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, 
+      PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, 
+      TASK_STATUS, TASK_NAME, TASK_SUB_NAME, 
+      START_TIME, END_TIME, ESTIMATED_TIME, 
+      TASK_INFO, TASK_PARENT_TYPE, DELAY_DAY, 
+      DELAY_PEOPLE, principal, product_type, 
+      platform_name, group_name)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{projectId,jdbcType=VARCHAR}, #{taskPrincipal,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, 
+      #{taskStatus,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, #{taskSubName,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{estimatedTime,jdbcType=VARCHAR}, 
+      #{taskInfo,jdbcType=VARCHAR}, #{taskParentType,jdbcType=VARCHAR}, #{delayDay,jdbcType=VARCHAR}, 
+      #{delayPeople,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, #{productType,jdbcType=VARCHAR}, 
+      #{platformName,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.TUserTask">
+    insert into t_user_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createdStaff != null">
+        CREATED_STAFF,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedStaff != null">
+        UPDATED_STAFF,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID,
+      </if>
+      <if test="taskPrincipal != null">
+        TASK_PRINCIPAL,
+      </if>
+      <if test="taskType != null">
+        TASK_TYPE,
+      </if>
+      <if test="taskStatus != null">
+        TASK_STATUS,
+      </if>
+      <if test="taskName != null">
+        TASK_NAME,
+      </if>
+      <if test="taskSubName != null">
+        TASK_SUB_NAME,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="estimatedTime != null">
+        ESTIMATED_TIME,
+      </if>
+      <if test="taskInfo != null">
+        TASK_INFO,
+      </if>
+      <if test="taskParentType != null">
+        TASK_PARENT_TYPE,
+      </if>
+      <if test="delayDay != null">
+        DELAY_DAY,
+      </if>
+      <if test="delayPeople != null">
+        DELAY_PEOPLE,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="platformName != null">
+        platform_name,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStaff != null">
+        #{createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedStaff != null">
+        #{updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPrincipal != null">
+        #{taskPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskSubName != null">
+        #{taskSubName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedTime != null">
+        #{estimatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskInfo != null">
+        #{taskInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskParentType != null">
+        #{taskParentType,jdbcType=VARCHAR},
+      </if>
+      <if test="delayDay != null">
+        #{delayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="delayPeople != null">
+        #{delayPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null">
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sugar.manage.dao.model.TUserTaskExample" resultType="java.lang.Long">
+    select count(*) from t_user_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_user_task
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdStaff != null">
+        CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedStaff != null">
+        UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.projectId != null">
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskPrincipal != null">
+        TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskType != null">
+        TASK_TYPE = #{record.taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskStatus != null">
+        TASK_STATUS = #{record.taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null">
+        TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskSubName != null">
+        TASK_SUB_NAME = #{record.taskSubName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimatedTime != null">
+        ESTIMATED_TIME = #{record.estimatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskInfo != null">
+        TASK_INFO = #{record.taskInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskParentType != null">
+        TASK_PARENT_TYPE = #{record.taskParentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delayDay != null">
+        DELAY_DAY = #{record.delayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delayPeople != null">
+        DELAY_PEOPLE = #{record.delayPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productType != null">
+        product_type = #{record.productType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformName != null">
+        platform_name = #{record.platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_user_task
+    set id = #{record.id,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
+      TASK_TYPE = #{record.taskType,jdbcType=VARCHAR},
+      TASK_STATUS = #{record.taskStatus,jdbcType=VARCHAR},
+      TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      TASK_SUB_NAME = #{record.taskSubName,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      ESTIMATED_TIME = #{record.estimatedTime,jdbcType=VARCHAR},
+      TASK_INFO = #{record.taskInfo,jdbcType=VARCHAR},
+      TASK_PARENT_TYPE = #{record.taskParentType,jdbcType=VARCHAR},
+      DELAY_DAY = #{record.delayDay,jdbcType=VARCHAR},
+      DELAY_PEOPLE = #{record.delayPeople,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      platform_name = #{record.platformName,jdbcType=VARCHAR},
+      group_name = #{record.groupName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sugar.manage.dao.model.TUserTask">
+    update t_user_task
+    <set>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStaff != null">
+        CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedStaff != null">
+        UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPrincipal != null">
+        TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null">
+        TASK_STATUS = #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null">
+        TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskSubName != null">
+        TASK_SUB_NAME = #{taskSubName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedTime != null">
+        ESTIMATED_TIME = #{estimatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taskInfo != null">
+        TASK_INFO = #{taskInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskParentType != null">
+        TASK_PARENT_TYPE = #{taskParentType,jdbcType=VARCHAR},
+      </if>
+      <if test="delayDay != null">
+        DELAY_DAY = #{delayDay,jdbcType=VARCHAR},
+      </if>
+      <if test="delayPeople != null">
+        DELAY_PEOPLE = #{delayPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null">
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.TUserTask">
+    update t_user_task
+    set STATUS = #{status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+      TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      TASK_STATUS = #{taskStatus,jdbcType=VARCHAR},
+      TASK_NAME = #{taskName,jdbcType=VARCHAR},
+      TASK_SUB_NAME = #{taskSubName,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      END_TIME = #{endTime,jdbcType=VARCHAR},
+      ESTIMATED_TIME = #{estimatedTime,jdbcType=VARCHAR},
+      TASK_INFO = #{taskInfo,jdbcType=VARCHAR},
+      TASK_PARENT_TYPE = #{taskParentType,jdbcType=VARCHAR},
+      DELAY_DAY = #{delayDay,jdbcType=VARCHAR},
+      DELAY_PEOPLE = #{delayPeople,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      product_type = #{productType,jdbcType=VARCHAR},
+      platform_name = #{platformName,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

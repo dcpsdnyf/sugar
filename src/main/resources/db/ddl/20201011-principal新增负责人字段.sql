@@ -1,1 +1,0 @@
-ALTER  TABLE  t_user_task  ADD   principal  VARCHAR(128)    COMMENT  '负责人' ;

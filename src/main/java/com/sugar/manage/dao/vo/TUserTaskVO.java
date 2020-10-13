@@ -72,4 +72,10 @@ public class TUserTaskVO implements Serializable
 
     //大段ID用于回显指派时的项目阶段
     private String bigId;
+
+    /**是否显示指派按钮*/
+    private boolean isAppoint;
+
+    /**是否显示申请延期按钮*/
+    private boolean isDelay;
 }
