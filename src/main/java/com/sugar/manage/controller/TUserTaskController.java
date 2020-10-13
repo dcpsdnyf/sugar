@@ -195,9 +195,10 @@ private ITUserTaskService itUserTaskService;
 			tableDataInfo.setCode(400);
 			return tableDataInfo;
 		}
-		TSugarProject tsuger = new TSugarProject();
+		TSugarProject tsuger = null;
 		HashMap<String, TSugarProject> hsTPList = new HashMap<>();
 		for (int i = 0; i < tsList.size(); i++) {
+			tsuger = new TSugarProject();
 			tsuger.setProductType(tsList.get(i).getProductType());
 			tsuger.setPlatformName(tsList.get(i).getPlatformName());
 			tsuger.setGroupName(tsList.get(i).getGroupName());
@@ -269,9 +270,10 @@ private ITUserTaskService itUserTaskService;
 			tableDataInfo.setCode(400);
 			return tableDataInfo;
 		}
-		TSugarProject tsuger = new TSugarProject();
+		TSugarProject tsuger = null;
 		HashMap<String, TSugarProject> hsTPList = new HashMap<>();
 		for (int i = 0; i < tsList.size(); i++) {
+			tsuger = new TSugarProject();
 			tsuger.setProductType(tsList.get(i).getProductType());
 			tsuger.setPlatformName(tsList.get(i).getPlatformName());
 			tsuger.setGroupName(tsList.get(i).getGroupName());
