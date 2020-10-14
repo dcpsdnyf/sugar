@@ -443,7 +443,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public void updateUserTask(TUserTask tUserTask) {
+	public void updateUserTask(TUserTaskVO vo) {
+		TUserTask tUserTask = ModelCopyUtil.copy(vo, TUserTask.class);
 		tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
 		tUserTask.setTaskStatus("2");
 		taskMapper.updateByPrimaryKeySelective(tUserTask);
@@ -685,18 +686,19 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		//小阶段不是最后一个才新增
 		if (!"108".equals(taskSubName) && !"218".equals(taskSubName) && !"307".equals(taskSubName) && !"412".equals(taskSubName) && !"5".equals(taskName) && !"6".equals(taskName)) {
 			if (StringUtils.isNotBlank(taskSubName)) {
-				tUserTask.setId(null);
-				tUserTask.setTaskStatus("0");
-				tUserTask.setStatus("01");
+				TUserTask newTask = ModelCopyUtil.copy(vo, TUserTask.class);
+				newTask.setId(null);
+				newTask.setTaskStatus("0");
+				newTask.setStatus("01");
 				int newTaskSubName = Integer.parseInt(taskSubName) + 1;
-				tUserTask.setTaskSubName(newTaskSubName + "");
-				tUserTask.setTaskInfo(null);
-				tUserTask.setCreatedTime(DateUtils.getNowDate());
-				tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-				tUserTask.setEndTime(null);
+				newTask.setTaskSubName(newTaskSubName + "");
+				newTask.setTaskInfo(null);
+				newTask.setCreatedTime(DateUtils.getNowDate());
+				newTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+				newTask.setEndTime(null);
 
 				//自动生成下一阶段任务
-				taskMapper.insertSelective(tUserTask);
+				taskMapper.insertSelective(newTask);
 			}
 		}
 

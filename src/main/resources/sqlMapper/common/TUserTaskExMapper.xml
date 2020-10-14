@@ -315,6 +315,7 @@
         PROJECT_ID = #{projectId}
         AND
         TASK_PRINCIPAL = #{taskPrincipal}
+        AND TASK_TYPE = '00'
     </update>
 
 	<update id="delayDay" parameterType="com.sugar.manage.dao.model.TUserTask">

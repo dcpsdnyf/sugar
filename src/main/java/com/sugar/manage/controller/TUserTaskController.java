@@ -251,8 +251,7 @@ public class TUserTaskController {
 	@ResponseBody
 	public SysResult updateUserTask(TUserTaskVO tUserTaskVO) {
 
-		TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
-		itUserTaskService.updateUserTask(userTask);
+		itUserTaskService.updateUserTask(tUserTaskVO);
 
 		return SysResult.success();
 	}
