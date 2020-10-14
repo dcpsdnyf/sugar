@@ -124,6 +124,13 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     private String projectIds;
 
+    private String businessPrincipal;
+    private String purchasePrincipal;
+    private String productPrincipal;
+    private String developmentPrincipal;
+    private String operationPrincipal;
+    private String operationMaintainPrincipal;
+
     /**若无项目id,表示行不可编辑*/
     private boolean rowEdit;
 
