@@ -78,4 +78,11 @@ public class TUserTaskVO implements Serializable
 
     /**是否显示申请延期按钮*/
     private boolean isDelay;
+
+    private String businessPrincipal;
+    private String purchasePrincipal;
+    private String productPrincipal;
+    private String developmentPrincipal;
+    private String operationPrincipal;
+    private String operationMaintainPrincipal;
 }
