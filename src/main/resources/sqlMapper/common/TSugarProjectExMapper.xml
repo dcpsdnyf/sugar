@@ -68,22 +68,24 @@
     <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
     <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
   </resultMap>
-  <sql id="Base_Column_List">
-    ID, product_type, platform_name, platform_id, group_name, status, CREATED_STAFF, 
-    CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, sort
+    <sql id="Base_Column_List">
+    ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME,
+    UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL, business_principal,
+    purchase_principal, product_principal, development_principal, operation_principal,
+    operation_maintain_principal
   </sql>
-  <sql id="Blob_Column_List">
-    business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
-    business_establish_50, business_establish_75, business_win_100, customer_maintain_back_money, 
-    business_close, initial_intention_plan, write_project_proposal, working_hours_assess, 
-    business_negotiation, request_draft, attend_meeting, bidding, request_oa_approval, 
-    contract_draft, lawyer_review, contract_oa_approval, usage_seal, other_seal, scan, 
-    general_department_file, first_payment, progress_payment, final_payment, design_brief, 
-    detailed_design, ui_design, requirement_design, requirements_review, demand_order_confirm, 
-    pro_check_deliver, technology_selection, environment_deployment, framework_design, 
-    develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75, 
-    develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver, 
-    operation_phase, maintain_phase,TASK_PRINCIPAL,START_TIME
+    <sql id="Blob_Column_List">
+    business_clue_open, business_clue_0, business_discover_10, business_establish_25,
+    business_establish_50, business_establish_75, business_win_100, customer_maintain_back_money,
+    business_close, initial_intention_plan, write_project_proposal, working_hours_assess,
+    business_negotiation, request_draft, attend_meeting, bidding, request_oa_approval,
+    contract_draft, lawyer_review, contract_oa_approval, usage_seal, other_seal, scan,
+    general_department_file, first_payment, progress_payment, final_payment, design_brief,
+    detailed_design, ui_design, requirement_design, requirements_review, demand_order_confirm,
+    pro_check_deliver, technology_selection, environment_deployment, framework_design,
+    develop_progress_10, develop_progress_25, develop_progress_50, develop_progress_75,
+    develop_progress_100, inside_test, customer_test, implement_deliver, check_deliver,
+    operation_phase, maintain_phase
   </sql>
 
   <insert id="insertSugarProject" useGeneratedKeys="true" keyProperty="id" parameterType="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">

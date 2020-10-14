@@ -70,9 +70,9 @@ public interface ITUserTaskService
 
     public String getAllTaskNameByProductId(Long userId);
 
-    public PageInfo<TUserTask> getDoneTask(String taskPrincipal);
+    public PageInfo<TUserTaskVO> getDoneTask(TUserTaskVO vo);
 
-    public PageInfo<TUserTask> getUndoTask(String taskPrincipal);
+    public PageInfo<TUserTaskVO> getUndoTask(TUserTaskVO vo);
 
     public int changeTaskStatusByPrincipalAndProjectId(String taskstatus,String projectId,String taskPrincipal);
 

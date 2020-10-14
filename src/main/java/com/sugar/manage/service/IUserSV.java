@@ -21,4 +21,6 @@ public interface IUserSV {
     public boolean getAddAuthority(TUser user);
 
     public String getUserIdByUerName(String id);
+
+    public TUserVO getUserById(Integer id);
 }

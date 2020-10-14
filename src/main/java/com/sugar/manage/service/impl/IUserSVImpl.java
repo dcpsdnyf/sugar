@@ -1,5 +1,6 @@
 package com.sugar.manage.service.impl;
 
+import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TRoleMapper;
 import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
@@ -105,4 +106,14 @@ public class IUserSVImpl implements IUserSV {
         return userMapper.getUserIdByUerName(id);
     }
 
+
+    @Override
+    public TUserVO getUserById(Integer id) {
+        TUser user = userMapper.selectByPrimaryKey(id);
+        if(user!=null){
+            TUserVO userVO = ModelCopyUtil.copy(user, TUserVO.class);
+            return  userVO;
+        }
+        return null;
+    }
 }

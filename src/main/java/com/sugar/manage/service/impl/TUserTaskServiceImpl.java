@@ -1,5 +1,6 @@
 package com.sugar.manage.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
@@ -96,6 +97,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 		if (project != null) {
 			tUserTask.setPrincipal(project.getTaskPrincipal());
+			tUserTask.setGroupName(project.getGroupName());
+			tUserTask.setProductType(project.getProductType());
+			tUserTask.setPlatformName(project.getPlatformName());
 		}
 		tUserTask.setCreatedTime(DateUtils.getNowDate());
 		tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
@@ -105,28 +109,46 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		if (CollectionUtils.isEmpty(taskList)) {
 			tUserTask.setTaskName("1");
 			tUserTask.setTaskSubName("100");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			if(project!=null){
+				project.setTaskPrincipal(tUserTask.getTaskPrincipal());
+				project.setBusinessPrincipal(tUserTask.getTaskPrincipal());
+			}
+			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("2")) {
 			tUserTask.setTaskName("2");
 			tUserTask.setTaskSubName("201");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			if(project!=null){
+				project.setPurchasePrincipal(tUserTask.getTaskPrincipal());
+			}
+			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("3")) {
 			tUserTask.setTaskName("3");
 			tUserTask.setTaskSubName("301");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			project.setProductPrincipal(tUserTask.getTaskPrincipal());
+			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("4")) {
 			tUserTask.setTaskName("4");
 			tUserTask.setTaskSubName("401");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			if(project!=null){
+				project.setDevelopmentPrincipal(tUserTask.getTaskPrincipal());
+			}
+			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("5")) {
 			tUserTask.setTaskName("5");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			if(project!=null){
+				project.setOperationPrincipal(tUserTask.getTaskPrincipal());
+			}
+			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("6")) {
 			tUserTask.setTaskName("6");
-			return tUserTaskMapper.insertTUserTask(tUserTask);
+			if(project!=null){
+				project.setOperationMaintainPrincipal(tUserTask.getTaskPrincipal());
+			}
+			taskMapper.insertSelective(tUserTask);
 		}
 
-		return 0;
+
+		return tSugarProjectMapper.updateByPrimaryKeyWithBLOBs(project);
 	}
 
 	/**
@@ -237,20 +259,41 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public PageInfo<TUserTask> getDoneTask(String taskPrincipal) {
-		List<TUserTask> doneTkuser = tUserTaskMapper.getDoneTask(taskPrincipal);
-		if (!CollectionUtils.isEmpty(doneTkuser)) {
-			PageInfo<TUserTask> pageInfo = new PageInfo<>(doneTkuser);
+	public PageInfo<TUserTaskVO> getDoneTask(TUserTaskVO vo) {
+		TUserTaskExample example = new TUserTaskExample();
+		TUserTaskExample.Criteria sql = example.createCriteria();
+		
+		if(StringUtils.isNotBlank(vo.getTaskPrincipal())){
+			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
+		}
+		sql.andTaskStatusEqualTo("2");
+		PageHelper.startPage(vo.getPage(),vo.getLimit());
+		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
+
+		if (!CollectionUtils.isEmpty(tUserTasks)) {
+			List<TUserTaskVO> userTaskVOList = ModelCopyUtil.copyToList(tUserTasks, TUserTaskVO.class);
+			PageInfo<TUserTaskVO> pageInfo = new PageInfo<>(userTaskVOList);
 			return pageInfo;
 		}
 		return new PageInfo<>();
 	}
 
 	@Override
-	public PageInfo<TUserTask> getUndoTask(String taskPrincipal) {
-		List<TUserTask> unDoTkuser = tUserTaskMapper.getUndoTask(taskPrincipal);
-		if (!CollectionUtils.isEmpty(unDoTkuser)) {
-			PageInfo<TUserTask> pageInfo = new PageInfo<>(unDoTkuser);
+	public PageInfo<TUserTaskVO> getUndoTask(TUserTaskVO vo) {
+		TUserTaskExample example = new TUserTaskExample();
+		TUserTaskExample.Criteria sql = example.createCriteria();
+
+		if(StringUtils.isNotBlank(vo.getTaskPrincipal())){
+			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
+		}
+		sql.andTaskStatusNotEqualTo("2");
+
+		PageHelper.startPage(vo.getPage(),vo.getLimit());
+		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
+
+		if (!CollectionUtils.isEmpty(tUserTasks)) {
+			List<TUserTaskVO> userTaskVOList = ModelCopyUtil.copyToList(tUserTasks, TUserTaskVO.class);
+			PageInfo<TUserTaskVO> pageInfo = new PageInfo<>(userTaskVOList);
 			return pageInfo;
 		}
 		return new PageInfo<>();
@@ -403,7 +446,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	public void updateUserTask(TUserTask tUserTask) {
 		tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
 		tUserTask.setTaskStatus("2");
-		tUserTaskMapper.updateTUserTaskById(tUserTask);
+		taskMapper.updateByPrimaryKeySelective(tUserTask);
 		String taskName = tUserTask.getTaskName();
 		TSugarProjectWithBLOBs project = tSugarProjectMapper.selectByPrimaryKey(Integer.parseInt(tUserTask.getProjectId()));
 
@@ -426,7 +469,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
-						tUserTaskMapper.insertTUserTask(newUserTask);
+						taskMapper.insertSelective(newUserTask);
 						project.setPurchasePrincipal(newUserTask.getTaskPrincipal());
 					}
 					break;
@@ -490,7 +533,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
-						tUserTaskMapper.insertTUserTask(newUserTask);
+						taskMapper.insertSelective(newUserTask);
 						project.setProductPrincipal(newUserTask.getTaskPrincipal());
 					}
 					break;
@@ -546,7 +589,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
-						tUserTaskMapper.insertTUserTask(newUserTask);
+						taskMapper.insertSelective(newUserTask);
 						project.setDevelopmentPrincipal(newUserTask.getTaskPrincipal());
 					}
 					break;
@@ -618,7 +661,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
-						tUserTaskMapper.insertTUserTask(newUserTask);
+						taskMapper.insertSelective(newUserTask);
 						project.setOperationPrincipal(newUserTask.getTaskPrincipal());
 					}
 					break;
@@ -628,7 +671,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 			TUserTask newUserTask = this.generateAppointTask(tUserTask);
 			if(newUserTask!=null){
-				tUserTaskMapper.insertTUserTask(newUserTask);
+				taskMapper.insertSelective(newUserTask);
 				project.setOperationMaintainPrincipal(newUserTask.getTaskPrincipal());
 			}
 		} else if ("6".equals(tUserTask.getTaskName())) {
@@ -653,7 +696,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				tUserTask.setEndTime(null);
 
 				//自动生成下一阶段任务
-				tUserTaskMapper.insertTUserTask(tUserTask);
+				taskMapper.insertSelective(tUserTask);
 			}
 		}
 
@@ -662,7 +705,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 	@Override
 	public void updateUserTaskToProgressing(TUserTask tUserTask) {
-		tUserTaskMapper.updateTUserTaskById(tUserTask);
+		taskMapper.updateByPrimaryKeySelective(tUserTask);
 	}
 
 	private TUserTaskVO setTuserTaskVO(TUserTask obj){
@@ -723,6 +766,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				newUserTask.setTaskStatus("0");
 				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
 				newUserTask.setCreatedTime(DateUtils.getNowDate());
+				newUserTask.setPlatformName(task.getPlatformName());
+				newUserTask.setGroupName(task.getGroupName());
+				newUserTask.setProductType(task.getProductType());
 				return newUserTask;
 			}
 		}

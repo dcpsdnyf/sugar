@@ -17,6 +17,7 @@ import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.service.IUserSV;
 import com.sugar.manage.vo.RoleProjectVO;
 import com.sugar.manage.vo.SysResult;
+import com.sugar.manage.vo.TUserVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +37,9 @@ import java.util.List;
 public class TUserTaskController {
 
 	@Autowired
-private ITUserTaskService itUserTaskService;
+	private ITUserTaskService itUserTaskService;
 	@Autowired
-	private IUserSV userRoleSV;
+	private IUserSV userSV;
     @Autowired
     private IUserRoleSV userRoleSVE;
 	@Autowired
@@ -104,7 +105,7 @@ private ITUserTaskService itUserTaskService;
 			return SysResult.success("插入失败", null);
 		}
 		//1.根据用户id去用户表获取用户名
-		String username = userRoleSV.getUserIdByUerName(userId);
+		String username = userSV.getUserIdByUerName(userId);
 		if (StringUtils.isBlank(username)) {
 			return SysResult.success("插入失败未获得登录信息", null);
 		}
@@ -120,77 +121,23 @@ private ITUserTaskService itUserTaskService;
 	 */
 	@RequestMapping("/getDoneTask")
 	@ResponseBody
-	public TableDataInfo getDoneTask(HttpServletRequest request) {
+	public TableDataInfo getDoneTask(HttpServletRequest request,TUserTaskVO vo) {
 		TableDataInfo tableDataInfo = new TableDataInfo();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-		if (StringUtils.isBlank(userId)) {//如果未获得用户id不返回任何信息
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		//1.根据用户id去用户表获取用户名
-		String username = userRoleSV.getUserIdByUerName(userId);
-		if (StringUtils.isBlank(username)) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		//1.用用户名去查询该用户的已办任务
-		PageInfo<TUserTask> tkuser = itUserTaskService.getDoneTask(username);
-		if (tkuser.getList() == null) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		if (tkuser.getList() == null) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		if (tkuser.getList().size() <= 0) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		List<Integer> projectIds = new ArrayList<>();
-		for (TUserTask tk : tkuser.getList()) {
-			if (StringUtils.isNotBlank(tk.getProjectId())) {
-				projectIds.add(Integer.parseInt(tk.getProjectId()));
+		if (StringUtils.isNotBlank(userId)) {//如果未获得用户id不返回任何信息
+			TUserVO userVO = userSV.getUserById(Integer.parseInt(userId));
+
+			PageInfo<TUserTaskVO> doneTaskPage = new PageInfo<>();
+			if(userVO!=null && StringUtils.isNotBlank(userVO.getUserName())){
+				vo.setTaskPrincipal(userVO.getUserName());
+				doneTaskPage = itUserTaskService.getDoneTask(vo);
+			}
+			if(!CollectionUtils.isEmpty(doneTaskPage.getList())){
+				tableDataInfo.setRows(doneTaskPage.getList());
+				tableDataInfo.setCode(200);
+				tableDataInfo.setTotal(doneTaskPage.getTotal());
 			}
 		}
-		List<TSugarProject> tsList = iSugarProjectSV.getProductHeaderByProjectIds(projectIds);
-		if (tsList.size() <= 0) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		TSugarProject tsuger = null;
-		HashMap<String, TSugarProject> hsTPList = new HashMap<>();
-		for (int i = 0; i < tsList.size(); i++) {
-			tsuger = new TSugarProject();
-			tsuger.setProductType(tsList.get(i).getProductType());
-			tsuger.setPlatformName(tsList.get(i).getPlatformName());
-			tsuger.setGroupName(tsList.get(i).getGroupName());
-
-			hsTPList.put(String.valueOf(tsList.get(i).getId()), tsuger);
-		}
-		List<TUserTask> tkList = new ArrayList<>();
-		for (TUserTask tku : tkuser.getList()) {
-			TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
-			tku.setProductType(tsugerp.getProductType());
-			tku.setPlatformName(tsugerp.getPlatformName());
-			tku.setGroupName(tsugerp.getGroupName());
-			tkList.add(tku);
-		}
-		tableDataInfo.setRows(tkList);
-		tableDataInfo.setTotal(tkuser.getList().size());
-		tableDataInfo.setCode(200);
 		return tableDataInfo;
 	}
 
@@ -201,83 +148,34 @@ private ITUserTaskService itUserTaskService;
 	 */
 	@RequestMapping("/getUndoTask")
 	@ResponseBody
-	public TableDataInfo getUndoTask(HttpServletRequest request) {
+	public TableDataInfo getUndoTask(HttpServletRequest request,TUserTaskVO vo) {
 		TableDataInfo tableDataInfo = new TableDataInfo();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-		if (StringUtils.isBlank(userId)) {//如果未获得用户id不返回任何信息
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		//1.根据用户id去用户表获取用户名
-		String username = userRoleSV.getUserIdByUerName(userId);
-		if (StringUtils.isBlank(username)) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		//1.用用户名去查询该用户的未办任务
-		PageInfo<TUserTask> tkuser = itUserTaskService.getUndoTask(username);
-		if (tkuser.getList() == null) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		if (tkuser.getList().size() <= 0) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		List<Integer> projectIds = new ArrayList<>();
-		for (TUserTask tk : tkuser.getList()) {
-			if (StringUtils.isNotBlank(tk.getProjectId())) {
-				projectIds.add(Integer.parseInt(tk.getProjectId()));
-			}
-		}
-		List<TSugarProject> tsList = iSugarProjectSV.getProductHeaderByProjectIds(projectIds);
-		if (tsList.size() <= 0) {
-			tableDataInfo.setRows(null);
-			tableDataInfo.setTotal(0);
-			tableDataInfo.setCode(400);
-			return tableDataInfo;
-		}
-		TSugarProject tsuger = null;
-		HashMap<String, TSugarProject> hsTPList = new HashMap<>();
-		for (int i = 0; i < tsList.size(); i++) {
-			tsuger = new TSugarProject();
-			tsuger.setProductType(tsList.get(i).getProductType());
-			tsuger.setPlatformName(tsList.get(i).getPlatformName());
-			tsuger.setGroupName(tsList.get(i).getGroupName());
-
-			hsTPList.put(String.valueOf(tsList.get(i).getId()), tsuger);
-		}
-		List<TUserTaskVO> tkList = new ArrayList<>();
-		TUser user = new TUser();
-		RoleProjectVO roleProjectVO = null;
 		if (StringUtils.isNotBlank(userId)) {
+			TUser user = new TUser();
 			user.setId(Integer.parseInt(userId));
-			roleProjectVO = userRoleSVE.getUserRoleList(user);
-		}
-		if(!CollectionUtils.isEmpty(tkuser.getList())){
-			List<TUserTaskVO> tUserTaskVOList = ModelCopyUtil.copyToList(tkuser.getList(), TUserTaskVO.class);
-			for (TUserTaskVO tku : tUserTaskVOList) {
-				TSugarProject tsugerp = hsTPList.get(tku.getProjectId());
-				tku.setProductType(tsugerp.getProductType());
-				tku.setPlatformName(tsugerp.getPlatformName());
-				tku.setGroupName(tsugerp.getGroupName());
-				tku.setAppoint(roleProjectVO.isRoleAppoint());
-				tku.setDelay(roleProjectVO.isRoleDelay());
-				tkList.add(tku);
+			RoleProjectVO roleProjectVO = userRoleSVE.getUserRoleList(user);
+
+			TUserVO userVO = userSV.getUserById(Integer.parseInt(userId));
+
+			PageInfo<TUserTaskVO> undoTaskPage = new PageInfo<>();
+
+			if(userVO!=null && StringUtils.isNotBlank(userVO.getUserName())){
+				vo.setTaskPrincipal(userVO.getUserName());
+				undoTaskPage = itUserTaskService.getUndoTask(vo);
+			}
+			if(!CollectionUtils.isEmpty(undoTaskPage.getList())){
+				List<TUserTaskVO> userTaskVOList = new ArrayList<>();
+				for(TUserTaskVO userTaskVO:undoTaskPage.getList()){
+					userTaskVO.setAppoint(roleProjectVO.isRoleAppoint());
+					userTaskVO.setDelay(roleProjectVO.isRoleDelay());
+					userTaskVOList.add(userTaskVO);
+				}
+				tableDataInfo.setRows(userTaskVOList);
+				tableDataInfo.setTotal(undoTaskPage.getTotal());
+				tableDataInfo.setCode(200);
 			}
 		}
-
-		tableDataInfo.setRows(tkList);
-		tableDataInfo.setTotal(tkuser.getList().size());
-		tableDataInfo.setCode(200);
 		return tableDataInfo;
 	}
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class TUserTaskVO implements Serializable
+public class TUserTaskVO extends BaseModel implements Serializable
 {
     private static final long serialVersionUID = 1L;
 

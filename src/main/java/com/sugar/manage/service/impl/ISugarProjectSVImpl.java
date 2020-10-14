@@ -7,6 +7,7 @@ import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TSugarProjectExMapper;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.mapper.TUserTaskExMapper;
+import com.sugar.manage.dao.mapper.TUserTaskMapper;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
@@ -38,7 +39,9 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	@Autowired
     private TUserTaskExMapper tUserTaskMapper;
     @Autowired
-    TSugarProjectExMapper sugarProjectExMapper;
+    private TSugarProjectExMapper sugarProjectExMapper;
+    @Autowired
+    private TUserTaskMapper taskMapper;
 
 	/**
 	 * 初始化参数信息
@@ -148,9 +151,6 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	public void saveSugarProject(TSugarProjectWithBLOBs record) {
       int  count = sugarProjectExMapper.insertSugarProject(record);
 	    if (count>0) {
-	        //再获取刚才插入数据的id
-            //Long id =  sugarProjectMapper.getProjectId(record.getTaskPrincipal());
-
 
             TUserTask tUserTask =new TUserTask();
             tUserTask.setPrincipal(record.getTaskPrincipal());
@@ -161,8 +161,11 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             tUserTask.setTaskName("1");
             tUserTask.setCreatedTime(DateUtils.getNowDate());
             tUserTask.setProjectId(record.getId()+"");
+            tUserTask.setPlatformName(record.getPlatformName());
+            tUserTask.setProductType(record.getProductType());
+            tUserTask.setGroupName(record.getGroupName());
 
-            tUserTaskMapper.insertTUserTask(tUserTask);
+            taskMapper.insertSelective(tUserTask);
         }
 	}
 
