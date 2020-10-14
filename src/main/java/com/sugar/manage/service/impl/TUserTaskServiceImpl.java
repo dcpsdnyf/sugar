@@ -4,10 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.*;
-import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
-import com.sugar.manage.dao.model.TUser;
-import com.sugar.manage.dao.model.TUserTask;
-import com.sugar.manage.dao.model.TUserTaskExample;
+import com.sugar.manage.dao.model.*;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
@@ -43,6 +40,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	private TSugarProjectMapper tSugarProjectMapper;
 	@Autowired
 	private TUserTaskMapper taskMapper;
+	@Autowired
+	private TStagePrincipalMapper stagePrincipalMapper;
 
 	/**
 	 * 查询【请填写功能名称】
@@ -425,16 +424,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setBusinessDiscover10(null);
 					project.setBusinessEstablish25(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = new TUserTask();
-					newUserTask.setTaskName("2");
-					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琪");
-					newUserTask.setPrincipal(tUserTask.getPrincipal());
-					newUserTask.setTaskType("00");
-					newUserTask.setTaskStatus("0");
-					newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-					newUserTask.setCreatedTime(DateUtils.getNowDate());
-					tUserTaskMapper.insertTUserTask(newUserTask);
+					TUserTask newUserTask = generateAppointTask(tUserTask);
+					if(newUserTask!=null){
+						tUserTaskMapper.insertTUserTask(newUserTask);
+						project.setPurchasePrincipal(newUserTask.getTaskPrincipal());
+					}
 					break;
 				case "104":
 					project.setBusinessEstablish25(null);
@@ -494,17 +488,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setRequestOaApproval(null);
 					project.setContractDraft(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = new TUserTask();
-					newUserTask.setTaskName("3");
-					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琪");
-					newUserTask.setPrincipal(tUserTask.getPrincipal());
-					newUserTask.setTaskType("00");
-					newUserTask.setTaskStatus("0");
-					newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-					newUserTask.setCreatedTime(DateUtils.getNowDate());
-					//自动开启产品阶段的第一步（设计概要）
-					tUserTaskMapper.insertTUserTask(newUserTask);
+					TUserTask newUserTask = generateAppointTask(tUserTask);
+					if(newUserTask!=null){
+						tUserTaskMapper.insertTUserTask(newUserTask);
+						project.setProductPrincipal(newUserTask.getTaskPrincipal());
+					}
 					break;
 				case "210":
 					project.setContractDraft(null);
@@ -556,17 +544,11 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setDetailedDesign(null);
 					project.setUiDesign(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = new TUserTask();
-					newUserTask.setTaskName("4");
-					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("黄斯楠");
-					newUserTask.setPrincipal(tUserTask.getPrincipal());
-					newUserTask.setTaskType("00");
-					newUserTask.setTaskStatus("0");
-					newUserTask.setCreatedTime(DateUtils.getNowDate());
-					newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-					//自动开启产品阶段的第一步（设计概要）
-					tUserTaskMapper.insertTUserTask(newUserTask);
+					TUserTask newUserTask = generateAppointTask(tUserTask);
+					if(newUserTask!=null){
+						tUserTaskMapper.insertTUserTask(newUserTask);
+						project.setDevelopmentPrincipal(newUserTask.getTaskPrincipal());
+					}
 					break;
 				case "304":
 					project.setUiDesign(null);
@@ -634,33 +616,21 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setImplementDeliver(null);
 					project.setCheckDeliver(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = new TUserTask();
-					newUserTask.setTaskName("5");
-					newUserTask.setProjectId(tUserTask.getProjectId());
-					newUserTask.setTaskPrincipal("尹罗琪");
-					newUserTask.setPrincipal(tUserTask.getPrincipal());
-					newUserTask.setTaskType("00");
-					newUserTask.setTaskStatus("0");
-					newUserTask.setCreatedTime(DateUtils.getNowDate());
-					newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-					//研发阶段完成自动开启运营阶段
-					tUserTaskMapper.insertTUserTask(newUserTask);
+					TUserTask newUserTask = generateAppointTask(tUserTask);
+					if(newUserTask!=null){
+						tUserTaskMapper.insertTUserTask(newUserTask);
+						project.setOperationPrincipal(newUserTask.getTaskPrincipal());
+					}
 					break;
 			}
 		} else if ("5".equals(tUserTask.getTaskName())) {
 			project.setOperationPhase(tUserTask.getTaskInfo());
 
-			TUserTask newUserTask = new TUserTask();
-			newUserTask.setTaskName("6");
-			newUserTask.setProjectId(tUserTask.getProjectId());
-			newUserTask.setTaskPrincipal("黄斯楠");
-			newUserTask.setPrincipal(tUserTask.getPrincipal());
-			newUserTask.setTaskType("00");
-			newUserTask.setTaskStatus("0");
-			newUserTask.setCreatedTime(DateUtils.getNowDate());
-			newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
-			//运维阶段完成自动开启运维阶段
-			tUserTaskMapper.insertTUserTask(newUserTask);
+			TUserTask newUserTask = generateAppointTask(tUserTask);
+			if(newUserTask!=null){
+				tUserTaskMapper.insertTUserTask(newUserTask);
+				project.setOperationMaintainPrincipal(newUserTask.getTaskPrincipal());
+			}
 		} else if ("6".equals(tUserTask.getTaskName())) {
 			project.setMaintainPhase(tUserTask.getTaskInfo());
 		}
@@ -730,6 +700,33 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		}
 		return taskVO;
 
+	}
+
+	/** 生成指派任务 */
+	private TUserTask generateAppointTask(TUserTask task){
+		if(task!=null){
+			TStagePrincipalExample example = new TStagePrincipalExample();
+			TStagePrincipalExample.Criteria sql = example.createCriteria();
+			if(StringUtils.isNotBlank(task.getTaskName())){
+				sql.andStageNumEqualTo((Integer.parseInt(task.getTaskName())+1)+"");
+			}
+			List<TStagePrincipal> principalList = stagePrincipalMapper.selectByExample(example);
+			if(!CollectionUtils.isEmpty(principalList)){
+				TUserTask newUserTask = new TUserTask();
+				if(StringUtils.isNotBlank(task.getTaskName())){
+					newUserTask.setTaskName((Integer.parseInt(task.getTaskName())+1)+"");
+				}
+				newUserTask.setProjectId(task.getProjectId());
+				newUserTask.setTaskPrincipal(principalList.get(0).getPrincipalName());
+				newUserTask.setPrincipal(task.getPrincipal());
+				newUserTask.setTaskType("00");
+				newUserTask.setTaskStatus("0");
+				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+				newUserTask.setCreatedTime(DateUtils.getNowDate());
+				return newUserTask;
+			}
+		}
+		return null;
 	}
 }
 
