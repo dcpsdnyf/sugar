@@ -96,7 +96,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		TSugarProjectWithBLOBs project = tSugarProjectMapper.selectByPrimaryKey(Integer.parseInt(tUserTask.getProjectId()));
 
 		if (project != null) {
-			tUserTask.setPrincipal(project.getTaskPrincipal());
+			tUserTask.setPrincipal(tUserTask.getTaskPrincipal());
 			tUserTask.setGroupName(project.getGroupName());
 			tUserTask.setProductType(project.getProductType());
 			tUserTask.setPlatformName(project.getPlatformName());
@@ -763,7 +763,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				}
 				newUserTask.setProjectId(task.getProjectId());
 				newUserTask.setTaskPrincipal(principalList.get(0).getPrincipalName());
-				newUserTask.setPrincipal(task.getPrincipal());
+				newUserTask.setPrincipal(principalList.get(0).getPrincipalName());
 				newUserTask.setTaskType("00");
 				newUserTask.setTaskStatus("0");
 				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
