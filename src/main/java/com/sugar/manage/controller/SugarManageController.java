@@ -4,17 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.AppBaseController;
 import com.sugar.common.utils.*;
-import com.sugar.manage.dao.model.TSugarProject;
-import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
-import com.sugar.manage.dao.model.TUser;
-import com.sugar.manage.dao.model.TUserTask;
+import com.sugar.manage.dao.model.*;
 import com.sugar.manage.dao.vo.GroupSugarList;
+import com.sugar.manage.dao.vo.TStagePrincipalVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.dto.TSugarProjectReqDTO;
-import com.sugar.manage.service.ISugarProjectSV;
-import com.sugar.manage.service.ITUserTaskService;
-import com.sugar.manage.service.IUserRoleSV;
-import com.sugar.manage.service.IUserSV;
+import com.sugar.manage.service.*;
 import com.sugar.manage.service.impl.ISugarProjectSVImpl;
 import com.sugar.manage.vo.*;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -59,6 +55,9 @@ public class SugarManageController extends AppBaseController {
 
     @Autowired
     private ITUserTaskService itUserTaskService;
+
+    @Autowired
+    private IStagePrincipalSV iStagePrincipalSV;
 
     private Boolean isShow = false;
     /**
@@ -177,11 +176,19 @@ public class SugarManageController extends AppBaseController {
             if (StringUtils.isBlank(record.getStartTime())) {
                 return SysResult.success("新增失败，开始时间不能为空",null);
             }
-            if (!"李佳娜".equals(record.getTaskPrincipal()) && !"谢帅".equals(record.getTaskPrincipal())) {
-                return SysResult.success("新增失败，新增用户责任人只能为李佳娜、谢帅",null);
+
+            TStagePrincipalVO vo = new TStagePrincipalVO();
+            vo.setStageNum("1");
+            List<TStagePrincipal> principalList = iStagePrincipalSV.selectStagePrincipalList(vo);
+            Map<String,String> principalMap = new HashMap<>();
+            if(!CollectionUtils.isEmpty(principalList)){
+                for(TStagePrincipal principal : principalList){
+                    principalMap.put(principal.getPrincipalName(),principal.getPrincipalName());
+                }
             }
-            if (!"82".equals(userId) && !"26".equals(userId) && "47".equals(userId)) {
-                return SysResult.success("新增失败，没有新增用户权限",null);
+
+            if(!principalMap.containsKey(record.getTaskPrincipal())){
+                return SysResult.success("新增失败，阶段负责人信息有误",null);
             }
 
             if(StringUtils.isNotBlank(userId)){
@@ -190,6 +197,7 @@ public class SugarManageController extends AppBaseController {
                 boolean addAuthority = userSV.getAddAuthority(user);
                 if(addAuthority){
                     record.setStatus("01");
+                    record.setBusinessPrincipal(record.getTaskPrincipal());
                     sugarProjectSV.saveSugarProject(record);
                     return SysResult.success("新增成功",null);
                 }

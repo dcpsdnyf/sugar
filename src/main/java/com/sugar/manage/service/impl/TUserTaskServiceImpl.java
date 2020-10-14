@@ -424,7 +424,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setBusinessDiscover10(null);
 					project.setBusinessEstablish25(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = generateAppointTask(tUserTask);
+					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
 						tUserTaskMapper.insertTUserTask(newUserTask);
 						project.setPurchasePrincipal(newUserTask.getTaskPrincipal());
@@ -488,7 +488,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setRequestOaApproval(null);
 					project.setContractDraft(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = generateAppointTask(tUserTask);
+					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
 						tUserTaskMapper.insertTUserTask(newUserTask);
 						project.setProductPrincipal(newUserTask.getTaskPrincipal());
@@ -544,7 +544,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setDetailedDesign(null);
 					project.setUiDesign(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = generateAppointTask(tUserTask);
+					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
 						tUserTaskMapper.insertTUserTask(newUserTask);
 						project.setDevelopmentPrincipal(newUserTask.getTaskPrincipal());
@@ -616,7 +616,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					project.setImplementDeliver(null);
 					project.setCheckDeliver(tUserTask.getTaskInfo());
 
-					TUserTask newUserTask = generateAppointTask(tUserTask);
+					TUserTask newUserTask = this.generateAppointTask(tUserTask);
 					if(newUserTask!=null){
 						tUserTaskMapper.insertTUserTask(newUserTask);
 						project.setOperationPrincipal(newUserTask.getTaskPrincipal());
@@ -626,7 +626,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		} else if ("5".equals(tUserTask.getTaskName())) {
 			project.setOperationPhase(tUserTask.getTaskInfo());
 
-			TUserTask newUserTask = generateAppointTask(tUserTask);
+			TUserTask newUserTask = this.generateAppointTask(tUserTask);
 			if(newUserTask!=null){
 				tUserTaskMapper.insertTUserTask(newUserTask);
 				project.setOperationMaintainPrincipal(newUserTask.getTaskPrincipal());
