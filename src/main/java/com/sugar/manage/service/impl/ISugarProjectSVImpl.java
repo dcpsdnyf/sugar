@@ -170,166 +170,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
     public int updateSugarProject(TSugarProjectReqDTO reqDTO){
         TSugarProjectWithBLOBs project = ModelCopyUtil.copy(reqDTO, TSugarProjectWithBLOBs.class);
 
-        Map<String, String> businessPhaseFieldsMap = FieldNameMaps.businessPhaseFieldsMap;
-        Map<String,String> purchasePhaseFieldsMap = FieldNameMaps.purchasePhaseFieldsMap;
-        Map<String,String> productPhaseFieldsMap = FieldNameMaps.productPhaseFieldsMap;
-        Map<String,String> developmentPhaseFieldsMap = FieldNameMaps.developmentPhaseFieldsMap;
-
         String fieldName = reqDTO.getFieldName();
-
-        /*商机推进阶段*/
-        if(businessPhaseFieldsMap.containsKey(fieldName)){
-            if(StringUtils.isNotBlank(fieldName)){
-
-                if(!"businessClue0".equals(fieldName)){
-                    project.setBusinessClue0("");
-                }
-                if(!"businessDiscover10".equals(fieldName)){
-                    project.setBusinessDiscover10("");
-                }
-                if(!"businessEstablish25".equals(fieldName)){
-                    project.setBusinessEstablish25("");
-                }
-                if(!"businessEstablish50".equals(fieldName)){
-                    project.setBusinessEstablish50("");
-                }
-                if(!"businessEstablish75".equals(fieldName)){
-                    project.setBusinessEstablish75("");
-                }
-                if(!"businessWin100".equals(fieldName)){
-                    project.setBusinessWin100("");
-                }
-                if(!"customerMaintainBackMoney".equals(fieldName)){
-                    project.setCustomerMaintainBackMoney("");
-                }
-            }
-        }
-
-        /*采购阶段*/
-        if(purchasePhaseFieldsMap.containsKey(fieldName)) {
-            if(StringUtils.isNotBlank(fieldName)) {
-                if(!"initialIntentionPlan".equals(fieldName)){
-                    project.setInitialIntentionPlan("");
-                }
-                if(!"writeProjectProposal".equals(fieldName)){
-                    project.setWriteProjectProposal("");
-                }
-                if(!"workingHoursAssess".equals(fieldName)){
-                    project.setWorkingHoursAssess("");
-                }
-                if(!"businessNegotiation".equals(fieldName)){
-                    project.setBusinessNegotiation("");
-                }
-                if(!"requestDraft".equals(fieldName)){
-                    project.setRequestDraft("");
-                }
-                if(!"attendMeeting".equals(fieldName)){
-                    project.setAttendMeeting("");
-                }
-                if(!"bidding".equals(fieldName)){
-                    project.setBidding("");
-                }
-                if(!"requestOaApproval".equals(fieldName)){
-                    project.setRequestOaApproval("");
-                }
-                if(!"contractDraft".equals(fieldName)){
-                    project.setContractDraft("");
-                }
-                if(!"lawyerReview".equals(fieldName)){
-                    project.setLawyerReview("");
-                }
-                if(!"contractOaApproval".equals(fieldName)){
-                    project.setContractOaApproval("");
-                }
-                if(!"usageSeal".equals(fieldName)){
-                    project.setUsageSeal("");
-                }
-                if(!"otherSeal".equals(fieldName)){
-                    project.setOtherSeal("");
-                }
-                if(!"scan".equals(fieldName)){
-                    project.setScan("");
-                }
-                if(!"generalDepartmentFile".equals(fieldName)){
-                    project.setGeneralDepartmentFile("");
-                }
-                if(!"firstPayment".equals(fieldName)){
-                    project.setFirstPayment("");
-                }
-                if(!"progressPayment".equals(fieldName)){
-                    project.setProgressPayment("");
-                }
-                if(!"finalPayment".equals(fieldName)){
-                    project.setFinalPayment("");
-                }
-            }
-
-        }
-
-        /*产品阶段*/
-        if(productPhaseFieldsMap.containsKey(fieldName)){
-            if(!"designBrief".equals(fieldName)){
-                project.setDesignBrief("");
-            }
-            if(!"detailedDesign".equals(fieldName)){
-                project.setDetailedDesign("");
-            }
-            if(!"uiDesign".equals(fieldName)){
-                project.setUiDesign("");
-            }
-            if(!"requirementDesign".equals(fieldName)){
-                project.setRequirementDesign("");
-            }
-            if(!"requirementsReview".equals(fieldName)){
-                project.setRequirementsReview("");
-            }
-            if(!"demandOrderConfirm".equals(fieldName)){
-                project.setDemandOrderConfirm("");
-            }
-            if(!"proCheckDeliver".equals(fieldName)){
-                project.setProCheckDeliver("");
-            }
-        }
-
-        /*研发阶段*/
-        if(developmentPhaseFieldsMap.containsKey(fieldName)){
-            if(!"technologySelection".equals(fieldName)){
-                project.setTechnologySelection("");
-            }
-            if(!"environmentDeployment".equals(fieldName)){
-                project.setEnvironmentDeployment("");
-            }
-            if(!"frameworkDesign".equals(fieldName)){
-                project.setFrameworkDesign("");
-            }
-            if(!"developProgress10".equals(fieldName)){
-                project.setDevelopProgress10("");
-            }
-            if(!"developProgress25".equals(fieldName)){
-                project.setDevelopProgress25("");
-            }
-            if(!"developProgress50".equals(fieldName)){
-                project.setDevelopProgress50("");
-            }
-            if(!"developProgress75".equals(fieldName)){
-                project.setDevelopProgress75("");
-            }
-            if(!"developProgress100".equals(fieldName)){
-                project.setDevelopProgress100("");
-            }
-            if(!"insideTest".equals(fieldName)){
-                project.setInsideTest("");
-            }
-            if(!"customerTest".equals(fieldName)){
-                project.setCustomerTest("");
-            }
-            if(!"implementDeliver".equals(fieldName)){
-                project.setImplementDeliver("");
-            }
-            if(!"checkDeliver".equals(fieldName)){
-                project.setCheckDeliver("");
-            }
-        }
 
         if(StringUtils.isBlank(project.getProductType())){
             project.setProductType(null);
@@ -340,13 +181,12 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
         project.setUpdatedTime(DateUtils.getNowDate());
 
-        sugarProjectMapper.updateByPrimaryKeySelective(project);
-        return 1;
+        return sugarProjectMapper.updateByPrimaryKeySelective(project);
     }
     @Override
     public int deleteByPrimaryKey(TSugarProjectWithBLOBs project){
-        sugarProjectMapper.updateByPrimaryKeySelective(project);
-        return 1;
+
+        return sugarProjectMapper.updateByPrimaryKeySelective(project);
     }
 
 	@Override

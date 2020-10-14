@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.TUserExMapper">
+  <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TUser">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="english_name" jdbcType="VARCHAR" property="englishName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    ID, user_name, english_name, status, remark, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, 
+    UPDATED_TIME
+  </sql>
+
+  <select id="getUserIdByUerName" parameterType="String" resultType="String">
+    SELECT
+    user_name
+    FROM
+    t_sys_user
+    WHERE
+    ID = #{id}
+  </select>
+</mapper>

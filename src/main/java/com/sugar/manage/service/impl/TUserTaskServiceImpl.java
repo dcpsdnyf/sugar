@@ -5,7 +5,9 @@ import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.*;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
+import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.model.TUserTask;
+import com.sugar.manage.dao.model.TUserTaskExample;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
@@ -16,10 +18,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -40,6 +41,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	private TDelayMapper tDelayMapper;
 	@Autowired
 	private TSugarProjectMapper tSugarProjectMapper;
+	@Autowired
+	private TUserTaskMapper taskMapper;
 
 	/**
 	 * 查询【请填写功能名称】
@@ -163,265 +166,64 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 	@Override
 	public TUserTaskVO getTaskInfoByUserIdAndProjectId(String projectId, String userId) {
-		TUserTaskVO task = new TUserTaskVO();
-		TUserTaskVO tk = new TUserTaskVO();
-		if ("53".equals(userId) || "33".equals(userId)) {//如果是李佳娜、谢帅
-			TUserTask userTask = tUserTaskMapper.getTaskInfoByUserIdAndProjectIdtask1(projectId);
-			task = ModelCopyUtil.copy(userTask, TUserTaskVO.class);
-			if (task != null) {
-				if ("100".equals(task.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
-					task.setTaskSubName("商机线索开启");
+        TUserTaskVO task = new TUserTaskVO();
+		List<TUserTask> tUserTaskList = null;
+		if(StringUtils.isNotBlank(userId)){
+			TUser user = tUserMapper.selectByPrimaryKey(Integer.parseInt(userId));
+			if(user!=null){
+				TUserTaskExample example = new TUserTaskExample();
+				TUserTaskExample.Criteria sql = example.createCriteria();
+				if(StringUtils.isNotBlank(projectId)){
+					sql.andProjectIdEqualTo(projectId);
 				}
-				if ("101".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机线索0%");
+				if(StringUtils.isNotBlank(user.getUserName())){
+					sql.andTaskPrincipalEqualTo(user.getUserName());
 				}
-				if ("102".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机发现10%");
-				}
-				if ("103".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机确立25%");
-				}
-				if ("104".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机确立50%");
-				}
-				if ("105".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机确立75%");
-				}
-				if ("106".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机赢取100%");
-				}
-				if ("107".equals(task.getTaskSubName())) {
-					task.setTaskSubName("客户回款/维护阶段");
-				}
-				if ("108".equals(task.getTaskSubName())) {
-					task.setTaskSubName("商机关闭");
-				}
-				if ("109".equals(task.getTaskName())) {
-					task.setTaskName("商机推进阶段");
-				}
-				task.setTaskName("商机推进阶段");
-				task.setBigId("1");
-				return task;
-			}
-			//如果为null说明只是新增没有指派过，就回显新增的负责人过去
-			if (task == null) {
-				TUserTask tUserTask = tUserTaskMapper.getOnlyAddPricipalTKName1(projectId);
-				tk = ModelCopyUtil.copy(tUserTask, TUserTaskVO.class);
-				if (tk != null) {
-					if ("100".equals(tk.getTaskSubName())) {//这个task.gettasksubname需要从下级中获取
-						tk.setTaskSubName("商机线索开启");
+				sql.andTaskTypeEqualTo("00");//指派下发的任务
+                example.setOrderByClause(" CREATED_TIME desc ");
+                tUserTaskList = taskMapper.selectByExample(example);
+
+                List<TUserTask> taskDoneList = new ArrayList<>();//已指派
+                List<TUserTask> taskUnDoneList = new ArrayList<>();//未指派
+
+				TUserTask tUserTask = null;
+                if(!CollectionUtils.isEmpty(tUserTaskList)){
+
+					taskUnDoneList = tUserTaskList.stream()
+							.filter((TUserTask t) -> "0".equals(t.getTaskStatus()))
+							.collect(Collectors.toList());
+
+					taskDoneList = tUserTaskList.stream()
+							.filter((TUserTask t) -> "2".equals(t.getTaskStatus()))
+							.collect(Collectors.toList());
+
+					//未指派最新的任务
+					if(!CollectionUtils.isEmpty(taskUnDoneList)){
+						tUserTask = tUserTaskList.get(0);
+						task = this.setTuserTaskVO(tUserTask);
+					}else if(!CollectionUtils.isEmpty(taskDoneList)) {
+
+						TUserTask userTask = taskDoneList.get(0);
+						example = new TUserTaskExample();
+						sql = example.createCriteria();
+						sql.andProjectIdEqualTo(projectId);
+						sql.andTaskTypeEqualTo("01");
+						sql.andTaskNameEqualTo(userTask.getTaskName());
+						example.setOrderByClause(" CREATED_TIME asc ");
+						tUserTaskList = taskMapper.selectByExample(example);
+						if(!CollectionUtils.isEmpty(tUserTaskList)){
+							tUserTask = tUserTaskList.get(0);
+							task = this.setTuserTaskVO(tUserTask);
+							task.setTaskType("01");
+						}
+
 					}
-					if ("101".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机线索0%");
-					}
-					if ("102".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机发现10%");
-					}
-					if ("103".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机确立25%");
-					}
-					if ("104".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机确立50%");
-					}
-					if ("105".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机确立75%");
-					}
-					if ("106".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机赢取100%");
-					}
-					if ("107".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("客户回款/维护阶段");
-					}
-					if ("108".equals(tk.getTaskSubName())) {
-						tk.setTaskSubName("商机关闭");
-					}
-					if ("109".equals(tk.getTaskName())) {
-						tk.setTaskName("商机推进阶段");
-					}
-					tk.setBigId("1");
-					return tk;
-				}
-			}
-			return new TUserTaskVO();
+                }
+            }
+
 		}
 
-
-		if ("80".equals(userId)) {//如果是尹罗琪
-			List<TUserTask> tasklist = tUserTaskMapper.getTaskInfoByProductIdAndTaskType(projectId);
-			List<TUserTaskVO> tUserTaskVOS = ModelCopyUtil.copyToList(tasklist, TUserTaskVO.class);
-			HashMap<String, TUserTaskVO> taskn = new HashMap<>();
-
-			for (TUserTaskVO tusk : tUserTaskVOS) {
-				taskn.put(tusk.getTaskName(), tusk);
-			}
-			if (taskn.containsKey("2")) {
-				task.setTaskName("采购阶段");
-				if ("201".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("初步意向方案");
-				}
-				if ("202".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("写立项方案");
-				}
-				if ("203".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("工时评估");
-				}
-				if ("204".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("商务谈判");
-				}
-				if ("205".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("请示拟写");
-				}
-				if ("206".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("上会");
-				}
-				if ("207".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("招投标");
-				}
-				if ("208".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("请示OA审批");
-				}
-				if ("209".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("合同拟写");
-				}
-				if ("210".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("律师审核");
-				}
-				if ("211".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("合同OA审批");
-				}
-				if ("212".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("用章");
-				}
-				if ("213".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("对方盖章");
-				}
-				if ("214".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("扫描");
-				}
-				if ("215".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("综合部归档");
-				}
-				if ("216".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("首付款");
-				}
-				if ("217".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("进度款");
-				}
-				if ("218".equals(taskn.get("2").getTaskSubName())) {
-					task.setTaskSubName("尾款");
-				}
-				task.setTaskType(taskn.get("2").getTaskType());
-				task.setTaskPrincipal(taskn.get("2").getTaskPrincipal());
-				task.setEstimatedTime(taskn.get("2").getEstimatedTime());
-                task.setBigId("2");
-			}
-
-			if (taskn.containsKey("3")) {
-				task.setTaskName("产品阶段");
-				if ("301".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("设计概要");
-				}
-				if ("302".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("详细设计");
-				}
-				if ("303".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("UI设计");
-				}
-				if ("304".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("需求设计");
-				}
-				if ("305".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("需求审批");
-				}
-				if ("306".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("需求单确认");
-				}
-				if ("307".equals(taskn.get("3").getTaskSubName())) {
-					task.setTaskSubName("验收");
-				}
-				task.setTaskType(taskn.get("3").getTaskType());
-				task.setTaskPrincipal(taskn.get("3").getTaskPrincipal());
-				task.setEstimatedTime(taskn.get("3").getEstimatedTime());
-                task.setBigId("3");
-			}
-			if (taskn.containsKey("5")) {
-				task.setTaskName("运营阶段");
-				task.setTaskSubName("运营阶段");
-				task.setTaskType(taskn.get("5").getTaskType());
-				task.setTaskPrincipal(taskn.get("5").getTaskPrincipal());
-				task.setEstimatedTime(taskn.get("5").getEstimatedTime());
-                task.setBigId("5");
-			}
-			return task;
-		}
-
-		if ("20".equals(userId)) {//如果是黄斯南
-			List<TUserTask> tasklist = tUserTaskMapper.getTaskInfoByProductIdAndTaskTypehsn(projectId);
-			List<TUserTaskVO> tUserTaskVOS = ModelCopyUtil.copyToList(tasklist, TUserTaskVO.class);
-			HashMap<String, TUserTaskVO> taskn = new HashMap<>();
-			for (TUserTaskVO tusk : tUserTaskVOS) {
-				taskn.put(tusk.getTaskName(), tusk);
-			}
-			if (taskn.containsKey("4")) {
-				task.setTaskName("研发阶段");
-				if ("401".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("技术选型");
-				}
-				if ("402".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("环境部署");
-				}
-				if ("403".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("框架设计");
-				}
-				if ("404".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("开发进度10");
-				}
-				if ("405".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("开发进度25");
-				}
-				if ("406".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("开发进度50");
-				}
-				if ("407".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("开发进度75");
-				}
-				if ("408".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("开发进度100");
-				}
-				if ("409".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("内部测试优化");
-				}
-				if ("410".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("客户测试优化");
-				}
-				if ("411".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("实施交付");
-				}
-				if ("412".equals(taskn.get("4").getTaskSubName())) {
-					task.setTaskSubName("验收");
-				}
-				task.setTaskType(taskn.get("4").getTaskType());
-				task.setTaskPrincipal(taskn.get("4").getTaskPrincipal());
-				task.setEstimatedTime(taskn.get("4").getEstimatedTime());
-                task.setBigId("4");
-			}
-			if (taskn.containsKey("6")) {
-				task.setTaskName("运维阶段");
-				task.setTaskSubName("技术选型");
-				task.setTaskType(taskn.get("5").getTaskType());
-				task.setTaskPrincipal(taskn.get("6").getTaskPrincipal());
-				task.setEstimatedTime(taskn.get("6").getEstimatedTime());
-                task.setBigId("6");
-			}
-			return task;
-		}
-		//如果是卢丽娜、张洋洋、姜仲一则返回一阶段信息
-		if ("82".equals(userId) || "26".equals(userId) || "47".equals(userId)) {
-			TUserTask ustk = tUserTaskMapper.getTaskInfoByProductId(projectId);
-			TUserTaskVO ustkVo = ModelCopyUtil.copy(ustk, TUserTaskVO.class);
-			return ustkVo;
-		}
-		return new TUserTaskVO();
+		return task;
 	}
 
 	@Override
@@ -891,6 +693,43 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Override
 	public void updateUserTaskToProgressing(TUserTask tUserTask) {
 		tUserTaskMapper.updateTUserTaskById(tUserTask);
+	}
+
+	private TUserTaskVO setTuserTaskVO(TUserTask obj){
+		TUserTaskVO taskVO = new TUserTaskVO();
+		if(obj==null){
+			return taskVO;
+		}
+		taskVO.setTaskPrincipal(obj.getTaskPrincipal());
+		taskVO.setEstimatedTime(obj.getEstimatedTime());
+		switch (obj.getTaskName()){
+			case "1":
+				taskVO.setTaskName("商机推进阶段");
+				taskVO.setBigId("1");
+				break;
+			case "2":
+				taskVO.setTaskName("采购阶段");
+				taskVO.setBigId("2");
+				break;
+			case "3":
+				taskVO.setTaskName("产品阶段");
+				taskVO.setBigId("3");
+				break;
+			case "4":
+				taskVO.setTaskName("研发阶段");
+				taskVO.setBigId("4");
+				break;
+			case "5":
+				taskVO.setTaskName("运营阶段");
+				taskVO.setBigId("5");
+				break;
+			case "6":
+				taskVO.setTaskName("运维阶段");
+				taskVO.setBigId("6");
+				break;
+		}
+		return taskVO;
+
 	}
 }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.TUserRoleExMapper">
+  <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.TUserRole">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, role_id, user_id, project_id
+  </sql>
+
+  <select id="getIsHasPowerToInsertTask" parameterType="Long" resultType="String">
+    SELECT
+    role_id
+    FROM
+    t_user_role
+    WHERE
+    user_id = #{userId,jdbcType=BIGINT};
+  </select>
+
+</mapper>
