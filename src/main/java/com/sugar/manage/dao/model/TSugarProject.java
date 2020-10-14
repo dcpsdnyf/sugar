@@ -30,6 +30,18 @@ public class TSugarProject implements Serializable {
 
     private String taskPrincipal;
 
+    private String businessPrincipal;
+
+    private String purchasePrincipal;
+
+    private String productPrincipal;
+
+    private String developmentPrincipal;
+
+    private String operationPrincipal;
+
+    private String operationMaintainPrincipal;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -136,6 +148,54 @@ public class TSugarProject implements Serializable {
         this.taskPrincipal = taskPrincipal == null ? null : taskPrincipal.trim();
     }
 
+    public String getBusinessPrincipal() {
+        return businessPrincipal;
+    }
+
+    public void setBusinessPrincipal(String businessPrincipal) {
+        this.businessPrincipal = businessPrincipal == null ? null : businessPrincipal.trim();
+    }
+
+    public String getPurchasePrincipal() {
+        return purchasePrincipal;
+    }
+
+    public void setPurchasePrincipal(String purchasePrincipal) {
+        this.purchasePrincipal = purchasePrincipal == null ? null : purchasePrincipal.trim();
+    }
+
+    public String getProductPrincipal() {
+        return productPrincipal;
+    }
+
+    public void setProductPrincipal(String productPrincipal) {
+        this.productPrincipal = productPrincipal == null ? null : productPrincipal.trim();
+    }
+
+    public String getDevelopmentPrincipal() {
+        return developmentPrincipal;
+    }
+
+    public void setDevelopmentPrincipal(String developmentPrincipal) {
+        this.developmentPrincipal = developmentPrincipal == null ? null : developmentPrincipal.trim();
+    }
+
+    public String getOperationPrincipal() {
+        return operationPrincipal;
+    }
+
+    public void setOperationPrincipal(String operationPrincipal) {
+        this.operationPrincipal = operationPrincipal == null ? null : operationPrincipal.trim();
+    }
+
+    public String getOperationMaintainPrincipal() {
+        return operationMaintainPrincipal;
+    }
+
+    public void setOperationMaintainPrincipal(String operationMaintainPrincipal) {
+        this.operationMaintainPrincipal = operationMaintainPrincipal == null ? null : operationMaintainPrincipal.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -160,7 +220,13 @@ public class TSugarProject implements Serializable {
             && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()))
             && (this.getGroupName() == null ? other.getGroupName() == null : this.getGroupName().equals(other.getGroupName()))
             && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
-            && (this.getTaskPrincipal() == null ? other.getTaskPrincipal() == null : this.getTaskPrincipal().equals(other.getTaskPrincipal()));
+            && (this.getTaskPrincipal() == null ? other.getTaskPrincipal() == null : this.getTaskPrincipal().equals(other.getTaskPrincipal()))
+            && (this.getBusinessPrincipal() == null ? other.getBusinessPrincipal() == null : this.getBusinessPrincipal().equals(other.getBusinessPrincipal()))
+            && (this.getPurchasePrincipal() == null ? other.getPurchasePrincipal() == null : this.getPurchasePrincipal().equals(other.getPurchasePrincipal()))
+            && (this.getProductPrincipal() == null ? other.getProductPrincipal() == null : this.getProductPrincipal().equals(other.getProductPrincipal()))
+            && (this.getDevelopmentPrincipal() == null ? other.getDevelopmentPrincipal() == null : this.getDevelopmentPrincipal().equals(other.getDevelopmentPrincipal()))
+            && (this.getOperationPrincipal() == null ? other.getOperationPrincipal() == null : this.getOperationPrincipal().equals(other.getOperationPrincipal()))
+            && (this.getOperationMaintainPrincipal() == null ? other.getOperationMaintainPrincipal() == null : this.getOperationMaintainPrincipal().equals(other.getOperationMaintainPrincipal()));
     }
 
     @Override
@@ -180,6 +246,12 @@ public class TSugarProject implements Serializable {
         result = prime * result + ((getGroupName() == null) ? 0 : getGroupName().hashCode());
         result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         result = prime * result + ((getTaskPrincipal() == null) ? 0 : getTaskPrincipal().hashCode());
+        result = prime * result + ((getBusinessPrincipal() == null) ? 0 : getBusinessPrincipal().hashCode());
+        result = prime * result + ((getPurchasePrincipal() == null) ? 0 : getPurchasePrincipal().hashCode());
+        result = prime * result + ((getProductPrincipal() == null) ? 0 : getProductPrincipal().hashCode());
+        result = prime * result + ((getDevelopmentPrincipal() == null) ? 0 : getDevelopmentPrincipal().hashCode());
+        result = prime * result + ((getOperationPrincipal() == null) ? 0 : getOperationPrincipal().hashCode());
+        result = prime * result + ((getOperationMaintainPrincipal() == null) ? 0 : getOperationMaintainPrincipal().hashCode());
         return result;
     }
 
@@ -202,6 +274,12 @@ public class TSugarProject implements Serializable {
         sb.append(", groupName=").append(groupName);
         sb.append(", startTime=").append(startTime);
         sb.append(", taskPrincipal=").append(taskPrincipal);
+        sb.append(", businessPrincipal=").append(businessPrincipal);
+        sb.append(", purchasePrincipal=").append(purchasePrincipal);
+        sb.append(", productPrincipal=").append(productPrincipal);
+        sb.append(", developmentPrincipal=").append(developmentPrincipal);
+        sb.append(", operationPrincipal=").append(operationPrincipal);
+        sb.append(", operationMaintainPrincipal=").append(operationMaintainPrincipal);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

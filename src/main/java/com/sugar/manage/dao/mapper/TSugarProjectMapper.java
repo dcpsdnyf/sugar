@@ -3,9 +3,9 @@ package com.sugar.manage.dao.mapper;
 import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TSugarProjectExample;
 import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TSugarProjectMapper {
     long countByExample(TSugarProjectExample example);

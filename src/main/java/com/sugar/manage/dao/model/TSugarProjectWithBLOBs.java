@@ -510,6 +510,12 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
             && (this.getGroupName() == null ? other.getGroupName() == null : this.getGroupName().equals(other.getGroupName()))
             && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
             && (this.getTaskPrincipal() == null ? other.getTaskPrincipal() == null : this.getTaskPrincipal().equals(other.getTaskPrincipal()))
+            && (this.getBusinessPrincipal() == null ? other.getBusinessPrincipal() == null : this.getBusinessPrincipal().equals(other.getBusinessPrincipal()))
+            && (this.getPurchasePrincipal() == null ? other.getPurchasePrincipal() == null : this.getPurchasePrincipal().equals(other.getPurchasePrincipal()))
+            && (this.getProductPrincipal() == null ? other.getProductPrincipal() == null : this.getProductPrincipal().equals(other.getProductPrincipal()))
+            && (this.getDevelopmentPrincipal() == null ? other.getDevelopmentPrincipal() == null : this.getDevelopmentPrincipal().equals(other.getDevelopmentPrincipal()))
+            && (this.getOperationPrincipal() == null ? other.getOperationPrincipal() == null : this.getOperationPrincipal().equals(other.getOperationPrincipal()))
+            && (this.getOperationMaintainPrincipal() == null ? other.getOperationMaintainPrincipal() == null : this.getOperationMaintainPrincipal().equals(other.getOperationMaintainPrincipal()))
             && (this.getBusinessClueOpen() == null ? other.getBusinessClueOpen() == null : this.getBusinessClueOpen().equals(other.getBusinessClueOpen()))
             && (this.getBusinessClue0() == null ? other.getBusinessClue0() == null : this.getBusinessClue0().equals(other.getBusinessClue0()))
             && (this.getBusinessDiscover10() == null ? other.getBusinessDiscover10() == null : this.getBusinessDiscover10().equals(other.getBusinessDiscover10()))
@@ -577,6 +583,12 @@ public class TSugarProjectWithBLOBs extends TSugarProject implements Serializabl
         result = prime * result + ((getGroupName() == null) ? 0 : getGroupName().hashCode());
         result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         result = prime * result + ((getTaskPrincipal() == null) ? 0 : getTaskPrincipal().hashCode());
+        result = prime * result + ((getBusinessPrincipal() == null) ? 0 : getBusinessPrincipal().hashCode());
+        result = prime * result + ((getPurchasePrincipal() == null) ? 0 : getPurchasePrincipal().hashCode());
+        result = prime * result + ((getProductPrincipal() == null) ? 0 : getProductPrincipal().hashCode());
+        result = prime * result + ((getDevelopmentPrincipal() == null) ? 0 : getDevelopmentPrincipal().hashCode());
+        result = prime * result + ((getOperationPrincipal() == null) ? 0 : getOperationPrincipal().hashCode());
+        result = prime * result + ((getOperationMaintainPrincipal() == null) ? 0 : getOperationMaintainPrincipal().hashCode());
         result = prime * result + ((getBusinessClueOpen() == null) ? 0 : getBusinessClueOpen().hashCode());
         result = prime * result + ((getBusinessClue0() == null) ? 0 : getBusinessClue0().hashCode());
         result = prime * result + ((getBusinessDiscover10() == null) ? 0 : getBusinessDiscover10().hashCode());

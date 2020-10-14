@@ -974,6 +974,426 @@ public class TSugarProjectExample {
             addCriterion("TASK_PRINCIPAL not between", value1, value2, "taskPrincipal");
             return (Criteria) this;
         }
+
+        public Criteria andBusinessPrincipalIsNull() {
+            addCriterion("business_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalIsNotNull() {
+            addCriterion("business_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalEqualTo(String value) {
+            addCriterion("business_principal =", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalNotEqualTo(String value) {
+            addCriterion("business_principal <>", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalGreaterThan(String value) {
+            addCriterion("business_principal >", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("business_principal >=", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalLessThan(String value) {
+            addCriterion("business_principal <", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("business_principal <=", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalLike(String value) {
+            addCriterion("business_principal like", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalNotLike(String value) {
+            addCriterion("business_principal not like", value, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalIn(List<String> values) {
+            addCriterion("business_principal in", values, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalNotIn(List<String> values) {
+            addCriterion("business_principal not in", values, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalBetween(String value1, String value2) {
+            addCriterion("business_principal between", value1, value2, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessPrincipalNotBetween(String value1, String value2) {
+            addCriterion("business_principal not between", value1, value2, "businessPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalIsNull() {
+            addCriterion("purchase_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalIsNotNull() {
+            addCriterion("purchase_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalEqualTo(String value) {
+            addCriterion("purchase_principal =", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalNotEqualTo(String value) {
+            addCriterion("purchase_principal <>", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalGreaterThan(String value) {
+            addCriterion("purchase_principal >", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("purchase_principal >=", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalLessThan(String value) {
+            addCriterion("purchase_principal <", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalLessThanOrEqualTo(String value) {
+            addCriterion("purchase_principal <=", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalLike(String value) {
+            addCriterion("purchase_principal like", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalNotLike(String value) {
+            addCriterion("purchase_principal not like", value, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalIn(List<String> values) {
+            addCriterion("purchase_principal in", values, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalNotIn(List<String> values) {
+            addCriterion("purchase_principal not in", values, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalBetween(String value1, String value2) {
+            addCriterion("purchase_principal between", value1, value2, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePrincipalNotBetween(String value1, String value2) {
+            addCriterion("purchase_principal not between", value1, value2, "purchasePrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalIsNull() {
+            addCriterion("product_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalIsNotNull() {
+            addCriterion("product_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalEqualTo(String value) {
+            addCriterion("product_principal =", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalNotEqualTo(String value) {
+            addCriterion("product_principal <>", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalGreaterThan(String value) {
+            addCriterion("product_principal >", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("product_principal >=", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalLessThan(String value) {
+            addCriterion("product_principal <", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("product_principal <=", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalLike(String value) {
+            addCriterion("product_principal like", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalNotLike(String value) {
+            addCriterion("product_principal not like", value, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalIn(List<String> values) {
+            addCriterion("product_principal in", values, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalNotIn(List<String> values) {
+            addCriterion("product_principal not in", values, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalBetween(String value1, String value2) {
+            addCriterion("product_principal between", value1, value2, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPrincipalNotBetween(String value1, String value2) {
+            addCriterion("product_principal not between", value1, value2, "productPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalIsNull() {
+            addCriterion("development_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalIsNotNull() {
+            addCriterion("development_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalEqualTo(String value) {
+            addCriterion("development_principal =", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalNotEqualTo(String value) {
+            addCriterion("development_principal <>", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalGreaterThan(String value) {
+            addCriterion("development_principal >", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("development_principal >=", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalLessThan(String value) {
+            addCriterion("development_principal <", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("development_principal <=", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalLike(String value) {
+            addCriterion("development_principal like", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalNotLike(String value) {
+            addCriterion("development_principal not like", value, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalIn(List<String> values) {
+            addCriterion("development_principal in", values, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalNotIn(List<String> values) {
+            addCriterion("development_principal not in", values, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalBetween(String value1, String value2) {
+            addCriterion("development_principal between", value1, value2, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andDevelopmentPrincipalNotBetween(String value1, String value2) {
+            addCriterion("development_principal not between", value1, value2, "developmentPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalIsNull() {
+            addCriterion("operation_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalIsNotNull() {
+            addCriterion("operation_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalEqualTo(String value) {
+            addCriterion("operation_principal =", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalNotEqualTo(String value) {
+            addCriterion("operation_principal <>", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalGreaterThan(String value) {
+            addCriterion("operation_principal >", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("operation_principal >=", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalLessThan(String value) {
+            addCriterion("operation_principal <", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("operation_principal <=", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalLike(String value) {
+            addCriterion("operation_principal like", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalNotLike(String value) {
+            addCriterion("operation_principal not like", value, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalIn(List<String> values) {
+            addCriterion("operation_principal in", values, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalNotIn(List<String> values) {
+            addCriterion("operation_principal not in", values, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalBetween(String value1, String value2) {
+            addCriterion("operation_principal between", value1, value2, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationPrincipalNotBetween(String value1, String value2) {
+            addCriterion("operation_principal not between", value1, value2, "operationPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalIsNull() {
+            addCriterion("operation_maintain_principal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalIsNotNull() {
+            addCriterion("operation_maintain_principal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalEqualTo(String value) {
+            addCriterion("operation_maintain_principal =", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalNotEqualTo(String value) {
+            addCriterion("operation_maintain_principal <>", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalGreaterThan(String value) {
+            addCriterion("operation_maintain_principal >", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalGreaterThanOrEqualTo(String value) {
+            addCriterion("operation_maintain_principal >=", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalLessThan(String value) {
+            addCriterion("operation_maintain_principal <", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalLessThanOrEqualTo(String value) {
+            addCriterion("operation_maintain_principal <=", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalLike(String value) {
+            addCriterion("operation_maintain_principal like", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalNotLike(String value) {
+            addCriterion("operation_maintain_principal not like", value, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalIn(List<String> values) {
+            addCriterion("operation_maintain_principal in", values, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalNotIn(List<String> values) {
+            addCriterion("operation_maintain_principal not in", values, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalBetween(String value1, String value2) {
+            addCriterion("operation_maintain_principal between", value1, value2, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationMaintainPrincipalNotBetween(String value1, String value2) {
+            addCriterion("operation_maintain_principal not between", value1, value2, "operationMaintainPrincipal");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

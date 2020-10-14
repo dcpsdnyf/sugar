@@ -15,6 +15,12 @@
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
     <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
     <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+    <result column="business_principal" jdbcType="VARCHAR" property="businessPrincipal" />
+    <result column="purchase_principal" jdbcType="VARCHAR" property="purchasePrincipal" />
+    <result column="product_principal" jdbcType="VARCHAR" property="productPrincipal" />
+    <result column="development_principal" jdbcType="VARCHAR" property="developmentPrincipal" />
+    <result column="operation_principal" jdbcType="VARCHAR" property="operationPrincipal" />
+    <result column="operation_maintain_principal" jdbcType="VARCHAR" property="operationMaintainPrincipal" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
@@ -126,7 +132,9 @@
   </sql>
   <sql id="Base_Column_List">
     ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME, 
-    UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL
+    UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL, business_principal, 
+    purchase_principal, product_principal, development_principal, operation_principal, 
+    operation_maintain_principal
   </sql>
   <sql id="Blob_Column_List">
     business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
@@ -194,7 +202,10 @@
       platform_id, status, CREATED_STAFF, 
       CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, 
       sort, group_name, START_TIME, 
-      TASK_PRINCIPAL, business_clue_open, business_clue_0, 
+      TASK_PRINCIPAL, business_principal, purchase_principal, 
+      product_principal, development_principal, 
+      operation_principal, operation_maintain_principal, 
+      business_clue_open, business_clue_0, 
       business_discover_10, business_establish_25, 
       business_establish_50, business_establish_75, 
       business_win_100, customer_maintain_back_money, 
@@ -220,7 +231,10 @@
       #{platformId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
       #{sort,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
-      #{taskPrincipal,jdbcType=VARCHAR}, #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
+      #{taskPrincipal,jdbcType=VARCHAR}, #{businessPrincipal,jdbcType=VARCHAR}, #{purchasePrincipal,jdbcType=VARCHAR}, 
+      #{productPrincipal,jdbcType=VARCHAR}, #{developmentPrincipal,jdbcType=VARCHAR}, 
+      #{operationPrincipal,jdbcType=VARCHAR}, #{operationMaintainPrincipal,jdbcType=VARCHAR}, 
+      #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
       #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR}, 
       #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR}, 
       #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, 
@@ -284,6 +298,24 @@
       </if>
       <if test="taskPrincipal != null">
         TASK_PRINCIPAL,
+      </if>
+      <if test="businessPrincipal != null">
+        business_principal,
+      </if>
+      <if test="purchasePrincipal != null">
+        purchase_principal,
+      </if>
+      <if test="productPrincipal != null">
+        product_principal,
+      </if>
+      <if test="developmentPrincipal != null">
+        development_principal,
+      </if>
+      <if test="operationPrincipal != null">
+        operation_principal,
+      </if>
+      <if test="operationMaintainPrincipal != null">
+        operation_maintain_principal,
       </if>
       <if test="businessClueOpen != null">
         business_clue_open,
@@ -469,6 +501,24 @@
       </if>
       <if test="taskPrincipal != null">
         #{taskPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPrincipal != null">
+        #{businessPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasePrincipal != null">
+        #{purchasePrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrincipal != null">
+        #{productPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="developmentPrincipal != null">
+        #{developmentPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="operationPrincipal != null">
+        #{operationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="operationMaintainPrincipal != null">
+        #{operationMaintainPrincipal,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -664,6 +714,24 @@
       <if test="record.taskPrincipal != null">
         TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
       </if>
+      <if test="record.businessPrincipal != null">
+        business_principal = #{record.businessPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchasePrincipal != null">
+        purchase_principal = #{record.purchasePrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPrincipal != null">
+        product_principal = #{record.productPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.developmentPrincipal != null">
+        development_principal = #{record.developmentPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationPrincipal != null">
+        operation_principal = #{record.operationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationMaintainPrincipal != null">
+        operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR},
+      </if>
       <if test="record.businessClueOpen != null">
         business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       </if>
@@ -828,6 +896,12 @@
       group_name = #{record.groupName,jdbcType=VARCHAR},
       START_TIME = #{record.startTime,jdbcType=VARCHAR},
       TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
+      business_principal = #{record.businessPrincipal,jdbcType=VARCHAR},
+      purchase_principal = #{record.purchasePrincipal,jdbcType=VARCHAR},
+      product_principal = #{record.productPrincipal,jdbcType=VARCHAR},
+      development_principal = #{record.developmentPrincipal,jdbcType=VARCHAR},
+      operation_principal = #{record.operationPrincipal,jdbcType=VARCHAR},
+      operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR},
       business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
@@ -894,7 +968,13 @@
       sort = #{record.sort,jdbcType=INTEGER},
       group_name = #{record.groupName,jdbcType=VARCHAR},
       START_TIME = #{record.startTime,jdbcType=VARCHAR},
-      TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR}
+      TASK_PRINCIPAL = #{record.taskPrincipal,jdbcType=VARCHAR},
+      business_principal = #{record.businessPrincipal,jdbcType=VARCHAR},
+      purchase_principal = #{record.purchasePrincipal,jdbcType=VARCHAR},
+      product_principal = #{record.productPrincipal,jdbcType=VARCHAR},
+      development_principal = #{record.developmentPrincipal,jdbcType=VARCHAR},
+      operation_principal = #{record.operationPrincipal,jdbcType=VARCHAR},
+      operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -937,6 +1017,24 @@
       </if>
       <if test="taskPrincipal != null">
         TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPrincipal != null">
+        business_principal = #{businessPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasePrincipal != null">
+        purchase_principal = #{purchasePrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrincipal != null">
+        product_principal = #{productPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="developmentPrincipal != null">
+        development_principal = #{developmentPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="operationPrincipal != null">
+        operation_principal = #{operationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="operationMaintainPrincipal != null">
+        operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -1099,6 +1197,12 @@
       group_name = #{groupName,jdbcType=VARCHAR},
       START_TIME = #{startTime,jdbcType=VARCHAR},
       TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+      business_principal = #{businessPrincipal,jdbcType=VARCHAR},
+      purchase_principal = #{purchasePrincipal,jdbcType=VARCHAR},
+      product_principal = #{productPrincipal,jdbcType=VARCHAR},
+      development_principal = #{developmentPrincipal,jdbcType=VARCHAR},
+      operation_principal = #{operationPrincipal,jdbcType=VARCHAR},
+      operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR},
       business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
@@ -1162,7 +1266,13 @@
       sort = #{sort,jdbcType=INTEGER},
       group_name = #{groupName,jdbcType=VARCHAR},
       START_TIME = #{startTime,jdbcType=VARCHAR},
-      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR}
+      TASK_PRINCIPAL = #{taskPrincipal,jdbcType=VARCHAR},
+      business_principal = #{businessPrincipal,jdbcType=VARCHAR},
+      purchase_principal = #{purchasePrincipal,jdbcType=VARCHAR},
+      product_principal = #{productPrincipal,jdbcType=VARCHAR},
+      development_principal = #{developmentPrincipal,jdbcType=VARCHAR},
+      operation_principal = #{operationPrincipal,jdbcType=VARCHAR},
+      operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
