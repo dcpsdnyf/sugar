@@ -267,9 +267,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
 		}
 		sql.andTaskStatusEqualTo("2");
-		PageHelper.startPage(vo.getPage(),vo.getLimit());
+//		PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
-
+		PageInfo<TUserTask> page = new PageInfo<>(tUserTasks);
 		if (!CollectionUtils.isEmpty(tUserTasks)) {
 			List<TUserTaskVO> userTaskVOList = ModelCopyUtil.copyToList(tUserTasks, TUserTaskVO.class);
 			PageInfo<TUserTaskVO> pageInfo = new PageInfo<>(userTaskVOList);
@@ -288,7 +288,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		}
 		sql.andTaskStatusNotEqualTo("2");
 
-		PageHelper.startPage(vo.getPage(),vo.getLimit());
+		//PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
 
 		if (!CollectionUtils.isEmpty(tUserTasks)) {

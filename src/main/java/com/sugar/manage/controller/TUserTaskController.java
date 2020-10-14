@@ -1,5 +1,7 @@
 package com.sugar.manage.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.CookieUtils;
@@ -121,8 +123,8 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/getDoneTask")
 	@ResponseBody
-	public TableDataInfo getDoneTask(HttpServletRequest request,TUserTaskVO vo) {
-		TableDataInfo tableDataInfo = new TableDataInfo();
+	public String getDoneTask(HttpServletRequest request,TUserTaskVO vo) {
+		JSONArray array = new JSONArray();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isNotBlank(userId)) {//如果未获得用户id不返回任何信息
 			TUserVO userVO = userSV.getUserById(Integer.parseInt(userId));
@@ -133,12 +135,10 @@ public class TUserTaskController {
 				doneTaskPage = itUserTaskService.getDoneTask(vo);
 			}
 			if(!CollectionUtils.isEmpty(doneTaskPage.getList())){
-				tableDataInfo.setRows(doneTaskPage.getList());
-				tableDataInfo.setCode(200);
-				tableDataInfo.setTotal(doneTaskPage.getTotal());
+				array= JSONArray.parseArray(JSON.toJSONString(doneTaskPage.getList()));
 			}
 		}
-		return tableDataInfo;
+		return array.toString();
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/getUndoTask")
 	@ResponseBody
-	public TableDataInfo getUndoTask(HttpServletRequest request,TUserTaskVO vo) {
-		TableDataInfo tableDataInfo = new TableDataInfo();
+	public String getUndoTask(HttpServletRequest request,TUserTaskVO vo) {
+		JSONArray array = new JSONArray();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isNotBlank(userId)) {
 			TUser user = new TUser();
@@ -171,12 +171,13 @@ public class TUserTaskController {
 					userTaskVO.setDelay(roleProjectVO.isRoleDelay());
 					userTaskVOList.add(userTaskVO);
 				}
-				tableDataInfo.setRows(userTaskVOList);
-				tableDataInfo.setTotal(undoTaskPage.getTotal());
-				tableDataInfo.setCode(200);
+				if(!CollectionUtils.isEmpty(userTaskVOList)){
+					array= JSONArray.parseArray(JSON.toJSONString(userTaskVOList));
+				}
+
 			}
 		}
-		return tableDataInfo;
+		return array.toString();
 	}
 
 	/**
