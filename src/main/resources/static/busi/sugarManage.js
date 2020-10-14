@@ -38,7 +38,7 @@ $(function () {
 		cardView: false,                    //是否显示详细视图
 		detailView: false,                   //是否显示父子表
 		fixedColumns: true,//是否固定列
-		fixedNumber: 5,//固定多少列，总左边开始数
+		fixedNumber: 4,//固定多少列，总左边开始数
 
 
 		selectItemName: 'parentItem',
@@ -48,13 +48,13 @@ $(function () {
 				"title": "项目信息",
 				"halign": "center",
 				"align": "center",
-				"colspan": 5
+				"colspan": 4
 			},
 			{
 				"title": "商机推进阶段",
 				"halign": "center",
 				"align": "center",
-				"colspan": 9,
+				"colspan": 10,
 				visible: false,
 				id: 'business',
 				class: "th_red",
@@ -63,33 +63,33 @@ $(function () {
 				"title": "采购阶段",
 				"halign": "center",
 				"align": "center",
-				"colspan": 18,
+				"colspan": 19,
 				class: "th_orange"
 			},
 			{
 				"title": "产品阶段",
 				"halign": "center",
 				"align": "center",
-				"colspan": 7,
+				"colspan": 8,
 				class: "th_yellow"
 			},
 			{
 				"title": "研发阶段",
 				"halign": "center",
 				"align": "center",
-				"colspan": 12,
+				"colspan": 13,
 				class: "th_darkblue"
 			},
 			{
 				field: 'operationPhase',
 				title: '运营阶段',
-				"colspan": 1,
+				"colspan": 2,
 				rowspan: 1,
 				class: "th_purple"
 			}, {
 				field: 'maintainPhase',
 				title: '运维阶段',
-				"colspan": 1,
+				"colspan": 2,
 				rowspan: 1,
 				class: "th_darkred",
 			}, {
@@ -139,11 +139,11 @@ $(function () {
 			field: 'groupName',
 			switchable: false,
 			title: '集团'
-		}, {
-			field: 'taskPrincipal',
-			switchable: false,
-			title: '负责人'
 		},
+			{
+				field: 'taskPrincipal',
+				title: '商机负责人'
+			},
 			{
 				field: 'businessClueOpen',
 				title: '商机线索开启',
@@ -178,10 +178,11 @@ $(function () {
 
 
 			}, {
+				field: 'purchasePrincipal',
+				title: '采购阶段负责人'
+			},{
 				field: 'initialIntentionPlan',
 				title: '1、初步意向方案',
-
-
 			}, {
 				field: 'writeProjectProposal',
 				title: '2、写立项方案',
@@ -268,10 +269,11 @@ $(function () {
 
 
 			}, {
+				field: 'productPrincipal',
+				title: '产品阶段负责人'
+			},{
 				field: 'designBrief',
 				title: '1、设计概要',
-
-
 			}, {
 				field: 'detailedDesign',
 				title: '2、详细设计',
@@ -302,9 +304,11 @@ $(function () {
 
 
 			}, {
+				field: 'developmentPrincipal',
+				title: '研发阶段负责人'
+			},{
 				field: 'technologySelection',
 				title: '1、技术选型',
-
 			}, {
 				field: 'environmentDeployment',
 				title: '2、环境部署',
@@ -349,12 +353,18 @@ $(function () {
 				field: 'checkDeliver',
 				title: '12、验收',
 
+			},{
+				field: 'operationPrincipal',
+				title: '运营阶段负责人'
 			},
 			{
 				field: 'operationPhase',
 				title: '运营阶段',
 
 			}, {
+				field: 'operationMaintainPrincipal',
+				title: '运维阶段负责人'
+			},{
 				field: 'maintainPhase',
 				title: '运维阶段',
 
