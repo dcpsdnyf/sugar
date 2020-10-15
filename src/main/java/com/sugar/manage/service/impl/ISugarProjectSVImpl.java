@@ -8,21 +8,18 @@ import com.sugar.manage.dao.mapper.TSugarProjectExMapper;
 import com.sugar.manage.dao.mapper.TSugarProjectMapper;
 import com.sugar.manage.dao.mapper.TUserTaskExMapper;
 import com.sugar.manage.dao.mapper.TUserTaskMapper;
-import com.sugar.manage.dao.model.TSugarProject;
-import com.sugar.manage.dao.model.TSugarProjectExample;
-import com.sugar.manage.dao.model.TSugarProjectWithBLOBs;
-import com.sugar.manage.dao.model.TUserTask;
+import com.sugar.manage.dao.model.*;
 import com.sugar.manage.dao.vo.GroupSugarList;
 import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.ISugarProjectSV;
-import com.sugar.manage.vo.FieldNameMaps;
 import com.sugar.manage.vo.TSugarProjectVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -80,36 +77,33 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 			sql.andGroupNameLike(projectVO.getGroupName());
 		}
 
+		//新增可以查看所有项目的角色11，只要11的可以查看所有项目
+        //没有11的话，查看当前用户的任务表信息列表，获取项目ID，in这些id
+        if(!projectVO.isViewAllProject()){
+            TUserTaskExample taskExample = new TUserTaskExample();
+            TUserTaskExample.Criteria criteria = taskExample.createCriteria();
+            criteria.andTaskPrincipalEqualTo(projectVO.getUserName());
+            List<TUserTask> userTaskList = taskMapper.selectByExample(taskExample);
 
-		//this.initParam(sql, projectVO);
+            if(!CollectionUtils.isEmpty(userTaskList)){
+                List<Integer> projectIdList = new ArrayList<>();
+                for(TUserTask userTask : userTaskList){
+                    if(StringUtils.isNotBlank(userTask.getProjectId())){
+                        projectIdList.add(Integer.parseInt(userTask.getProjectId()));
+                    }
+                }
+                sql.andIdIn(projectIdList);
+            }else {
+                return new PageInfo<>();
+            }
+        }
+
 		//列表按照产品类型进行排序展示
 		example.setOrderByClause(" product_type asc ");
 		PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
 
 		List<TSugarProjectWithBLOBs> sugarProject = sugarProjectMapper.selectByExampleWithBLOBs(example);
-		/*//根据项目id获取任务表中最新负责人
-        List<String>  ls= new ArrayList<>();
-		if (sugarProject.size()>0) {
-		    for (TSugarProjectWithBLOBs sugpj : sugarProject) {
-              if (sugpj.getId() !=0 ) {
-                  ls.add(String.valueOf(sugpj.getId()));
-              }
-            }
-        }
-		HashMap<String,String> hsmap = new HashMap<>();
-        List<TUserTask> hsmp = tUserTaskMapper.getTkPrincipalByPjId(ls);
-		if (hsmp.size()>0) {
-		    for (int i = 0;i<hsmp.size();i++) {
-                if (StringUtils.isNotBlank(hsmp.get(i).getProjectId())) {
-                    hsmap.put(hsmp.get(i).getProjectId(),hsmp.get(i).getTaskPrincipal());
-                }
-            }
-        }
-		if (sugarProject.size()>0) {
-		    for (int i = 0;i<sugarProject.size();i++) {
-                sugarProject.get(i).setTaskPrincipal(hsmap.get(String.valueOf(sugarProject.get(i).getId())));
-            }
-        }*/
+
 		if (!CollectionUtils.isEmpty(sugarProject)) {
 			PageInfo<TSugarProjectWithBLOBs> pageInfo = new PageInfo<>(sugarProject);
 			return pageInfo;
@@ -124,13 +118,36 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	 * @return
 	 */
 	@Override
-	public GroupSugarList getSugarProjectGroupList() {
+	public GroupSugarList getSugarProjectGroupList(TSugarProjectVO projectVO) {
+        GroupSugarList groupSugarList = new GroupSugarList();
 
 		TSugarProjectExample example = new TSugarProjectExample();
 		TSugarProjectExample.Criteria sql = example.createCriteria();
 		sql.andStatusEqualTo("01");
+
+        if(!projectVO.isViewAllProject()){
+            TUserTaskExample taskExample = new TUserTaskExample();
+            TUserTaskExample.Criteria criteria = taskExample.createCriteria();
+            if(StringUtils.isNotBlank(projectVO.getUserName())){
+                criteria.andTaskPrincipalEqualTo(projectVO.getUserName());
+            }
+            List<TUserTask> userTaskList = taskMapper.selectByExample(taskExample);
+
+            if(!CollectionUtils.isEmpty(userTaskList)){
+                List<Integer> projectIdList = new ArrayList<>();
+                for(TUserTask userTask : userTaskList){
+                    if(StringUtils.isNotBlank(userTask.getProjectId())){
+                        projectIdList.add(Integer.parseInt(userTask.getProjectId()));
+                    }
+                }
+                sql.andIdIn(projectIdList);
+            }else {
+                return groupSugarList;
+            }
+        }
+
 		List<TSugarProjectWithBLOBs> sugarProject = sugarProjectMapper.selectByExampleWithBLOBs(example);
-		GroupSugarList groupSugarList = new GroupSugarList();
+
 		if (!CollectionUtils.isEmpty(sugarProject)) {
 			//产品类型
 			groupSugarList.setProductType(sugarProject.stream().map(TSugarProjectWithBLOBs::getProductType).collect(Collectors.toList()));
@@ -202,11 +219,6 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 		return sugarLists;
 	}
 
-    @Override
-    public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds) {
-
-        return sugarProjectExMapper.getProductHeaderByProjectIds(projectIds);
-    }
 
     @Override
     public TSugarProject selectSugarProjectByName(String platformName) {
@@ -218,5 +230,4 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         sugarProject = tSugarProjects.get(0);
         return sugarProject;
     }
-
 }

@@ -68,10 +68,16 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/init")
     public String initSugarManage(HttpServletResponse response, HttpServletRequest request, TUserVO tUser, Model model){
+        RoleProjectVO roleProjectVO = null;
+        TSugarProjectVO projectVO = new TSugarProjectVO();
         if(!StringUtils.isBlank(tUser.getUserName()) || StringUtils.isNotBlank(tUser.getUserAccount())){
             TUser user = userSV.getUserList(tUser);
             if(user!=null){
                 model.addAttribute("userName",user.getUserName());
+
+                roleProjectVO = userRoleSV.getUserRoleList(user);
+
+                projectVO.setUserName(tUser.getUserName());
             }
             if(tUser != null){
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
@@ -91,16 +97,20 @@ public class SugarManageController extends AppBaseController {
         }
 
 
+        if(roleProjectVO!=null){
+            projectVO.setViewAllProject(roleProjectVO.isViewAllProject());
+        }
+
         //查询列表详情再分组
-        GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList();
+        GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList(projectVO);
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getProductType())){
-            model.addAttribute("productType",sugarProjectGroupList.getProductType().stream().filter(productType -> productType != null).collect(Collectors.toList()));
+            model.addAttribute("productType",sugarProjectGroupList.getProductType().stream().filter(productType -> productType != null).distinct().collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getPlatformName())){
-            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName().stream().filter(platformName -> platformName != null).collect(Collectors.toList()));
+            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName().stream().filter(platformName -> platformName != null).distinct().collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getGroupName())){
-            model.addAttribute("groupName",sugarProjectGroupList.getGroupName().stream().filter(groupName -> groupName != null).collect(Collectors.toList()));
+            model.addAttribute("groupName",sugarProjectGroupList.getGroupName().stream().filter(groupName -> groupName != null).distinct().collect(Collectors.toList()));
         }
 
         return "sugarManage/sugarManage";
@@ -121,52 +131,38 @@ public class SugarManageController extends AppBaseController {
             if(StringUtils.isNotBlank(userId)){
                 user.setId(Integer.parseInt(userId));
                 roleProjectVO = userRoleSV.getUserRoleList(user);
-            }
-
-           /* Map<String,String> projectIdMap = null;
-            if(roleProjectVO!=null){
-
-                projectIdMap = roleProjectVO.getProjectIdMap();
-            }*/
-
-            PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
-            List<TSugarProjectWithBLOBs> list = page.getList();
-            List<TSugarProjectVO> tSugarProjectVOSList = new ArrayList<>() ;
-            if(!CollectionUtils.isEmpty(list)){
-                for (TSugarProjectWithBLOBs t : list){
-                    TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
-
-                    if(roleProjectVO!=null){
-                        /*tSugarProjectVO.setDepMiddLelevel(roleProjectVO.isDepMiddLelevel());
-
-                        tSugarProjectVO.setBusinessManager(roleProjectVO.isBusinessManager());
-
-                        tSugarProjectVO.setProjectManagement(roleProjectVO.isProjectManagement());
-
-                        tSugarProjectVO.setProductManager(roleProjectVO.isProductManager());
-
-                        tSugarProjectVO.setDevelopManager(roleProjectVO.isDevelopManager());
-
-                        tSugarProjectVO.setOperateManager(roleProjectVO.isOperateManager());
-
-                        tSugarProjectVO.setMaintainManager(roleProjectVO.isMaintainManager());*/
-
-                        tSugarProjectVO.setAppoint(roleProjectVO.isRoleAppoint());
-
-                        tSugarProjectVO.setDelay(roleProjectVO.isRoleDelay());
-                    }
-                    /*if(projectIdMap!=null && projectIdMap.containsKey(tSugarProjectVO.getId()+"")){
-                        tSugarProjectVO.setRowEdit(true);
-                    }*/
 
 
-                    tSugarProjectVOSList.add(tSugarProjectVO);
+                TUserVO userVO = userSV.getUserById(Integer.parseInt(userId));
+                if(userVO!=null){
+                    projectVO.setUserName(userVO.getUserName());
                 }
+
+                projectVO.setViewAllProject(roleProjectVO.isViewAllProject());
+
+                PageInfo<TSugarProjectWithBLOBs> page = sugarProjectSV.getSugarProjectList(projectVO);
+                List<TSugarProjectWithBLOBs> list = page.getList();
+                List<TSugarProjectVO> tSugarProjectVOSList = new ArrayList<>() ;
+                if(!CollectionUtils.isEmpty(list)){
+                    for (TSugarProjectWithBLOBs t : list){
+                        TSugarProjectVO tSugarProjectVO = ModelCopyUtil.copy(t, TSugarProjectVO.class);
+
+                        if(roleProjectVO!=null){
+
+                            tSugarProjectVO.setAppoint(roleProjectVO.isRoleAppoint());
+
+                            tSugarProjectVO.setDelay(roleProjectVO.isRoleDelay());
+                        }
+
+                        tSugarProjectVOSList.add(tSugarProjectVO);
+                    }
+                }
+
+                tableDataInfo.setRows(tSugarProjectVOSList);
+                tableDataInfo.setTotal(page.getTotal());
+                tableDataInfo.setCode(200);
             }
 
-            tableDataInfo.setRows(tSugarProjectVOSList);
-            tableDataInfo.setTotal(page.getTotal());
-            tableDataInfo.setCode(200);
         }catch (Exception e){
             log.error(e.getMessage());
         }

@@ -18,7 +18,7 @@ public interface ISugarProjectSV {
      */
     public PageInfo<TSugarProjectWithBLOBs> getSugarProjectList(TSugarProjectVO projectVO);
 
-    public GroupSugarList getSugarProjectGroupList();
+    public GroupSugarList getSugarProjectGroupList(TSugarProjectVO vo);
 
     /**
      * 保存及更新项目信息
@@ -38,7 +38,6 @@ public interface ISugarProjectSV {
      */
     public List<TSugarProjectWithBLOBs> selectSugarList(TSugarProjectWithBLOBs sugarList);
 
-    public List<TSugarProject> getProductHeaderByProjectIds(List<Integer> projectIds);
 
     /**
      * 根据平台名称去查询数据

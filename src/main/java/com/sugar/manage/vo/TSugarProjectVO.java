@@ -166,4 +166,10 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     /**是否显示申请延期按钮*/
     private boolean isDelay;
+
+    /** 用户姓名 */
+    private String userName;
+
+    /** 是否有查看所有项目的权限 */
+    private boolean viewAllProject;
 }

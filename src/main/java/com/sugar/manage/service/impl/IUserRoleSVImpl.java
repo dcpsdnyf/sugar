@@ -53,72 +53,28 @@ public class IUserRoleSVImpl implements IUserRoleSV {
         if(!CollectionUtils.isEmpty(userRoleList)){
 
             TUserRole userRole = userRoleList.get(0);
-            //List<Long> roleIdList = new ArrayList<>();
+
 
             String roleIds = userRole.getRoleId();
 
-            //String projectIds = userRole.getProjectId();
+
             if(StringUtils.isNotBlank(roleIds)){
                 String[] roleIdArr = roleIds.split(",");
-                //String[] projectIdArr = projectIds.split(",");
+                List<String> roleIdList = Arrays.asList(roleIdArr);
                 //用于控制指派按钮是否显示
-                if(Arrays.asList(roleIdArr).contains("9")){
+                if(roleIdList.contains("9")){
                     roleProjectVO.setRoleAppoint(true);
                 }
                 //用于控制申请延期按钮是否显示
-                if(Arrays.asList(roleIdArr).contains("10")){
+                if(roleIdList.contains("10")){
                     roleProjectVO.setRoleDelay(true);
                 }
-            }
-
-            /*项目id*/
-           /* Map<String,String> projectIdMap = new HashMap<>();
-            for (String projectId : projectIdArr){
-                projectIdMap.put(projectId+"",projectId+"");
-            }
-            roleProjectVO.setProjectIdMap(projectIdMap);
-
-            *//*角色id*//*
-            for(String roleId:roleIdArr){
-                roleIdList.add(Long.parseLong(roleId));
+                if(roleIdList.contains("11")){
+                    roleProjectVO.setViewAllProject(true);
+                }
             }
 
 
-            TRoleExample exampleRole = new TRoleExample();
-            TRoleExample.Criteria sqlRole = exampleRole.createCriteria();
-            sqlRole.andIdIn(roleIdList);*/
-
-            //List<TRole> roleList = roleMapper.selectByExample(exampleRole);
-            /*if(!CollectionUtils.isEmpty(roleList)){
-
-                Map<String,String> roleTypeMap = new HashMap<>();
-                for (TRole role : roleList){
-                    roleTypeMap.put(role.getRoleType()+"",role.getRoleName());
-                }
-                roleProjectVO.setRoleTypeMap(roleTypeMap);
-
-                if(roleTypeMap.containsKey("1")){
-                    roleProjectVO.setDepMiddLelevel(true);
-                }
-                if(roleTypeMap.containsKey("2")){
-                    roleProjectVO.setBusinessManager(true);
-                }
-                if(roleTypeMap.containsKey("3")){
-                    roleProjectVO.setProjectManagement(true);
-                }
-                if(roleTypeMap.containsKey("4")){
-                    roleProjectVO.setProductManager(true);
-                }
-                if(roleTypeMap.containsKey("5")){
-                    roleProjectVO.setDevelopManager(true);
-                }
-                if(roleTypeMap.containsKey("6")){
-                    roleProjectVO.setOperateManager(true);
-                }
-                if(roleTypeMap.containsKey("7")){
-                    roleProjectVO.setMaintainManager(true);
-                }
-            }*/
 
         }
         return roleProjectVO;
