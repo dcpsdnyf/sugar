@@ -9,6 +9,7 @@ import com.sugar.manage.dao.model.*;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -416,12 +417,28 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public List<TUserTask> selectTUserTaskByProId(Integer projectId) {
-		TUserTask tUserTask = new TUserTask();
-		tUserTask.setProjectId(String.valueOf(projectId));
-		tUserTask.setTaskType("01");
-		List<TUserTask> tUserTasks = tUserTaskMapper.selectTUserTaskOrderByDate(tUserTask);
-		return tUserTasks;
+	public List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO vo) {
+		TUserTaskExample example = new TUserTaskExample();
+		TUserTaskExample.Criteria sql = example.createCriteria();
+		if(StringUtils.isNotBlank(vo.getProjectId())){
+			sql.andProjectIdEqualTo(vo.getProjectId());
+		}
+		if(StringUtils.isNotBlank(vo.getTaskType())){
+			sql.andTaskTypeEqualTo(vo.getTaskType());
+		}
+		if(StringUtils.isNotBlank(vo.getTaskStatus())){
+			sql.andTaskStatusEqualTo(vo.getTaskStatus());
+		}
+
+		example.setOrderByClause(" TASK_SUB_NAME ASC,CREATED_TIME ASC ");
+
+		List<TUserTaskVO> userTaskVOS = null;
+		List<TUserTask> userTaskList = taskMapper.selectByExample(example);
+		if(!CollectionUtils.isEmpty(userTaskList)){
+			userTaskVOS = ModelCopyUtil.copyToList(userTaskList, TUserTaskVO.class);
+		}
+
+		return userTaskVOS;
 	}
 
 	/**

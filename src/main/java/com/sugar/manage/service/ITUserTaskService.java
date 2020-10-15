@@ -81,7 +81,8 @@ public interface ITUserTaskService
     public void updateUserTask(TUserTaskVO tUserTaskVO);
     public int examine(String userId,String projectId,String staus,String taskName) throws ParseException;
 
-    List<TUserTask> selectTUserTaskByProId(Integer projectId);
+    /** 查询已完成的子任务列表 */
+    List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO tUserTaskVO);
 
     /**
      * 更新用户任务状态为进行中

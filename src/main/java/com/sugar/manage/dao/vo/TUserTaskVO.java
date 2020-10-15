@@ -3,6 +3,7 @@ package com.sugar.manage.dao.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class TUserTaskVO extends BaseModel implements Serializable
@@ -78,5 +79,7 @@ public class TUserTaskVO extends BaseModel implements Serializable
 
     /**是否显示申请延期按钮*/
     private boolean isDelay;
+
+    private List<TUserTaskVO> userTaskVOList;
 
 }

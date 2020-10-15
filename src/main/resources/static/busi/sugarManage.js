@@ -1289,84 +1289,91 @@ function runInit() {
 		data: {"platformName": platformName},
 		dataType: 'JSON',
 		success: function (result) {
-			var res = [];
-			var projectName = [];
-			const colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
-			$.each(result, function (key, v) {
-				console.log(key);
-				var value = [];
-				if (v.startTime != null && v.endTime != null && v.projectStage != null) {
-					value.push(key);
-					value.push(v.startTime);
-					value.push(v.endTime);
-					projectName.push(v.projectStage);
-					res.push({
-						itemStyle: {normal: {color: colors[key]}},
-						value: value,
-						name: v.projectStage
-					});
-				}
-			});
-			var myChart =
-				echarts.init(document.getElementById('chart'));
-			var option = {
-				tooltip: {
-					formatter: function (params) {
-						return params.name + ':' + params.value[1] + '~' + params.value[2]
-					}
-				},
-				legend: {
-					data: ['时间']
-				},
-				grid: {
-					left: '3%',
-					right: '4%',
-					bottom: '3%',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'time'
-				},
-				yAxis: {
-					type: 'category',
-					splitLine: {show: false},
-					data: ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段']
-				},
-				series: [
-					{
-						type: 'custom',
-						renderItem: function (params, api) {
-							var categoryIndex = api.value(0);
-							var start = api.coord([api.value(1), categoryIndex])
-							var end = api.coord([api.value(2), categoryIndex])
-							var height = 24
-
-							return {
-
-								type: 'rect',
-								shape: echarts.graphic.clipRectByRect({
-									x: start[0],
-									y: start[1] - height / 2,
-									width: end[0] - start[0],
-									height: height
-								}, {
-									x: params.coordSys.x,
-									y: params.coordSys.y,
-									width: params.coordSys.width,
-									height: params.coordSys.height
-								}),
-								style: api.style()
-							}
-						},
-						encode: {
-							x: [1, 2],
-							y: 0
-						},
-						data: res
-					}
-				]
-			};
-			myChart.setOption(option);
-		},
+			if(result!=null){
+				initEcharts(result);
+			}
+		}
 	});
+}
+
+function initEcharts(result) {
+	var res = [];
+	var projectName = [];
+	var categories = ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段'];
+	var colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
+	$.each(result, function (key, v) {
+		console.log(key);
+		var value = [];
+		if (v.startTime != null && v.endTime != null && v.projectStage != null) {
+			value.push(key);
+			value.push(v.startTime);
+			value.push(v.endTime);
+			projectName.push(v.projectStage);
+			res.push({
+				itemStyle: {normal: {color: colors[key]}},
+				value: value,
+				name: v.projectStage
+			});
+		}
+	});
+	var myChart =
+		echarts.init(document.getElementById('chart'));
+	var option = {
+		tooltip: {
+			formatter: function (params) {
+				return params.name + ':' + params.value[1] + '~' + params.value[2]
+			}
+		},
+		legend: {
+			data: ['时间']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'time'
+		},
+		yAxis: {
+			type: 'category',
+			splitLine: {show: false},
+			data: categories
+		},
+		series: [
+			{
+				type: 'custom',
+				renderItem: function (params, api) {
+					var categoryIndex = api.value(0);
+					var start = api.coord([api.value(1), categoryIndex])
+					var end = api.coord([api.value(2), categoryIndex])
+					var height = 24
+
+					return {
+
+						type: 'rect',
+						shape: echarts.graphic.clipRectByRect({
+							x: start[0],
+							y: start[1] - height / 2,
+							width: end[0] - start[0],
+							height: height
+						}, {
+							x: params.coordSys.x,
+							y: params.coordSys.y,
+							width: params.coordSys.width,
+							height: params.coordSys.height
+						}),
+						style: api.style()
+					}
+				},
+				encode: {
+					x: [1, 2],
+					y: 0
+				},
+				data: res
+			}
+		]
+	};
+	myChart.setOption(option);
 }

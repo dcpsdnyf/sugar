@@ -3,7 +3,8 @@ package com.sugar.manage.vo;
 import lombok.Data;
 
 @Data
-public class projectChartVO {
+public class ProjectChartVO {
+
     //阶段名称
     private String projectStage;
 
