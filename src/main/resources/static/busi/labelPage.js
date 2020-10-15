@@ -173,7 +173,6 @@ function backlog() {
                 title: '操作',
 				switchable: false,
                 formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-					debugger
                     var html = '';
 					if(row.delay && row.appoint){
 						html = '<div style=\'width:100%;\'>' +
@@ -195,7 +194,6 @@ function backlog() {
                 }
             }],
 		onEditableSave: function (field, row, oldValue, $el) {
-			debugger
 			// alert("更新保存事件，原始值为" + oldValue);
 			$.ajax({
 				type: "POST",
@@ -203,7 +201,6 @@ function backlog() {
 				data: row,
 				dataType: 'JSON',
 				success: function (result) {
-					debugger
                     window.location.reload();
 				},
 				error: function () {

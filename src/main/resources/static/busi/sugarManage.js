@@ -146,232 +146,168 @@ $(function () {
 			},
 			{
 				field: 'businessClueOpen',
-				title: '商机线索开启',
+				title: '商机线索开启'
 			}, {
 				field: 'businessClue0',
-				title: '1、商机线索0%',
+				title: '1、商机线索0%'
 			}, {
 				field: 'businessDiscover10',
-				title: '2、商机发现10%',
+				title: '2、商机发现10%'
 			}, {
 				field: 'businessEstablish25',
-				title: '3、商机确立25%',
+				title: '3、商机确立25%'
 			}, {
 				field: 'businessEstablish50',
-				title: '4、商机确立50%',
+				title: '4、商机确立50%'
 			}, {
 				field: 'businessEstablish75',
-				title: '5、商机确认75%',
+				title: '5、商机确认75%'
 			}, {
 				field: 'businessWin100',
-				title: '6、商机赢取100%',
-
-
+				title: '6、商机赢取100%'
 			}, {
 				field: 'customerMaintainBackMoney',
-				title: '7、客户维护/回款阶段',
-
-
+				title: '7、客户维护/回款阶段'
 			}, {
 				field: 'businessClose',
-				title: '商机关闭',
-
-
+				title: '商机关闭'
 			}, {
 				field: 'purchasePrincipal',
 				title: '采购阶段负责人'
 			},{
 				field: 'initialIntentionPlan',
-				title: '1、初步意向方案',
+				title: '1、初步意向方案'
 			}, {
 				field: 'writeProjectProposal',
-				title: '2、写立项方案',
-
-
+				title: '2、写立项方案'
 			}, {
 				field: 'workingHoursAssess',
-				title: '3、工时评估',
-
-
+				title: '3、工时评估'
 			}, {
 				field: 'businessNegotiation',
-				title: '4、商务谈判',
-
-
+				title: '4、商务谈判'
 			}, {
 				field: 'requestDraft',
-				title: '5、请示拟写',
-
-
+				title: '5、请示拟写'
 			}, {
 				field: 'attendMeeting',
-				title: '6、上会',
-
-
+				title: '6、上会'
 			}, {
 				field: 'bidding',
-				title: '7、招投标',
-
-
+				title: '7、招投标'
 			}, {
 				field: 'requestOaApproval',
-				title: '8、请示OA审批',
-
-
+				title: '8、请示OA审批'
 			}, {
 				field: 'contractDraft',
-				title: '9、合同拟写',
-
-
+				title: '9、合同拟写'
 			}, {
 				field: 'lawyerReview',
-				title: '10、律师审核',
-
-
+				title: '10、律师审核'
 			}, {
 				field: 'contractOaApproval',
-				title: '11、合同OA审批',
-
-
+				title: '11、合同OA审批'
 			}, {
 				field: 'usageSeal',
-				title: '12、用章',
-
-
+				title: '12、用章'
 			}, {
 				field: 'otherSeal',
-				title: '13、对方盖章',
-
-
+				title: '13、对方盖章'
 			}, {
 				field: 'scan',
-				title: '14、扫描',
-
-
+				title: '14、扫描'
 			}, {
 				field: 'generalDepartmentFile',
-				title: '15、综合部归档',
-
-
+				title: '15、综合部归档'
 			}, {
 				field: 'firstPayment',
-				title: '16、首付款',
-
-
+				title: '16、首付款'
 			}, {
 				field: 'progressPayment',
-				title: '17、进度款',
-
-
+				title: '17、进度款'
 			}, {
 				field: 'finalPayment',
-				title: '18、尾款',
-
-
+				title: '18、尾款'
 			}, {
 				field: 'productPrincipal',
 				title: '产品阶段负责人'
 			},{
 				field: 'designBrief',
-				title: '1、设计概要',
+				title: '1、设计概要'
 			}, {
 				field: 'detailedDesign',
-				title: '2、详细设计',
-
-
+				title: '2、详细设计'
 			}, {
 				field: 'uiDesign',
-				title: '3、UI设计',
-
-
+				title: '3、UI设计'
 			}, {
 				field: 'requirementDesign',
-				title: '4、需求设计',
-
-
+				title: '4、需求设计'
 			}, {
 				field: 'requirementsReview',
-				title: '5、需求评审',
-
-
+				title: '5、需求评审'
 			}, {
 				field: 'demandOrderConfirm',
-				title: '6、需求单确认',
-
+				title: '6、需求单确认'
 			}, {
 				field: 'proCheckDeliver',
-				title: '7、验收',
-
-
+				title: '7、验收'
 			}, {
 				field: 'developmentPrincipal',
 				title: '研发阶段负责人'
 			},{
 				field: 'technologySelection',
-				title: '1、技术选型',
+				title: '1、技术选型'
 			}, {
 				field: 'environmentDeployment',
-				title: '2、环境部署',
-
+				title: '2、环境部署'
 			}, {
 				field: 'frameworkDesign',
-				title: '3、框架设计',
-
+				title: '3、框架设计'
 			}, {
 				field: 'developProgress10',
-				title: '4、开发进度10%',
-
+				title: '4、开发进度10%'
 			}, {
 				field: 'developProgress25',
-				title: '5、开发进度25%',
-
+				title: '5、开发进度25%'
 			}, {
 				field: 'developProgress50',
-				title: '6、开发进度50%',
-
+				title: '6、开发进度50%'
 			}, {
 				field: 'developProgress75',
-				title: '7、开发进度75%',
-
+				title: '7、开发进度75%'
 			}, {
 				field: 'developProgress100',
-				title: '8、开发进度100%',
-
+				title: '8、开发进度100%'
 			}, {
 				field: 'insideTest',
-				title: '9、内部测试优化',
-
+				title: '9、内部测试优化'
 			}, {
 				field: 'customerTest',
-				title: '10、客户测试优化',
-
+				title: '10、客户测试优化'
 			}, {
 				field: 'implementDeliver',
-				title: '11、实施交付',
-
+				title: '11、实施交付'
 			}, {
 				field: 'checkDeliver',
-				title: '12、验收',
-
+				title: '12、验收'
 			},{
 				field: 'operationPrincipal',
 				title: '运营阶段负责人'
-			},
-			{
+			}, {
 				field: 'operationPhase',
-				title: '运营阶段',
+				title: '运营阶段'
 
 			}, {
 				field: 'operationMaintainPrincipal',
 				title: '运维阶段负责人'
 			},{
 				field: 'maintainPhase',
-				title: '运维阶段',
+				title: '运维阶段'
 
 			}]],
 		onEditableSave: function (field, row, oldValue, $el) {
 			// alert("更新保存事件，原始值为" + oldValue);
-			debugger
 			row.fieldName = field;
 			//添加编辑人修改处理
 			var userName = row[field];
@@ -916,7 +852,6 @@ $(function () {
 
 //编辑事件
 var editModel = function (id) {
-	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	//弹出模态框
@@ -944,7 +879,6 @@ var appointModel = function (id) {
 		data: {"projectId": id},
 		dataType: 'JSON',
 		success: function (result) {
-			debugger
 			if (result != null && result.data != null) {
 				var stage = result.data.taskName;
 				$("#appointMyModal input[name='taskName']").val(stage);
@@ -1006,14 +940,12 @@ function exportSugar() {
 
 //指派保存
 function saveAppointInfo() {
-	debugger
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/addEntrustInfo",
 		data: $("#appointForm").serialize(),
 		dataType: 'JSON',
 		success: function (result) {
-			debugger
 			confirmModal("提示", result.msg, function () {
 				window.location.reload();
 			}, {}, function () {
@@ -1034,7 +966,6 @@ function saveDelayInfo() {
 		data: $("#delayForm").serialize(),
 		dataType: 'JSON',
 		success: function (result) {
-			debugger
 			confirmModal("提示", result.msg, function () {
 				window.location.reload();
 			}, {}, function () {
@@ -1049,7 +980,6 @@ function saveDelayInfo() {
 
 //审核
 function examineAj(e) {
-	debugger
 //根据当前行的id获取当前的行数据
 	var projectId = document.getElementById("ww").value;
 	var taskName = document.getElementById("tN").value;
@@ -1058,7 +988,6 @@ function examineAj(e) {
 		url: WEB_ROOT + "/TUserTaskController/examine",
 		data: {"projectId": projectId, "staus": e, "taskName": taskName},
 		success: function (result) {
-			debugger
 			if ("false" == result) {
 				confirmModal("提示", "审核结果:不通过！", function () {
 					window.location.reload();
@@ -1081,7 +1010,6 @@ function examineAj(e) {
 
 //审核事件
 var examine = function (id, taskName) {
-	debugger
 	//根据当前行的id获取当前的行数据
 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	$("#ww").val(id);
