@@ -77,8 +77,6 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 			sql.andGroupNameLike(projectVO.getGroupName());
 		}
 
-		//新增可以查看所有项目的角色11，只要11的可以查看所有项目
-        //没有11的话，查看当前用户的任务表信息列表，获取项目ID，in这些id
         if(!projectVO.isViewAllProject()){
             TUserTaskExample taskExample = new TUserTaskExample();
             TUserTaskExample.Criteria criteria = taskExample.createCriteria();

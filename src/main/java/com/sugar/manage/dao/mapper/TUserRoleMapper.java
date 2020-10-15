@@ -30,6 +30,4 @@ public interface TUserRoleMapper {
     int updateByPrimaryKeySelective(TUserRole record);
 
     int updateByPrimaryKey(TUserRole record);
-
-    String getIsHasPowerToInsertTask(Long userId);
 }

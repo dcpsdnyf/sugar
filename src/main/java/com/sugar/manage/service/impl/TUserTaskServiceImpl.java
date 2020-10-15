@@ -1,6 +1,5 @@
 package com.sugar.manage.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
@@ -10,7 +9,6 @@ import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
 import com.sugar.manage.vo.StageTimeVO;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -47,6 +44,10 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	private TStagePrincipalMapper stagePrincipalMapper;
 	@Autowired
 	private StageTimeMapper stageTimeMapper;
+	@Autowired
+	private TUserExMapper tUserExMapper;
+	@Autowired
+	private TUserRoleExMapper userRoleExMapper;
 
 	/**
 	 * 查询【请填写功能名称】
@@ -259,7 +260,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 	@Override
 	public String getAllTaskNameByProductId(Long userId) {
-		return tUserRoleMapper.getIsHasPowerToInsertTask(userId);
+		return userRoleExMapper.getIsHasPowerToInsertTask(userId);
 	}
 
 	@Override
@@ -311,7 +312,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Override
 	public int delay(String userId, String projectId, String delayDay) throws ParseException {
 		//1.先根据用户id获取用户名
-		String userName = tUserMapper.getUserIdByUerName(userId);
+		String userName = tUserExMapper.getUserIdByUerName(userId);
 		if (StringUtils.isBlank(userName)) {
 			return 0;
 		}
@@ -361,7 +362,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Override
 	public int examine(String userId, String projectId, String staus, String taskName) throws ParseException {
 		//1.先根据用户id获取用户名
-		String userName = tUserMapper.getUserIdByUerName(userId);
+		String userName = tUserExMapper.getUserIdByUerName(userId);
 		if (StringUtils.isBlank(userName)) {
 			return 0;
 		}

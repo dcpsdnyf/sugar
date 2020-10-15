@@ -2,6 +2,7 @@ package com.sugar.manage.service.impl;
 
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TRoleMapper;
+import com.sugar.manage.dao.mapper.TUserExMapper;
 import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.*;
@@ -26,6 +27,9 @@ public class IUserSVImpl implements IUserSV {
 
     @Autowired
     private TRoleMapper roleMapper;
+
+    @Autowired
+    private TUserExMapper tUserExMapper;
 
     /**
      * 初始化参数信息
@@ -103,7 +107,7 @@ public class IUserSVImpl implements IUserSV {
     @Override
     public String getUserIdByUerName(String id) {
 
-        return userMapper.getUserIdByUerName(id);
+        return tUserExMapper.getUserIdByUerName(id);
     }
 
 
