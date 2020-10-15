@@ -184,7 +184,6 @@ function backlog() {
 						html = '<div style=\'width:100%;\'>' +
 							'<button type="button" onclick="updateUserTask(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;' +
 							'<button type="button" onclick="delayModel(' + row.projectId + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >' +
-							'<button type="button" onclick="examine (' + row.projectId + ',' + row.taskName + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 5px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >' +
 							'</div>';
 					} else if (row.delay) {
 						html = '<div style=\'width:100%;\'>' +
@@ -193,7 +192,8 @@ function backlog() {
 							'</div>';
 					} else if (row.appoint) {
 						html = '<div style=\'width:100%;\'>' +
-							'<button type="button" onclick="examine (' + row.projectId + ',' + row.taskName + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 5px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >延期审核</button >' +
+						'<button type="button" onclick="examineAj(' + row.projectId + ','+0+ ','+ row.taskName + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 8px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >申请延期通过</button >&nbsp;&nbsp;' +
+						'<button type="button" onclick="examineAj(' + row.projectId + ','+1+ ','+ row.taskName + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 20px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期不通过</button >&nbsp;&nbsp;' +
 							'</div>';
 					}
 					return html;
@@ -563,6 +563,11 @@ function updateUserTask(id) {
 		}
 
 	});
+}
+
+function examine(id) {
+	//根据当前行的id获取当前的行数据
+ 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 }
 
 

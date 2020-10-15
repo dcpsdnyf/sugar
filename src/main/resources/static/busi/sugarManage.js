@@ -979,15 +979,16 @@ function saveDelayInfo() {
 }
 
 //审核
-function examineAj(e) {
+function examineAj(id,e,taskName) {
+	debugger
 //根据当前行的id获取当前的行数据
-	var projectId = document.getElementById("ww").value;
-	var taskName = document.getElementById("tN").value;
+	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/examine",
-		data: {"projectId": projectId, "staus": e, "taskName": taskName},
+		data: {"projectId": id, "staus": e, "taskName": taskName},
 		success: function (result) {
+			debugger
 			if ("false" == result) {
 				confirmModal("提示", "审核结果:不通过！", function () {
 					window.location.reload();
@@ -1009,14 +1010,14 @@ function examineAj(e) {
 }
 
 //审核事件
-var examine = function (id, taskName) {
-	//根据当前行的id获取当前的行数据
-	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
-	$("#ww").val(id);
-	$("#tN").val(taskName);
-	//弹出模态框
-	$("#examineModel").modal();
-}
+// var examine = function (id, taskName) {
+// 	//根据当前行的id获取当前的行数据
+// 	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+// 	$("#ww").val(id);
+// 	$("#tN").val(taskName);
+// 	//弹出模态框
+// 	$("#examineModel").modal();
+// }
 
 function saveProjectInfo() {
 	$.ajax({
