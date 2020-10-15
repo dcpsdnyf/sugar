@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -208,6 +211,8 @@ public class SugarManageController extends AppBaseController {
                 if(addAuthority){
                     record.setStatus("01");
                     record.setBusinessPrincipal(record.getTaskPrincipal());
+                    record.setCreatedTime(DateUtils.getNowDate());
+                    record.setCreatedStaff(userId);
                     sugarProjectSV.saveSugarProject(record);
                     return SysResult.success("新增成功",null);
                 }

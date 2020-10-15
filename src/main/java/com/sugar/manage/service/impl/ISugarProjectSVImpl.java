@@ -81,7 +81,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 		}
 
 
-		this.initParam(sql, projectVO);
+		//this.initParam(sql, projectVO);
 		//列表按照产品类型进行排序展示
 		example.setOrderByClause(" product_type asc ");
 		PageHelper.startPage(projectVO.getPage(), projectVO.getLimit());
