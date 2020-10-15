@@ -11,7 +11,7 @@ import java.util.Map;
  * @time 17:38,
  * @email 779875923@qq.com
  */
-public class whetherVo {
+public class WhetherVo {
 	/*是否展示标签页*/
 	public static Map<String,String> isShowLabel = new HashMap<>();
 

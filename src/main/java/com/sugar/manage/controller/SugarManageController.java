@@ -60,6 +60,7 @@ public class SugarManageController extends AppBaseController {
     private IStagePrincipalSV iStagePrincipalSV;
 
     private Boolean isShow = false;
+
     /**
      * 项目进度初始化界面
      * @return
@@ -75,9 +76,20 @@ public class SugarManageController extends AppBaseController {
                 CookieUtils.setCookie(response, "SUGAR_USER_ID","" + user.getId());
             }
         }
-	    if(whetherVo.isShowLabel.containsKey(tUser.getUserName())){
-		    model.addAttribute("isShowLabel",isShow=true);
-	    }
+
+        TUserRoleVO vo = new TUserRoleVO();
+        vo.setRoleId("8");
+        //查询有新增权限的用户
+        List<TUserVO> authorityToAddUsers = userRoleSV.getAuthorityToAddUsers(vo);
+        if(!CollectionUtils.isEmpty(authorityToAddUsers)){
+            for(TUserVO userVO : authorityToAddUsers){
+                if(StringUtils.isNotBlank(userVO.getUserName()) && userVO.getUserName().equals(tUser.getUserName())){
+                    model.addAttribute("isShowLabel",isShow=true);
+                }
+            }
+        }
+
+
         //查询列表详情再分组
         GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList();
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getProductType())){

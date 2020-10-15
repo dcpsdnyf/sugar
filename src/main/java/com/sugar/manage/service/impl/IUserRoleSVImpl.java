@@ -1,10 +1,14 @@
 package com.sugar.manage.service.impl;
 
+import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.TRoleMapper;
+import com.sugar.manage.dao.mapper.TUserMapper;
 import com.sugar.manage.dao.mapper.TUserRoleMapper;
 import com.sugar.manage.dao.model.*;
 import com.sugar.manage.service.IUserRoleSV;
 import com.sugar.manage.vo.RoleProjectVO;
+import com.sugar.manage.vo.TUserRoleVO;
+import com.sugar.manage.vo.TUserVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +25,14 @@ public class IUserRoleSVImpl implements IUserRoleSV {
     @Autowired
     private TRoleMapper roleMapper;
 
+    @Autowired
+    private TUserMapper userMapper;
+
     /**
      * 初始化参数信息
      * @param user
      */
     private void initParam(TUserRoleExample.Criteria sql, TUser user){
-        /*if(StringUtils.isBlank(projectVO.getCheckDeliver())){
-
-        }*/
 
     }
 
@@ -44,13 +48,12 @@ public class IUserRoleSVImpl implements IUserRoleSV {
         TUserRoleExample example = new TUserRoleExample();
         TUserRoleExample.Criteria sql = example.createCriteria();
         sql.andUserIdEqualTo(Long.parseLong(user.getId().toString()));
-        this.initParam(sql, user);
 
         List<TUserRole> userRoleList = userRoleMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(userRoleList)){
 
             TUserRole userRole = userRoleList.get(0);
-            List<Long> roleIdList = new ArrayList<>();
+            //List<Long> roleIdList = new ArrayList<>();
 
             String roleIds = userRole.getRoleId();
 
@@ -119,5 +122,40 @@ public class IUserRoleSVImpl implements IUserRoleSV {
 
         }
         return roleProjectVO;
+    }
+
+    @Override
+    public List<TUserVO> getAuthorityToAddUsers(TUserRoleVO vo) {
+        List<TUserVO> userVOList = new ArrayList<>();
+
+        TUserRoleExample example = new TUserRoleExample();
+        TUserRoleExample.Criteria sql = example.createCriteria();
+        if(StringUtils.isNotBlank(vo.getRoleId())){
+            sql.andRoleIdLike("%" + vo.getRoleId() + "%");
+        }
+
+        List<TUserRole> userRoleList = userRoleMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(userRoleList)){
+            TUser user = null;
+            List<String> roleIds = null;
+            for(TUserRole userRole : userRoleList){
+                if(StringUtils.isNotBlank(userRole.getRoleId())){
+                    roleIds = Arrays.asList(userRole.getRoleId().split(","));
+
+                    if(!CollectionUtils.isEmpty(roleIds)){
+                        if(roleIds.contains("8") && userRole.getUserId()!=null){
+                            user = userMapper.selectByPrimaryKey(userRole.getUserId().intValue());
+                            if(user!=null){
+                                TUserVO userVO = ModelCopyUtil.copy(user, TUserVO.class);
+                                userVOList.add(userVO);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return userVOList;
     }
 }
