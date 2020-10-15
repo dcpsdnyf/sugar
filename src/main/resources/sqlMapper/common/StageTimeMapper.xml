@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.StageTimeMapper">
+  <resultMap id="BaseResultMap" type="com.sugar.manage.dao.model.StageTime">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stage_type" jdbcType="VARCHAR" property="stageType" />
+    <result column="stage_name" jdbcType="VARCHAR" property="stageName" />
+    <result column="stage_day" jdbcType="INTEGER" property="stageDay" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, stage_type, stage_name, stage_day, status, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, 
+    UPDATED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.sugar.manage.dao.model.StageTimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_stage_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_stage_time
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_stage_time
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sugar.manage.dao.model.StageTimeExample">
+    delete from t_stage_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sugar.manage.dao.model.StageTime">
+    insert into t_stage_time (id, stage_type, stage_name, 
+      stage_day, status, CREATED_STAFF, 
+      CREATED_TIME, UPDATED_STAFF, UPDATED_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{stageType,jdbcType=VARCHAR}, #{stageName,jdbcType=VARCHAR}, 
+      #{stageDay,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{createdStaff,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedStaff,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sugar.manage.dao.model.StageTime">
+    insert into t_stage_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stageType != null">
+        stage_type,
+      </if>
+      <if test="stageName != null">
+        stage_name,
+      </if>
+      <if test="stageDay != null">
+        stage_day,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdStaff != null">
+        CREATED_STAFF,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedStaff != null">
+        UPDATED_STAFF,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stageType != null">
+        #{stageType,jdbcType=VARCHAR},
+      </if>
+      <if test="stageName != null">
+        #{stageName,jdbcType=VARCHAR},
+      </if>
+      <if test="stageDay != null">
+        #{stageDay,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStaff != null">
+        #{createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedStaff != null">
+        #{updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sugar.manage.dao.model.StageTimeExample" resultType="java.lang.Long">
+    select count(*) from t_stage_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_stage_time
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stageType != null">
+        stage_type = #{record.stageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stageName != null">
+        stage_name = #{record.stageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stageDay != null">
+        stage_day = #{record.stageDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdStaff != null">
+        CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedStaff != null">
+        UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_stage_time
+    set id = #{record.id,jdbcType=INTEGER},
+      stage_type = #{record.stageType,jdbcType=VARCHAR},
+      stage_name = #{record.stageName,jdbcType=VARCHAR},
+      stage_day = #{record.stageDay,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{record.createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{record.updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sugar.manage.dao.model.StageTime">
+    update t_stage_time
+    <set>
+      <if test="stageType != null">
+        stage_type = #{stageType,jdbcType=VARCHAR},
+      </if>
+      <if test="stageName != null">
+        stage_name = #{stageName,jdbcType=VARCHAR},
+      </if>
+      <if test="stageDay != null">
+        stage_day = #{stageDay,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStaff != null">
+        CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedStaff != null">
+        UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sugar.manage.dao.model.StageTime">
+    update t_stage_time
+    set stage_type = #{stageType,jdbcType=VARCHAR},
+      stage_name = #{stageName,jdbcType=VARCHAR},
+      stage_day = #{stageDay,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      CREATED_STAFF = #{createdStaff,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_STAFF = #{updatedStaff,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

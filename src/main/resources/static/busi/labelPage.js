@@ -149,7 +149,7 @@ function backlog() {
 				halign: "center",
 				field: 'estimatedTime',
 				switchable: false,
-				title: '整体预计完成时间'
+				title: '计划完成时间'
 			}, {
 				align: "center",
 				halign: "center",
@@ -382,7 +382,7 @@ function finished() {
 			halign: "center",
 			field: 'estimatedTime',
 			switchable: false,
-			title: '整体预计完成时间'
+			title: '计划完成时间'
 		}, {
 			align: "center",
 			halign: "center",

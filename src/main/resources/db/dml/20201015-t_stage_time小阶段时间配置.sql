@@ -1,0 +1,1 @@
+INSERT INTO `t_stage_time`(`id`, `stage_type`, `stage_name`, `stage_day`, `status`, `CREATED_STAFF`, `CREATED_TIME`, `UPDATED_STAFF`, `UPDATED_TIME`) VALUES (1, '02', NULL, 7, NULL, NULL, NULL, NULL, NULL);

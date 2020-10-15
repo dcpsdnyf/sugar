@@ -9,6 +9,7 @@ import com.sugar.manage.dao.model.*;
 import com.sugar.manage.dao.vo.TDelay;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
+import com.sugar.manage.vo.StageTimeVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	private TUserTaskMapper taskMapper;
 	@Autowired
 	private TStagePrincipalMapper stagePrincipalMapper;
+	@Autowired
+	private StageTimeMapper stageTimeMapper;
 
 	/**
 	 * 查询【请填写功能名称】
@@ -103,7 +106,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			tUserTask.setPlatformName(project.getPlatformName());
 		}
 		tUserTask.setCreatedTime(DateUtils.getNowDate());
-		tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+		tUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
 		tUserTask.setStatus("01");
 		tUserTask.setTaskType("01");
 		tUserTask.setTaskStatus("0");
@@ -711,8 +714,21 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				newTask.setTaskSubName(newTaskSubName + "");
 				newTask.setTaskInfo(null);
 				newTask.setCreatedTime(DateUtils.getNowDate());
-				newTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+				newTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
 				newTask.setEndTime(null);
+
+				StageTimeVO timeVO = new StageTimeVO();
+				timeVO.setStageType("02");
+				StageTimeVO stage = this.getDefaultRequireForSubStage(timeVO);
+				if(stage!=null && stage.getStageDay()!=null){
+					Calendar calendar = Calendar.getInstance();
+					calendar.add(Calendar.DATE,stage.getStageDay());
+
+					SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+					String estimatedTime = sdf.format(calendar.getTime());
+					newTask.setEstimatedTime(estimatedTime);
+				}
+
 
 				//自动生成下一阶段任务
 				taskMapper.insertSelective(newTask);
@@ -732,9 +748,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		if(obj==null){
 			return taskVO;
 		}
-		taskVO.setTaskPrincipal(obj.getTaskPrincipal());
-		taskVO.setEstimatedTime(obj.getEstimatedTime());
-		switch (obj.getTaskName()){
+        taskVO = ModelCopyUtil.copy(obj, TUserTaskVO.class);
+        switch (obj.getTaskName()){
 			case "1":
 				taskVO.setTaskName("商机推进阶段");
 				taskVO.setBigId("1");
@@ -783,7 +798,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				newUserTask.setPrincipal(principalList.get(0).getPrincipalName());
 				newUserTask.setTaskType("00");
 				newUserTask.setTaskStatus("0");
-				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
 				newUserTask.setCreatedTime(DateUtils.getNowDate());
 				newUserTask.setPlatformName(task.getPlatformName());
 				newUserTask.setGroupName(task.getGroupName());
@@ -792,6 +807,23 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			}
 		}
 		return null;
+	}
+
+	/** 查询默认小阶段完成需要天数 */
+	private StageTimeVO getDefaultRequireForSubStage(StageTimeVO vo){
+		StageTimeExample example = new StageTimeExample();
+		StageTimeExample.Criteria sql = example.createCriteria();
+		if(StringUtils.isNotBlank(vo.getStageType())){
+			sql.andStageTypeEqualTo(vo.getStageType());
+		}
+
+		StageTimeVO timeVO = null;
+		List<StageTime> stageTimeList = stageTimeMapper.selectByExample(example);
+		if(!CollectionUtils.isEmpty(stageTimeList)){
+			timeVO = ModelCopyUtil.copy(stageTimeList.get(0), StageTimeVO.class);
+		}
+
+		return timeVO;
 	}
 }
 

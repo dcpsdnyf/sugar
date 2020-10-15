@@ -884,6 +884,9 @@ var appointModel = function (id) {
 				$("#appointMyModal input[name='taskName']").val(stage);
 				var bigId = result.data.bigId;
 				$("#appointMyModal input[name='bigId']").val(bigId);
+				if(result.data.taskType == "00"){
+					$("#appointMyModal input[name='estimatedTime']").val(result.data.estimatedTime);
+				}
 				if (result.data.taskType == "01") {
 					var head = result.data.taskPrincipal;
 					var apponitTime = result.data.estimatedTime;

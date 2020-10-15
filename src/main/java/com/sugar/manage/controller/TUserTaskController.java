@@ -11,11 +11,9 @@ import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.model.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
-import com.sugar.manage.service.ISugarProjectSV;
-import com.sugar.manage.service.ITUserTaskService;
-import com.sugar.manage.service.IUserRoleSV;
-import com.sugar.manage.service.IUserSV;
+import com.sugar.manage.service.*;
 import com.sugar.manage.vo.RoleProjectVO;
+import com.sugar.manage.vo.StageTimeVO;
 import com.sugar.manage.vo.SysResult;
 import com.sugar.manage.vo.TUserVO;
 import org.apache.commons.lang.StringUtils;
@@ -27,8 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -43,7 +43,8 @@ public class TUserTaskController {
 	private IUserRoleSV userRoleSVE;
 	@Autowired
 	private ISugarProjectSV iSugarProjectSV;
-
+	@Autowired
+	private StageTimeSV stageTimeSV;
 
 	/**
 	 * 指派按钮回显数据
@@ -61,6 +62,24 @@ public class TUserTaskController {
 			return SysResult.success("未获得用户信息，请登录", null);
 		}
 		TUserTaskVO task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(), userId);
+
+		if("00".equals(task.getTaskType())){//指派下发的任务
+			StageTimeVO vo = new StageTimeVO();
+			vo.setStageType("02");
+			List<StageTimeVO> stageTimeVOList = stageTimeSV.selectStageTimeList(vo);
+			if(!CollectionUtils.isEmpty(stageTimeVOList)){
+				StageTimeVO timeVO = stageTimeVOList.get(0);
+				Integer day = timeVO.getStageDay();
+				Calendar calendar = Calendar.getInstance();
+				calendar.add(Calendar.DATE,day);
+
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+				String estimatedTime = sdf.format(calendar.getTime());
+				task.setEstimatedTime(estimatedTime);
+
+			}
+		}
+
 		return SysResult.success("成功", task);
 	}
 
