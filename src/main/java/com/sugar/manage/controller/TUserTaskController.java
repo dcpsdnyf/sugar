@@ -8,11 +8,9 @@ import com.sugar.common.utils.CookieUtils;
 import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.JsonUtil;
 import com.sugar.common.utils.ModelCopyUtil;
-import com.sugar.manage.dao.model.TSugarProject;
 import com.sugar.manage.dao.model.TUser;
 import com.sugar.manage.dao.model.TUserTask;
 import com.sugar.manage.dao.vo.TUserTaskVO;
-import com.sugar.manage.dao.vo.TableDataInfo;
 import com.sugar.manage.service.ISugarProjectSV;
 import com.sugar.manage.service.ITUserTaskService;
 import com.sugar.manage.service.IUserRoleSV;
@@ -31,7 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -42,8 +39,8 @@ public class TUserTaskController {
 	private ITUserTaskService itUserTaskService;
 	@Autowired
 	private IUserSV userSV;
-    @Autowired
-    private IUserRoleSV userRoleSVE;
+	@Autowired
+	private IUserRoleSV userRoleSVE;
 	@Autowired
 	private ISugarProjectSV iSugarProjectSV;
 
@@ -64,7 +61,7 @@ public class TUserTaskController {
 			return SysResult.success("未获得用户信息，请登录", null);
 		}
 		TUserTaskVO task = itUserTaskService.getTaskInfoByUserIdAndProjectId(tUserTask.getProjectId(), userId);
- 		return SysResult.success("成功", task);
+		return SysResult.success("成功", task);
 	}
 
 	@RequestMapping("/addEntrustInfo")
@@ -97,7 +94,7 @@ public class TUserTaskController {
 		tUserTaskVOTemp.setTaskType("01");
 		/**查询该阶段是否被指派过*/
 		List<TUserTaskVO> tUserTaskVOList = itUserTaskService.selectTUserTaskList(tUserTaskVOTemp);
-		if(!CollectionUtils.isEmpty(tUserTaskVOList)){
+		if (!CollectionUtils.isEmpty(tUserTaskVOList)) {
 			return SysResult.success("该阶段已被指派过，请勿重复指派", null);
 		}
 
@@ -123,19 +120,19 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/getDoneTask")
 	@ResponseBody
-	public String getDoneTask(HttpServletRequest request,TUserTaskVO vo) {
+	public String getDoneTask(HttpServletRequest request, TUserTaskVO vo) {
 		JSONArray array = new JSONArray();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isNotBlank(userId)) {//如果未获得用户id不返回任何信息
 			TUserVO userVO = userSV.getUserById(Integer.parseInt(userId));
 
 			PageInfo<TUserTaskVO> doneTaskPage = new PageInfo<>();
-			if(userVO!=null && StringUtils.isNotBlank(userVO.getUserName())){
+			if (userVO != null && StringUtils.isNotBlank(userVO.getUserName())) {
 				vo.setTaskPrincipal(userVO.getUserName());
 				doneTaskPage = itUserTaskService.getDoneTask(vo);
 			}
-			if(!CollectionUtils.isEmpty(doneTaskPage.getList())){
-				array= JSONArray.parseArray(JSON.toJSONString(doneTaskPage.getList()));
+			if (!CollectionUtils.isEmpty(doneTaskPage.getList())) {
+				array = JSONArray.parseArray(JSON.toJSONString(doneTaskPage.getList()));
 			}
 		}
 		return array.toString();
@@ -148,7 +145,7 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/getUndoTask")
 	@ResponseBody
-	public String getUndoTask(HttpServletRequest request,TUserTaskVO vo) {
+	public String getUndoTask(HttpServletRequest request, TUserTaskVO vo) {
 		JSONArray array = new JSONArray();
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isNotBlank(userId)) {
@@ -160,19 +157,19 @@ public class TUserTaskController {
 
 			PageInfo<TUserTaskVO> undoTaskPage = new PageInfo<>();
 
-			if(userVO!=null && StringUtils.isNotBlank(userVO.getUserName())){
+			if (userVO != null && StringUtils.isNotBlank(userVO.getUserName())) {
 				vo.setTaskPrincipal(userVO.getUserName());
 				undoTaskPage = itUserTaskService.getUndoTask(vo);
 			}
-			if(!CollectionUtils.isEmpty(undoTaskPage.getList())){
+			if (!CollectionUtils.isEmpty(undoTaskPage.getList())) {
 				List<TUserTaskVO> userTaskVOList = new ArrayList<>();
-				for(TUserTaskVO userTaskVO:undoTaskPage.getList()){
+				for (TUserTaskVO userTaskVO : undoTaskPage.getList()) {
 					userTaskVO.setAppoint(roleProjectVO.isRoleAppoint());
 					userTaskVO.setDelay(roleProjectVO.isRoleDelay());
 					userTaskVOList.add(userTaskVO);
 				}
-				if(!CollectionUtils.isEmpty(userTaskVOList)){
-					array= JSONArray.parseArray(JSON.toJSONString(userTaskVOList));
+				if (!CollectionUtils.isEmpty(userTaskVOList)) {
+					array = JSONArray.parseArray(JSON.toJSONString(userTaskVOList));
 				}
 
 			}
@@ -206,36 +203,38 @@ public class TUserTaskController {
 			return SysResult.success("成功", null);
 		}
 
-        return null;
-    }
-    /**
-     * 审核申请延期接口
-     * @return
-     */
-    @RequestMapping("/examine")
-    @ResponseBody
-    public String examine(String projectId,String staus,String taskName,HttpServletRequest request, HttpServletResponse response) throws Exception{
-        String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-        if (StringUtils.isBlank(userId)) {
-            return null;
-        }
-        if (StringUtils.isBlank(projectId)) {
-            return null;
-        }
-        if (StringUtils.isBlank(staus)) {
-            return null;
-        }
-        int count=itUserTaskService.examine(userId,projectId,staus,taskName);
-        if(count>0){
-            JSONObject result=new JSONObject();
-            result.put("success",Boolean.TRUE);
-            JsonUtil.write(response,result);
-        }
-        if(count==-1){
-            return "null";
-        }
-        return "false";
-    }
+		return null;
+	}
+
+	/**
+	 * 审核申请延期接口
+	 *
+	 * @return
+	 */
+	@RequestMapping("/examine")
+	@ResponseBody
+	public String examine(String projectId, String staus, String taskName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+		if (StringUtils.isBlank(userId)) {
+			return null;
+		}
+		if (StringUtils.isBlank(projectId)) {
+			return null;
+		}
+		if (StringUtils.isBlank(staus)) {
+			return null;
+		}
+		int count = itUserTaskService.examine(userId, projectId, staus, taskName);
+		if (count > 0) {
+			JSONObject result = new JSONObject();
+			result.put("success", Boolean.TRUE);
+			JsonUtil.write(response, result);
+		}
+		if (count == -1) {
+			return "null";
+		}
+		return "false";
+	}
 //    public  boolean isNumeric(String str){
 //        for (int i = 0; i < str.length(); i++){
 //            if (!Character.isDigit(str.charAt(i))){
@@ -266,12 +265,8 @@ public class TUserTaskController {
 	@ResponseBody
 	public SysResult updateUserTaskToProgressing(TUserTaskVO tUserTaskVO) {
 		TUserTask userTask = ModelCopyUtil.copy(tUserTaskVO, TUserTask.class);
-		if("00".equals(tUserTaskVO.getTaskType())){
-			userTask.setTaskInfo("");
-		}else {
-			userTask.setTaskStatus("1");
-			userTask.setUpdatedTime(DateUtils.getNowDate());
-		}
+		userTask.setTaskStatus("1");
+		userTask.setUpdatedTime(DateUtils.getNowDate());
 		itUserTaskService.updateUserTaskToProgressing(userTask);
 		return SysResult.success();
 	}
