@@ -274,6 +274,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
 		}
 		sql.andTaskStatusEqualTo("2");
+		example.setOrderByClause(" CREATED_TIME DESC ");
 //		PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
 		PageInfo<TUserTask> page = new PageInfo<>(tUserTasks);
@@ -294,7 +295,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
 		}
 		sql.andTaskStatusNotEqualTo("2");
-
+		example.setOrderByClause(" CREATED_TIME DESC ");
 		//PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
 
@@ -374,64 +375,90 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public int examine(String userId, String projectId, String staus, String taskName) throws ParseException {
+	public int examine(TUserTaskVO taskVO) throws ParseException {
 		//1.先根据用户id获取用户名
-		String userName = tUserExMapper.getUserIdByUerName(userId);
+		String userName = tUserExMapper.getUserIdByUerName(taskVO.getUserId());
 		if (StringUtils.isBlank(userName)) {
 			return 0;
 		}
-		TDelayVO delay = new TDelayVO();
-		delay.setProjectId(projectId);
-		delay.setAuditingPeopleName(userName);
-		delay.setStatus("01");
-		delay.setTaskName(taskName);
-		if ("0".equals(staus)) {
-			delay.setAuditingStatus("0");
-            List<TDelayVO> delayList = tDelayMapper.selectTDelayList(delay);
-			int count = tDelayMapper.udaDelay(delay);
-			if (count > 0) {
-				TUserTask task = new TUserTask();
-				for (TDelayVO s : delayList) {
-					task.setDelayDay(s.getDelayTime());
-					task.setDelayPeople(s.getDelayPeopleName());
-					task.setTaskPrincipal(s.getAuditingPeopleName());
-				}
-				task.setProjectId(projectId);
-				task.setTaskInfo("延期申请"+task.getDelayDay());
-				task.setEstimatedTime(tUserTaskMapper.getProject(projectId, task.getTaskPrincipal(), task.getTaskInfo(),"0").getDelayDay());
-				task.setTaskStatus("2");
-				task.setTaskName(taskName);
-				task.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
-				count = tUserTaskMapper.updateTUserTask(task);
-				if (count > 0) {
-					//修改预计完成时间
-					TUserTask userTask = new TUserTask();
-					userTask.setTaskType("01");
-					userTask.setTaskName(taskName);
-					userTask.setEstimatedTime(task.getEstimatedTime());
-					tUserTaskMapper.updateTask(userTask);
-					return 1;
-				} else {
-					return 0;
-				}
-			}
-		} else {
-			delay.setAuditingStatus("1");
-			int count = tDelayMapper.udaDelay(delay);
-			List<TDelayVO> delayList = tDelayMapper.selectTDelayList(delay);
-			TUserTask task = new TUserTask();
-			for (TDelayVO s : delayList) {
-				task.setDelayDay(s.getDelayTime());
-				task.setDelayPeople(s.getDelayPeopleName());
-				task.setTaskPrincipal(s.getAuditingPeopleName());
-			}
-			task.setProjectId(projectId);
-			task.setTaskStatus("2");
-			task.setTaskInfo("延期申请");
-			tUserTaskMapper.updateTUserTask(task);
-			return 0;
+
+		TUserTask tUserTask = ModelCopyUtil.copy(taskVO, TUserTask.class);
+		tUserTask.setTaskStatus("2");//已完成
+
+		TDelay temp = new TDelay();
+		temp.setProjectId(taskVO.getProjectId());
+		temp.setTaskName(taskVO.getTaskName());
+		temp.setTaskSubName(taskVO.getTaskSubName());
+
+		TDelayExample example = new TDelayExample();
+		TDelayExample.Criteria sql = example.createCriteria();
+		if(StringUtils.isNotBlank(taskVO.getProjectId())){
+			sql.andProjectIdEqualTo(taskVO.getProjectId());
 		}
-		return -1;
+		if(StringUtils.isNotBlank(taskVO.getTaskName())){
+			sql.andTaskNameEqualTo(taskVO.getTaskName());
+		}
+		if(StringUtils.isNotBlank(taskVO.getTaskSubName())){
+			sql.andTaskSubNameEqualTo(taskVO.getTaskSubName());
+		}
+		if(StringUtils.isNotBlank(userName)){
+			sql.andAuditingPeopleNameEqualTo(userName);//审批人
+		}
+		example.setOrderByClause(" CREATED_TIME DESC ");
+		//查询申请延期的数据记录
+		List<TDelay> tDelayList = delayMapper.selectByExample(example);
+		if(!CollectionUtils.isEmpty(tDelayList)){
+			TDelay delay = tDelayList.get(0);
+
+			TUserTaskExample taskExample = new TUserTaskExample();
+			TUserTaskExample.Criteria criteria = taskExample.createCriteria();
+
+			criteria.andProjectIdEqualTo(taskVO.getProjectId());
+			criteria.andTaskNameEqualTo(taskVO.getTaskName());
+			criteria.andTaskSubNameEqualTo(taskVO.getTaskSubName());
+			criteria.andTaskPrincipalEqualTo(delay.getDelayPeopleName());//申请延期的人(现在负责任务的人)
+			criteria.andTaskStatusNotEqualTo("2");
+
+			//查询申请延期的任务
+			List<TUserTask> userTaskList = taskMapper.selectByExample(taskExample);
+			if(!CollectionUtils.isEmpty(userTaskList)){
+
+				TUserTask task = userTaskList.get(0);//申请延期的任务
+				TUserTask tipTask = ModelCopyUtil.copy(task, TUserTask.class);
+				tipTask.setId(null);
+				tipTask.setTaskStatus("2");//完成状态
+				tipTask.setCreatedTime(DateUtils.getNowDate());
+
+
+				if("0".equals(taskVO.getAuditingStatus())){//通过
+
+					tUserTask.setTaskInfo(tUserTask.getTaskInfo() + ",已通过审核");
+
+
+					task.setEstimatedTime(delay.getDelayTime());//更新计划完成时间
+					taskMapper.updateByPrimaryKeySelective(task);
+
+					delay.setAuditingStatus("0");//该条延期申请记录改为审核通过(不通过不更新该字段)
+					delayMapper.updateByPrimaryKeySelective(delay);
+
+					tipTask.setTaskInfo(tUserTask.getTaskInfo());//给申请人的提示
+					taskMapper.insertSelective(tipTask);
+
+					return taskMapper.updateByPrimaryKeySelective(tUserTask);//更新该条记录为完成状态
+				}else if("1".equals(taskVO.getAuditingStatus())){//不通过
+					tUserTask.setTaskInfo(tUserTask.getTaskInfo() + ",未通过审核");
+
+					tipTask.setTaskInfo(tUserTask.getTaskInfo());
+					taskMapper.insertSelective(tipTask);//给申请人的提示
+
+					return taskMapper.updateByPrimaryKeySelective(tUserTask);//更新该条记录为完成状态
+				}
+
+
+			}
+
+		}
+		return 0;
 	}
 
 	@Override

@@ -983,26 +983,21 @@ function saveDelayInfo() {
 }
 
 //审核
-function examineAj(id,e,taskName) {
-	debugger
+function examineAj(id,auditingStatus) {
 //根据当前行的id获取当前的行数据
-	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+	var row = $("#tb_backlog").bootstrapTable('getRowByUniqueId', id);
+	if(row.taskType=="00"){
+		msgInfoModal('提示', "操作失败");
+		return
+	}
+	row.auditingStatus = auditingStatus;
 	$.ajax({
 		type: "post",
 		url: WEB_ROOT + "/TUserTaskController/examine",
-		data: {"projectId": id, "staus": e, "taskName": taskName},
+		data: row,
 		success: function (result) {
-			debugger
-			if ("false" == result) {
-				confirmModal("提示", "审核结果:不通过！", function () {
-					window.location.reload();
-				})
-			} else if ("null" == result) {
-				confirmModal("提示", "无项目审核", function () {
-					window.location.reload();
-				})
-			} else {
-				confirmModal("提示", "审核结果:通过！", function () {
+			if (result!=null) {
+				confirmModal("提示", result.msg, function () {
 					window.location.reload();
 				})
 			}

@@ -8,5 +8,5 @@ INSERT INTO `t_sys_role`(`id`, `role_name`, `role_type`, `role_desc`, `role_orde
 
 INSERT INTO `t_sys_role`(`id`, `role_name`, `role_type`, `role_desc`, `role_order`, `status`, `CREATED_STAFF`, `CREATED_TIME`, `UPDATED_STAFF`, `UPDATED_TIME`) VALUES (10, '申请延期', 'delay', NULL, NULL, '01', NULL, NULL, NULL, NULL);
 
---------------2020.10.15新增查看所有项目权限角色-------------
+--------------2020.10.16新增查看所有项目权限角色-------------
 INSERT INTO `t_sys_role`(`id`, `role_name`, `role_type`, `role_desc`, `role_order`, `status`, `CREATED_STAFF`, `CREATED_TIME`, `UPDATED_STAFF`, `UPDATED_TIME`) VALUES (11, '查看所有项目', 'viewAll', NULL, NULL, '01', NULL, NULL, NULL, NULL);

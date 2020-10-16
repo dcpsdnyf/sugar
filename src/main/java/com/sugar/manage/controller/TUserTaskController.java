@@ -236,27 +236,32 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/examine")
 	@ResponseBody
-	public String examine(String projectId, String staus, String taskName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public SysResult examine(TUserTaskVO taskVO, String projectId, String staus, String taskName, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
+		String msg = "操作失败";
+
 		if (StringUtils.isBlank(userId)) {
-			return null;
+			msg = "用户未登录" ;
 		}
-		if (StringUtils.isBlank(projectId)) {
-			return null;
+		if (StringUtils.isBlank(taskVO.getProjectId())) {
+			msg = "操作失败";
 		}
-		if (StringUtils.isBlank(staus)) {
-			return null;
+		if (StringUtils.isBlank(taskVO.getAuditingStatus())) {
+			msg = "操作失败";
 		}
-		int count = itUserTaskService.examine(userId, projectId, staus, taskName);
+		if(StringUtils.isBlank(taskVO.getTaskName())){
+			msg = "操作失败";
+		}
+		if(StringUtils.isBlank(taskVO.getTaskSubName())){
+			msg = "操作失败";
+		}
+		taskVO.setUserId(userId);
+		int count = itUserTaskService.examine(taskVO);
 		if (count > 0) {
-			JSONObject result = new JSONObject();
-			result.put("success", Boolean.TRUE);
-			JsonUtil.write(response, result);
+			msg = "操作成功";
 		}
-		if (count == -1) {
-			return "null";
-		}
-		return "false";
+
+		return SysResult.success(msg,null);
 	}
 //    public  boolean isNumeric(String str){
 //        for (int i = 0; i < str.length(); i++){

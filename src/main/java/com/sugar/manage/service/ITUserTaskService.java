@@ -79,7 +79,7 @@ public interface ITUserTaskService
     public int delay(TUserTaskVO tUserTaskVO) throws ParseException;
 
     public void updateUserTask(TUserTaskVO tUserTaskVO);
-    public int examine(String userId,String projectId,String staus,String taskName) throws ParseException;
+    public int examine(TUserTaskVO taskVO) throws ParseException;
 
     /** 查询已完成的子任务列表 */
     List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO tUserTaskVO);

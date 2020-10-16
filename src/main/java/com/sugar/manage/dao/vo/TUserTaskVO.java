@@ -88,4 +88,7 @@ public class TUserTaskVO extends BaseModel implements Serializable
     /** 用户名 */
     private String userName;
 
+    /** 审批状态：0-通过; 1-失败 */
+    private String auditingStatus;
+
 }

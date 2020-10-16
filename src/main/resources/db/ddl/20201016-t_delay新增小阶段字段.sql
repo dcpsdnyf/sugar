@@ -1,0 +1,1 @@
+ALTER  TABLE  t_delay  ADD   TASK_SUB_NAME  VARCHAR(128)    COMMENT  '子任务名称' ;
