@@ -1024,9 +1024,9 @@ function saveProjectInfo() {
 		url: WEB_ROOT + "/sugarManage/Edit",
 		data: $("#editForm").serialize(),
 		dataType: 'JSON',
-		success: function (data) {
+		success: function (result) {
 			//location.reload();
-			confirmModal("提示", "更新成功！", function () {
+			confirmModal("提示", result.msg, function () {
 				window.location.reload();
 			}, {}, function () {
 				window.location.reload();

@@ -68,13 +68,13 @@
     <result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
     <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
   </resultMap>
-    <sql id="Base_Column_List">
+  <sql id="Base_Column_List">
     ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME,
     UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL, business_principal,
     purchase_principal, product_principal, development_principal, operation_principal,
-    operation_maintain_principal
+    operation_maintain_principal, add_project_username
   </sql>
-    <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List">
     business_clue_open, business_clue_0, business_discover_10, business_establish_25,
     business_establish_50, business_establish_75, business_win_100, customer_maintain_back_money,
     business_close, initial_intention_plan, write_project_proposal, working_hours_assess,
@@ -96,15 +96,16 @@
       TASK_PRINCIPAL, business_principal, purchase_principal,
       product_principal, development_principal,
       operation_principal, operation_maintain_principal,
-      business_clue_open, business_clue_0,
-      business_discover_10, business_establish_25,
-      business_establish_50, business_establish_75,
-      business_win_100, customer_maintain_back_money,
-      business_close, initial_intention_plan,
-      write_project_proposal, working_hours_assess,
-      business_negotiation, request_draft,
-      attend_meeting, bidding, request_oa_approval,
-      contract_draft, lawyer_review, contract_oa_approval,
+      add_project_username, business_clue_open,
+      business_clue_0, business_discover_10,
+      business_establish_25, business_establish_50,
+      business_establish_75, business_win_100,
+      customer_maintain_back_money, business_close,
+      initial_intention_plan, write_project_proposal,
+      working_hours_assess, business_negotiation,
+      request_draft, attend_meeting, bidding,
+      request_oa_approval, contract_draft,
+      lawyer_review, contract_oa_approval,
       usage_seal, other_seal, scan,
       general_department_file, first_payment,
       progress_payment, final_payment,
@@ -125,15 +126,16 @@
       #{taskPrincipal,jdbcType=VARCHAR}, #{businessPrincipal,jdbcType=VARCHAR}, #{purchasePrincipal,jdbcType=VARCHAR},
       #{productPrincipal,jdbcType=VARCHAR}, #{developmentPrincipal,jdbcType=VARCHAR},
       #{operationPrincipal,jdbcType=VARCHAR}, #{operationMaintainPrincipal,jdbcType=VARCHAR},
-      #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR},
-      #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR},
-      #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR},
-      #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR},
-      #{businessClose,jdbcType=LONGVARCHAR}, #{initialIntentionPlan,jdbcType=LONGVARCHAR},
-      #{writeProjectProposal,jdbcType=LONGVARCHAR}, #{workingHoursAssess,jdbcType=LONGVARCHAR},
-      #{businessNegotiation,jdbcType=LONGVARCHAR}, #{requestDraft,jdbcType=LONGVARCHAR},
-      #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, #{requestOaApproval,jdbcType=LONGVARCHAR},
-      #{contractDraft,jdbcType=LONGVARCHAR}, #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR},
+      #{addProjectUsername,jdbcType=VARCHAR}, #{businessClueOpen,jdbcType=LONGVARCHAR},
+      #{businessClue0,jdbcType=LONGVARCHAR}, #{businessDiscover10,jdbcType=LONGVARCHAR},
+      #{businessEstablish25,jdbcType=LONGVARCHAR}, #{businessEstablish50,jdbcType=LONGVARCHAR},
+      #{businessEstablish75,jdbcType=LONGVARCHAR}, #{businessWin100,jdbcType=LONGVARCHAR},
+      #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, #{businessClose,jdbcType=LONGVARCHAR},
+      #{initialIntentionPlan,jdbcType=LONGVARCHAR}, #{writeProjectProposal,jdbcType=LONGVARCHAR},
+      #{workingHoursAssess,jdbcType=LONGVARCHAR}, #{businessNegotiation,jdbcType=LONGVARCHAR},
+      #{requestDraft,jdbcType=LONGVARCHAR}, #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR},
+      #{requestOaApproval,jdbcType=LONGVARCHAR}, #{contractDraft,jdbcType=LONGVARCHAR},
+      #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR},
       #{usageSeal,jdbcType=LONGVARCHAR}, #{otherSeal,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR},
       #{generalDepartmentFile,jdbcType=LONGVARCHAR}, #{firstPayment,jdbcType=LONGVARCHAR},
       #{progressPayment,jdbcType=LONGVARCHAR}, #{finalPayment,jdbcType=LONGVARCHAR},

@@ -11,3 +11,6 @@ ALTER  TABLE  t_sugar_project  ADD   development_principal  VARCHAR(128) COMMENT
 ALTER  TABLE  t_sugar_project  ADD   operation_principal  VARCHAR(128) COMMENT  '运营负责人' ;
 
 ALTER  TABLE  t_sugar_project  ADD   operation_maintain_principal  VARCHAR(128) COMMENT  '运维负责人' ;
+
+--------------------------2020.10.16-------------------------
+ALTER  TABLE  t_sugar_project  ADD   add_project_username  VARCHAR(64) COMMENT  '项目新增人' ;

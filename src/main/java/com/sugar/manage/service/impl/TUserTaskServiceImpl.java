@@ -274,6 +274,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
 		}
 		sql.andTaskStatusEqualTo("2");
+		sql.andStatusEqualTo("01");
 		example.setOrderByClause(" CREATED_TIME DESC ");
 //		PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
@@ -295,6 +296,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskPrincipalEqualTo(vo.getTaskPrincipal());
 		}
 		sql.andTaskStatusNotEqualTo("2");
+		sql.andStatusEqualTo("01");
 		example.setOrderByClause(" CREATED_TIME DESC ");
 		//PageHelper.startPage(vo.getPage(),vo.getLimit());
 		List<TUserTask> tUserTasks = taskMapper.selectByExample(example);
@@ -361,6 +363,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			tkuse.setEstimatedTime(tkuser.getEstimatedTime());//小阶段计划完成时间
 			tkuse.setTaskInfo("任务延期申请至:"+tUserTaskVO.getDelayDay());
 			tkuse.setTaskStatus("0");
+			tkuse.setStatus("01");
 			tkuse.setTaskName(tUserTaskVO.getTaskName());//大阶段id
 			tkuse.setTaskSubName(tUserTaskVO.getTaskSubName());//小阶段id
 			tkuse.setCreatedTime(DateUtils.getNowDate());
@@ -838,6 +841,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				newUserTask.setProjectId(task.getProjectId());
 				newUserTask.setTaskPrincipal(principalList.get(0).getPrincipalName());
 				newUserTask.setPrincipal(principalList.get(0).getPrincipalName());
+				newUserTask.setStatus("01");
 				newUserTask.setTaskType("00");
 				newUserTask.setTaskStatus("0");
 				newUserTask.setStartTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));

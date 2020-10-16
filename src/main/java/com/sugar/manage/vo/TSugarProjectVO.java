@@ -5,6 +5,7 @@ import com.sugar.manage.dao.vo.BaseModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @program: sugarManage
@@ -23,6 +24,20 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     /** 集团 */
     private String groupName;
+
+    private String status;
+
+    private String createdStaff;
+
+    private Date createdTime;
+
+    private String updatedStaff;
+
+    private Date updatedTime;
+
+    private Integer sort;
+
+    private String addProjectUsername;
 
     private String businessClueOpen;
 
@@ -124,11 +139,22 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     private String projectIds;
 
+    /** 商机阶段负责人 */
     private String businessPrincipal;
+
+    /** 采购阶段负责人 */
     private String purchasePrincipal;
+
+    /** 产品阶段负责人 */
     private String productPrincipal;
+
+    /** 开发阶段负责人 */
     private String developmentPrincipal;
+
+    /** 运营阶段负责人 */
     private String operationPrincipal;
+
+    /** 运维阶段负责人 */
     private String operationMaintainPrincipal;
 
     /**若无项目id,表示行不可编辑*/
@@ -172,4 +198,7 @@ public class TSugarProjectVO extends BaseModel implements Serializable,Cloneable
 
     /** 是否有查看所有项目的权限 */
     private boolean viewAllProject;
+
+    /** 要更改的字段名称 */
+    private String fieldName;
 }

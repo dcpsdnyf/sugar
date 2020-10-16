@@ -21,6 +21,7 @@
     <result column="development_principal" jdbcType="VARCHAR" property="developmentPrincipal" />
     <result column="operation_principal" jdbcType="VARCHAR" property="operationPrincipal" />
     <result column="operation_maintain_principal" jdbcType="VARCHAR" property="operationMaintainPrincipal" />
+    <result column="add_project_username" jdbcType="VARCHAR" property="addProjectUsername" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sugar.manage.dao.model.TSugarProjectWithBLOBs">
     <result column="business_clue_open" jdbcType="LONGVARCHAR" property="businessClueOpen" />
@@ -134,7 +135,7 @@
     ID, product_type, platform_name, platform_id, status, CREATED_STAFF, CREATED_TIME, 
     UPDATED_STAFF, UPDATED_TIME, sort, group_name, START_TIME, TASK_PRINCIPAL, business_principal, 
     purchase_principal, product_principal, development_principal, operation_principal, 
-    operation_maintain_principal
+    operation_maintain_principal, add_project_username
   </sql>
   <sql id="Blob_Column_List">
     business_clue_open, business_clue_0, business_discover_10, business_establish_25, 
@@ -205,15 +206,16 @@
       TASK_PRINCIPAL, business_principal, purchase_principal, 
       product_principal, development_principal, 
       operation_principal, operation_maintain_principal, 
-      business_clue_open, business_clue_0, 
-      business_discover_10, business_establish_25, 
-      business_establish_50, business_establish_75, 
-      business_win_100, customer_maintain_back_money, 
-      business_close, initial_intention_plan, 
-      write_project_proposal, working_hours_assess, 
-      business_negotiation, request_draft, 
-      attend_meeting, bidding, request_oa_approval, 
-      contract_draft, lawyer_review, contract_oa_approval, 
+      add_project_username, business_clue_open, 
+      business_clue_0, business_discover_10, 
+      business_establish_25, business_establish_50, 
+      business_establish_75, business_win_100, 
+      customer_maintain_back_money, business_close, 
+      initial_intention_plan, write_project_proposal, 
+      working_hours_assess, business_negotiation, 
+      request_draft, attend_meeting, bidding, 
+      request_oa_approval, contract_draft, 
+      lawyer_review, contract_oa_approval, 
       usage_seal, other_seal, scan, 
       general_department_file, first_payment, 
       progress_payment, final_payment, 
@@ -234,15 +236,16 @@
       #{taskPrincipal,jdbcType=VARCHAR}, #{businessPrincipal,jdbcType=VARCHAR}, #{purchasePrincipal,jdbcType=VARCHAR}, 
       #{productPrincipal,jdbcType=VARCHAR}, #{developmentPrincipal,jdbcType=VARCHAR}, 
       #{operationPrincipal,jdbcType=VARCHAR}, #{operationMaintainPrincipal,jdbcType=VARCHAR}, 
-      #{businessClueOpen,jdbcType=LONGVARCHAR}, #{businessClue0,jdbcType=LONGVARCHAR}, 
-      #{businessDiscover10,jdbcType=LONGVARCHAR}, #{businessEstablish25,jdbcType=LONGVARCHAR}, 
-      #{businessEstablish50,jdbcType=LONGVARCHAR}, #{businessEstablish75,jdbcType=LONGVARCHAR}, 
-      #{businessWin100,jdbcType=LONGVARCHAR}, #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, 
-      #{businessClose,jdbcType=LONGVARCHAR}, #{initialIntentionPlan,jdbcType=LONGVARCHAR}, 
-      #{writeProjectProposal,jdbcType=LONGVARCHAR}, #{workingHoursAssess,jdbcType=LONGVARCHAR}, 
-      #{businessNegotiation,jdbcType=LONGVARCHAR}, #{requestDraft,jdbcType=LONGVARCHAR}, 
-      #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, #{requestOaApproval,jdbcType=LONGVARCHAR}, 
-      #{contractDraft,jdbcType=LONGVARCHAR}, #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
+      #{addProjectUsername,jdbcType=VARCHAR}, #{businessClueOpen,jdbcType=LONGVARCHAR}, 
+      #{businessClue0,jdbcType=LONGVARCHAR}, #{businessDiscover10,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish25,jdbcType=LONGVARCHAR}, #{businessEstablish50,jdbcType=LONGVARCHAR}, 
+      #{businessEstablish75,jdbcType=LONGVARCHAR}, #{businessWin100,jdbcType=LONGVARCHAR}, 
+      #{customerMaintainBackMoney,jdbcType=LONGVARCHAR}, #{businessClose,jdbcType=LONGVARCHAR}, 
+      #{initialIntentionPlan,jdbcType=LONGVARCHAR}, #{writeProjectProposal,jdbcType=LONGVARCHAR}, 
+      #{workingHoursAssess,jdbcType=LONGVARCHAR}, #{businessNegotiation,jdbcType=LONGVARCHAR}, 
+      #{requestDraft,jdbcType=LONGVARCHAR}, #{attendMeeting,jdbcType=LONGVARCHAR}, #{bidding,jdbcType=LONGVARCHAR}, 
+      #{requestOaApproval,jdbcType=LONGVARCHAR}, #{contractDraft,jdbcType=LONGVARCHAR}, 
+      #{lawyerReview,jdbcType=LONGVARCHAR}, #{contractOaApproval,jdbcType=LONGVARCHAR}, 
       #{usageSeal,jdbcType=LONGVARCHAR}, #{otherSeal,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR}, 
       #{generalDepartmentFile,jdbcType=LONGVARCHAR}, #{firstPayment,jdbcType=LONGVARCHAR}, 
       #{progressPayment,jdbcType=LONGVARCHAR}, #{finalPayment,jdbcType=LONGVARCHAR}, 
@@ -316,6 +319,9 @@
       </if>
       <if test="operationMaintainPrincipal != null">
         operation_maintain_principal,
+      </if>
+      <if test="addProjectUsername != null">
+        add_project_username,
       </if>
       <if test="businessClueOpen != null">
         business_clue_open,
@@ -519,6 +525,9 @@
       </if>
       <if test="operationMaintainPrincipal != null">
         #{operationMaintainPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="addProjectUsername != null">
+        #{addProjectUsername,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -732,6 +741,9 @@
       <if test="record.operationMaintainPrincipal != null">
         operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR},
       </if>
+      <if test="record.addProjectUsername != null">
+        add_project_username = #{record.addProjectUsername,jdbcType=VARCHAR},
+      </if>
       <if test="record.businessClueOpen != null">
         business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       </if>
@@ -902,6 +914,7 @@
       development_principal = #{record.developmentPrincipal,jdbcType=VARCHAR},
       operation_principal = #{record.operationPrincipal,jdbcType=VARCHAR},
       operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR},
+      add_project_username = #{record.addProjectUsername,jdbcType=VARCHAR},
       business_clue_open = #{record.businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{record.businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{record.businessDiscover10,jdbcType=LONGVARCHAR},
@@ -974,7 +987,8 @@
       product_principal = #{record.productPrincipal,jdbcType=VARCHAR},
       development_principal = #{record.developmentPrincipal,jdbcType=VARCHAR},
       operation_principal = #{record.operationPrincipal,jdbcType=VARCHAR},
-      operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR}
+      operation_maintain_principal = #{record.operationMaintainPrincipal,jdbcType=VARCHAR},
+      add_project_username = #{record.addProjectUsername,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -1035,6 +1049,9 @@
       </if>
       <if test="operationMaintainPrincipal != null">
         operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="addProjectUsername != null">
+        add_project_username = #{addProjectUsername,jdbcType=VARCHAR},
       </if>
       <if test="businessClueOpen != null">
         business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
@@ -1203,6 +1220,7 @@
       development_principal = #{developmentPrincipal,jdbcType=VARCHAR},
       operation_principal = #{operationPrincipal,jdbcType=VARCHAR},
       operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR},
+      add_project_username = #{addProjectUsername,jdbcType=VARCHAR},
       business_clue_open = #{businessClueOpen,jdbcType=LONGVARCHAR},
       business_clue_0 = #{businessClue0,jdbcType=LONGVARCHAR},
       business_discover_10 = #{businessDiscover10,jdbcType=LONGVARCHAR},
@@ -1272,7 +1290,8 @@
       product_principal = #{productPrincipal,jdbcType=VARCHAR},
       development_principal = #{developmentPrincipal,jdbcType=VARCHAR},
       operation_principal = #{operationPrincipal,jdbcType=VARCHAR},
-      operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR}
+      operation_maintain_principal = #{operationMaintainPrincipal,jdbcType=VARCHAR},
+      add_project_username = #{addProjectUsername,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

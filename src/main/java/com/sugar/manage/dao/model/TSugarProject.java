@@ -42,6 +42,8 @@ public class TSugarProject implements Serializable {
 
     private String operationMaintainPrincipal;
 
+    private String addProjectUsername;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -196,6 +198,14 @@ public class TSugarProject implements Serializable {
         this.operationMaintainPrincipal = operationMaintainPrincipal == null ? null : operationMaintainPrincipal.trim();
     }
 
+    public String getAddProjectUsername() {
+        return addProjectUsername;
+    }
+
+    public void setAddProjectUsername(String addProjectUsername) {
+        this.addProjectUsername = addProjectUsername == null ? null : addProjectUsername.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -226,7 +236,8 @@ public class TSugarProject implements Serializable {
             && (this.getProductPrincipal() == null ? other.getProductPrincipal() == null : this.getProductPrincipal().equals(other.getProductPrincipal()))
             && (this.getDevelopmentPrincipal() == null ? other.getDevelopmentPrincipal() == null : this.getDevelopmentPrincipal().equals(other.getDevelopmentPrincipal()))
             && (this.getOperationPrincipal() == null ? other.getOperationPrincipal() == null : this.getOperationPrincipal().equals(other.getOperationPrincipal()))
-            && (this.getOperationMaintainPrincipal() == null ? other.getOperationMaintainPrincipal() == null : this.getOperationMaintainPrincipal().equals(other.getOperationMaintainPrincipal()));
+            && (this.getOperationMaintainPrincipal() == null ? other.getOperationMaintainPrincipal() == null : this.getOperationMaintainPrincipal().equals(other.getOperationMaintainPrincipal()))
+            && (this.getAddProjectUsername() == null ? other.getAddProjectUsername() == null : this.getAddProjectUsername().equals(other.getAddProjectUsername()));
     }
 
     @Override
@@ -252,6 +263,7 @@ public class TSugarProject implements Serializable {
         result = prime * result + ((getDevelopmentPrincipal() == null) ? 0 : getDevelopmentPrincipal().hashCode());
         result = prime * result + ((getOperationPrincipal() == null) ? 0 : getOperationPrincipal().hashCode());
         result = prime * result + ((getOperationMaintainPrincipal() == null) ? 0 : getOperationMaintainPrincipal().hashCode());
+        result = prime * result + ((getAddProjectUsername() == null) ? 0 : getAddProjectUsername().hashCode());
         return result;
     }
 
@@ -280,6 +292,7 @@ public class TSugarProject implements Serializable {
         sb.append(", developmentPrincipal=").append(developmentPrincipal);
         sb.append(", operationPrincipal=").append(operationPrincipal);
         sb.append(", operationMaintainPrincipal=").append(operationMaintainPrincipal);
+        sb.append(", addProjectUsername=").append(addProjectUsername);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

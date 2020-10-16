@@ -81,6 +81,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             TUserTaskExample taskExample = new TUserTaskExample();
             TUserTaskExample.Criteria criteria = taskExample.createCriteria();
             criteria.andTaskPrincipalEqualTo(projectVO.getUserName());
+            criteria.andStatusEqualTo("01");
             List<TUserTask> userTaskList = taskMapper.selectByExample(taskExample);
 
             if(!CollectionUtils.isEmpty(userTaskList)){
@@ -129,6 +130,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             if(StringUtils.isNotBlank(projectVO.getUserName())){
                 criteria.andTaskPrincipalEqualTo(projectVO.getUserName());
             }
+            criteria.andStatusEqualTo("01");
             List<TUserTask> userTaskList = taskMapper.selectByExample(taskExample);
 
             if(!CollectionUtils.isEmpty(userTaskList)){
@@ -160,11 +162,13 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	/**
 	 * 保存及更新项目信息
 	 *
-	 * @param record 参数对象
+	 * @param vo 参数对象
 	 */
 	@Override
-	public void saveSugarProject(TSugarProjectWithBLOBs record) {
-      int  count = sugarProjectExMapper.insertSugarProject(record);
+	public void saveSugarProject(TSugarProjectVO vo) {
+        TSugarProjectWithBLOBs record = ModelCopyUtil.copy(vo, TSugarProjectWithBLOBs.class);
+
+        int  count = sugarProjectExMapper.insertSugarProject(record);
 	    if (count>0) {
 
             TUserTask tUserTask =new TUserTask();
@@ -174,6 +178,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
             tUserTask.setTaskType("00");
             tUserTask.setTaskStatus("0");
             tUserTask.setTaskName("1");
+            tUserTask.setStatus("01");
             tUserTask.setCreatedTime(DateUtils.getNowDate());
             tUserTask.setProjectId(record.getId()+"");
             tUserTask.setPlatformName(record.getPlatformName());
@@ -185,10 +190,45 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	}
 
     @Override
-    public int updateSugarProject(TSugarProjectReqDTO reqDTO){
-        TSugarProjectWithBLOBs project = ModelCopyUtil.copy(reqDTO, TSugarProjectWithBLOBs.class);
+    public int updateSugarProject(TSugarProjectVO vo){
+        TSugarProjectWithBLOBs project = ModelCopyUtil.copy(vo, TSugarProjectWithBLOBs.class);
+        if(vo.getId()==null){
+            return 0;
+        }
 
-        String fieldName = reqDTO.getFieldName();
+        //查询商机阶段经理负责人,若该阶段未指派，则重新生成指派任务,原来的指派任务状态改为删除状态,
+        //若该阶段已指派,不更新商机阶段负责人
+
+        TUserTaskExample example = new TUserTaskExample();
+        TUserTaskExample.Criteria sql = example.createCriteria();
+
+        sql.andStatusEqualTo("01");
+        sql.andProjectIdEqualTo(vo.getId()+"");
+        sql.andTaskTypeEqualTo("00");
+        sql.andTaskNameEqualTo("1");
+        sql.andTaskStatusNotEqualTo("2");
+        List<TUserTask> userTaskList = taskMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(userTaskList)){
+            TUserTask task = userTaskList.get(0);
+            if(StringUtils.isNotBlank(vo.getTaskPrincipal())){
+                if(!vo.getTaskPrincipal().equals(task.getTaskPrincipal())){
+                    task.setStatus("99");
+                    taskMapper.updateByPrimaryKeySelective(task);
+
+
+                    TUserTask newTask = ModelCopyUtil.copy(task, TUserTask.class);
+                    newTask.setId(null);
+                    newTask.setStatus("01");
+                    newTask.setCreatedTime(DateUtils.getNowDate());
+                    newTask.setPrincipal(vo.getTaskPrincipal());
+                    newTask.setTaskPrincipal(vo.getTaskPrincipal());
+                    taskMapper.insertSelective(newTask);
+                }
+            }
+
+        }else {
+            project.setTaskPrincipal(null);//设置为null不更新原来的
+        }
 
         if(StringUtils.isBlank(project.getProductType())){
             project.setProductType(null);
@@ -196,11 +236,22 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         if(StringUtils.isBlank(project.getPlatformName())){
             project.setPlatformName(null);
         }
+        if(StringUtils.isBlank(project.getGroupName())){
+            project.setGroupName(null);
+        }
+        if(StringUtils.isBlank(project.getTaskPrincipal())){
+            project.setTaskPrincipal(null);
+        }
+        if(StringUtils.isNotBlank(project.getTaskPrincipal())){
+            project.setBusinessPrincipal(project.getTaskPrincipal());
+        }
+
 
         project.setUpdatedTime(DateUtils.getNowDate());
 
         return sugarProjectMapper.updateByPrimaryKeySelective(project);
     }
+
     @Override
     public int deleteByPrimaryKey(TSugarProjectWithBLOBs project){
 
@@ -227,5 +278,14 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
         TSugarProject sugarProject = new TSugarProject();
         sugarProject = tSugarProjects.get(0);
         return sugarProject;
+    }
+
+    @Override
+    public TSugarProjectVO getSugarProjectById(TSugarProjectVO vo) {
+	    if(vo.getId()!=null){
+            TSugarProjectWithBLOBs project = sugarProjectMapper.selectByPrimaryKey(vo.getId());
+            return ModelCopyUtil.copy(project,TSugarProjectVO.class);
+        }
+        return null;
     }
 }

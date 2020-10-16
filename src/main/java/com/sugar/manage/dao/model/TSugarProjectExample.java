@@ -1394,6 +1394,76 @@ public class TSugarProjectExample {
             addCriterion("operation_maintain_principal not between", value1, value2, "operationMaintainPrincipal");
             return (Criteria) this;
         }
+
+        public Criteria andAddProjectUsernameIsNull() {
+            addCriterion("add_project_username is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameIsNotNull() {
+            addCriterion("add_project_username is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameEqualTo(String value) {
+            addCriterion("add_project_username =", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameNotEqualTo(String value) {
+            addCriterion("add_project_username <>", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameGreaterThan(String value) {
+            addCriterion("add_project_username >", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("add_project_username >=", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameLessThan(String value) {
+            addCriterion("add_project_username <", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameLessThanOrEqualTo(String value) {
+            addCriterion("add_project_username <=", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameLike(String value) {
+            addCriterion("add_project_username like", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameNotLike(String value) {
+            addCriterion("add_project_username not like", value, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameIn(List<String> values) {
+            addCriterion("add_project_username in", values, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameNotIn(List<String> values) {
+            addCriterion("add_project_username not in", values, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameBetween(String value1, String value2) {
+            addCriterion("add_project_username between", value1, value2, "addProjectUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddProjectUsernameNotBetween(String value1, String value2) {
+            addCriterion("add_project_username not between", value1, value2, "addProjectUsername");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

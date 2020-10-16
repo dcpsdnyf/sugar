@@ -9,7 +9,6 @@ import com.sugar.manage.dao.vo.GroupSugarList;
 import com.sugar.manage.dao.vo.TStagePrincipalVO;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.dao.vo.TableDataInfo;
-import com.sugar.manage.dto.TSugarProjectReqDTO;
 import com.sugar.manage.service.*;
 import com.sugar.manage.service.impl.ISugarProjectSVImpl;
 import com.sugar.manage.vo.*;
@@ -176,7 +175,7 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/newlyAdded")
     @ResponseBody
-    public SysResult newlyAdded(HttpServletRequest request, TSugarProjectWithBLOBs record){
+    public SysResult newlyAdded(HttpServletRequest request, TSugarProjectVO record){
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
         try {
             if (StringUtils.isBlank(record.getTaskPrincipal())) {
@@ -204,6 +203,8 @@ public class SugarManageController extends AppBaseController {
                 TUser user = new TUser();
                 user.setId(Integer.parseInt(userId));
                 boolean addAuthority = userSV.getAddAuthority(user);
+                String uerName = userSV.getUserIdByUerName(userId);
+                record.setAddProjectUsername(uerName);
                 if(addAuthority){
                     record.setStatus("01");
                     record.setBusinessPrincipal(record.getTaskPrincipal());
@@ -240,16 +241,43 @@ public class SugarManageController extends AppBaseController {
      */
     @RequestMapping("/Edit")
     @ResponseBody
-    public String updateSugarProject(TSugarProjectReqDTO reqDTO, HttpServletResponse response) throws Exception {
+    public SysResult updateSugarProject(TSugarProjectVO vo, HttpServletResponse response) throws Exception {
         String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
-        reqDTO.setUpdatedStaff(userId);
-        int a=sugarProjectSV.updateSugarProject(reqDTO);
-            if (a>0){
-                JSONObject result=new JSONObject();
-                result.put("success",Boolean.TRUE);
-                JsonUtil.write(response,result);
+        if(StringUtils.isBlank(userId)){
+            return SysResult.fail("用户未登录");
+        }
+        String uerName = userSV.getUserIdByUerName(userId);
+
+        TSugarProjectVO project = sugarProjectSV.getSugarProjectById(vo);
+        if(project!=null){
+            if(StringUtils.isNotBlank(uerName)){
+                if(!uerName.equals(project.getAddProjectUsername())){
+                    return SysResult.fail("您不是新增该项目的负责人，不能修改");
+                }
             }
-       return null;
+        }
+
+        TStagePrincipalVO stagePrincipalVO = new TStagePrincipalVO();
+        stagePrincipalVO.setStageNum("1");
+        List<TStagePrincipal> principalList = iStagePrincipalSV.selectStagePrincipalList(stagePrincipalVO);
+        Map<String,String> principalMap = new HashMap<>();
+        if(!CollectionUtils.isEmpty(principalList)){
+            for(TStagePrincipal principal : principalList){
+                principalMap.put(principal.getPrincipalName(),principal.getPrincipalName());
+            }
+        }
+
+        if(!principalMap.containsKey(vo.getTaskPrincipal())){
+            return SysResult.fail("修改失败，阶段负责人信息有误");
+        }
+
+        vo.setUpdatedStaff(userId);
+        int a=sugarProjectSV.updateSugarProject(vo);
+        if (a>0){
+            return SysResult.success("修改成功");
+        }
+
+       return SysResult.fail("修改失败");
     }
     @RequestMapping("/delete")
     public String deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {

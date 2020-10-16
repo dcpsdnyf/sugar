@@ -22,11 +22,11 @@ public interface ISugarProjectSV {
 
     /**
      * 保存及更新项目信息
-     * @param record 参数对象
+     * @param vo 参数对象
      */
-    public void saveSugarProject(TSugarProjectWithBLOBs record);
+    public void saveSugarProject(TSugarProjectVO vo);
 
-    public int updateSugarProject(TSugarProjectReqDTO reqDTO);
+    public int updateSugarProject(TSugarProjectVO vo);
 
     public int deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject);
 
@@ -45,4 +45,6 @@ public interface ISugarProjectSV {
      * @return
      */
     TSugarProject selectSugarProjectByName(String platformName);
+
+    public TSugarProjectVO getSugarProjectById(TSugarProjectVO vo);
 }
