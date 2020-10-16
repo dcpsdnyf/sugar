@@ -168,6 +168,7 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 	public void saveSugarProject(TSugarProjectVO vo) {
         TSugarProjectWithBLOBs record = ModelCopyUtil.copy(vo, TSugarProjectWithBLOBs.class);
 
+        //此处需返回主键id
         int  count = sugarProjectExMapper.insertSugarProject(record);
 	    if (count>0) {
 
