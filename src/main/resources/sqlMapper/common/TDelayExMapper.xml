@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sugar.manage.dao.mapper.TDelayExMapper">
+    
+    <resultMap type="com.sugar.manage.dao.vo.TDelayVO" id="TDelayResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="STATUS"    />
+        <result property="createdStaff"    column="CREATED_STAFF"    />
+        <result property="createdTime"    column="CREATED_TIME"    />
+        <result property="updatedStaff"    column="UPDATED_STAFF"    />
+        <result property="updatedTime"    column="UPDATED_TIME"    />
+        <result property="delayTime"    column="DELAY_TIME"    />
+        <result property="delayPeopleName"    column="DELAY_PEOPLE_NAME"    />
+        <result property="auditingPeopleName"    column="AUDITING_PEOPLE_NAME"    />
+        <result property="projectId"    column="PROJECT_ID"    />
+        <result property="taskName"    column="TASK_NAME"    />
+        <result property="auditingStatus"    column="AUDITING_STATUS"    />
+    </resultMap>
+
+    <sql id="selectTDelayVo">
+        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, DELAY_TIME, DELAY_PEOPLE_NAME, AUDITING_PEOPLE_NAME, PROJECT_ID, TASK_NAME, AUDITING_STATUS from t_delay
+    </sql>
+
+    <select id="selectTDelayList" parameterType="com.sugar.manage.dao.vo.TDelayVO" resultMap="TDelayResult">
+        <include refid="selectTDelayVo"/>
+        <where>  
+            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
+            <if test="createdStaff != null  and createdStaff != ''"> and CREATED_STAFF = #{createdStaff}</if>
+            <if test="createdTime != null "> and CREATED_TIME = #{createdTime}</if>
+            <if test="updatedStaff != null  and updatedStaff != ''"> and UPDATED_STAFF = #{updatedStaff}</if>
+            <if test="updatedTime != null "> and UPDATED_TIME = #{updatedTime}</if>
+            <if test="delayTime != null  and delayTime != ''"> and DELAY_TIME = #{delayTime}</if>
+            <if test="delayPeopleName != null  and delayPeopleName != ''"> and DELAY_PEOPLE_NAME like concat('%', #{delayPeopleName}, '%')</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''"> and AUDITING_PEOPLE_NAME like concat('%', #{auditingPeopleName}, '%')</if>
+            <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
+            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectTDelayById" parameterType="Long" resultMap="TDelayResult">
+        <include refid="selectTDelayVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTDelay" parameterType="com.sugar.manage.dao.vo.TDelayVO" useGeneratedKeys="true" keyProperty="id">
+        insert into t_delay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null  and status != ''">STATUS,</if>
+            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF,</if>
+            <if test="createdTime != null ">CREATED_TIME,</if>
+            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF,</if>
+            <if test="updatedTime != null ">UPDATED_TIME,</if>
+            <if test="delayTime != null  and delayTime != ''">DELAY_TIME,</if>
+            <if test="delayPeopleName != null  and delayPeopleName != ''">DELAY_PEOPLE_NAME,</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''">AUDITING_PEOPLE_NAME,</if>
+            <if test="projectId != null  and projectId != ''">PROJECT_ID,</if>
+            <if test="taskName != null  and taskName != ''">TASK_NAME,</if>
+            <if test="auditingStatus != null  and auditingStatus != ''">AUDITING_STATUS,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="createdStaff != null  and createdStaff != ''">#{createdStaff},</if>
+            <if test="createdTime != null ">#{createdTime},</if>
+            <if test="updatedStaff != null  and updatedStaff != ''">#{updatedStaff},</if>
+            <if test="updatedTime != null ">#{updatedTime},</if>
+            <if test="delayTime != null  and delayTime != ''">#{delayTime},</if>
+            <if test="delayPeopleName != null  and delayPeopleName != ''">#{delayPeopleName},</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''">#{auditingPeopleName},</if>
+            <if test="projectId != null  and projectId != ''">#{projectId},</if>
+            <if test="taskName != null  and taskName != ''">#{taskName},</if>
+            <if test="auditingStatus != null  and auditingStatus != ''">#{auditingStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTDelay" parameterType="com.sugar.manage.dao.vo.TDelayVO">
+        update t_delay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null  and status != ''">STATUS = #{status},</if>
+            <if test="createdStaff != null  and createdStaff != ''">CREATED_STAFF = #{createdStaff},</if>
+            <if test="createdTime != null ">CREATED_TIME = #{createdTime},</if>
+            <if test="updatedStaff != null  and updatedStaff != ''">UPDATED_STAFF = #{updatedStaff},</if>
+            <if test="updatedTime != null ">UPDATED_TIME = #{updatedTime},</if>
+            <if test="delayTime != null  and delayTime != ''">DELAY_TIME = #{delayTime},</if>
+            <if test="delayPeopleName != null  and delayPeopleName != ''">DELAY_PEOPLE_NAME = #{delayPeopleName},</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''">AUDITING_PEOPLE_NAME = #{auditingPeopleName},</if>
+            <if test="projectId != null  and projectId != ''">PROJECT_ID = #{projectId},</if>
+            <if test="taskName != null  and taskName != ''">TASK_NAME = #{taskName},</if>
+            <if test="auditingStatus != null  and auditingStatus != ''">AUDITING_STATUS = #{auditingStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="udaDelay" parameterType="com.sugar.manage.dao.vo.TDelayVO">
+        update t_delay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="auditingStatus != null  and auditingStatus != ''">AUDITING_STATUS = #{auditingStatus},</if>
+            STATUS = "99"
+        </trim>
+
+        <where>
+            <if test="status != null  and status != ''">STATUS = #{status}</if>
+            <if test="delayPeopleName != null  and delayPeopleName != ''"> and DELAY_PEOPLE_NAME like concat('%', #{delayPeopleName}, '%')</if>
+            <if test="auditingPeopleName != null  and auditingPeopleName != ''"> and AUDITING_PEOPLE_NAME like concat('%', #{auditingPeopleName}, '%')</if>
+            <if test="projectId != null  and projectId != ''"> and PROJECT_ID = #{projectId}</if>
+            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
+        </where>
+    </update>
+
+    <delete id="deleteTDelayById" parameterType="Long">
+        delete from t_delay where id = #{id}
+    </delete>
+
+    <delete id="deleteTDelayByIds" parameterType="String">
+        delete from t_delay where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

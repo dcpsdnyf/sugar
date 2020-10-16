@@ -82,4 +82,10 @@ public class TUserTaskVO extends BaseModel implements Serializable
 
     private List<TUserTaskVO> userTaskVOList;
 
+    /** 用户id */
+    private String userId;
+
+    /** 用户名 */
+    private String userName;
+
 }

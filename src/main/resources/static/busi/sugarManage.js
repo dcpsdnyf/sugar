@@ -903,12 +903,14 @@ var appointModel = function (id) {
 //申请延期事件
 var delayModel = function (id) {
 	//根据当前行的id获取当前的行数据
-	var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+	var row = $("#tb_backlog").bootstrapTable('getRowByUniqueId', id);
 	//弹出模态框
 	$("#delayMyModal").modal();
 	//给弹出框里面的各个文本框赋值
-	$("#delayMyModal input[name='projectId']").val(id);
-	$("#delayMyModal input[name='delayDay']").val(row.delayDay);
+	$("#delayMyModal input[name='projectId']").val(row.projectId);
+	$("#delayMyModal input[name='taskName']").val(row.taskName);
+	$("#delayMyModal input[name='taskSubName']").val(row.taskSubName);
+	//$("#delayMyModal input[name='delayDay']").val(row.delayDay);
 }
 
 //删除事件
@@ -1292,14 +1294,13 @@ function runInit() {
 		data: {"platformName": platformName},
 		dataType: 'JSON',
 		success: function (result) {
-			if(result!=null){
-				initEcharts(result);
-			}
+			initEcharts(result);
 		}
 	});
 }
 
 function initEcharts(result) {
+	debugger
 	var res = [];
 	var projectName = [];
 	var categories = ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段'];

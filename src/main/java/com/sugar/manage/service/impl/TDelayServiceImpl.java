@@ -2,8 +2,8 @@ package com.sugar.manage.service.impl;
 
 import java.util.List;
 
-import com.sugar.manage.dao.mapper.TDelayMapper;
-import com.sugar.manage.dao.vo.TDelay;
+import com.sugar.manage.dao.mapper.TDelayExMapper;
+import com.sugar.manage.dao.vo.TDelayVO;
 import com.sugar.manage.service.ITDelayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class TDelayServiceImpl implements ITDelayService
 {
     @Autowired
-    private TDelayMapper tDelayMapper;
+    private TDelayExMapper tDelayMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -28,7 +28,7 @@ public class TDelayServiceImpl implements ITDelayService
      * @return 【请填写功能名称】
      */
     @Override
-    public TDelay selectTDelayById(Long id)
+    public TDelayVO selectTDelayById(Long id)
     {
         return tDelayMapper.selectTDelayById(id);
     }
@@ -40,7 +40,7 @@ public class TDelayServiceImpl implements ITDelayService
      * @return 【请填写功能名称】
      */
     @Override
-    public List<TDelay> selectTDelayList(TDelay tDelay)
+    public List<TDelayVO> selectTDelayList(TDelayVO tDelay)
     {
         return tDelayMapper.selectTDelayList(tDelay);
     }
@@ -52,7 +52,7 @@ public class TDelayServiceImpl implements ITDelayService
      * @return 结果
      */
     @Override
-    public int insertTDelay(TDelay tDelay)
+    public int insertTDelay(TDelayVO tDelay)
     {
         return tDelayMapper.insertTDelay(tDelay);
     }
@@ -64,7 +64,7 @@ public class TDelayServiceImpl implements ITDelayService
      * @return 结果
      */
     @Override
-    public int updateTDelay(TDelay tDelay)
+    public int updateTDelay(TDelayVO tDelay)
     {
         return tDelayMapper.updateTDelay(tDelay);
     }

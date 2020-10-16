@@ -183,12 +183,12 @@ function backlog() {
 					if (row.delay && row.appoint) {
 						html = '<div style=\'width:100%;\'>' +
 							'<button type="button" onclick="updateUserTask(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="delayModel(' + row.projectId + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >' +
+							'<button type="button" onclick="delayModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >' +
 							'</div>';
 					} else if (row.delay) {
 						html = '<div style=\'width:100%;\'>' +
 							'<button type="button" onclick="updateUserTask(' + row.id + ')" class="btn btn-primary"  style="font-weight:150;font-size:12px;padding:3px 3px"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >确认完成</button >&nbsp;&nbsp;' +
-							'<button type="button" onclick="delayModel(' + row.projectId + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >' +
+							'<button type="button" onclick="delayModel(' + row.id + ')" class="btn btn-danger"  style="font-weight:150;font-size:12px;padding:3px 8px;margin-left: 10px"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >申请延期</button >' +
 							'</div>';
 					} else if (row.appoint) {
 						html = '<div style=\'width:100%;\'>' +
@@ -200,7 +200,6 @@ function backlog() {
 				}
 			}],
 		onEditableSave: function (field, row, oldValue, $el) {
-			debugger
 			// alert("更新保存事件，原始值为" + oldValue);
 			$.ajax({
 				type: "POST",
@@ -217,7 +216,6 @@ function backlog() {
 			});
 		},
 		onLoadSuccess: function (data) {
-			debugger
 			if (data != null ) {
 			for (var k = 0; k < data.length; k++) {
 				if (data[k].taskType == '00') {

@@ -5,30 +5,37 @@
 <mapper namespace="com.sugar.manage.dao.mapper.TUserTaskExMapper">
 
 	<resultMap type="com.sugar.manage.dao.model.TUserTask" id="TUserTaskResult">
-		<result property="id" column="id"/>
-		<result property="status" column="STATUS"/>
-		<result property="createdStaff" column="CREATED_STAFF"/>
-		<result property="createdTime" column="CREATED_TIME"/>
-		<result property="updatedStaff" column="UPDATED_STAFF"/>
-		<result property="updatedTime" column="UPDATED_TIME"/>
-		<result property="projectId" column="PROJECT_ID"/>
-		<result property="taskPrincipal" column="TASK_PRINCIPAL"/>
-		<result property="taskType" column="TASK_TYPE"/>
-		<result property="taskStatus" column="TASK_STATUS"/>
-		<result property="taskName" column="TASK_NAME"/>
-		<result property="taskSubName" column="TASK_SUB_NAME"/>
-		<result property="startTime" column="START_TIME"/>
-		<result property="endTime" column="END_TIME"/>
-		<result property="estimatedTime" column="ESTIMATED_TIME"/>
-		<result property="taskInfo" column="TASK_INFO"/>
-		<result property="taskParentType" column="TASK_PARENT_TYPE"/>
-		<result property="delayDay" column="DELAY_DAY"/>
-		<result property="delayPeople" column="DELAY_PEOPLE"/>
-		<result property="principal" column="principal"/>
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="CREATED_STAFF" jdbcType="VARCHAR" property="createdStaff" />
+		<result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+		<result column="UPDATED_STAFF" jdbcType="VARCHAR" property="updatedStaff" />
+		<result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+		<result column="PROJECT_ID" jdbcType="VARCHAR" property="projectId" />
+		<result column="TASK_PRINCIPAL" jdbcType="VARCHAR" property="taskPrincipal" />
+		<result column="TASK_TYPE" jdbcType="VARCHAR" property="taskType" />
+		<result column="TASK_STATUS" jdbcType="VARCHAR" property="taskStatus" />
+		<result column="TASK_NAME" jdbcType="VARCHAR" property="taskName" />
+		<result column="TASK_SUB_NAME" jdbcType="VARCHAR" property="taskSubName" />
+		<result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+		<result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+		<result column="ESTIMATED_TIME" jdbcType="VARCHAR" property="estimatedTime" />
+		<result column="TASK_INFO" jdbcType="VARCHAR" property="taskInfo" />
+		<result column="TASK_PARENT_TYPE" jdbcType="VARCHAR" property="taskParentType" />
+		<result column="DELAY_DAY" jdbcType="VARCHAR" property="delayDay" />
+		<result column="DELAY_PEOPLE" jdbcType="VARCHAR" property="delayPeople" />
+		<result column="principal" jdbcType="VARCHAR" property="principal" />
+		<result column="product_type" jdbcType="VARCHAR" property="productType" />
+		<result column="platform_name" jdbcType="VARCHAR" property="platformName" />
+		<result column="group_name" jdbcType="VARCHAR" property="groupName" />
 	</resultMap>
 
 	<sql id="selectTUserTaskVo">
-        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID, TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME, ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE,DELAY_DAY,DELAY_PEOPLE,principal from t_user_task
+        select id, STATUS, CREATED_STAFF, CREATED_TIME, UPDATED_STAFF, UPDATED_TIME, PROJECT_ID,
+    	TASK_PRINCIPAL, TASK_TYPE, TASK_STATUS, TASK_NAME, TASK_SUB_NAME, START_TIME, END_TIME,
+    	ESTIMATED_TIME, TASK_INFO, TASK_PARENT_TYPE, DELAY_DAY, DELAY_PEOPLE, principal,
+    	product_type, platform_name, group_name
+    	from t_user_task
     </sql>
 
 	<select id="selectTUserTaskList" parameterType="com.sugar.manage.dao.model.TUserTask" resultMap="TUserTaskResult">
@@ -349,19 +356,23 @@
 		 TASK_STATUS = '1'
 	 </select>-->
 
-	<select id="getTaskInfoByPrincipalAndPJId" parameterType="String" resultMap="TUserTaskResult">
+	<select id="getTaskInfoByPrincipalAndPJId" parameterType="com.sugar.manage.dao.vo.TUserTaskVO" resultMap="TUserTaskResult">
 		<include refid="selectTUserTaskVo"/>
 		WHERE
 		TASK_PRINCIPAL = #{userName}
 		AND
 		PROJECT_ID = #{projectId}
 		AND
+		TASK_NAME = #{taskName}
+		AND
+		TASK_SUB_NAME = #{taskSubName}
+		AND
 		TASK_STATUS = '0'
 		OR
 		TASK_STATUS = '1'
 	</select>
 
-	<select id="getPrincipal" parameterType="com.sugar.manage.dao.model.TUserTask" resultMap="TUserTaskResult">
+	<select id="getPrincipal" parameterType="com.sugar.manage.dao.vo.TUserTaskVO" resultMap="TUserTaskResult">
 		<include refid="selectTUserTaskVo"/>
 		WHERE
 		PROJECT_ID =#{projectId}

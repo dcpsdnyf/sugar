@@ -5,7 +5,7 @@ import com.sugar.common.utils.DateUtils;
 import com.sugar.common.utils.ModelCopyUtil;
 import com.sugar.manage.dao.mapper.*;
 import com.sugar.manage.dao.model.*;
-import com.sugar.manage.dao.vo.TDelay;
+import com.sugar.manage.dao.vo.TDelayVO;
 import com.sugar.manage.dao.vo.TUserTaskVO;
 import com.sugar.manage.service.ITUserTaskService;
 import com.sugar.manage.vo.StageTimeVO;
@@ -35,7 +35,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Autowired
 	private TUserMapper tUserMapper;
 	@Autowired
-	private TDelayMapper tDelayMapper;
+	private TDelayExMapper tDelayMapper;
 	@Autowired
 	private TSugarProjectMapper tSugarProjectMapper;
 	@Autowired
@@ -48,6 +48,8 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	private TUserExMapper tUserExMapper;
 	@Autowired
 	private TUserRoleExMapper userRoleExMapper;
+	@Autowired
+	private TDelayMapper delayMapper;
 
 	/**
 	 * 查询【请填写功能名称】
@@ -310,14 +312,16 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public int delay(String userId, String projectId, String delayDay) throws ParseException {
+	public int delay(TUserTaskVO tUserTaskVO) throws ParseException {
 		//1.先根据用户id获取用户名
-		String userName = tUserExMapper.getUserIdByUerName(userId);
+		String userName = tUserExMapper.getUserIdByUerName(tUserTaskVO.getUserId());
 		if (StringUtils.isBlank(userName)) {
 			return 0;
 		}
-		//2.根据用户名与项目id获取该用户未完成的任务
-		TUserTask tkuser = tUserTaskMapper.getTaskInfoByPrincipalAndPJId(userName, projectId);
+		tUserTaskVO.setUserName(userName);
+
+		//2.根据用户名与项目id,大阶段id，小阶段id,获取该用户未完成的任务
+		TUserTask tkuser = tUserTaskMapper.getTaskInfoByPrincipalAndPJId(tUserTaskVO);
 		if (StringUtils.isBlank(tkuser.getStartTime())) {
 			return 0;
 		}
@@ -326,30 +330,40 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			return 0;
 		}
 		TDelay tDelay = new TDelay();
-		tDelay.setDelayTime(delayDay);
+		tDelay.setDelayTime(tUserTaskVO.getDelayDay());
 		tDelay.setDelayPeopleName(userName);
 		//1.查到谁给他指派的任务
-		TUserTask tk = tUserTaskMapper.getPrincipal(projectId, tkuser.getTaskName());
-		tDelay.setAuditingPeopleName(tk.getTaskPrincipal());
-		tDelay.setProjectId(projectId);
-		tDelay.setTaskName(tkuser.getTaskName());
+		TUserTask tk = tUserTaskMapper.getPrincipal(tUserTaskVO);
+		if(tk!=null){
+			tDelay.setAuditingPeopleName(tk.getTaskPrincipal());
+		}
+		tDelay.setProjectId(tUserTaskVO.getProjectId());
+		tDelay.setTaskName(tUserTaskVO.getTaskName());
+		tDelay.setTaskSubName(tUserTaskVO.getTaskSubName());
 		tDelay.setAuditingStatus("1");//默认为1失败
 		tDelay.setStatus("01");
-		int count = tDelayMapper.insertTDelay(tDelay);
+		tDelay.setCreatedTime(DateUtils.getNowDate());
+		int count = delayMapper.insertSelective(tDelay);
 		if (count > 0) {
 			//延期成功后给上级派发任务
 			//2.获取项目id,延期天数，延期人，延期任务名，并新增任务，指定负责人为tk.getTaskPrincipal();
 			TUserTask tkuse = new TUserTask();
-			tkuse.setDelayDay(delayDay);
-			tkuse.setDelayPeople(userName);
-			tkuse.setTaskName(tkuser.getTaskName());
-			tkuse.setProjectId(projectId);
-			tkuse.setTaskPrincipal(tk.getTaskPrincipal());
-			tkuse.setStartTime(tk.getStartTime());
-			tkuse.setEstimatedTime(tkuser.getEstimatedTime());
-			tkuse.setTaskInfo("延期申请"+delayDay);
+			tkuse.setProductType(tkuser.getProductType());
+			tkuse.setPlatformName(tkuser.getPlatformName());
+			tkuse.setGroupName(tkuser.getGroupName());
+			tkuse.setDelayDay(tUserTaskVO.getDelayDay());//延期到的时间
+			tkuse.setDelayPeople(userName);//申请人
+			tkuse.setProjectId(tUserTaskVO.getProjectId());//项目id
+			tkuse.setTaskPrincipal(tk.getTaskPrincipal());//要审批的负责人
+			tkuse.setPrincipal(tkuser.getTaskPrincipal());//现阶段负责人
+			tkuse.setStartTime(tkuser.getStartTime());//小阶段开始时间
+			tkuse.setEstimatedTime(tkuser.getEstimatedTime());//小阶段计划完成时间
+			tkuse.setTaskInfo("任务延期申请至:"+tUserTaskVO.getDelayDay());
 			tkuse.setTaskStatus("0");
-			int coun = tUserTaskMapper.insertTUserTask(tkuse);
+			tkuse.setTaskName(tUserTaskVO.getTaskName());//大阶段id
+			tkuse.setTaskSubName(tUserTaskVO.getTaskSubName());//小阶段id
+			tkuse.setCreatedTime(DateUtils.getNowDate());
+			int coun = taskMapper.insertSelective(tkuse);
 			if (coun > 0) {
 				return 1;
 			}
@@ -366,18 +380,18 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		if (StringUtils.isBlank(userName)) {
 			return 0;
 		}
-		TDelay delay = new TDelay();
+		TDelayVO delay = new TDelayVO();
 		delay.setProjectId(projectId);
 		delay.setAuditingPeopleName(userName);
 		delay.setStatus("01");
 		delay.setTaskName(taskName);
 		if ("0".equals(staus)) {
 			delay.setAuditingStatus("0");
-            List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+            List<TDelayVO> delayList = tDelayMapper.selectTDelayList(delay);
 			int count = tDelayMapper.udaDelay(delay);
 			if (count > 0) {
 				TUserTask task = new TUserTask();
-				for (TDelay s : delayList) {
+				for (TDelayVO s : delayList) {
 					task.setDelayDay(s.getDelayTime());
 					task.setDelayPeople(s.getDelayPeopleName());
 					task.setTaskPrincipal(s.getAuditingPeopleName());
@@ -404,9 +418,9 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 		} else {
 			delay.setAuditingStatus("1");
 			int count = tDelayMapper.udaDelay(delay);
-			List<TDelay> delayList = tDelayMapper.selectTDelayList(delay);
+			List<TDelayVO> delayList = tDelayMapper.selectTDelayList(delay);
 			TUserTask task = new TUserTask();
-			for (TDelay s : delayList) {
+			for (TDelayVO s : delayList) {
 				task.setDelayDay(s.getDelayTime());
 				task.setDelayPeople(s.getDelayPeopleName());
 				task.setTaskPrincipal(s.getAuditingPeopleName());

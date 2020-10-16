@@ -104,13 +104,13 @@ public class SugarManageController extends AppBaseController {
         //查询列表详情再分组
         GroupSugarList sugarProjectGroupList = iSugarProjectSV.getSugarProjectGroupList(projectVO);
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getProductType())){
-            model.addAttribute("productType",sugarProjectGroupList.getProductType().stream().filter(productType -> productType != null).distinct().collect(Collectors.toList()));
+            model.addAttribute("productType",sugarProjectGroupList.getProductType().stream().filter(productType -> StringUtils.isNotBlank(productType)).distinct().collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getPlatformName())){
-            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName().stream().filter(platformName -> platformName != null).distinct().collect(Collectors.toList()));
+            model.addAttribute("platformName",sugarProjectGroupList.getPlatformName().stream().filter(platformName -> StringUtils.isNotBlank(platformName)).distinct().collect(Collectors.toList()));
         }
         if(!CollectionUtils.isEmpty(sugarProjectGroupList.getGroupName())){
-            model.addAttribute("groupName",sugarProjectGroupList.getGroupName().stream().filter(groupName -> groupName != null).distinct().collect(Collectors.toList()));
+            model.addAttribute("groupName",sugarProjectGroupList.getGroupName().stream().filter(groupName -> StringUtils.isNotBlank(groupName)).distinct().collect(Collectors.toList()));
         }
 
         return "sugarManage/sugarManage";
@@ -399,7 +399,7 @@ public class SugarManageController extends AppBaseController {
     @ResponseBody
     public List<ProjectChartVO> echartForProject(String platformName, Model model){
         List<TUserTaskVO> result = new ArrayList<>();
-
+        List<ProjectChartVO> UserTaskTimes = new ArrayList<>();
         if(!StringUtils.isBlank(platformName)){
             //根据platFormName查询出Project
             TSugarProject sugarProject = iSugarProjectSV.selectSugarProjectByName(platformName);
@@ -414,7 +414,7 @@ public class SugarManageController extends AppBaseController {
                     //取出最后一条数据:大阶段开始的数据,取其开始时间      取出开始一条数据:大阶段目前处于位置,取其结束时间
                     Map<String, List<TUserTaskVO>> map = tUserTasks.stream().collect(Collectors.groupingBy(TUserTaskVO::getTaskName));
 
-                    List<ProjectChartVO> UserTaskTimes = new ArrayList<>();
+                    UserTaskTimes = new ArrayList<>();
                     //商机推进
                     setUserTimes("1",map,UserTaskTimes);
                     setUserTimes("2",map,UserTaskTimes);
@@ -428,7 +428,7 @@ public class SugarManageController extends AppBaseController {
             }
 
         }
-        return null;
+        return UserTaskTimes;
     }
 
     private void setUserTimes(String key, Map<String,List<TUserTaskVO>> map,List<ProjectChartVO> UserTaskTimes){

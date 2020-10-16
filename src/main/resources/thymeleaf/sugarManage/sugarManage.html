@@ -250,6 +250,8 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="projectId" value="">
+                    <input type="hidden" name="taskName" value="">
+                    <input type="hidden" name="taskSubName" value="">
                     <div class="row" style="padding:10px;">
                         <label class="control-label col-xs-2">延期天数</label>
                         <div class="col-xs-10">
@@ -319,7 +321,7 @@
 
 <div style="margin-left: 50px;width: 100%;margin-top: 10px">
 <select id="productName"  class="form-control" style="width: 200px; margin-left:-10px; " onchange="runInit()">
-    <option th:each="platformNames,iterStat : ${platformName}" th:text="${platformNames}" th:value="${platformNames}" th:selected="${iterStat.count==0?'selected':''}"></option>
+    <option th:each="platformNames,iterStat : ${platformName}" th:text="${platformNames}" th:value="${platformNames}" th:selected="${iterStat.count==0}"></option>
 </select>
 </div>
 

@@ -2,6 +2,7 @@ package com.sugar.manage.dao.mapper;
 
 
 import com.sugar.manage.dao.model.TUserTask;
+import com.sugar.manage.dao.vo.TUserTaskVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -85,9 +86,9 @@ public interface TUserTaskExMapper
 
     public TUserTask getProject(@Param("projectId") String projectId,@Param("taskPrincipal") String taskPrincipal,@Param("taskInfo") String taskInfo,@Param("taskStatus") String taskStatus);
 
-    public TUserTask getTaskInfoByPrincipalAndPJId(@Param("userName") String userName,@Param("projectId") String projectId);
+    public TUserTask getTaskInfoByPrincipalAndPJId(TUserTaskVO tUserTaskVO);
 
-    public TUserTask getPrincipal(@Param("projectId") String projectId,@Param("taskName") String taskName);
+    public TUserTask getPrincipal(TUserTaskVO tUserTaskVO);
 
     public TUserTask getOnlyAddPricipalTKName1(String projectId);
 

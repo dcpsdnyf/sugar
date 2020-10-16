@@ -203,26 +203,30 @@ public class TUserTaskController {
 	 */
 	@RequestMapping("/delay")
 	@ResponseBody
-	public SysResult delay(TUserTask tUserTask, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public SysResult delay(TUserTaskVO tUserTask, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = CookieUtils.getCookie(request, "SUGAR_USER_ID");
 		if (StringUtils.isBlank(userId)) {
-			return null;
+			return SysResult.fail("用户未登录");
 		}
 		if (StringUtils.isBlank(tUserTask.getProjectId())) {
-			return null;
+			return SysResult.fail("操作失败");
 		}
 		if (StringUtils.isBlank(tUserTask.getDelayDay())) {
-			return null;
+			return SysResult.fail("延期时间为空");
 		}
-//		if (!this.isNumeric(tUserTask.getDelayDay())) {
-//			return null;
-//		}
-		int count = itUserTaskService.delay(userId, tUserTask.getProjectId(), tUserTask.getDelayDay());
+		if(StringUtils.isBlank(tUserTask.getTaskName())){
+			return SysResult.fail("操作失败");
+		}
+		if(StringUtils.isBlank(tUserTask.getTaskSubName())){
+			return SysResult.fail("操作失败");
+		}
+		tUserTask.setUserId(userId);
+		int count = itUserTaskService.delay(tUserTask);
 		if (count > 0) {
-			return SysResult.success("成功", null);
+			return SysResult.success("已提交申请", null);
 		}
 
-		return null;
+		return SysResult.fail("申请失败");
 	}
 
 	/**

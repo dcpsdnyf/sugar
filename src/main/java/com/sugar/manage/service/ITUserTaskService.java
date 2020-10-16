@@ -76,7 +76,7 @@ public interface ITUserTaskService
 
     public int changeTaskStatusByPrincipalAndProjectId(String taskstatus,String projectId,String taskPrincipal);
 
-    public int delay(String userId,String projectId,String delayDay) throws ParseException;
+    public int delay(TUserTaskVO tUserTaskVO) throws ParseException;
 
     public void updateUserTask(TUserTaskVO tUserTaskVO);
     public int examine(String userId,String projectId,String staus,String taskName) throws ParseException;
