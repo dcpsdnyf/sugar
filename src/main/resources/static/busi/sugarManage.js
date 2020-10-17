@@ -845,7 +845,7 @@ $(function () {
 	});
 
 	//画Echart
-	runInit();
+	makeEchart();
 });
 
 
@@ -921,8 +921,8 @@ var deleteModel = function (id) {
 			url: WEB_ROOT + "/sugarManage/delete",
 			data: "id=" + id,
 			dataType: 'JSON',
-			success: function (status) {
-				confirmModal("提示", "删除成功！", function () {
+			success: function (result) {
+				confirmModal("提示", result.msg, function () {
 					window.location.reload();
 				}, {}, function () {
 					window.location.reload();
@@ -1281,7 +1281,7 @@ function roolBack(selectValue) {
 }
 
 
-function runInit() {
+function makeEchart() {
 	var platformName = $("#productName").val();
 	$.ajax({
 		type: "post",
@@ -1289,11 +1289,211 @@ function runInit() {
 		data: {"platformName": platformName},
 		dataType: 'JSON',
 		success: function (result) {
-			initEcharts(result);
+			generateEchart(result);
 		}
 	});
 }
 
+function generateEchart(result) {
+	var nowTime = +new Date();
+	if(result.length>0){
+		var tasks = result[0];
+		var firstTask = tasks.userTaskVOList[0];
+		var indexStartTime = firstTask.startTime;
+		indexStartTime = indexStartTime.replace(new RegExp("-","gm"),"/");
+		nowTime = new Date(indexStartTime).getTime();
+	}
+
+	var data = [];
+	//var nowTime = +new Date();
+	var categories = ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段'];
+	var types = [
+		{name: '商机推进阶段', color: '#7b9ce1'},
+		{name: '采购阶段', color: '#bd6d6c'},
+		{name: '产品阶段', color: '#75d874'},
+		{name: '研发阶段', color: '#e0bc78'},
+		{name: '运营阶段', color: '#dc77dc'},
+		{name: '运维阶段', color: '#72b362'}
+	];
+
+	var colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
+
+// Generate mock data
+
+	var baseTime = nowTime;
+	echarts.util.each(categories, function (category, index) {
+
+		if(index<=result.length-1){
+			var rowTask = result[index];
+			var taskList = rowTask.userTaskVOList;
+
+			for (var i = 0; i < taskList.length; i++) {
+				var task = taskList[i];
+
+				var showTime = task.startTime + "-" + task.endTime;
+				var normalTime = task.startTime + "-" + task.estimatedTime;
+				var delayTime = task.estimatedTime + "-" + task.endTime;
+
+				var startTime = task.startTime;
+				var endTime = task.endTime;
+				var estimatedTime = task.estimatedTime;
+
+				var taskSubName = task.taskSubName;
+				taskSubName = getTaskSubName(taskSubName);
+
+				startTime = startTime.replace(new RegExp("-","gm"),"/");
+				endTime = endTime.replace(new RegExp("-","gm"),"/");
+				estimatedTime = estimatedTime.replace(new RegExp("-","gm"),"/");
+
+				var _startTime = new Date(startTime).getTime();
+				var _endTime = new Date(endTime).getTime();
+				var _estimatedTime = new Date(estimatedTime).getTime();
+
+				var typeItem = types[index];
+
+				if(_endTime>_estimatedTime){	//延期情况
+					data.push({
+						name: taskSubName,
+						value: [
+							index,
+							_startTime,
+							_estimatedTime,
+							normalTime
+						],
+						itemStyle: {
+							normal: {
+								color: typeItem.color
+							}
+						}
+					});
+					data.push({
+						name: taskSubName,
+						value: [
+							index,
+							_estimatedTime,
+							_endTime,
+							delayTime
+						],
+						itemStyle: {
+							normal: {
+								color: "#FF0000"
+							}
+						}
+					});
+				}else {	//正常完成
+					data.push({
+						name: taskSubName,
+						value: [
+							index,
+							_startTime,
+							_endTime,
+							showTime
+						],
+						itemStyle: {
+							normal: {
+								color: typeItem.color
+							}
+						}
+					});
+				}
+			}
+		}
+
+	});
+
+	var myChart = echarts.init(document.getElementById('chart'));
+
+	function renderItem(params, api) {
+		var categoryIndex = api.value(0);
+		var start = api.coord([api.value(1), categoryIndex]);
+		var end = api.coord([api.value(2), categoryIndex]);
+		var height = api.size([0, 1])[1] * 0.6;
+
+		var rectShape = echarts.graphic.clipRectByRect({
+			x: start[0],
+			y: start[1] - height / 2,
+			width: end[0] - start[0],
+			height: height
+		}, {
+			x: params.coordSys.x,
+			y: params.coordSys.y,
+			width: params.coordSys.width,
+			height: params.coordSys.height
+		});
+
+		return rectShape && {
+			type: 'rect',
+			shape: rectShape,
+			style: api.style()
+		};
+	}
+
+
+	option = {
+		tooltip: {
+			formatter: function (params) {
+				return params.marker + params.name + ': ' + params.value[3];
+			}
+		},
+		title: {
+			text: '项目进度',
+			left: 'center'
+		},
+		dataZoom: [{
+			type: 'slider',
+			filterMode: 'weakFilter',
+			showDataShadow: false,
+			top: 400,
+			height: 10,
+			borderColor: 'transparent',
+			backgroundColor: '#e2e2e2',
+			handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+			handleSize: 20,
+			handleStyle: {
+				shadowBlur: 6,
+				shadowOffsetX: 1,
+				shadowOffsetY: 2,
+				shadowColor: '#aaa'
+			},
+			labelFormatter: ''
+		}, {
+			type: 'inside',
+			filterMode: 'weakFilter'
+		}],
+		grid: {
+			height: 300,
+		},
+		xAxis: {
+			min: nowTime,
+			scale: true,
+			axisLabel: {
+				formatter: function (val) {
+					return Math.max(0, val-nowTime);
+				}
+			}
+		},
+		yAxis: {
+			data: categories
+		},
+		series: [{
+			type: 'custom',
+			renderItem: renderItem,
+			itemStyle: {
+				opacity: 0.8
+			},
+			encode: {
+				x: [1, 2],
+				y: 0
+			},
+			data: data
+		}]
+	};
+
+	myChart.setOption(option);
+
+}
+
+/*
 function initEcharts(result) {
 	debugger
 	var res = [];
@@ -1301,7 +1501,6 @@ function initEcharts(result) {
 	var categories = ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段'];
 	var colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
 	$.each(result, function (key, v) {
-		console.log(key);
 		var value = [];
 		if (v.startTime != null && v.endTime != null && v.projectStage != null) {
 			value.push(key);
@@ -1315,8 +1514,7 @@ function initEcharts(result) {
 			});
 		}
 	});
-	var myChart =
-		echarts.init(document.getElementById('chart'));
+	var myChart = echarts.init(document.getElementById('chart'));
 	var option = {
 		tooltip: {
 			formatter: function (params) {
@@ -1375,4 +1573,4 @@ function initEcharts(result) {
 		]
 	};
 	myChart.setOption(option);
-}
+}*/

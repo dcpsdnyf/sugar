@@ -24,10 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -279,16 +277,16 @@ public class SugarManageController extends AppBaseController {
 
        return SysResult.fail("修改失败");
     }
+
     @RequestMapping("/delete")
-    public String deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {
+    @ResponseBody
+    public SysResult deleteByPrimaryKey(TSugarProjectWithBLOBs tSugarProject, HttpServletResponse response) throws Exception {
         tSugarProject.setStatus("99");
         int a=sugarProjectSV.deleteByPrimaryKey(tSugarProject);
         if (a>0){
-            JSONObject result=new JSONObject();
-            result.put("success",Boolean.TRUE);
-            JsonUtil.write(response,result);
+            return SysResult.success("删除成功",null);
         }
-        return null;
+        return SysResult.fail("删除失败");
     }
 
     /**
@@ -425,16 +423,17 @@ public class SugarManageController extends AppBaseController {
 
     @RequestMapping("/echartForProject")
     @ResponseBody
-    public List<ProjectChartVO> echartForProject(String platformName, Model model){
+    public List<TUserTaskVO> echartForProject(String platformName) throws ParseException {
         List<TUserTaskVO> result = new ArrayList<>();
-        List<ProjectChartVO> UserTaskTimes = new ArrayList<>();
+        //List<ProjectChartVO> UserTaskTimes = new ArrayList<>();
         if(!StringUtils.isBlank(platformName)){
             //根据platFormName查询出Project
-            TSugarProject sugarProject = iSugarProjectSV.selectSugarProjectByName(platformName);
+            TSugarProjectVO  sugarProject = iSugarProjectSV.selectSugarProjectByName(platformName);
             //取出ID去根据开始时间降序排序去查询t_user_task的数据列表
             if(sugarProject!=null){
                 TUserTaskVO vo = new TUserTaskVO();
                 vo.setTaskType("01");
+                vo.setTaskStatus("2");//已完成
                 vo.setProjectId(sugarProject.getId()+"");
                 List<TUserTaskVO> tUserTasks = itUserTaskService.selectDoneSubTaskList(vo);
 
@@ -442,21 +441,28 @@ public class SugarManageController extends AppBaseController {
                     //取出最后一条数据:大阶段开始的数据,取其开始时间      取出开始一条数据:大阶段目前处于位置,取其结束时间
                     Map<String, List<TUserTaskVO>> map = tUserTasks.stream().collect(Collectors.groupingBy(TUserTaskVO::getTaskName));
 
-                    UserTaskTimes = new ArrayList<>();
-                    //商机推进
-                    setUserTimes("1",map,UserTaskTimes);
-                    setUserTimes("2",map,UserTaskTimes);
-                    setUserTimes("3",map,UserTaskTimes);
-                    setUserTimes("4",map,UserTaskTimes);
-                    setUserTimes("5",map,UserTaskTimes);
-                    setUserTimes("6",map,UserTaskTimes);
-                    return UserTaskTimes;
+                    Set<Map.Entry<String, List<TUserTaskVO>>> entries = map.entrySet();
+                    for (Map.Entry<String, List<TUserTaskVO>> entry : entries) {
+                        TUserTaskVO taskVO = new TUserTaskVO();
+                        taskVO.setTaskName(entry.getKey());
+                        taskVO.setUserTaskVOList(entry.getValue());
+                        result.add(taskVO);
+                    }
+
+//                    UserTaskTimes = new ArrayList<>();
+//                    商机推进
+//                    setUserTimes("1",map,UserTaskTimes);
+//                    setUserTimes("2",map,UserTaskTimes);
+//                    setUserTimes("3",map,UserTaskTimes);
+//                    setUserTimes("4",map,UserTaskTimes);
+//                    setUserTimes("5",map,UserTaskTimes);
+//                    setUserTimes("6",map,UserTaskTimes);
                 }
 
             }
 
         }
-        return UserTaskTimes;
+        return result;
     }
 
     private void setUserTimes(String key, Map<String,List<TUserTaskVO>> map,List<ProjectChartVO> UserTaskTimes){

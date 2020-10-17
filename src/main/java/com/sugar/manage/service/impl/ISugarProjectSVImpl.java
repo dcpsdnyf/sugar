@@ -271,14 +271,20 @@ public class ISugarProjectSVImpl implements ISugarProjectSV {
 
 
     @Override
-    public TSugarProject selectSugarProjectByName(String platformName) {
+    public TSugarProjectVO selectSugarProjectByName(String platformName) {
+        TSugarProjectVO projectVO = null;
         TSugarProjectExample example = new TSugarProjectExample();
         TSugarProjectExample.Criteria sql = example.createCriteria();
         sql.andPlatformNameEqualTo(platformName);
         List<TSugarProject> tSugarProjects = sugarProjectMapper.selectByExample(example);
-        TSugarProject sugarProject = new TSugarProject();
-        sugarProject = tSugarProjects.get(0);
-        return sugarProject;
+        if(!CollectionUtils.isEmpty(tSugarProjects)){
+            TSugarProject project = tSugarProjects.get(0);
+            if(project!=null){
+                projectVO = ModelCopyUtil.copy(project, TSugarProjectVO.class);
+                return projectVO;
+            }
+        }
+        return projectVO;
     }
 
     @Override

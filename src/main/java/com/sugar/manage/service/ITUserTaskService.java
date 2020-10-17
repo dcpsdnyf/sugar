@@ -82,7 +82,7 @@ public interface ITUserTaskService
     public int examine(TUserTaskVO taskVO) throws ParseException;
 
     /** 查询已完成的子任务列表 */
-    List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO tUserTaskVO);
+    List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO tUserTaskVO) throws ParseException;
 
     /**
      * 更新用户任务状态为进行中

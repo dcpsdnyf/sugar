@@ -44,7 +44,7 @@ public interface ISugarProjectSV {
      * @param platformName
      * @return
      */
-    TSugarProject selectSugarProjectByName(String platformName);
+    public TSugarProjectVO selectSugarProjectByName(String platformName);
 
     public TSugarProjectVO getSugarProjectById(TSugarProjectVO vo);
 }

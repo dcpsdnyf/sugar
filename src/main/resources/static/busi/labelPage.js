@@ -536,6 +536,12 @@ function getTaskSubName(value) {
 		case "412":
 			taskSubName = "12、验收";
 			break;
+		case "501":
+			taskSubName = "运营阶段";
+			break;
+		case "601":
+			taskSubName = "运维阶段";
+			break;
 
 	}
 	return taskSubName;

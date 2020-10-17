@@ -142,12 +142,14 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("5")) {
 			tUserTask.setTaskName("5");
+			tUserTask.setTaskSubName("501");
 			if(project!=null){
 				project.setOperationPrincipal(tUserTask.getTaskPrincipal());
 			}
 			taskMapper.insertSelective(tUserTask);
 		} else if (!taskMap.containsKey("6")) {
 			tUserTask.setTaskName("6");
+			tUserTask.setTaskSubName("601");
 			if(project!=null){
 				project.setOperationMaintainPrincipal(tUserTask.getTaskPrincipal());
 			}
@@ -465,7 +467,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	}
 
 	@Override
-	public List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO vo) {
+	public List<TUserTaskVO> selectDoneSubTaskList(TUserTaskVO vo) throws ParseException{
 		TUserTaskExample example = new TUserTaskExample();
 		TUserTaskExample.Criteria sql = example.createCriteria();
 		if(StringUtils.isNotBlank(vo.getProjectId())){
@@ -478,7 +480,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 			sql.andTaskStatusEqualTo(vo.getTaskStatus());
 		}
 
-		example.setOrderByClause(" TASK_SUB_NAME ASC,CREATED_TIME ASC ");
+		example.setOrderByClause(" TASK_NAME ASC,CREATED_TIME ASC ");
 
 		List<TUserTaskVO> userTaskVOS = null;
 		List<TUserTask> userTaskList = taskMapper.selectByExample(example);
@@ -510,7 +512,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 	@Override
 	public void updateUserTask(TUserTaskVO vo) {
 		TUserTask tUserTask = ModelCopyUtil.copy(vo, TUserTask.class);
-		tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm"));
+		tUserTask.setEndTime(DateUtils.dateTimeNow("YYYY-MM-dd HH:mm:ss"));
 		tUserTask.setTaskStatus("2");
 		taskMapper.updateByPrimaryKeySelective(tUserTask);
 		String taskName = tUserTask.getTaskName();
@@ -732,7 +734,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 					}
 					break;
 			}
-		} else if ("5".equals(tUserTask.getTaskName())) {
+		} else if ("501".equals(tUserTask.getTaskName())) {
 			project.setOperationPhase(tUserTask.getTaskInfo());
 
 			TUserTask newUserTask = this.generateAppointTask(tUserTask);
@@ -740,7 +742,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 				taskMapper.insertSelective(newUserTask);
 				project.setOperationMaintainPrincipal(newUserTask.getTaskPrincipal());
 			}
-		} else if ("6".equals(tUserTask.getTaskName())) {
+		} else if ("601".equals(tUserTask.getTaskName())) {
 			project.setMaintainPhase(tUserTask.getTaskInfo());
 		}
 
@@ -749,7 +751,7 @@ public class TUserTaskServiceImpl implements ITUserTaskService {
 
 		String taskSubName = tUserTask.getTaskSubName();
 		//小阶段不是最后一个才新增
-		if (!"108".equals(taskSubName) && !"218".equals(taskSubName) && !"307".equals(taskSubName) && !"412".equals(taskSubName) && !"5".equals(taskName) && !"6".equals(taskName)) {
+		if (!"108".equals(taskSubName) && !"218".equals(taskSubName) && !"307".equals(taskSubName) && !"412".equals(taskSubName) && !"501".equals(taskName) && !"601".equals(taskName)) {
 			if (StringUtils.isNotBlank(taskSubName)) {
 				TUserTask newTask = ModelCopyUtil.copy(vo, TUserTask.class);
 				newTask.setId(null);
