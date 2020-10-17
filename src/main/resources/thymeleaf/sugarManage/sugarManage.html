@@ -320,7 +320,7 @@
 </div>
 
 <div style="margin-left: 50px;width: 100%;margin-top: 10px">
-<select id="productName"  class="form-control" style="width: 200px; margin-left:-10px; " onchange="runInit()">
+<select id="productName"  class="form-control" style="width: 200px; margin-left:-10px; " onchange="makeEchart()">
     <option th:each="platformNames,iterStat : ${platformName}" th:text="${platformNames}" th:value="${platformNames}" th:selected="${iterStat.count==0}"></option>
 </select>
 </div>
