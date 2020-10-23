@@ -1294,6 +1294,33 @@ function makeEchart() {
 	});
 }
 
+function dateFormat(fmt, date) {
+	let ret;
+	const opt = {
+		"Y+": date.getFullYear().toString(),        // 年
+		"m+": (date.getMonth() + 1).toString(),     // 月
+		"d+": date.getDate().toString(),            // 日
+		"H+": date.getHours().toString(),           // 时
+		"M+": date.getMinutes().toString(),         // 分
+		"S+": date.getSeconds().toString()          // 秒
+		// 有其他格式化字符需求可以继续添加，必须转化成字符串
+	};
+	for (let k in opt) {
+		ret = new RegExp("(" + k + ")").exec(fmt);
+		if (ret) {
+			fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+		};
+	};
+	return fmt;
+}
+
+function getLocalTime(nS) {
+	var dataTi = new Date(parseInt(nS) * 1000);
+	var dataStr = dateFormat("YYYY-mm-dd HH:MM", dataTi)
+	return dataStr;
+}
+
+
 function generateEchart(result) {
 	var nowTime = +new Date();
 	if(result.length>0){
@@ -1443,7 +1470,7 @@ function generateEchart(result) {
 			type: 'slider',
 			filterMode: 'weakFilter',
 			showDataShadow: false,
-			top: 400,
+			top: 450,
 			height: 10,
 			borderColor: 'transparent',
 			backgroundColor: '#e2e2e2',
@@ -1466,9 +1493,18 @@ function generateEchart(result) {
 		xAxis: {
 			min: nowTime,
 			scale: true,
+			max:(new Date()).getTime(),
 			axisLabel: {
+				interval: 0,    //强制文字产生间隔
+				rotate: 45,     //文字逆时针旋转45°
+				textStyle: {    //文字样式
+					color: "black",
+					fontSize: 10,
+					fontFamily: 'Microsoft YaHei'
+				},
 				formatter: function (val) {
-					return Math.max(0, val-nowTime);
+					var dataStr = getLocalTime(val/1000);
+					return getLocalTime(val/1000);
 				}
 			}
 		},
@@ -1492,85 +1528,3 @@ function generateEchart(result) {
 	myChart.setOption(option);
 
 }
-
-/*
-function initEcharts(result) {
-	debugger
-	var res = [];
-	var projectName = [];
-	var categories = ['商机推进阶段', '采购阶段', '产品阶段', '研发阶段', '运营阶段', '运维阶段'];
-	var colors = ['#FF0000', '#FFA500', '#FFFF00', '#00008B', '#800080', '#8B0000'];
-	$.each(result, function (key, v) {
-		var value = [];
-		if (v.startTime != null && v.endTime != null && v.projectStage != null) {
-			value.push(key);
-			value.push(v.startTime);
-			value.push(v.endTime);
-			projectName.push(v.projectStage);
-			res.push({
-				itemStyle: {normal: {color: colors[key]}},
-				value: value,
-				name: v.projectStage
-			});
-		}
-	});
-	var myChart = echarts.init(document.getElementById('chart'));
-	var option = {
-		tooltip: {
-			formatter: function (params) {
-				return params.name + ':' + params.value[1] + '~' + params.value[2]
-			}
-		},
-		legend: {
-			data: ['时间']
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: {
-			type: 'time'
-		},
-		yAxis: {
-			type: 'category',
-			splitLine: {show: false},
-			data: categories
-		},
-		series: [
-			{
-				type: 'custom',
-				renderItem: function (params, api) {
-					var categoryIndex = api.value(0);
-					var start = api.coord([api.value(1), categoryIndex])
-					var end = api.coord([api.value(2), categoryIndex])
-					var height = 24
-
-					return {
-
-						type: 'rect',
-						shape: echarts.graphic.clipRectByRect({
-							x: start[0],
-							y: start[1] - height / 2,
-							width: end[0] - start[0],
-							height: height
-						}, {
-							x: params.coordSys.x,
-							y: params.coordSys.y,
-							width: params.coordSys.width,
-							height: params.coordSys.height
-						}),
-						style: api.style()
-					}
-				},
-				encode: {
-					x: [1, 2],
-					y: 0
-				},
-				data: res
-			}
-		]
-	};
-	myChart.setOption(option);
-}*/

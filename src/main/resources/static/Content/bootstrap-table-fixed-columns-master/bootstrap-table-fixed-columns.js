@@ -214,7 +214,7 @@
         }).show();
 
         this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.1);
+            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.5);
         });
 
         // events
