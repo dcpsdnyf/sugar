@@ -28,7 +28,7 @@
 
         this.$fixedBody = $([
             '<div class="fixed-table-body-columns">',
-            '<table>',
+            '<table style="top: 0px;height:100%!important;" >',
             '<tbody></tbody>',
             '</table>',
             '</div>'].join(''));

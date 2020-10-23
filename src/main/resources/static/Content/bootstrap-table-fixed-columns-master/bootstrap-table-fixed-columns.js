@@ -39,7 +39,7 @@
 
         this.$fixedBody = $([
             '<div class="fixed-table-body-columns">',
-            '<table>',
+            '<table style="top: 0px;height:100%!important;">',
             '<tbody></tbody>',
             '</table>',
             '</div>'].join(''));
@@ -214,7 +214,7 @@
         }).show();
 
         this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.5);
+            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.1);
         });
 
         // events
